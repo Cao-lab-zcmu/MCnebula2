@@ -9,3 +9,16 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
+Collate:
+    utils.R
+    colors.R
+    projectConformation.sirius.v4.R
+    base-generic.R
+    main-generic.R
+    class-mcn_palette.R
+    class-mcn_path.R
+    class-project_conformation.R
+    class-project_metadata.R
+    class-msframe.R
+    class-mcnebula.R
+    methods-initialize_mcnebula.R
