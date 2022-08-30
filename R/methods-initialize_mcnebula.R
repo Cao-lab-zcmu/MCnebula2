@@ -54,3 +54,19 @@ setMethod("initialize_mcnebula",
             }
             return(x)
           })
+setMethod("initialize_mcnebula", 
+          signature = c(x = "project_api",
+                        sirius_version = "character"),
+          function(x, sirius_version){
+            express <- paste0("function(x) format_msframe(",
+                              "x,",
+                              "fun_names = .get_attribute_name_", sirius_version, "(),",
+                              "fun_types = .get_attribute_type_", sirius_version, "()",
+                              ")")
+            format_methods(x) <- eval( parse(text = express) )
+            express <- paste0(".get_read_methods_", sirius_version, "()")
+            read_methods(x) <- eval( parse(text = express) )
+            express <- paste0(".get_match_methods_", sirius_version, "()")
+            match_methods(x) <- eval( parse(text = express) )
+            return(x)
+          })

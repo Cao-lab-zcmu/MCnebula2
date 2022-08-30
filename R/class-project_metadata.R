@@ -55,29 +55,58 @@ setMethod("add",
             return(x)
           })
 ## ---------------------------------------------------------------------- 
+setMethod("extract_metadata", 
+          signature = c(x = "ANY", subscript = "character"),
+          function(x, subscript){
+            upper_dir_subscript <- get_upper_dir_subscript(x, subscript)
+            x <- get_metadata(x, subscript = upper_dir_subscript)
+            path.set <- metadata(project_metadata(x))[[ upper_dir_subscript ]]
+            pattern <- file_name(project_conformation(x))[[ subscript ]]
+            path.set <- dplyr::filter(path.set, grepl(pattern, files))
+            ## build project_metadata
+            path.set <- list(path.set)
+            names(path.set) <- upper_dir_subscript
+            new("project_metadata", metadata = path.set)
+          })
+## ---------------------------------------------------------------------- 
 setMethod("get_metadata", 
-          signature = c(x = "character",
-                        meta = "project_metadata",
-                        api = "project_conformation",
-                        path = "character",
-                        db = "missing"),
-          function(x, meta, api, path){
-            file_name <- file_name(api)
-            file_api <- file_api(api)
-            if (!x %in% names(file_api) )
-              stop( "`x` not descriped in `names(file_api(api))`" )
+          signature = c(x = "ANY", subscript = "character"),
+          function(x, subscript){
+            exits_meta <- names( metadata(project_metadata(x)) )
+            if (!subscript %in% exits_meta) {
+              project_metadata(x) <-
+                get_metadata(subscript = subscript,
+                             project_metadata = project_metadata(x),
+                             project_conformation = project_conformation(x),
+                             path = sirius_project(mcn_path(x))
+                )
+            }
+            return(x)
+          })
+setMethod("get_metadata", 
+          signature = c(x = "missing",
+                        subscript = "character",
+                        project_metadata = "project_metadata",
+                        project_conformation = "project_conformation",
+                        path = "character"
+                        ),
+          function(subscript, project_metadata, project_conformation, path){
+            file_name <- file_name(project_conformation)
+            file_api <- file_api(project_conformation)
+            if (!subscript %in% names(file_api) )
+              stop( "`subscript` not descriped in `names(file_api(project_conformation))`" )
             ## ------------------------------------- 
-            api <- file_api[[x]]
+            api <- file_api[[ subscript ]]
             api <- strsplit(api, split = "/")[[1]]
             ## ------------------------------------- 
             for (i in 1:length(api)) {
-              api.x <- api[i]
-              if ( any(api.x == names(metadata(meta))) )
+              sub <- api[i]
+              if ( any(sub == names(metadata(project_metadata))) )
                 next
-              if ( !api.x %in% names(file_name) )
-                stop( "`x` not descriped in `names(file_name(api))`" )
+              if ( !sub %in% names(file_name) )
+                stop( "`subscript` not descriped in `names(file_name(project_conformation))`" )
               ## get the name of file, or the function name to get file name
-              target <- file_name[[api.x]]
+              target <- file_name[[sub]]
               ## get the target of filename
               if ( grepl("^FUN_", target) )
                 target <- match.fun(target)()
@@ -85,17 +114,17 @@ setMethod("get_metadata",
                 df <- data.frame(files = list.files(path = path, pattern = target))
               } else {
                 ## get the metadata of upper directory
-                df <- metadata(meta)[[ api[i - 1] ]]
+                df <- metadata(project_metadata)[[ api[i - 1] ]]
                 upper <- paste0(apply(df, 1, paste0, collapse = "/"), "/", target)
                 ## ------------------------------------- 
                 .get_info("project_metadata", "get_metadata",
-                          paste0(target, "(", api.x, ")"))
+                          paste0(target, "(", sub, ")"))
                 df <- .list_files(path, upper)
               }
               lst <- list( df )
-              names(lst) <- api.x
-              meta <- add(meta, lst)
+              names(lst) <- sub
+              project_metadata <- add(project_metadata, lst)
             }
-            return(meta)
+            return(project_metadata)
           })
 ## ------------------------------------- 

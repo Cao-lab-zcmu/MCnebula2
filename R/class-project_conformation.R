@@ -73,3 +73,12 @@ setReplaceMethod("attribute_name",
                  function(x, value){
                    initialize(x, attribute_name = value)
                  })
+## ------------------------------------- 
+setMethod("get_upper_dir_subscript", 
+          signature = c(x = "ANY",
+                        subscript = "character",
+                        project_conformation = "missing"),
+          function(x, subscript){
+            stringr::str_extract(file_api(project_conformation(x))[[ subscript ]],
+                                 paste0("(?<=^|/)[^/]*(?=/", subscript, "|$)"))
+          })

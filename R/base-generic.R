@@ -87,6 +87,14 @@ setGeneric("attribute_name",
 setGeneric("attribute_name<-", 
            signature = c(project_conformation = "x"),
            function(x, value) standardGeneric("attribute_name<-"))
+## ------------------------------------- 
+setGeneric("get_upper_dir_subscript", 
+           signature = c(ANY = "x",
+                         character = "subscript",
+                         project_conformation = "project_conformation"
+                         ),
+           function(x, subscript, project_conformation)
+             standardGeneric("get_upper_dir_subscript"))
 ## ---------------------------------------------------------------------- 
 ## class-project_metadata
 setGeneric("project_metadata", 
@@ -106,15 +114,45 @@ setGeneric("add",
                          "list" = "list"
                          ),
            function(x, list) standardGeneric("add"))
-## ---------------------------------------------------------------------- 
+## ------------------------------------- 
 setGeneric("get_metadata", 
-           signature = c("character" = "x",
-                         ANY = "db",
-                         project_metadata = "meta",
-                         project_conformation = "api",
+           signature = c(ANY = "x",
+                         "character" = "subscript",
+                         project_metadata = "project_metadata",
+                         project_conformation = "project_conformation",
                          "character" = "path"
                          ),
-           function(x, meta, api, path, db) standardGeneric("get_metadata"))
+           function(x, subscript, project_metadata, project_conformation, path)
+             standardGeneric("get_metadata"))
+## ------------------------------------- 
+setGeneric("extract_metadata", 
+           signature = c(ANY = "x", "character" = "subscript"),
+           function(x, subscript) standardGeneric("extract_metadata"))
+## ---------------------------------------------------------------------- 
+## class-project_api
+setGeneric("project_api", 
+           function(x) standardGeneric("project_api"))
+setGeneric("project_api<-", 
+           function(x, value) standardGeneric("project_api<-"))
+## ------------------------------------- 
+setGeneric("read_methods", 
+           signature = c(project_api = "x"),
+           function(x) standardGeneric("read_methods"))
+setGeneric("read_methods<-", 
+           signature = c(project_api = "x"),
+           function(x, value) standardGeneric("read_methods<-"))
+setGeneric("format_methods", 
+           signature = c(project_api = "x"),
+           function(x) standardGeneric("format_methods"))
+setGeneric("format_methods<-", 
+           signature = c(project_api = "x"),
+           function(x, value) standardGeneric("format_methods<-"))
+setGeneric("match_methods", 
+           signature = c(project_api = "x"),
+           function(x) standardGeneric("match_methods"))
+setGeneric("match_methods<-", 
+           signature = c(project_api = "x"),
+           function(x, value) standardGeneric("match_methods<-"))
 ## ---------------------------------------------------------------------- 
 ## class-msframe
 setGeneric("msframe", 
@@ -122,20 +160,35 @@ setGeneric("msframe",
 setGeneric("msframe<-", 
            function(x, value) standardGeneric("msframe<-"))
 ## ------------------------------------- 
-setGeneric("file", 
+setGeneric("subscript", 
            signature = c(msframe = "x"),
-           function(x) standardGeneric("file"))
-setGeneric("file<-", 
+           function(x) standardGeneric("subscript"))
+setGeneric("subscript<-", 
            signature = c(msframe = "x"),
-           function(x, value) standardGeneric("file<-"))
-setGeneric("file_data", 
+           function(x, value) standardGeneric("subscript<-"))
+setGeneric("entity", 
            signature = c(msframe = "x"),
-           function(x) standardGeneric("file_data"))
-setGeneric("file_data<-", 
+           function(x) standardGeneric("entity"))
+setGeneric("entity<-", 
            signature = c(msframe = "x"),
-           function(x, value) standardGeneric("file_data<-"))
+           function(x, value) standardGeneric("entity<-"))
 ## ------------------------------------- 
-## rename the colnames
+## read data (table format)
+setGeneric("read_data", 
+           signature = c(ANY = "x",
+                         character = "path",
+                         project_metadata = "project_metadata",
+                         "function" = "read_fun",
+                         character = "subscript",
+                         "function" = "format_fun",
+                         character = ".features_id",
+                         character = ".candidates_id"
+                         ),
+           function(x, path, project_metadata, read_fun,
+                    subscript, format_fun,
+                    .features_id, .candidates_id) standardGeneric("read_data"))
+## ------------------------------------- 
+## rename the colnames and check the values type (character or interger, etc.)
 setGeneric("format_msframe", 
            signature = c(msframe = "x",
                          character = "names", "function" = "fun_names",

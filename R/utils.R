@@ -46,13 +46,18 @@ mapply_rename_col <-
   function(object){
     cat(class(object), "\n")
     slots_mapply(object, function(names, slots){
-                   cat(names, ":\n", sep = "")
-                   cat(str(slots))
+              cat("## ---------------------------------------------------------------------- \n")
+              cat(names, ":\n", sep = "")
+              cat(str(slots))
            })
   }
 ## ------------------------------------- 
 .get_info <- 
   function(main, sub, arg = NULL, sig = "##"){
+    cat(sig, " ", main, ": ", sub, ": ", arg, "\n", sep = "")
+  }
+.get_info_formal <- 
+  function(main, sub, arg = NULL, sig = "[INFO]"){
     cat(sig, " ", main, ": ", sub, ": ", arg, "\n", sep = "")
   }
 ## ------------------------------------- 
@@ -70,8 +75,14 @@ read_tsv <- function(path){
   file <- data.table::fread(input=path, sep="\t", header=T, quote="", check.names=F)
   return(file)
 }
+pbsapply_read_tsv <- function(path){
+  data <- pbapply::pbsapply(path, read_tsv, simplify = F)
+  return(data)
+}
 write_tsv <-
   function(x, filename, col.names = T, row.names = F){
     write.table(x, file = filename, sep = "\t",
                 col.names = col.names, row.names = row.names, quote = F)
   }
+## ------------------------------------- 
+`%>%` <- magrittr::`%>%`

@@ -10,6 +10,7 @@
                             mcn_palette = "mcn_palette",
                             project_conformation = "project_conformation",
                             project_metadata = "project_metadata",
+                            project_api = "project_api",
                             sirius_version = "character"
                             ),
            prototype = prototype(creation_time = date(),

@@ -14,11 +14,17 @@
              .dir_spectra = "spectra",
              .f2_ms = "spectrum.ms",
              .f2_formula = "formula_candidates.tsv",
-             .f3_canopus = "FUN_get_candidates.fpt",
-             .f3_fingerid = "FUN_get_candidates.tsv",
-             .f3_scores = "FUN_get_candidates.info",
-             .f3_spectra = "FUN_get_candidates.tsv"
+             .f3_canopus = "\\.fpt$",
+             .f3_fingerid = "\\.tsv$",
+             .f3_scores = "\\.info$",
+             .f3_spectra = "\\.tsv$"
     )
+  }
+FUN_get_id_sirius.v4 <- 
+  function(x){
+    if (missing(x))
+      return("^[0-9](.*)_(.*)_(.*)$")
+    stringr::str_extract(x, "(?<=_)[^_|^/]{1,}(?=/|$)")
   }
 .get_file_api_sirius.v4 <- 
   function(){
@@ -74,9 +80,9 @@
              iso.score = "IsotopeScore",
              hit.num. = "numExplainedPeaks",
              hit.int. = "explainedIntensity",
-             error.frag. = "medianMassErrorFragmentPeaks(ppm)",
-             error.abs.frag. = "medianAbsoluteMassErrorFragmentPeaks(ppm)",
-             error.mass = "massErrorPrecursor(ppm)",
+             error.frag. = "medianMassErrorFragmentPeaks\\(ppm\\)",
+             error.abs.frag. = "medianAbsoluteMassErrorFragmentPeaks\\(ppm\\)",
+             error.mass = "massErrorPrecursor\\(ppm\\)",
              ## .canopus
              ...sig = ".canopus",
              rel.index = "relativeIndex",
@@ -125,9 +131,25 @@
              cosmic.score = "numeric"
     )
   }
-FUN_get_id_sirius.v4 <- 
-  function(x){
-    if (missing(x))
-      return("^[0-9](.*)_(.*)_(.*)$")
-    stringr::str_extract(x, "(?<=_)[^_]{1,}$")
+.get_read_methods_sirius.v4 <- 
+  function(){
+    set <- c(
+             read.canopus = MCnebula2::read_tsv,
+             read.canopus_summary = MCnebula2::read_tsv,
+             read.compound_identifications = MCnebula2::read_tsv,
+             read.formula_identifications = MCnebula2::read_tsv,
+             read.f2_ms = MCnebula2::pbsapply_read_tsv,
+             read.f2_formula = MCnebula2::pbsapply_read_tsv,
+             read.f3_fingerid = MCnebula2::pbsapply_read_tsv,
+             read.f3_scores = MCnebula2::pbsapply_read_tsv,
+             read.f3_spectra = MCnebula2::pbsapply_read_tsv,
+             read.f3_canopus = MCnebula2::pbsapply_read_tsv
+    )
+  }
+.get_match_methods_sirius.v4 <- 
+  function(){
+    set <- c(
+             match.features_id = MCnebula2::FUN_get_id_sirius.v4,
+             match.candidates_id = function(x) stringr::str_extract(x, "[^/]*(?=\\.[a-z]*$)")
+    )
   }
