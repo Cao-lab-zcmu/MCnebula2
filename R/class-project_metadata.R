@@ -36,6 +36,12 @@ setReplaceMethod("project_metadata",
                  function(x, value){
                    initialize(x, project_metadata = value)
                  })
+## ------------------------------------- 
+setMethod("latest", 
+          signature = c(x = "project_metadata"),
+          function(x){
+            tibble::as_tibble(metadata(x)[[1]])
+          })
 ## ---------------------------------------------------------------------- 
 setMethod("metadata", 
           signature = c(x = "project_metadata"),
@@ -46,11 +52,11 @@ setReplaceMethod("metadata",
                    initialize(x, metadata = value)
                  })
 ## ---------------------------------------------------------------------- 
-setMethod("add", 
+setMethod("add_dataset", 
           signature = c(x = "project_metadata",
                         list = "list"),
           function(x, list){
-            metadata <- c(metadata(x), list)
+            metadata <- c(list, metadata(x))
             metadata(x) <- list_unique_by_names(metadata)
             return(x)
           })
@@ -58,14 +64,11 @@ setMethod("add",
 setMethod("extract_metadata", 
           signature = c(x = "ANY", subscript = "character"),
           function(x, subscript){
-            upper_dir_subscript <- get_upper_dir_subscript(x, subscript)
-            x <- get_metadata(x, subscript = upper_dir_subscript)
-            path.set <- metadata(project_metadata(x))[[ upper_dir_subscript ]]
-            pattern <- file_name(project_conformation(x))[[ subscript ]]
-            path.set <- dplyr::filter(path.set, grepl(pattern, files))
+            x <- get_metadata(x, subscript = subscript)
+            path.set <- metadata(project_metadata(x))[[ subscript ]]
             ## build project_metadata
             path.set <- list(path.set)
-            names(path.set) <- upper_dir_subscript
+            names(path.set) <- subscript
             new("project_metadata", metadata = path.set)
           })
 ## ---------------------------------------------------------------------- 
@@ -115,15 +118,15 @@ setMethod("get_metadata",
               } else {
                 ## get the metadata of upper directory
                 df <- metadata(project_metadata)[[ api[i - 1] ]]
-                upper <- paste0(apply(df, 1, paste0, collapse = "/"), "/", target)
+                upper <- paste0(apply(df, 1, paste0, collapse = "/"))
                 ## ------------------------------------- 
                 .get_info("project_metadata", "get_metadata",
                           paste0(target, "(", sub, ")"))
-                df <- .list_files(path, upper)
+                df <- .list_files(path, upper, target)
               }
               lst <- list( df )
               names(lst) <- sub
-              project_metadata <- add(project_metadata, lst)
+              project_metadata <- add_dataset(project_metadata, lst)
             }
             return(project_metadata)
           })

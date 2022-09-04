@@ -37,12 +37,19 @@ setGeneric("creation_time",
            function(x) standardGeneric("creation_time"))
 setGeneric("creation_time<-", 
            function(x, value) standardGeneric("creation_time<-"))
+setGeneric("ion_mode", 
+           function(x) standardGeneric("ion_mode"))
+setGeneric("ion_mode<-", 
+           function(x, value) standardGeneric("ion_mode<-"))
 setGeneric("sirius_version", 
            signature = c(mcnebula = "x"),
            function(x) standardGeneric("sirius_version"))
 setGeneric("sirius_version<-", 
            signature = c(mcnebula = "x"),
            function(x, value) standardGeneric("sirius_version<-"))
+setGeneric("latest", 
+           signature = c(mcnebula = "x", "logical" = "switch"),
+           function(x, switch) standardGeneric("latest"))
 ## ---------------------------------------------------------------------- 
 ## class-mcn_path
 setGeneric("mcn_path", 
@@ -109,12 +116,6 @@ setGeneric("metadata<-",
            signature = c(project_metadata = "x"),
            function(x, value) standardGeneric("metadata<-"))
 ## ------------------------------------- 
-setGeneric("add", 
-           signature = c(project_metadata = "x",
-                         "list" = "list"
-                         ),
-           function(x, list) standardGeneric("add"))
-## ------------------------------------- 
 setGeneric("get_metadata", 
            signature = c(ANY = "x",
                          "character" = "subscript",
@@ -135,24 +136,43 @@ setGeneric("project_api",
 setGeneric("project_api<-", 
            function(x, value) standardGeneric("project_api<-"))
 ## ------------------------------------- 
-setGeneric("read_methods", 
+setGeneric("methods_read", 
            signature = c(project_api = "x"),
-           function(x) standardGeneric("read_methods"))
-setGeneric("read_methods<-", 
+           function(x) standardGeneric("methods_read"))
+setGeneric("methods_read<-", 
            signature = c(project_api = "x"),
-           function(x, value) standardGeneric("read_methods<-"))
-setGeneric("format_methods", 
+           function(x, value) standardGeneric("methods_read<-"))
+setGeneric("methods_format", 
            signature = c(project_api = "x"),
-           function(x) standardGeneric("format_methods"))
-setGeneric("format_methods<-", 
+           function(x) standardGeneric("methods_format"))
+setGeneric("methods_format<-", 
            signature = c(project_api = "x"),
-           function(x, value) standardGeneric("format_methods<-"))
-setGeneric("match_methods", 
+           function(x, value) standardGeneric("methods_format<-"))
+setGeneric("methods_match", 
            signature = c(project_api = "x"),
-           function(x) standardGeneric("match_methods"))
-setGeneric("match_methods<-", 
+           function(x) standardGeneric("methods_match"))
+setGeneric("methods_match<-", 
            signature = c(project_api = "x"),
-           function(x, value) standardGeneric("match_methods<-"))
+           function(x, value) standardGeneric("methods_match<-"))
+## ---------------------------------------------------------------------- 
+## class-project_dataset
+## class-mcn_dataset
+setGeneric("project_dataset", 
+           function(x) standardGeneric("project_dataset"))
+setGeneric("project_dataset<-", 
+           function(x, value) standardGeneric("project_dataset<-"))
+setGeneric("mcn_dataset", 
+           function(x) standardGeneric("mcn_dataset"))
+setGeneric("mcn_dataset<-", 
+           function(x, value) standardGeneric("mcn_dataset<-"))
+## ------------------------------------- 
+setGeneric("extract_rawset", 
+           signature = c("ANY" = "x", character = "subscript",
+                         "function" = "fun_collate"),
+           function(x, subscript, fun_collate, ...) standardGeneric("extract_rawset"))
+setGeneric("extract_mcnset", 
+           signature = c("ANY" = "x", character = "subscript"),
+           function(x, subscript) standardGeneric("extract_mcnset"))
 ## ---------------------------------------------------------------------- 
 ## class-msframe
 setGeneric("msframe", 
@@ -160,12 +180,6 @@ setGeneric("msframe",
 setGeneric("msframe<-", 
            function(x, value) standardGeneric("msframe<-"))
 ## ------------------------------------- 
-setGeneric("subscript", 
-           signature = c(msframe = "x"),
-           function(x) standardGeneric("subscript"))
-setGeneric("subscript<-", 
-           signature = c(msframe = "x"),
-           function(x, value) standardGeneric("subscript<-"))
 setGeneric("entity", 
            signature = c(msframe = "x"),
            function(x) standardGeneric("entity"))
@@ -178,14 +192,14 @@ setGeneric("read_data",
            signature = c(ANY = "x",
                          character = "path",
                          project_metadata = "project_metadata",
-                         "function" = "read_fun",
+                         "function" = "fun_read",
                          character = "subscript",
-                         "function" = "format_fun",
+                         "function" = "fun_format",
                          character = ".features_id",
                          character = ".candidates_id"
                          ),
-           function(x, path, project_metadata, read_fun,
-                    subscript, format_fun,
+           function(x, path, project_metadata, fun_read,
+                    subscript, fun_format,
                     .features_id, .candidates_id) standardGeneric("read_data"))
 ## ------------------------------------- 
 ## rename the colnames and check the values type (character or interger, etc.)
@@ -196,4 +210,28 @@ setGeneric("format_msframe",
                          ),
            function(x, names, fun_names, types, fun_types)
              standardGeneric("format_msframe"))
+## ------------------------------------- 
+setGeneric("filter_msframe", 
+           signature = c(msframe = "x", "function" = "fun_filter",
+                         "formula" = "f"),
+           function(x, fun_filter, f, ...) standardGeneric("filter_msframe"))
 ## ---------------------------------------------------------------------- 
+## class-VIRTUAL
+setGeneric("subscript", 
+           function(x) standardGeneric("subscript"))
+setGeneric("subscript<-", 
+           function(x, value) standardGeneric("subscript<-"))
+## ------------------------------------- 
+setGeneric("dataset", 
+           function(x) standardGeneric("dataset"))
+setGeneric("dataset<-", 
+           function(x, value) standardGeneric("dataset<-"))
+setGeneric("add_dataset", 
+           signature = c("ANY" = "x", "list" = "list"),
+           function(x, list) standardGeneric("add_dataset"))
+## ------------------------------------- 
+setGeneric("reference", 
+           function(x) standardGeneric("reference"))
+setGeneric("reference<-", 
+           function(x, value) standardGeneric("reference<-"))
+## ------------------------------------- 

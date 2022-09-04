@@ -3,16 +3,19 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .msframe <- 
   setClass("msframe", 
-           contains = character(),
+           contains = "subscript",
            representation = 
-             representation(subscript = "character",
-                            entity = "data.frame"
-                            ),
+             representation(entity = "data.frame"),
            prototype = NULL
   )
 # ==========================================================================
 # methods
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+setMethod("show", 
+          signature = c(object = "msframe"),
+          function(object){
+            cat( "A class of \"msframe\" of", subscript(object), "\n")
+          })
 setMethod("msframe", 
           signature = c(x = "ANY"),
           function(x){ x@msframe })
@@ -22,14 +25,11 @@ setReplaceMethod("msframe",
                    initialize(x, msframe = value)
                  })
 ## ------------------------------------- 
-setMethod("subscript", 
+setMethod("latest", 
           signature = c(x = "msframe"),
-          function(x){ x@subscript })
-setReplaceMethod("subscript", 
-                 signature = c(x = "msframe"),
-                 function(x, value){
-                   initialize(x, subscript = value)
-                 })
+          function(x){
+            tibble::as_tibble(entity(x[[1]]))
+          })
 ## ------------------------------------- 
 setMethod("entity", 
           signature = c(x = "msframe"),
@@ -44,57 +44,55 @@ setMethod("read_data",
           signature = c(x = "ANY",
                         path = "missing",
                         project_metadata = "project_metadata",
-                        read_fun = "missing",
+                        fun_read = "missing",
                         subscript = "character"
                         ),
           function(x, project_metadata, subscript){
-            path.df <- metadata(project_metadata)[[ get_upper_dir_subscript(x, subscript) ]]
+            path.df <- metadata(project_metadata)[[ subscript ]]
             path <-
               paste0(sirius_project(mcn_path(x)), "/", path.df$upper, "/", path.df$files)
-            read_fun <-
-              read_methods(project_api(x))[[ paste0("read", subscript) ]]
-            format_fun <-
-              format_methods(project_api(x))
+            fun_read <-
+              methods_read(project_api(x))[[ paste0("read", subscript) ]]
+            fun_format <-
+              methods_format(project_api(x))
             .features_id <-
-              match_methods(project_api(x))[[ "match.features_id" ]](path.df$upper)
+              methods_match(project_api(x))[[ "match.features_id" ]](path.df$upper)
+            if (length(.features_id) == 0)
+              .features_id <- subscript
             .candidates_id <-
-              match_methods(project_api(x))[[ "match.candidates_id" ]](path.df$files)
+              methods_match(project_api(x))[[ "match.candidates_id" ]](path.df$files)
             .get_info("collate_data", "read_data", subscript)
-            msframe <- read_data(path = path,
-                                 read_fun = read_fun,
-                                 subscript = subscript,
-                                 format_fun = format_fun,
+            msframe <- read_data(path = path, fun_read = fun_read,
+                                 subscript = subscript, fun_format = fun_format,
                                  .features_id = .features_id,
                                  .candidates_id = .candidates_id
             )
           })
 setMethod("read_data", 
-          signature = c(x = "missing",
-                        path = "character",
+          signature = c(x = "missing", path = "character",
                         project_metadata = "missing",
-                        read_fun = "function",
-                        subscript = "character",
-                        format_fun = "function",
-                        .features_id = "character",
-                        .candidates_id = "character"
+                        fun_read = "function", subscript = "character",
+                        fun_format = "function",
+                        .features_id = "character", .candidates_id = "character"
                         ),
-          function(path, read_fun, subscript, format_fun,
+          function(path, fun_read, subscript, fun_format,
                    .features_id, .candidates_id){
-            entity <- read_fun(path)
-            if (is.list(entity)) {
-              entity <- mapply(entity, .features_id, .candidates_id,
-                               SIMPLIFY = F,
-                               FUN = function(df, .features_id, .candidates_id){
-                                 dplyr::mutate(df, .features_id = .features_id,
-                                               .candidates_id = .candidates_id)
-                               })
-              entity <- data.table::rbindlist(entity, fill = T)
-              entity <- dplyr::relocate(entity, .features_id, .candidates_id)
+            entity <- fun_read(path)
+            if (is.data.frame(entity)) {
+              ## a 'data.table' may cause error
+              entity <- list(data.frame(entity))
+              names(entity) <- subscript
             }
+            entity <- mapply(entity, .features_id, .candidates_id,
+                             SIMPLIFY = F,
+                             FUN = function(df, .features_id, .candidates_id){
+                               dplyr::mutate(df, .features_id = .features_id,
+                                             .candidates_id = .candidates_id)
+                             })
+            entity <- dplyr::relocate(data.table::rbindlist(entity, fill = T),
+                                      .features_id, .candidates_id)
             msframe <- new("msframe", subscript = subscript, entity = entity)
-            if (missing(format_fun))
-              return(format_msframe(msframe))
-            format_fun(msframe)
+            fun_format(msframe)
           })
 ## ------------------------------------- 
 setMethod("format_msframe", 
@@ -131,6 +129,7 @@ setMethod("format_msframe",
     if( any(names(names) == "...sig") ) {
       rs <- which( names == subscript(x) & names(names) == "...sig")
       rs <- rs + 1
+      re <- length(names)
       for( i in rs:length(names) ){
         if( names(names)[i] == "...sig" ) {
           re <- i - 1
@@ -160,4 +159,22 @@ setMethod("format_msframe",
     }
     return(x)
   }
+## ------------------------------------- 
+setMethod("filter_msframe", 
+          signature = c(x = "msframe", fun_filter = "function"),
+          function(x, fun_filter, ...){
+            filter_msframe(x, fun_filter = fun_filter,
+                           f = ~ .features_id, ...)
+          })
+setMethod("filter_msframe", 
+          signature = c(x = "msframe", fun_filter = "function",
+                        f = "formula"),
+          function(x, fun_filter, f, ...){
+            .get_info("msframe", "filter_msframe",
+                      paste0("group_by: ", paste0(f, collapse = " "))
+            )
+            entity <- lapply( split(entity(x), f = f), FUN = fun_filter, ...)
+            entity(x) <- data.table::rbindlist(entity, fill = T)
+            return(x)
+          })
 

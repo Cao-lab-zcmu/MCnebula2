@@ -5,14 +5,15 @@
   setClass("project_api", 
            contains = character(),
            representation = 
-             representation(read_methods = "list",
-                            format_methods = "function",
-                            match_methods = "list"
+             representation(methods_read = "list",
+                            methods_format = "function",
+                            methods_match = "list"
                             ),
            prototype = NULL
            )
 # ==========================================================================
 # method
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 setMethod("show", 
           signature = c(object = "project_api"),
           function(object){
@@ -27,29 +28,29 @@ setReplaceMethod("project_api",
                    initialize(x, project_api = value)
                  })
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-setMethod("read_methods", 
+setMethod("methods_read", 
           signature = c(x = "project_api"),
-          function(x){ x@read_methods })
-setReplaceMethod("read_methods", 
+          function(x){ x@methods_read })
+setReplaceMethod("methods_read", 
                  signature = c(x = "project_api"),
                  function(x, value){
-                   initialize(x, read_methods = value)
+                   initialize(x, methods_read = value)
                  })
 ## ------------------------------------- 
-setMethod("format_methods", 
+setMethod("methods_format", 
           signature = c(x = "project_api"),
-          function(x){ x@format_methods })
-setReplaceMethod("format_methods", 
+          function(x){ x@methods_format })
+setReplaceMethod("methods_format", 
                  signature = c(x = "project_api"),
                  function(x, value){
-                   initialize(x, format_methods = value)
+                   initialize(x, methods_format = value)
                  })
 ## ------------------------------------- 
-setMethod("match_methods", 
+setMethod("methods_match", 
           signature = c(x = "project_api"),
-          function(x){ x@match_methods })
-setReplaceMethod("match_methods", 
+          function(x){ x@methods_match })
+setReplaceMethod("methods_match", 
                  signature = c(x = "project_api"),
                  function(x, value){
-                   initialize(x, match_methods = value)
+                   initialize(x, methods_match = value)
                  })

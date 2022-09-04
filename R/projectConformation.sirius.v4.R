@@ -3,15 +3,18 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .get_file_name_sirius.v4 <- 
   function(){
-    set <- c( .id = "FUN_get_id_sirius.v4",
-             .canopus = "canopus.tsv",
+    set <- c(.id = "FUN_get_id_sirius.v4",
+             .canopus = "^canopus.tsv",
              .canopus_summary = "canopus_summary.tsv",
              .compound_identifications = "compound_identifications.tsv",
              .formula_identifications = "formula_identifications.tsv",
-             .dir_canopus = "canopus",
-             .dir_fingerid = "fingerid",
-             .dir_scores = "scores",
-             .dir_spectra = "spectra",
+             .canopus_neg = "canopus_neg.tsv",
+             .csi_fingerid = "csi_fingerid.tsv",
+             .csi_fingerid_neg = "csi_fingerid_neg.tsv",
+             .dir_canopus = "^canopus$",
+             .dir_fingerid = "^fingerid$",
+             .dir_scores = "^scores$",
+             .dir_spectra = "^spectra$",
              .f2_ms = "spectrum.ms",
              .f2_formula = "formula_candidates.tsv",
              .f3_canopus = "\\.fpt$",
@@ -33,6 +36,9 @@ FUN_get_id_sirius.v4 <-
              .canopus_summary = ".canopus_summary",
              .compound_identifications = ".compound_identifications",
              .formula_identifications = ".formula_identifications",
+             .canopus_neg = ".canopus_neg",
+             .csi_fingerid = ".csi_fingerid",
+             .csi_fingerid_neg = ".csi_fingerid_neg",
              .dir_canopus = ".id/.dir_canopus",
              .dir_fingerid = ".id/.dir_fingerid",
              .dir_scores = ".id/.dir_scores",
@@ -91,6 +97,10 @@ FUN_get_id_sirius.v4 <-
              class.name = "name",
              parent.chem.ont.id = "parentId",
              description = "description",
+             ## .canopus_neg
+             ...sig = ".canopus_neg",
+             chem.ont.id = "id",
+             class.name = "name",
              ## .canopus_summary
              ...sig = ".canopus_summary",
              .id = "name",
@@ -103,7 +113,11 @@ FUN_get_id_sirius.v4 <-
              ## .compound_identifications
              ...sig = ".compound_identifications",
              cosmic.score = "ConfidenceScore",
-             .id = "id"
+             .id = "id",
+             ## .f3_canopus
+             ...sig = ".f3_canopus",
+             pp.value = "V1",
+             ...sig = "END"
     )
   }
 .get_attribute_type_sirius.v4 <- 
@@ -128,10 +142,11 @@ FUN_get_id_sirius.v4 <-
              error.mass = "numeric",
              rel.index = "integer",
              abs.index = "integer",
-             cosmic.score = "numeric"
+             cosmic.score = "numeric",
+             pp.value = "numeric"
     )
   }
-.get_read_methods_sirius.v4 <- 
+.get_methods_read_sirius.v4 <- 
   function(){
     set <- c(
              read.canopus = MCnebula2::read_tsv,
@@ -143,10 +158,19 @@ FUN_get_id_sirius.v4 <-
              read.f3_fingerid = MCnebula2::pbsapply_read_tsv,
              read.f3_scores = MCnebula2::pbsapply_read_tsv,
              read.f3_spectra = MCnebula2::pbsapply_read_tsv,
-             read.f3_canopus = MCnebula2::pbsapply_read_tsv
+             read.f3_canopus = .pbsapply_read_fpt
     )
   }
-.get_match_methods_sirius.v4 <- 
+.pbsapply_read_fpt <- function(path){
+  data <- pbapply::pbsapply(path, simplify = F,
+                            function(path){
+                              df <- data.table::fread(path, header = F)
+                              df$rel.index <- 0:(nrow(df) - 1)
+                              df
+                            })
+  return(data)
+}
+.get_methods_match_sirius.v4 <- 
   function(){
     set <- c(
              match.features_id = MCnebula2::FUN_get_id_sirius.v4,

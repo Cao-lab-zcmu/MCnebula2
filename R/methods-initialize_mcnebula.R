@@ -63,10 +63,10 @@ setMethod("initialize_mcnebula",
                               "fun_names = .get_attribute_name_", sirius_version, "(),",
                               "fun_types = .get_attribute_type_", sirius_version, "()",
                               ")")
-            format_methods(x) <- eval( parse(text = express) )
-            express <- paste0(".get_read_methods_", sirius_version, "()")
-            read_methods(x) <- eval( parse(text = express) )
-            express <- paste0(".get_match_methods_", sirius_version, "()")
-            match_methods(x) <- eval( parse(text = express) )
+            methods_format(x) <- eval( parse(text = express) )
+            express <- paste0(".get_methods_read_", sirius_version, "()")
+            methods_read(x) <- eval( parse(text = express) )
+            express <- paste0(".get_methods_match_", sirius_version, "()")
+            methods_match(x) <- eval( parse(text = express) )
             return(x)
           })

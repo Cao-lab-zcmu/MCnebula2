@@ -61,13 +61,14 @@ mapply_rename_col <-
     cat(sig, " ", main, ": ", sub, ": ", arg, "\n", sep = "")
   }
 ## ------------------------------------- 
-.list_files <- function(path, upper){
-  lst_file <- pbapply::pbsapply(paste0(path, "/", upper), list.files)
-  lst_file <- mapply(upper, lst_file, SIMPLIFY = F, FUN = function(upper, files){
-                       if (length(files) == 0)
+.list_files <- function(path, upper, pattern){
+  lst_file <- pbapply::pbmapply(path, upper, pattern, SIMPLIFY = F,
+                     FUN = function(path, upper, pattern){
+                       files <- list.files(paste0(path, "/", upper), pattern)
+                       if ( length(files) == 0)
                          return( data.frame() )
                        data.frame(upper = upper, files = files)
-           })
+                     })
   data.table::rbindlist(lst_file)
 }
 ## ------------------------------------- 
