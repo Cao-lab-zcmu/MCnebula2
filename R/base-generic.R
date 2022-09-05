@@ -187,21 +187,6 @@ setGeneric("entity<-",
            signature = c(msframe = "x"),
            function(x, value) standardGeneric("entity<-"))
 ## ------------------------------------- 
-## read data (table format)
-setGeneric("read_data", 
-           signature = c(ANY = "x",
-                         character = "path",
-                         project_metadata = "project_metadata",
-                         "function" = "fun_read",
-                         character = "subscript",
-                         "function" = "fun_format",
-                         character = ".features_id",
-                         character = ".candidates_id"
-                         ),
-           function(x, path, project_metadata, fun_read,
-                    subscript, fun_format,
-                    .features_id, .candidates_id) standardGeneric("read_data"))
-## ------------------------------------- 
 ## rename the colnames and check the values type (character or interger, etc.)
 setGeneric("format_msframe", 
            signature = c(msframe = "x",
