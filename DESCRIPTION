@@ -15,7 +15,7 @@ Collate:
     projectConformation.sirius.v4.R
     base-generic.R
     main-generic.R
-    class-VIRTUAL.R
+    class-VIRTUAL_slots.R
     class-mcn_palette.R
     class-mcn_path.R
     class-project_conformation.R
