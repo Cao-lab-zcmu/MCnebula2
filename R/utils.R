@@ -46,9 +46,9 @@ mapply_rename_col <-
   function(object){
     cat(class(object), "\n")
     slots_mapply(object, function(names, slots){
-              cat("## ---------------------------------------------------------------------- \n")
               cat(names, ":\n", sep = "")
               cat(str(slots))
+              cat("\n\n")
            })
   }
 ## ------------------------------------- 

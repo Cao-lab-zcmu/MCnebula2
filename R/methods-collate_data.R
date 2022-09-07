@@ -6,6 +6,12 @@ setMethod("collate_data",
           function(x, subscript){
             collate_data(x, subscript, .collate_data.msframe)
           })
+setMethod("collate_data",
+          signature = c(x = "mcnebula", subscript = "character",
+                        fun_collate = "missing"),
+          function(x, subscript, ...){
+            collate_data(x, subscript, .collate_data.msframe, ...)
+          })
 setMethod("collate_data", 
           signature = c(x = "mcnebula", subscript = "character",
                         fun_collate = "function"
@@ -17,32 +23,33 @@ setMethod("collate_data",
             return(x)
           })
 .collate_data.msframe <- 
-  function(x, subscript){
+  function(x, subscript, reference){
     project_metadata <- extract_metadata(x, subscript)
-    msframe <- read_data(x, project_metadata = project_metadata,
-                         subscript = subscript)
-    return(msframe)
+    if (!missing(reference)) {
+      df <- metadata(project_metadata)[[ subscript ]]
+      df <- dplyr::mutate(df, .features_id = match.features_id(x)(upper),
+                          .candidates_id = match.candidates_id(x)(files))
+      df <- merge(reference, df, by = c(".features_id", ".candidates_id"))
+      metadata(project_metadata)[[ subscript ]] <- df
+    }
+    read_data(x, project_metadata = project_metadata,
+              subscript = subscript)
   }
 ## ---------------------------------------------------------------------- 
 setMethod("read_data", 
-          signature = c(x = "ANY",
+          signature = c(x = "mcnebula",
                         project_metadata = "project_metadata",
                         subscript = "character"
                         ),
           function(x, project_metadata, subscript){
             path.df <- metadata(project_metadata)[[ subscript ]]
-            path <-
-              paste0(sirius_project(mcn_path(x)), "/", path.df$upper, "/", path.df$files)
-            fun_read <-
-              methods_read(project_api(x))[[ paste0("read", subscript) ]]
-            fun_format <-
-              methods_format(project_api(x))
-            .features_id <-
-              methods_match(project_api(x))[[ "match.features_id" ]](path.df$upper)
+            path <- paste0(sirius_project(x), "/", path.df$upper, "/", path.df$files)
+            fun_read <- methods_read(x)[[ paste0("read", subscript) ]]
+            fun_format <- methods_format(x)
+            .features_id <- match.features_id(x)(path.df$upper)
             if (length(.features_id) == 0)
               .features_id <- subscript
-            .candidates_id <-
-              methods_match(project_api(x))[[ "match.candidates_id" ]](path.df$files)
+            .candidates_id <- match.candidates_id(x)(path.df$files)
             .get_info("collate_data", "read_data", subscript)
             msframe <- read_data(path = path, fun_read = fun_read,
                                  subscript = subscript, fun_format = fun_format,

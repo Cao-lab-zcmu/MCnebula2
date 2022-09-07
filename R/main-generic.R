@@ -33,10 +33,14 @@ setGeneric("filter_structure",
            function(x, fun_filter, ...) standardGeneric("filter_structure"))
 setGeneric("create_reference", 
            signature = c(mcnebula = "x",
-                         "character" = "from_reference",
-                         "data.frame" = "data"
+                         "character" = "from",
+                         "character" = "subscript",
+                         "data.frame" = "data",
+                         "vector" = "columns",
+                         "logical" = "fill"
                          ),
-           function(x, from_reference, data) standardGeneric("create_reference"))
+           function(x, from, subscript, data, columns, fill)
+             standardGeneric("create_reference"))
 setGeneric("filter_ppcp", 
            signature = c(mcnebula = "x",
                          "function" = "fun_filter",
@@ -44,4 +48,22 @@ setGeneric("filter_ppcp",
                          ),
            function(x, fun_filter, ..., by_reference)
              standardGeneric("filter_ppcp"))
-
+setGeneric("get_hierarchy", 
+           signature = c(mcnebula = "x", "function" = "fun_organize"),
+           function(x, fun_organize) standardGeneric("get_hierarchy"))
+setGeneric("summarise_stardust_classes", 
+           signature = c(mcnebula = "x",
+                         "numeric" = "pp.threashold",
+                         "numeric" = "hierarchy_priority",
+                         "logical" = "position_isomerism",
+                         "logical" = "inherit_dataset"
+                         ),
+           function(x, pp.threashold, hierarchy_priority,
+                    position_isomerism, inherit_dataset)
+             standardGeneric("summarise_stardust_classes"))
+setGeneric("cross_filter_stardust", 
+           signature = c(mcnebula = "x"),
+           function(x) standardGeneric("cross_filter_stardust"))
+setGeneric("summarise_nebula_index", 
+           signature = c(mcnebula = "x"),
+           function(x) standardGeneric("summarise_nebula_index"))

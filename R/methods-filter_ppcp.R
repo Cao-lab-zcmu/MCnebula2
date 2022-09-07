@@ -30,19 +30,19 @@ setMethod("filter_ppcp",
                         by_reference = "logical"),
           function(x, fun_filter, ..., by_reference){
             .get_info_formal("MCnebula2", "filter_ppcp")
+            if (by_reference) {
+              if (is.null(specific_candidate(x)))
+                stop("is.null(specific_candidate(x)) == T. use `create_reference(x)` previously.")
+            }
             subscript <- c(".canopus", ".f3_canopus")
             if (ion_mode(x) == "neg")
               subscript[1] <- c(".canopus_neg")
-            if (by_reference) {
-              for (i in subscript){
-                x <- get_metadata(x, i)
+            for (i in subscript) {
+              x <- get_metadata(x, i)
+              if (by_reference & i == subscript[2])
+                x <- collate_data(x, i, reference = specific_candidate(x))
+              else
                 x <- collate_data(x, i)
-              }
-            } else {
-              for (i in subscript){
-                x <- get_metadata(x, i)
-                x <- collate_data(x, i)
-              }
             }
             annotation <- entity(dataset(project_dataset(x))[[ subscript[1] ]])
             msframe.lst <- extract_rawset(x, subscript = subscript[2])

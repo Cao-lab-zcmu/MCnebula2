@@ -12,7 +12,7 @@ RoxygenNote: 7.2.0
 Collate:
     utils.R
     colors.R
-    projectConformation.sirius.v4.R
+    project.sirius.v4.R
     base-generic.R
     main-generic.R
     class-VIRTUAL_slots.R
@@ -32,4 +32,6 @@ Collate:
     methods-filter_structure.R
     methods-filter_formula.R
     methods-filter_ppcp.R
+    methods-get_hierarchy.R
     methods-create_reference.R
+    methods-summarise_stardust_classes.R

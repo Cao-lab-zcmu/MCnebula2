@@ -174,6 +174,12 @@ FUN_get_id_sirius.v4 <-
   function(){
     set <- c(
              match.features_id = MCnebula2::FUN_get_id_sirius.v4,
-             match.candidates_id = function(x) stringr::str_extract(x, "[^/]*(?=\\.[a-z]*$)")
+             match.candidates_id = function(x) stringr::str_extract(x, "[^/]*(?=\\.[a-z]*$)"),
+             generate_candidates_id = function(df) {
+               if (is.null(df$mol.formula) | is.null(df$adduct))
+                 stop( "columns not found in `df`" )
+               paste0(df$mol.formula, "_", gsub(" ", "", df$adduct))
+             }
     )
   }
+

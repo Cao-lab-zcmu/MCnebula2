@@ -8,28 +8,20 @@ setGeneric("mcn_palette<-",
            function(x, value) standardGeneric("mcn_palette<-"))
 ## ------------------------------------- 
 setGeneric("palette_set", 
-           signature = c(mcn_palette = "x"),
            function(x) standardGeneric("palette_set"))
 setGeneric("palette_set<-", 
-           signature = c(mcn_palette = "x"),
             function(x, value) standardGeneric("palette_set<-"))
 setGeneric("palette_stat", 
-           signature = c(mcn_palette = "x"),
            function(x) standardGeneric("palette_stat"))
 setGeneric("palette_stat<-", 
-           signature = c(mcn_palette = "x"),
            function(x, value) standardGeneric("palette_stat<-"))
 setGeneric("palette_ppcp", 
-           signature = c(mcn_palette = "x"),
            function(x) standardGeneric("palette_ppcp"))
 setGeneric("palette_ppcp<-", 
-           signature = c(mcn_palette = "x"),
            function(x, value) standardGeneric("palette_ppcp<-"))
 setGeneric("palette_label", 
-           signature = c(mcn_palette = "x"),
            function(x) standardGeneric("palette_label"))
 setGeneric("palette_label<-", 
-           signature = c(mcn_palette = "x"),
            function(x, value) standardGeneric("palette_label<-"))
 ## ---------------------------------------------------------------------- 
 ## class-mcnebula
@@ -42,14 +34,23 @@ setGeneric("ion_mode",
 setGeneric("ion_mode<-", 
            function(x, value) standardGeneric("ion_mode<-"))
 setGeneric("sirius_version", 
-           signature = c(mcnebula = "x"),
            function(x) standardGeneric("sirius_version"))
 setGeneric("sirius_version<-", 
-           signature = c(mcnebula = "x"),
            function(x, value) standardGeneric("sirius_version<-"))
 setGeneric("latest", 
-           signature = c(mcnebula = "x", "logical" = "switch"),
-           function(x, switch) standardGeneric("latest"))
+           function(x, slot) standardGeneric("latest"))
+setGeneric("match.features_id", 
+           function(x) standardGeneric("match.features_id"))
+setGeneric("match.candidates_id", 
+           function(x) standardGeneric("match.candidates_id"))
+setGeneric("specific_candidate", 
+           function(x) standardGeneric("specific_candidate"))
+setGeneric("classification", 
+           function(x) standardGeneric("classification"))
+setGeneric("hierarchy", 
+           function(x) standardGeneric("hierarchy"))
+setGeneric("stardust_classes", 
+           function(x) standardGeneric("stardust_classes"))
 ## ---------------------------------------------------------------------- 
 ## class-mcn_path
 setGeneric("mcn_path", 
@@ -58,16 +59,12 @@ setGeneric("mcn_path<-",
            function(x, value) standardGeneric("mcn_path<-"))
 ## ------------------------------------- 
 setGeneric("sirius_project", 
-           signature = c(mcn_path = "x"),
            function(x) standardGeneric("sirius_project"))
 setGeneric("sirius_project<-", 
-           signature = c(mcn_path = "x"),
            function(x, value) standardGeneric("sirius_project<-"))
 setGeneric("output_directory", 
-           signature = c(mcn_path = "x"),
            function(x) standardGeneric("output_directory"))
 setGeneric("output_directory<-", 
-           signature = c(mcn_path = "x"),
            function(x, value) standardGeneric("output_directory<-"))
 ## ---------------------------------------------------------------------- 
 ## class-project_conformation
@@ -77,22 +74,16 @@ setGeneric("project_conformation<-",
            function(x, value) standardGeneric("project_conformation<-"))
 ## ------------------------------------- 
 setGeneric("file_name", 
-           signature = c(project_conformation = "x"),
            function(x) standardGeneric("file_name"))
 setGeneric("file_name<-", 
-           signature = c(project_conformation = "x"),
            function(x, value) standardGeneric("file_name<-"))
 setGeneric("file_api", 
-           signature = c(project_conformation = "x"),
            function(x) standardGeneric("file_api"))
 setGeneric("file_api<-", 
-           signature = c(project_conformation = "x"),
            function(x, value) standardGeneric("file_api<-"))
 setGeneric("attribute_name", 
-           signature = c(project_conformation = "x"),
            function(x) standardGeneric("attribute_name"))
 setGeneric("attribute_name<-", 
-           signature = c(project_conformation = "x"),
            function(x, value) standardGeneric("attribute_name<-"))
 ## ------------------------------------- 
 setGeneric("get_upper_dir_subscript", 
@@ -110,10 +101,8 @@ setGeneric("project_metadata<-",
            function(x, value) standardGeneric("project_metadata<-"))
 ## ------------------------------------- 
 setGeneric("metadata", 
-           signature = c(project_metadata = "x"),
            function(x) standardGeneric("metadata"))
 setGeneric("metadata<-", 
-           signature = c(project_metadata = "x"),
            function(x, value) standardGeneric("metadata<-"))
 ## ------------------------------------- 
 setGeneric("get_metadata", 
@@ -137,22 +126,16 @@ setGeneric("project_api<-",
            function(x, value) standardGeneric("project_api<-"))
 ## ------------------------------------- 
 setGeneric("methods_read", 
-           signature = c(project_api = "x"),
            function(x) standardGeneric("methods_read"))
 setGeneric("methods_read<-", 
-           signature = c(project_api = "x"),
            function(x, value) standardGeneric("methods_read<-"))
 setGeneric("methods_format", 
-           signature = c(project_api = "x"),
            function(x) standardGeneric("methods_format"))
 setGeneric("methods_format<-", 
-           signature = c(project_api = "x"),
            function(x, value) standardGeneric("methods_format<-"))
 setGeneric("methods_match", 
-           signature = c(project_api = "x"),
            function(x) standardGeneric("methods_match"))
 setGeneric("methods_match<-", 
-           signature = c(project_api = "x"),
            function(x, value) standardGeneric("methods_match<-"))
 ## ---------------------------------------------------------------------- 
 ## class-project_dataset
