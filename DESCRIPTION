@@ -10,28 +10,20 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
 Collate:
-    utils.R
-    colors.R
-    project.sirius.v4.R
-    base-generic.R
-    main-generic.R
+    utils.R colors.R project.sirius.v4.R
+    tools-methods.R tools-classes.R
+    base-generic.R extra-generic.R main-generic.R
     class-VIRTUAL_slots.R
-    class-mcn_palette.R
-    class-mcn_path.R
-    class-project_conformation.R
-    class-project_metadata.R
-    class-project_api.R
-    class-project_dataset.R
+    class-mcn_palette.R class-mcn_path.R
+    class-project_conformation.R class-project_metadata.R
+    class-project_api.R class-project_dataset.R
     class-mcn_dataset.R
-    class-msframe.R
+    class-msframe.R extra-MODIFY_msframe.R
     class-mcnebula.R
-    tools-methods.R
-    tools-classes.R
     methods-initialize_mcnebula.R
-    methods-collate_data.R
-    methods-filter_structure.R
-    methods-filter_formula.R
-    methods-filter_ppcp.R
-    methods-get_hierarchy.R
-    methods-create_reference.R
-    methods-summarise_stardust_classes.R
+    methods-collate_data.R methods-filter_structure.R
+    methods-filter_formula.R methods-filter_ppcp.R
+    methods-create_hierarchy.R methods-create_reference.R
+    methods-create_stardust_classes.R
+    methods-create_features_annotation.R
+    methods-cross_filter_stardust.R

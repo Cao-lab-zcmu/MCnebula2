@@ -2,35 +2,39 @@
 # collate ppcp dataset in sirius project and do filtering
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 setMethod("filter_ppcp", 
-          signature = c(x = "mcnebula"),
+          signature = setMissing("filter_ppcp",
+                                 x = "mcnebula"),
           function(x, ...){
             filter_ppcp(x, .filter_ppcp_by_threashold, ..., by_reference = T)
           })
 setMethod("filter_ppcp", 
-          signature = c(x = "mcnebula", fun_filter = "function"),
+          signature = setMissing("filter_ppcp",
+                                 x = "mcnebula", fun_filter = "function"),
           function(x, fun_filter, ...){
             filter_ppcp(x, fun_filter, ..., by_reference = T)
           })
 setMethod("filter_ppcp", 
-          signature = c(x = "mcnebula", fun_filter = "missing",
-                        by_reference = "logical"),
+          signature = setMissing("filter_ppcp",
+                                 x = "mcnebula",
+                                 by_reference = "logical"),
           function(x, ..., by_reference){
             filter_ppcp(x, .filter_ppcp_by_threashold, ..., by_reference)
           })
 setMethod("filter_ppcp", 
-          signature = c(x = "mcnebula",
-                        fun_filter = "missing",
-                        by_reference = "logical"
-                        ),
+          signature = setMissing("filter_ppcp",
+                                 x = "mcnebula",
+                                 by_reference = "logical"),
           function(x, by_reference){
             filter_ppcp(x, .filter_ppcp_by_threashold, by_reference = by_reference)
           })
 setMethod("filter_ppcp", 
-          signature = c(x = "mcnebula", fun_filter = "function",
-                        by_reference = "logical"),
+          signature = setMissing("filter_ppcp",
+                                 x = "mcnebula", fun_filter = "function",
+                                 by_reference = "logical"),
           function(x, fun_filter, ..., by_reference){
             .get_info_formal("MCnebula2", "filter_ppcp")
             if (by_reference) {
+              .get_info("filter_ppcp", "by_reference == T")
               if (is.null(specific_candidate(x)))
                 stop("is.null(specific_candidate(x)) == T. use `create_reference(x)` previously.")
             }

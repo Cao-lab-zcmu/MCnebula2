@@ -2,13 +2,15 @@
 # collate any dataset in sirius project without filtering or arranging
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 setMethod("collate_data", 
-          signature = c(x = "mcnebula", subscript = "character"),
+          signature = setMissing("collate_data",
+                                 x = "mcnebula", subscript = "character"),
           function(x, subscript){
             collate_data(x, subscript, .collate_data.msframe)
           })
 setMethod("collate_data",
-          signature = c(x = "mcnebula", subscript = "character",
-                        fun_collate = "missing"),
+          signature = setMissing("collate_data",
+                                 x = "mcnebula",
+                                 subscript = "character"),
           function(x, subscript, ...){
             collate_data(x, subscript, .collate_data.msframe, ...)
           })
@@ -37,10 +39,10 @@ setMethod("collate_data",
   }
 ## ---------------------------------------------------------------------- 
 setMethod("read_data", 
-          signature = c(x = "mcnebula",
-                        project_metadata = "project_metadata",
-                        subscript = "character"
-                        ),
+          signature = setMissing("read_data",
+                                 x = "mcnebula",
+                                 project_metadata = "project_metadata",
+                                 subscript = "character"),
           function(x, project_metadata, subscript){
             path.df <- metadata(project_metadata)[[ subscript ]]
             path <- paste0(sirius_project(x), "/", path.df$upper, "/", path.df$files)
@@ -58,11 +60,10 @@ setMethod("read_data",
             )
           })
 setMethod("read_data", 
-          signature = c(x = "missing", project_metadata = "missing",
-                        subscript = "character", path = "character",
-                        .features_id = "character", .candidates_id = "character",
-                        fun_read = "function", fun_format = "function"
-                        ),
+          signature = setMissing("read_data",
+                       subscript = "character", path = "character",
+                       .features_id = "character", .candidates_id = "character",
+                       fun_read = "function", fun_format = "function"),
           function(subscript, path,
                    .features_id, .candidates_id,
                    fun_read, fun_format){

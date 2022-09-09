@@ -59,7 +59,7 @@ FUN_get_id_sirius.v4 <-
              inchikey2d = "inchikey2D",
              inchi = "inchi",
              mol.formula = "molecularFormula",
-             rank = "rank",
+             rank.structure = "rank",
              csi.score = "score",
              synonym = "name",
              smiles = "smiles",
@@ -89,6 +89,7 @@ FUN_get_id_sirius.v4 <-
              error.frag. = "medianMassErrorFragmentPeaks\\(ppm\\)",
              error.abs.frag. = "medianAbsoluteMassErrorFragmentPeaks\\(ppm\\)",
              error.mass = "massErrorPrecursor\\(ppm\\)",
+             rank.formula = "rank",
              ## .canopus
              ...sig = ".canopus",
              rel.index = "relativeIndex",
@@ -123,7 +124,8 @@ FUN_get_id_sirius.v4 <-
 .get_attribute_type_sirius.v4 <- 
   function(){
     set <- c(
-             rank = "integer",
+             rank.formula = "integer",
+             rank.structure = "integer",
              csi.score = "numeric",
              xlogp = "numeric",
              tani.score = "numeric",

@@ -37,8 +37,6 @@ setGeneric("sirius_version",
            function(x) standardGeneric("sirius_version"))
 setGeneric("sirius_version<-", 
            function(x, value) standardGeneric("sirius_version<-"))
-setGeneric("latest", 
-           function(x, slot) standardGeneric("latest"))
 setGeneric("match.features_id", 
            function(x) standardGeneric("match.features_id"))
 setGeneric("match.candidates_id", 
@@ -51,6 +49,8 @@ setGeneric("hierarchy",
            function(x) standardGeneric("hierarchy"))
 setGeneric("stardust_classes", 
            function(x) standardGeneric("stardust_classes"))
+setGeneric("features_annotation", 
+           function(x) standardGeneric("features_annotation"))
 ## ---------------------------------------------------------------------- 
 ## class-mcn_path
 setGeneric("mcn_path", 
@@ -85,14 +85,6 @@ setGeneric("attribute_name",
            function(x) standardGeneric("attribute_name"))
 setGeneric("attribute_name<-", 
            function(x, value) standardGeneric("attribute_name<-"))
-## ------------------------------------- 
-setGeneric("get_upper_dir_subscript", 
-           signature = c(ANY = "x",
-                         character = "subscript",
-                         project_conformation = "project_conformation"
-                         ),
-           function(x, subscript, project_conformation)
-             standardGeneric("get_upper_dir_subscript"))
 ## ---------------------------------------------------------------------- 
 ## class-project_metadata
 setGeneric("project_metadata", 
@@ -104,20 +96,6 @@ setGeneric("metadata",
            function(x) standardGeneric("metadata"))
 setGeneric("metadata<-", 
            function(x, value) standardGeneric("metadata<-"))
-## ------------------------------------- 
-setGeneric("get_metadata", 
-           signature = c(ANY = "x",
-                         "character" = "subscript",
-                         project_metadata = "project_metadata",
-                         project_conformation = "project_conformation",
-                         "character" = "path"
-                         ),
-           function(x, subscript, project_metadata, project_conformation, path)
-             standardGeneric("get_metadata"))
-## ------------------------------------- 
-setGeneric("extract_metadata", 
-           signature = c(ANY = "x", "character" = "subscript"),
-           function(x, subscript) standardGeneric("extract_metadata"))
 ## ---------------------------------------------------------------------- 
 ## class-project_api
 setGeneric("project_api", 
@@ -148,14 +126,6 @@ setGeneric("mcn_dataset",
            function(x) standardGeneric("mcn_dataset"))
 setGeneric("mcn_dataset<-", 
            function(x, value) standardGeneric("mcn_dataset<-"))
-## ------------------------------------- 
-setGeneric("extract_rawset", 
-           signature = c("ANY" = "x", character = "subscript",
-                         "function" = "fun_collate"),
-           function(x, subscript, fun_collate, ...) standardGeneric("extract_rawset"))
-setGeneric("extract_mcnset", 
-           signature = c("ANY" = "x", character = "subscript"),
-           function(x, subscript) standardGeneric("extract_mcnset"))
 ## ---------------------------------------------------------------------- 
 ## class-msframe
 setGeneric("msframe", 
@@ -169,20 +139,6 @@ setGeneric("entity",
 setGeneric("entity<-", 
            signature = c(msframe = "x"),
            function(x, value) standardGeneric("entity<-"))
-## ------------------------------------- 
-## rename the colnames and check the values type (character or interger, etc.)
-setGeneric("format_msframe", 
-           signature = c(msframe = "x",
-                         character = "names", "function" = "fun_names",
-                         character = "types", "function" = "fun_types"
-                         ),
-           function(x, names, fun_names, types, fun_types)
-             standardGeneric("format_msframe"))
-## ------------------------------------- 
-setGeneric("filter_msframe", 
-           signature = c(msframe = "x", "function" = "fun_filter",
-                         "formula" = "f"),
-           function(x, fun_filter, f, ...) standardGeneric("filter_msframe"))
 ## ---------------------------------------------------------------------- 
 ## class-VIRTUAL
 setGeneric("subscript", 

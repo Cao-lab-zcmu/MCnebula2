@@ -1,7 +1,7 @@
 # ==========================================================================
 # filter classification for each features, as stardust classes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-setMethod("summarise_stardust_classes", 
+setMethod("create_stardust_classes", 
           signature = c(x = "mcnebula", rep("ANY", 4)),
           function(x, pp.threashold, hierarchy_priority,
                    position_isomerism, inherit_dataset){
@@ -17,9 +17,9 @@ setMethod("summarise_stardust_classes",
                              else
                                value
                             })
-            do.call(summarise_stardust_classes, args)
+            do.call(create_stardust_classes, args)
           })
-setMethod("summarise_stardust_classes", 
+setMethod("create_stardust_classes", 
           signature = c(x = "mcnebula",
                         pp.threashold = "numeric",
                         hierarchy_priority = "numeric",
@@ -27,12 +27,12 @@ setMethod("summarise_stardust_classes",
                         inherit_dataset = "logical"),
           function(x, pp.threashold, hierarchy_priority,
                    position_isomerism, inherit_dataset){
-            .get_info_formal("MCnebula2", "summarise_stardust_classes")
+            .get_info_formal("MCnebula2", "create_stardust_classes")
             if (is.null(hierarchy(x)))
-              x <- get_hierarchy(x)
+              x <- create_hierarchy(x)
             hierarchy <- hierarchy(x)
             if (inherit_dataset) {
-              dataset <- entity(dataset(mcn_dataset(x))[[ ".f3_canopus" ]])
+              dataset <- latest(x, subscript = ".f3_canopus")
               check <- dplyr::distinct(dataset, .features_id, .candidates_id)
               if (any( duplicated(check[[ ".features_id" ]]) ))
                 stop("`.candidates_id` for features in ppcp dataset were not unique")

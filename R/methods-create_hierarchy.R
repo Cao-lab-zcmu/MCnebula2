@@ -1,12 +1,12 @@
 # ==========================================================================
 # collate and build classification hierarchy annotation data
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-setMethod("get_hierarchy", 
+setMethod("create_hierarchy", 
           signature = c(x = "mcnebula"),
           function(x){
-            get_hierarchy(x, .build_hierarchy)
+            create_hierarchy(x, .build_hierarchy)
           })
-setMethod("get_hierarchy", 
+setMethod("create_hierarchy", 
           signature = c(x = "mcnebula", fun_organize = "function"),
           function(x, fun_organize){
             class <- classification(x)

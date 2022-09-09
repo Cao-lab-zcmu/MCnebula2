@@ -33,13 +33,33 @@ setMethod("show",
 setMethod("latest", 
           signature = c(x = "mcnebula"),
           function(x){
-            tibble::as_tibble(entity(dataset(mcn_dataset(x))[[1]]))
+            latest(x, "mcn_dataset", 1)
           })
 setMethod("latest", 
-          signature = c(x = "mcnebula", slot = "character"),
+          signature = c(x = "mcnebula", slot = "character",
+                        subscript = "missing"),
           function(x, slot){
+            latest(x, slot, 1)
+          })
+setMethod("latest", 
+          signature = c(x = "mcnebula", slot = "missing",
+                        subscript = "character"),
+          function(x, subscript){
+            latest(x, "mcn_dataset", subscript)
+          })
+setMethod("latest", 
+          signature = c(x = "mcnebula", slot = "character",
+                        subscript = "ANY"),
+          function(x, slot, subscript){
             fun <- match.fun(slot)
-            tibble::as_tibble(entity(dataset(fun(x))[[1]]))
+            res <- dataset(fun(x))
+            if (length(res) == 0)
+              return()
+            res <- res[[ subscript ]]
+            if (is.null(res))
+              return()
+            else
+              return(tibble::as_tibble(entity(res)))
           })
 ## ------------------------------------- 
 setMethod("creation_time", 
@@ -176,9 +196,13 @@ setMethod("hierarchy",
           function(x){
             reference(x)[[ "hierarchy" ]]
           })
-## ------------------------------------- 
 setMethod("stardust_classes", 
           signature = c(x = "mcnebula"),
           function(x){
             reference(x)[[ "stardust_classes" ]]
+          })
+setMethod("features_annotation", 
+          signature = c(x = "mcnebula"),
+          function(x){
+            reference(x)[[ "features_annotation" ]]
           })

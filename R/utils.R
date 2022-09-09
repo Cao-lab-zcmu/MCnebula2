@@ -1,6 +1,20 @@
 # ==========================================================================
 # additional function
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+setMissing <- 
+  function(generic, ...){
+    args <- list(...)
+    sig <- getGeneric(generic)@signature
+    res <- vapply(sig, FUN.VALUE = "character",
+                  function(name){
+                    if (is.null(args[[ name ]]))
+                      "missing"
+                    else
+                      args[[ name ]]
+                  })
+    names(res) <- sig
+    return(res)
+  }
 list_unique_by_names <- 
   function(lst){
     unique <- data.frame(names = names(lst),

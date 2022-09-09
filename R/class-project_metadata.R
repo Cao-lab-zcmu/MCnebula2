@@ -87,12 +87,11 @@ setMethod("get_metadata",
             return(x)
           })
 setMethod("get_metadata", 
-          signature = c(x = "missing",
-                        subscript = "character",
-                        project_metadata = "project_metadata",
-                        project_conformation = "project_conformation",
-                        path = "character"
-                        ),
+          signature = setMissing("get_metadata",
+                                 subscript = "character",
+                                 project_metadata = "project_metadata",
+                                 project_conformation = "project_conformation",
+                                 path = "character"),
           function(subscript, project_metadata, project_conformation, path){
             file_name <- file_name(project_conformation)
             file_api <- file_api(project_conformation)
