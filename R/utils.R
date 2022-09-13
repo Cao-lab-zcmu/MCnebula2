@@ -15,6 +15,12 @@ setMissing <-
     names(res) <- sig
     return(res)
   }
+match_methods <- 
+  function(name, classes){
+    methods <- showMethods(classes = classes, printTo = FALSE)
+    methods <- methods[ grep(paste0("^Function: ", name), methods, perl = T) ]
+    vapply(strsplit(methods, " "), `[`, "character", 2)
+  }
 list_unique_by_names <- 
   function(lst){
     unique <- data.frame(names = names(lst),
@@ -68,7 +74,7 @@ mapply_rename_col <-
 ## ------------------------------------- 
 .get_info <- 
   function(main, sub, arg = NULL, sig = "##"){
-    cat(sig, " ", main, ": ", sub, ": ", arg, "\n", sep = "")
+    cat(sig, " ", main, ": ", sub, " ", arg, "\n", sep = "")
   }
 .get_info_formal <- 
   function(main, sub, arg = NULL, sig = "[INFO]"){

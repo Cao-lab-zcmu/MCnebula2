@@ -43,6 +43,7 @@ setMethod("format_msframe",
           })
 setMethod("format_msframe", 
           signature = setMissing("format_msframe",
+                                 x = "msframe",
                                  fun_names = "function",
                                  fun_types = "function"),
           function(x, fun_names, fun_types){

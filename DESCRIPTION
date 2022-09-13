@@ -24,6 +24,6 @@ Collate:
     methods-collate_data.R methods-filter_structure.R
     methods-filter_formula.R methods-filter_ppcp.R
     methods-create_hierarchy.R methods-create_reference.R
-    methods-create_stardust_classes.R
     methods-create_features_annotation.R
-    methods-cross_filter_stardust.R
+    methods-create_stardust_classes.R methods-cross_filter_stardust.R
+    methods-backtrack_stardust.R

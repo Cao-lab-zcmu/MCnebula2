@@ -3,7 +3,7 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .mcn_dataset <- 
   setClass("mcn_dataset", 
-           contains = c("dataset", "reference"),
+           contains = c("dataset", "reference", "backtrack"),
            prototype = NULL
            )
 # ==========================================================================

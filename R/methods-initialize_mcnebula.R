@@ -60,8 +60,8 @@ setMethod("initialize_mcnebula",
           function(x, sirius_version){
             express <- paste0("function(x) format_msframe(",
                               "x,",
-                              "fun_names = .get_attribute_name_", sirius_version, "(),",
-                              "fun_types = .get_attribute_type_", sirius_version, "()",
+                              "fun_names = .get_attribute_name_", sirius_version, ",",
+                              "fun_types = .get_attribute_type_", sirius_version, "",
                               ")")
             methods_format(x) <- eval( parse(text = express) )
             express <- paste0(".get_methods_read_", sirius_version, "()")

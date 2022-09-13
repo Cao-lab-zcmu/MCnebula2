@@ -159,3 +159,7 @@ setGeneric("reference",
 setGeneric("reference<-", 
            function(x, value) standardGeneric("reference<-"))
 ## ------------------------------------- 
+setGeneric("backtrack", 
+           function(x) standardGeneric("backtrack"))
+setGeneric("backtrack<-", 
+           function(x, value) standardGeneric("backtrack<-"))

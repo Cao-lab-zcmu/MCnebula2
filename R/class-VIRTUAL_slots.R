@@ -17,6 +17,14 @@ setClass("reference",
                           ),
          prototype = NULL
          )
+setClass("backtrack", 
+         contains = character(),
+         representation = 
+           representation("VIRTUAL",
+                          backtrack = "list"
+                          ),
+         prototype = NULL
+         )
 setClass("subscript", 
          contains = character(),
          representation = 
@@ -48,6 +56,14 @@ setMethod("reference", "ANY",
 setReplaceMethod("reference", "ANY",
                  function(x, value){
                    initialize(x, reference = value)
+                 })
+## ------------------------------------- 
+setMethod("backtrack", "ANY",
+          function(x){ x@backtrack })
+setReplaceMethod("backtrack", 
+                 signature = c(x = "ANY"),
+                 function(x, value){
+                   initialize(x, backtrack = value)
                  })
 ## ------------------------------------- 
 setMethod("subscript", "ANY",

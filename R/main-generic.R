@@ -73,8 +73,11 @@ setGeneric("create_stardust_classes",
              standardGeneric("create_stardust_classes"))
 ## ------------------------------------- 
 setGeneric("cross_filter_stardust",
-           signature = c(mcnebula = "x", "list" = "args"),
-           function(x, args) standardGeneric("cross_filter_stardust"))
+           signature = c(mcnebula = "x"),
+           function(x, min_number, max_ratio,
+                    types, cutoff, tolerance,
+                    hierarchy_range, identical_factor)
+             standardGeneric("cross_filter_stardust"))
 setGeneric("cross_filter_quantity",
            signature = c(mcnebula = "x",
                          "numeric" = "min_number", "numeric" = "max_ratio"),
@@ -90,6 +93,11 @@ setGeneric("cross_filter_identical",
                          "numeric" = "identical_factor"),
            function(x, hierarchy_range, identical_factor)
              standardGeneric("cross_filter_identical"))
+setGeneric("backtrack_stardust", 
+           signature = c(mcnebula = "x", "character" = "class.name",
+                         "numeric" = "rel.index", "logical" = "remove"),
+           function(x, class.name, rel.index, remove)
+             standardGeneric("backtrack_stardust"))
 ## ------------------------------------- 
 setGeneric("create_nebula_index", 
            signature = c(mcnebula = "x"),
