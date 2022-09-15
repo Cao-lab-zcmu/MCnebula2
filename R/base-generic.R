@@ -24,6 +24,16 @@ setGeneric("palette_label",
 setGeneric("palette_label<-", 
            function(x, value) standardGeneric("palette_label<-"))
 ## ---------------------------------------------------------------------- 
+## class-nebula
+setGeneric("parent_nebula", 
+           function(x) standardGeneric("parent_nebula"))
+setGeneric("parent_nebula<-", 
+           function(x, value) standardGeneric("parent_nebula<-"))
+setGeneric("child_nebulae", 
+           function(x) standardGeneric("child_nebulae"))
+setGeneric("child_nebulae<-", 
+           function(x, value) standardGeneric("child_nebulae<-"))
+## ---------------------------------------------------------------------- 
 ## class-mcnebula
 setGeneric("creation_time", 
            function(x) standardGeneric("creation_time"))

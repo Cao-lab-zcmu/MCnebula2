@@ -81,6 +81,16 @@ mapply_rename_col <-
     cat(sig, " ", main, ": ", sub, " ", arg, "\n", sep = "")
   }
 ## ------------------------------------- 
+.check_data <- 
+  function(object, lst){
+    mapply(lst, names(lst), FUN = function(value, name){
+             if (is.null(match.fun(name)(object))) {
+               stop(paste0("is.null(", name, "(x)) == T. ",
+                           "use `", value, "(x)` previously."))
+             }
+           })
+  }
+## ------------------------------------- 
 .list_files <- function(path, upper, pattern){
   lst_file <- pbapply::pbmapply(path, upper, pattern, SIMPLIFY = F,
                      FUN = function(path, upper, pattern){

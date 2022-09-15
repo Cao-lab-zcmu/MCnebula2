@@ -55,10 +55,7 @@ setMethod("compute_spectral_similarity",
                                  recompute = "logical"),
           function(x, within_nebula, recompute){
             .get_info_formal("MCnebula2", "compute_spectral_similarity")
-            if (is.null(nebula_index(x))) {
-              stop(paste0("is.null(nebula_index(x)) == T. ",
-                          "use `create_nebula_index(x)` previously."))
-            }
+            .check_data(x, list(nebula_index = "create_nebula_index"))
             if (!is.null(spectral_similarity(x))) {
               if (recompute) {
                 .get_info("compute_spectral_similarity", "recompute == T")
@@ -98,6 +95,26 @@ setMethod("compute_spectral_similarity",
                                  compareSpectra(lst_lightSpectrum[[ vec[1] ]],
                                                 lst_lightSpectrum[[ vec[2] ]])
                                    })
+            ## compute ionMass difference
+            if (!is.null(features_annotation(x))) {
+              mz <- dplyr::select(features_annotation(x),
+                                  .features_id, mz, rt.secound)
+              combn <- merge(combn,
+                             dplyr::rename(mz, .features_id2 = .features_id,
+                                           mz2 = mz, rt.secound2 = rt.secound),
+                             by = ".features_id2", all.x = T)
+              combn <- merge(combn,
+                             dplyr::rename(mz, .features_id1 = .features_id,
+                                           mz1 = mz, rt.secound1 = rt.secound),
+                             by = ".features_id1", all.x = T)
+              combn <-
+                dplyr::select(dplyr::mutate(combn,
+                                            mass_difference = mz2 - mz1,
+                                            rt.min_difference = 
+                                              round((rt.secound2 - rt.secound1) / 60, 2)
+                                            ),
+                              -mz1, -mz2, -rt.secound1, -rt.secound2)
+            }
             reference(mcn_dataset(x))[[ "spectral_similarity" ]] <-
               dplyr::as_tibble(combn)
             return(x)

@@ -35,8 +35,7 @@ setMethod("filter_ppcp",
             .get_info_formal("MCnebula2", "filter_ppcp")
             if (by_reference) {
               .get_info("filter_ppcp", "by_reference == T")
-              if (is.null(specific_candidate(x)))
-                stop("is.null(specific_candidate(x)) == T. use `create_reference(x)` previously.")
+              .check_data(x, list(specific_candidate = "create_reference"))
             }
             subscript <- c(".canopus", ".f3_canopus")
             if (ion_mode(x) == "neg")

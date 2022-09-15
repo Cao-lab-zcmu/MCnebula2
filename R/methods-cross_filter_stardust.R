@@ -20,10 +20,7 @@ setMethod("cross_filter_stardust",
                    types, cutoff, tolerance,
                    hierarchy_range, identical_factor){
             .get_info_formal("MCnebula2", "cross_filter_stardust")
-            if (is.null(stardust_classes(x))) {
-              stop(paste0("is.null(stardust_classes(x)) == T. ",
-                          "use `create_stardust_classes(x)` previously."))
-            }
+            .check_data(x, list(stardust_classes = "create_stardust_classes"))
             args <- as.list(environment())
             args <- args[ !vapply(args, is.name, T) ]
             new_args <- cross_filter_stardust()
@@ -61,11 +58,8 @@ setMethod("cross_filter_score",
                                  cutoff = "numeric", tolerance = "numeric"),
           function(x, types, cutoff, tolerance){
             .get_info("cross_filter_stardust", "score")
+            .check_data(x, list(features_annotation = "create_features_annotation"))
             set <- split(stardust_classes(x), f = ~ rel.index)
-            if (is.null(features_annotation(x))) {
-              stop(paste0("is.null(features_annotation(x)) == T. ",
-                   "use `create_features_annotation(x)` previously."))
-            }
             features <- features_annotation(x)
             res <- mapply(types, cutoff, tolerance,
                           SIMPLIFY = F, USE.NAMES = F,

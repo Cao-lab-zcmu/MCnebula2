@@ -41,10 +41,7 @@ setMethod("backtrack_stardust",
             else if (!is.logical(remove))
               stop( "`remove` must be logical or as missing as `FALSE`" )
             .get_info("backtrack_stardust", paste0("remove == ", remove))
-            if (is.null(stardust_classes(x))) {
-              stop(paste0("is.null(stardust_classes(x)) == T. ",
-                          "use `create_stardust_classes(x)` previously."))
-            }
+            .check_data(x, list(stardust_classes = "create_stardust_classes"))
             if (remove) {
               reference(mcn_dataset(x))[[ "stardust_classes" ]] <- 
                 dplyr::filter(stardust_classes(x), !rel.index %in% !!rel.index)

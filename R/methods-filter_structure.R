@@ -37,8 +37,7 @@ setMethod("filter_structure",
             msframe.lst <- extract_rawset(x, subscript)
             if (by_reference) {
               .get_info("filter_structure", "by_reference == T")
-              if (is.null(specific_candidate(x)))
-                stop("is.null(specific_candidate(x)) == T. use `create_reference(x)` previously.")
+              .check_data(x, list(specific_candidate = "create_reference"))
               entity(msframe.lst[[1]]) <- 
                 merge(specific_candidate(x), entity(msframe.lst[[1]]),
                       by = c(".features_id", ".candidates_id"))

@@ -116,3 +116,12 @@ setGeneric("compute_spectral_similarity",
            function(x, within_nebula, recompute, sp1, sp2)
              standardGeneric("compute_spectral_similarity"))
 ## ------------------------------------- 
+setGeneric("create_parent_nebula", 
+           signature = c(mcnebula = "x",
+                         "numeric" = "edge.threashould",
+                         "logical" = "remove_isolate"),
+           function(x, edge.threashould, remove_isolate)
+             standardGeneric("create_parent_nebula"))
+setGeneric("create_child_nebulae", 
+           signature = c(mcnebula = "x"),
+           function(x) standardGeneric("create_child_nebulae"))

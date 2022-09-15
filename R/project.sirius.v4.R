@@ -16,6 +16,7 @@
              .dir_scores = "^scores$",
              .dir_spectra = "^spectra$",
              .f2_ms = "spectrum.ms",
+             .f2_info = "compound.info",
              .f2_formula = "formula_candidates.tsv",
              .f3_canopus = "\\.fpt$",
              .f3_fingerid = "\\.tsv$",
@@ -44,6 +45,7 @@ FUN_get_id_sirius.v4 <-
              .dir_scores = ".id/.dir_scores",
              .dir_spectra = ".id/.dir_spectra",
              .f2_ms = ".id/.f2_ms",
+             .f2_info = ".id/.f2_info",
              .f2_formula = ".id/.f2_formula",
              .f3_canopus = ".id/.dir_canopus/.f3_canopus",
              .f3_fingerid = ".id/.dir_fingerid/.f3_fingerid",
@@ -90,6 +92,10 @@ FUN_get_id_sirius.v4 <-
              error.abs.frag. = "medianAbsoluteMassErrorFragmentPeaks\\(ppm\\)",
              error.mass = "massErrorPrecursor\\(ppm\\)",
              rank.formula = "rank",
+             ## .f2_info
+             ...sig = ".f2_info",
+             rt.secound = "rt",
+             mz = "ionMass",
              ## .canopus
              ...sig = ".canopus",
              rel.index = "relativeIndex",
@@ -130,6 +136,8 @@ FUN_get_id_sirius.v4 <-
              xlogp = "numeric",
              tani.score = "numeric",
              mz = "numeric",
+             rt.secound = "numeric",
+             rt.min = "numeric",
              int. = "numeric",
              rel.int. = "numeric",
              exactmass = "numeric",
@@ -157,20 +165,31 @@ FUN_get_id_sirius.v4 <-
              read.formula_identifications = MCnebula2::read_tsv,
              read.f2_ms = MCnebula2::pbsapply_read_tsv,
              read.f2_formula = MCnebula2::pbsapply_read_tsv,
+             read.f2_info = MCnebula2::pbsapply_read_info,
              read.f3_fingerid = MCnebula2::pbsapply_read_tsv,
              read.f3_scores = MCnebula2::pbsapply_read_tsv,
              read.f3_spectra = MCnebula2::pbsapply_read_tsv,
              read.f3_canopus = .pbsapply_read_fpt
     )
   }
+pbsapply_read_info <- function(path){
+  pbapply::pbsapply(path, simplify = F,
+                     function(path){
+                       lines <- readLines(path)
+                       lines <- lines[grepl("^ionMass|^rt", lines)]
+                       data.frame(ionMass =
+                                    stringr::str_extract(lines[1], "[0-9|.]{1,}"),
+                                  rt = stringr::str_extract(lines[2], "[0-9|.]{1,}")
+                       )
+                     })
+}
 .pbsapply_read_fpt <- function(path){
-  data <- pbapply::pbsapply(path, simplify = F,
-                            function(path){
-                              df <- data.table::fread(path, header = F)
-                              df$rel.index <- 0:(nrow(df) - 1)
-                              df
-                            })
-  return(data)
+  pbapply::pbsapply(path, simplify = F,
+                    function(path){
+                      df <- data.table::fread(path, header = F)
+                      df$rel.index <- 0:(nrow(df) - 1)
+                      df
+                    })
 }
 .get_methods_match_sirius.v4 <- 
   function(){

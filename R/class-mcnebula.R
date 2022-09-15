@@ -3,7 +3,7 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .mcnebula <- 
   setClass("mcnebula", 
-           contains = character(),
+           contains = c("nebula"),
            representation = 
              representation(creation_time = "character",
                             ion_mode = "character",

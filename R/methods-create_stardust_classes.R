@@ -46,7 +46,7 @@ setMethod("create_stardust_classes",
                     hierarchy, by = "rel.index", all.x = T)
             dataset <- dplyr::filter(dataset, hierarchy %in% hierarchy_priority)
             if (position_isomerism) {
-              dataset <- dplyr::filter(dataset, !grepl("[0-9]", name))
+              dataset <- dplyr::filter(dataset, !grepl("[0-9]", class.name))
             }
             reference(mcn_dataset(x))[[ "stardust_classes" ]] <- 
               dplyr::relocate(dplyr::as_tibble(dataset), .features_id, .candidates_id)

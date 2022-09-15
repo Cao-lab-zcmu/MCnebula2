@@ -35,8 +35,7 @@ setMethod("filter_formula",
             if (by_reference) {
               .get_info("filter_formula", "by_reference == T",
                         "\n\tcase formula, ignore `fun_filter`")
-              if (is.null(specific_candidate(x)))
-                stop("is.null(specific_candidate(x)) == T. use `create_reference(x)` previously.")
+              .check_data(x, list(specific_candidate = "create_reference"))
               fun <- methods_match(project_api(x))[[ "generate_candidates_id" ]]
               entity(msframe.lst[[1]]) <- 
                 merge(specific_candidate(x),
