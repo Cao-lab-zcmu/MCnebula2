@@ -51,6 +51,10 @@ setGeneric("stardust_classes",
            function(x) standardGeneric("stardust_classes"))
 setGeneric("features_annotation", 
            function(x) standardGeneric("features_annotation"))
+setGeneric("nebula_index", 
+           function(x) standardGeneric("nebula_index"))
+setGeneric("spectral_similarity", 
+           function(x) standardGeneric("spectral_similarity"))
 ## ---------------------------------------------------------------------- 
 ## class-mcn_path
 setGeneric("mcn_path", 

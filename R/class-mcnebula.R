@@ -201,6 +201,16 @@ setMethod("stardust_classes",
           function(x){
             reference(x)[[ "stardust_classes" ]]
           })
+setMethod("nebula_index", 
+          signature = c(x = "mcnebula"),
+          function(x){
+            reference(x)[[ "nebula_index" ]]
+          })
+setMethod("spectral_similarity", 
+          signature = c(x = "mcnebula"),
+          function(x){
+            reference(x)[[ "spectral_similarity" ]]
+          })
 setMethod("features_annotation", 
           signature = c(x = "mcnebula"),
           function(x){

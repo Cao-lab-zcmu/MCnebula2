@@ -78,7 +78,7 @@ mapply_rename_col <-
   }
 .get_info_formal <- 
   function(main, sub, arg = NULL, sig = "[INFO]"){
-    cat(sig, " ", main, ": ", sub, ": ", arg, "\n", sep = "")
+    cat(sig, " ", main, ": ", sub, " ", arg, "\n", sep = "")
   }
 ## ------------------------------------- 
 .list_files <- function(path, upper, pattern){

@@ -2,8 +2,12 @@
 # Generic for main method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 setGeneric("initialize_mcnebula", 
-           signature = c(ANY = "x", "character" = "sirius_version"),
-           function(x, sirius_version) standardGeneric("initialize_mcnebula"))
+           signature = c(ANY = "x",
+                         "character" = "sirius_version",
+                         "character" = "sirius_project"
+                         ),
+           function(x, sirius_version, sirius_project)
+             standardGeneric("initialize_mcnebula"))
 ## ------------------------------------- 
 setGeneric("collate_data", 
            signature = c(mcnebula = "x", "character" = "subscript",
@@ -102,3 +106,13 @@ setGeneric("backtrack_stardust",
 setGeneric("create_nebula_index", 
            signature = c(mcnebula = "x"),
            function(x) standardGeneric("create_nebula_index"))
+## ------------------------------------- 
+setGeneric("compute_spectral_similarity", 
+           signature = c(mcnebula = "x",
+                         "logical" = "within_nebula",
+                         "logical" = "recompute",
+                         "ANY" = "sp1",
+                         "ANY" = "sp2"),
+           function(x, within_nebula, recompute, sp1, sp2)
+             standardGeneric("compute_spectral_similarity"))
+## ------------------------------------- 

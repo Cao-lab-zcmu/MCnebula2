@@ -19,12 +19,16 @@ setValidity("project_conformation",
               check <- 
                 slots_mapply(object,
                              function(slots, names){
-                               if ( is.character( names(slots) ))
+                               if (is.character(slots) & length(slots) == 0) {
                                  TRUE
-                               else
-                                 FALSE
+                               } else {
+                                 if ( is.character( names(slots) ))
+                                   TRUE
+                                 else
+                                   FALSE
+                               }
                              })
-              if (!any(check))
+              if (any(!check))
                 "the colnames not matched."
               else
                 TRUE

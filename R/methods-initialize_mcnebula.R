@@ -2,8 +2,14 @@
 # set default value for project of MCnebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 setMethod("initialize_mcnebula", 
-          signature = c(x = "mcnebula"),
-          function(x){
+          signature = c(x = "mcnebula",
+                        sirius_version = "ANY",
+                        sirius_project = "ANY"),
+          function(x, sirius_version, sirius_project){
+            if (missing(sirius_version))
+              sirius_version <- match.fun("sirius_version")(x)
+            if (missing(sirius_project))
+              sirius_project <- match.fun("sirius_project")(x)
             item <- methods(initialize_mcnebula)
             item <- stringr::str_extract(item, "(?<=,).*(?=-method)")
             item <- gsub(",.*$", "", item)
@@ -15,7 +21,8 @@ setMethod("initialize_mcnebula",
                                 i, "(x)",
                                 ", ",
                                 ## other args
-                                "sirius_version = sirius_version(x)",
+                                "sirius_version = sirius_version,",
+                                "sirius_project = sirius_project",
                                 ")")
               eval( parse(text = express) )
             }
@@ -23,10 +30,8 @@ setMethod("initialize_mcnebula",
           })
 setMethod("initialize_mcnebula", 
           signature = c(x = "mcn_path"),
-          function(x){
-            ## ------------------------------------- 
-            ## set path
-            sirius_project(x) <- "."
+          function(x, sirius_project){
+            sirius_project(x) <- sirius_project
             output_directory(x) <- paste0(sirius_project(x), "/mcnebula_results")
             return(x)
           })

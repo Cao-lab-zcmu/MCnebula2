@@ -8,7 +8,7 @@
              representation(sirius_project = "character",
                             output_directory = "character"
                             ),
-           prototype = NULL
+           prototype = prototype(sirius_project = ".")
   )
 # ==========================================================================
 # validity
@@ -18,12 +18,14 @@ setValidity("mcn_path",
               sig <- paste0(object@sirius_project, "/.format")
               content <- "%source_%name"
               if (file.exists(sig)) {
-                if (readLines(sig, warn = F) == content)
-                  return(TRUE)
-                else
-                  return(FALSE)
+                if (identical(readLines(sig, warn = F), content)) {
+                  TRUE
+                } else {
+                  paste0("the content of file \"", sig,
+                         "\" is not identical to \"", content, "\"")
+                }
               }else{
-                return(FALSE)
+                paste0("file \"", sig, "\" not exists")
               }
             })
 # ==========================================================================

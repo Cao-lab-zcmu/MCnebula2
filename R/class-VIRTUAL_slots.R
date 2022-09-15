@@ -34,6 +34,18 @@ setClass("subscript",
          prototype = NULL
          )
 # ==========================================================================
+# validate
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+setValidity("reference", 
+            function(object){
+              check <- vapply(reference(object), is.data.frame,
+                              T, USE.NAMES = F)
+              if (any(!check))
+                "the elements in \"reference\" slot must be data.frame."
+              else
+                TRUE
+            })
+# ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 setMethod("dataset", "ANY",
