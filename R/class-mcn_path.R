@@ -1,5 +1,5 @@
 # ==========================================================================
-# nebula save path
+# a class to set work directory
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .mcn_path <- 
   setClass("mcn_path", 

@@ -1,5 +1,5 @@
 # ==========================================================================
-# Generic for base method of class
+# Generic for base method (get or replace data in slots) of class
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ## class-mcn_palette
 setGeneric("mcn_palette", 
@@ -154,6 +154,35 @@ setGeneric("entity<-",
            signature = c(msframe = "x"),
            function(x, value) standardGeneric("entity<-"))
 ## ---------------------------------------------------------------------- 
+## class-command
+setGeneric("command", 
+           function(x) standardGeneric("command"))
+setGeneric("command<-", 
+           function(x, value) standardGeneric("command<-"))
+## ------------------------------------- 
+setGeneric("command_name", 
+           function(x) standardGeneric("command_name"))
+setGeneric("command_name<-", 
+           function(x, value) standardGeneric("command_name<-"))
+setGeneric("command_function", 
+           function(x) standardGeneric("command_function"))
+setGeneric("command_function<-", 
+           function(x, value) standardGeneric("command_function<-"))
+setGeneric("command_args", 
+           function(x) standardGeneric("command_args"))
+setGeneric("command_args<-", 
+           function(x, value) standardGeneric("command_args<-"))
+## ---------------------------------------------------------------------- 
+setGeneric("ggset", 
+           function(x) standardGeneric("ggset"))
+setGeneric("ggset<-", 
+           function(x, value) standardGeneric("ggset<-"))
+## ------------------------------------- 
+setGeneric("layers", 
+           function(x) standardGeneric("layers"))
+setGeneric("layers<-", 
+           function(x, value) standardGeneric("layers<-"))
+## ---------------------------------------------------------------------- 
 ## class-VIRTUAL
 setGeneric("subscript", 
            function(x) standardGeneric("subscript"))
@@ -164,9 +193,6 @@ setGeneric("dataset",
            function(x) standardGeneric("dataset"))
 setGeneric("dataset<-", 
            function(x, value) standardGeneric("dataset<-"))
-setGeneric("add_dataset", 
-           signature = c("ANY" = "x", "list" = "list"),
-           function(x, list) standardGeneric("add_dataset"))
 ## ------------------------------------- 
 setGeneric("reference", 
            function(x) standardGeneric("reference"))

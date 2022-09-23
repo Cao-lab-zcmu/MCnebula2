@@ -1,5 +1,5 @@
 # ==========================================================================
-# class-project_api
+# a class to store functions of reading or formating the target data
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .project_api <- 
   setClass("project_api", 

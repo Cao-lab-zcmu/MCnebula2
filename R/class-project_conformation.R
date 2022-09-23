@@ -1,5 +1,6 @@
 # ==========================================================================
-# project_conformation
+# a class to store the characters of files or data in raw project.
+# These generally describe the file name, file path, and attributes name.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .project_conformation <- 
   setClass("project_conformation", 
@@ -78,11 +79,4 @@ setReplaceMethod("attribute_name",
                    initialize(x, attribute_name = value)
                  })
 ## ------------------------------------- 
-setMethod("get_upper_dir_subscript", 
-          signature = setMissing("get_upper_dir_subscript",
-                                 x = "ANY",
-                                 subscript = "character"),
-          function(x, subscript){
-            stringr::str_extract(file_api(project_conformation(x))[[ subscript ]],
-                                 paste0("(?<=^|/)[^/]*(?=/", subscript, "|$)"))
-          })
+

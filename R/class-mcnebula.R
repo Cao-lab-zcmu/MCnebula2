@@ -62,6 +62,15 @@ setMethod("latest",
               return(tibble::as_tibble(entity(res)))
           })
 ## ------------------------------------- 
+setMethod("get_upper_dir_subscript", 
+          signature = setMissing("get_upper_dir_subscript",
+                                 x = "mcnebula",
+                                 subscript = "character"),
+          function(x, subscript){
+            stringr::str_extract(file_api(project_conformation(x))[[ subscript ]],
+                                 paste0("(?<=^|/)[^/]*(?=/", subscript, "|$)"))
+          })
+## ------------------------------------- 
 setMethod("creation_time", 
           signature = c(x = "mcnebula"),
           function(x){ x@creation_time })

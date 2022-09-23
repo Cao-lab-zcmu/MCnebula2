@@ -1,5 +1,5 @@
 # ==========================================================================
-# Generic for main method
+# Generic for main method supplied by MCnebula2
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 setGeneric("initialize_mcnebula", 
            signature = c(ANY = "x",
@@ -118,10 +118,14 @@ setGeneric("compute_spectral_similarity",
 ## ------------------------------------- 
 setGeneric("create_parent_nebula", 
            signature = c(mcnebula = "x",
-                         "numeric" = "edge.threashould",
+                         "numeric" = "edge_cutoff",
                          "logical" = "remove_isolate"),
-           function(x, edge.threashould, remove_isolate)
+           function(x, edge_cutoff, remove_isolate)
              standardGeneric("create_parent_nebula"))
 setGeneric("create_child_nebulae", 
-           signature = c(mcnebula = "x"),
-           function(x) standardGeneric("create_child_nebulae"))
+           signature = c(mcnebula = "x",
+                         "numeric" = "edge_cutoff",
+                         "numeric" = "max_edge_number"),
+           function(x, edge_cutoff, max_edge_number)
+             standardGeneric("create_child_nebulae"))
+## ------------------------------------- 

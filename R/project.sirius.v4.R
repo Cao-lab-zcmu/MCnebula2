@@ -1,5 +1,6 @@
 # ==========================================================================
-# directory and file names in SIRIUS 4 project
+# directory and file names and path in SIRIUS 4 project, and some function
+# for how to read or format these data.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .get_file_name_sirius.v4 <- 
   function(){

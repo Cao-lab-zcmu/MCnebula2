@@ -1,5 +1,5 @@
 # ==========================================================================
-# class-mcn_dataset
+# a class to store the filtered dataset from 'project_dataset'
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .mcn_dataset <- 
   setClass("mcn_dataset", 

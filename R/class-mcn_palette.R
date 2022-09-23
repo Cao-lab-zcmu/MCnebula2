@@ -1,5 +1,5 @@
 # ==========================================================================
-# mcn_palette
+# a class to store hex color set.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .mcn_palette <- 
   setClass("mcn_palette", 

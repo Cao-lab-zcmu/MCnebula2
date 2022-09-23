@@ -1,5 +1,5 @@
 # ==========================================================================
-# class-project_dataset
+# a class to store dataset extract from raw data
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .project_dataset <- 
   setClass("project_dataset", 

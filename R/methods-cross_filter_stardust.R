@@ -43,6 +43,12 @@ setMethod("cross_filter_quantity",
                                  max_ratio = "numeric"),
           function(x, min_number, max_ratio){
             .get_info("cross_filter_stardust", "quantity")
+            if (min_number < 1) {
+              stop( "`min_number` must be a numeric greater or equal to 1" )
+            }
+            if (!(max_ratio <= 1 & max_ratio > 0)) {
+              stop( "`max_ratio` must be a numeric within (0, 1]" )
+            }
             sum <- length( unique(stardust_classes(x)[[ ".features_id" ]]) )
             set <- split(stardust_classes(x), ~ rel.index)
             set <- lapply(set, function(df)

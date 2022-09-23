@@ -1,5 +1,6 @@
 # ==========================================================================
-# project_metadata
+# a class to store the metadata of files in project directory, i.e.,
+# whether the files exists.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .project_metadata <- 
   setClass("project_metadata", 
