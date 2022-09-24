@@ -28,7 +28,7 @@ setMethod("create_child_nebulae",
                                  edge_cutoff = "numeric",
                                  max_edge_number = "numeric"),
           function(x, edge_cutoff, max_edge_number){
-            .get_info_formal("MCnebula2", "create_parent_nebula")
+            .get_info_formal("MCnebula2", "create_child_nebulae")
             .check_data(x, list(features_annotation = "create_features_annotation",
                                 spectral_similarity = "compute_spectral_similarity",
                                 nebula_index = "create_nebula_index"

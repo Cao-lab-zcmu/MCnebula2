@@ -33,6 +33,16 @@ setClass("subscript",
                           ),
          prototype = NULL
          )
+# setClass("parent_nebula", 
+         # contains = character(),
+         # representation = 
+         #   representation("VIRTUAL",
+         #                  igraph = "igraph",
+         #                  tbl_graph = "tbl_graph",
+         #                  layout_ggraph = "layout_ggraph"
+         #                  ),
+         # prototype = NULL
+         # )
 # ==========================================================================
 # validate
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
