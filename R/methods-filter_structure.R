@@ -1,6 +1,7 @@
 # ==========================================================================
 # collate structure dataset in sirius project and do filtering
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod filter_structure
 setMethod("filter_structure", 
           signature = setMissing("filter_structure",
                                  x = "mcnebula"),

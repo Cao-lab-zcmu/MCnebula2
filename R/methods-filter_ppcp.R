@@ -1,6 +1,7 @@
 # ==========================================================================
 # collate ppcp dataset in sirius project and do filtering
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod filter_ppcp
 setMethod("filter_ppcp", 
           signature = setMissing("filter_ppcp",
                                  x = "mcnebula"),

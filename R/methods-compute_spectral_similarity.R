@@ -1,6 +1,10 @@
 # ==========================================================================
 # compute spectral similarity of features within each nebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @importFrom pbapply pbapply
+#' @importFrom pbapply pblapply
+#' @importFrom pbapply pbmapply
+#' @exportMethod compute_spectral_similarity
 setMethod("compute_spectral_similarity", 
           signature = setMissing("compute_spectral_similarity",
                                  x = "mcnebula"),

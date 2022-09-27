@@ -2,13 +2,13 @@
 # additional function
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 setMissing <- 
-  function(generic, ...){
+  function(generic, ..., .SIG = "missing"){
     args <- list(...)
     sig <- getGeneric(generic)@signature
     res <- vapply(sig, FUN.VALUE = "character",
                   function(name){
                     if (is.null(args[[ name ]]))
-                      "missing"
+                      .SIG
                     else
                       args[[ name ]]
                   })
@@ -40,7 +40,7 @@ slots_mapply <-
   function(x, fun, ...){
     slots <- attributes(x)
     slots <- slots[-length(slots)]
-    res <- mapply(fun, slots = slots, names = names(slots), ...)
+    res <- mapply(fun, slot = slots, name = names(slots), ...)
     return(res)
   }
 ## ------------------------------------- 
@@ -86,9 +86,27 @@ mapply_rename_col <-
     mapply(lst, names(lst), FUN = function(value, name){
              if (is.null(match.fun(name)(object))) {
                stop(paste0("is.null(", name, "(x)) == T. ",
-                           "use `", value, "(x)` previously."))
+                           "use `", value, "(...)` previously."))
              }
            })
+  }
+.check_names <- 
+  function(param, formal, tip1, tip2){
+    if (!is.null(names(param))) {
+      if ( any(!names(formal) %in% names(param)) ) {
+        stop(paste0("the names of `", tip1, "` must contain all names of ",
+                    tip2, "; or without names."
+                    ))
+      }
+    }
+  }
+.check_class <- 
+  function(object, class = "layout", tip = "grid::grid.layout"){
+    if (!identical(as.character(class(object)), class)) {
+      stop(paste0("`", paste0(substitute(object), collapse = ""),
+                  "` should be a '", class, "' object created by ",
+                  "`", tip, "`." ))
+    }
   }
 ## ------------------------------------- 
 .list_files <- function(path, upper, pattern){
@@ -116,4 +134,3 @@ write_tsv <-
                 col.names = col.names, row.names = row.names, quote = F)
   }
 ## ------------------------------------- 
-`%>%` <- magrittr::`%>%`

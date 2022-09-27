@@ -19,11 +19,11 @@ setValidity("project_conformation",
             function(object){
               check <- 
                 slots_mapply(object,
-                             function(slots, names){
-                               if (is.character(slots) & length(slots) == 0) {
+                             function(slot, name){
+                               if (is.character(slot) & length(slot) == 0) {
                                  TRUE
                                } else {
-                                 if ( is.character( names(slots) ))
+                                 if ( is.character( names(slot) ))
                                    TRUE
                                  else
                                    FALSE

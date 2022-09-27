@@ -1,6 +1,19 @@
 # ==========================================================================
 # collate any dataset in sirius project without filtering or arranging
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @importFrom dplyr mutate
+#' @importFrom dplyr relocate
+#' @importFrom dplyr select
+#' @importFrom dplyr arrange
+#' @importFrom dplyr distinct
+#' @importFrom dplyr filter
+#' @importFrom dplyr rename
+#' @importFrom tibble as_tibble
+#' @importFrom tibble tibble
+#' @importFrom data.table rbindlist
+#' @importFrom data.table fread
+#' @importFrom stringr str_extract
+#' @exportMethod collate_data
 setMethod("collate_data", 
           signature = setMissing("collate_data",
                                  x = "mcnebula", subscript = "character"),

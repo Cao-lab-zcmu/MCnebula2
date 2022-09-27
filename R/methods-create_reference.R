@@ -50,7 +50,11 @@ setMethod("create_reference",
                                  subscript = "character"),
           function(x, subscript){
             .get_info_formal("MCnebula2", "create_reference")
-            data <- entity(dataset(mcn_dataset(x))[[ subscript ]])
+            data <- try(entity(dataset(mcn_dataset(x))[[ subscript ]]), silent = T)
+            if (inherits(data, "try-error")) {
+              stop(paste0("the specified dataset not exists. use, e.g., ",
+                          "`filter_structure(x)` previously."))
+            }
             if (subscript == ".f3_canopus") {
               data <- dplyr::distinct(data, .features_id, .candidates_id)
             }

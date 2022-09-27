@@ -39,7 +39,7 @@ setMethod("create_child_nebulae",
             features <- features_annotation(x)
             edges <- dplyr::filter(spectral_similarity(x),
                                    similarity >= edge_cutoff)
-            child_nebulae(x) <-
+            igraph(child_nebulae(x)) <-
               lapply(split(nebula_index(x), ~ class.name),
                      function(meta) {
                        features <- dplyr::filter(features, .features_id %in%

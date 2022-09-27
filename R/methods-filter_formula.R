@@ -1,6 +1,7 @@
 # ==========================================================================
 # collate formula dataset in sirius project and do filtering
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod filter_formula
 setMethod("filter_formula", 
           signature = setMissing("filter_formula",
                                  x = "mcnebula", by_reference = "logical"),

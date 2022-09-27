@@ -104,8 +104,9 @@ setGeneric("backtrack_stardust",
              standardGeneric("backtrack_stardust"))
 ## ------------------------------------- 
 setGeneric("create_nebula_index", 
-           signature = c(mcnebula = "x"),
-           function(x) standardGeneric("create_nebula_index"))
+           signature = c(mcnebula = "x", "logical" = "force"),
+           function(x, force)
+             standardGeneric("create_nebula_index"))
 ## ------------------------------------- 
 setGeneric("compute_spectral_similarity", 
            signature = c(mcnebula = "x",
@@ -129,3 +130,16 @@ setGeneric("create_child_nebulae",
            function(x, edge_cutoff, max_edge_number)
              standardGeneric("create_child_nebulae"))
 ## ------------------------------------- 
+setGeneric("create_parent_layout", 
+           signature = c(mcnebula = "x", "character" = "ggraph_layout",
+                         "numeric" = "seed"),
+           function(x, ggraph_layout, seed)
+             standardGeneric("create_parent_layout"))
+setGeneric("create_child_layouts", 
+           signature = c(mcnebula = "x", "character" = "ggraph_layouts",
+                         "numeric" = "seeds", "ANY" = "grid_layout",
+                         "list" = "viewports", "ANY" = "panel_viewport",
+                         "ANY" = "legend_viewport"),
+           function(x, ggraph_layouts, seeds, grid_layout,
+                    viewports, panel_viewport, legend_viewport)
+             standardGeneric("create_child_layouts"))

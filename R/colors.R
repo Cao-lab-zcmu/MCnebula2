@@ -1,6 +1,10 @@
 # ==========================================================================
 # Get hexadecimal color with ggsci package
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @importFrom ggsci pal_simpsons
+#' @importFrom ggsci pal_igv
+#' @importFrom ggsci pal_ucscgb
+#' @importFrom ggsci pal_d3
 .get_color_set <- 
   function(){
     unique(c(ggsci::pal_simpsons()(16),

@@ -2,6 +2,8 @@
 # use features annotation and spectral similarity data to create network
 # for parent-nebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @importFrom igraph graph_from_data_frame
+#' @exportMethod create_parent_nebula
 setMethod("create_parent_nebula", 
           signature = setMissing("create_parent_nebula",
                                  x = "mcnebula"),
@@ -38,9 +40,8 @@ setMethod("create_parent_nebula",
             } else {
               features <- features_annotation(x)
             }
-            parent_nebula <-
+            igraph(parent_nebula(x)) <-
               igraph::graph_from_data_frame(edges, directed = T,
                                             vertices = features)
-            parent_nebula(x) <- list(parent_nebula)
             return(x)
           })

@@ -203,3 +203,33 @@ setGeneric("backtrack",
            function(x) standardGeneric("backtrack"))
 setGeneric("backtrack<-", 
            function(x, value) standardGeneric("backtrack<-"))
+## ------------------------------------- 
+setGeneric("igraph", 
+           function(x) standardGeneric("igraph"))
+setGeneric("igraph<-", 
+           function(x, value) standardGeneric("igraph<-"))
+setGeneric("tbl_graph", 
+           function(x) standardGeneric("tbl_graph"))
+setGeneric("tbl_graph<-", 
+           function(x, value) standardGeneric("tbl_graph<-"))
+setGeneric("layout_ggraph", 
+           function(x) standardGeneric("layout_ggraph"))
+setGeneric("layout_ggraph<-", 
+           function(x, value) standardGeneric("layout_ggraph<-"))
+setGeneric("grid_layout", 
+           function(x) standardGeneric("grid_layout"))
+setGeneric("grid_layout<-", 
+           function(x, value) standardGeneric("grid_layout<-"))
+setGeneric("viewports", 
+           function(x) standardGeneric("viewports"))
+setGeneric("viewports<-", 
+           function(x, value) standardGeneric("viewports<-"))
+setGeneric("panel_viewport", 
+           function(x) standardGeneric("panel_viewport"))
+setGeneric("panel_viewport<-", 
+           function(x, value) standardGeneric("panel_viewport<-"))
+setGeneric("legend_viewport", 
+           function(x) standardGeneric("legend_viewport"))
+setGeneric("legend_viewport<-", 
+           function(x, value) standardGeneric("legend_viewport<-"))
+## ------------------------------------- 
