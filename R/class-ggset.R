@@ -34,7 +34,7 @@ setMethod("show_layers",
             mapply(layers, 1:length(layers),
                    FUN = function(com, seq){
                      cat("  +++ layer", seq, "+++\n")
-                     cat("  ", command_name(com), ":", "\n",
+                     cat("  ", command_name(com), "\n",
                          rep(" ", 4), "Args:\n", sep = "")
                      args <- vapply(command_args(com), function(v) class(v)[1], "ch")
                      if (length(args) >= 1) {

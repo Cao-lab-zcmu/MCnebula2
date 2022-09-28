@@ -6,6 +6,7 @@
            contains = character(),
            representation = 
              representation(palette_set = "character",
+                            palette_gradient = "character",
                             palette_stat = "character",
                             palette_ppcp = "character",
                             palette_label = "character"
@@ -37,6 +38,15 @@ setReplaceMethod("palette_set",
                  signature = c(x = "mcn_palette"),
                  function(x, value){
                    initialize(x, palette_set = value)
+                 })
+## ------------------------------------- 
+setMethod("palette_gradient", 
+          signature = c(x = "mcn_palette"),
+          function(x){ x@palette_gradient })
+setReplaceMethod("palette_gradient", 
+                 signature = c(x = "mcn_palette"),
+                 function(x, value){
+                   initialize(x, palette_gradient = value)
                  })
 ## ------------------------------------- 
 setMethod("palette_stat", 

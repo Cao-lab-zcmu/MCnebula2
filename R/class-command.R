@@ -74,7 +74,11 @@ setMethod("set_command",
           signature = setMissing("set_command",
                                  fun = "function"),
           function(fun, ...){
-            set_command(fun, ..., name = as.character(substitute(fun)))
+            name <- as.character(substitute(fun))
+            if (length(name) != 1) {
+              name <- paste0(name[2], name[1], name[3])
+            }
+            set_command(fun, ..., name = name)
           })
 setMethod("call_command", 
           signature = c(x = "command"),

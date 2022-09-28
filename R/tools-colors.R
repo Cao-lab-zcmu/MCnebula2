@@ -13,6 +13,10 @@
              ggsci::pal_d3("category20")(20)
              ))
   }
+.get_color_gradient <- 
+  function(){
+    c("#D5E4A2FF", "#FFCD00FF", "#EEA236FF", "#FB6467FF", "#9467BDFF")
+  }
 .get_label_color <- 
   function(){
     colorRampPalette(c("#C6DBEFFF", "#3182BDFF", "red"))(10)

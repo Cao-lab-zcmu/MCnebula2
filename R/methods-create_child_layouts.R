@@ -105,6 +105,8 @@ setMethod("create_child_layouts",
                set.seed(seed)
                ggraph::create_layout(graph, layout = layout)
              })
+    names(layout_ggraph(child_nebulae(x))) <-
+      names(tbl_graph(child_nebulae(x)))
     grid_layout(child_nebulae(x)) <- grid_layout
     viewports(child_nebulae(x)) <- viewports
     panel_viewport(child_nebulae(x)) <- panel_viewport

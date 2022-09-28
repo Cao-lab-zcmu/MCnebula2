@@ -10,8 +10,8 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
 Collate:
-    utils.R colors.R project.sirius.v4.R tools-methods.R 
-    tools-MSnbase-MODIFIED_compareSpectra.R
+    utils.R project.sirius.v4.R tools-colors.R tools-methods.R
+    tools-visualize.R tools-MSnbase-MODIFIED_compareSpectra.R
     base-generic.R extra-generic.R main-generic.R
     class-VIRTUAL_slots.R class-mcn_palette.R class-mcn_path.R
     class-project_conformation.R class-project_metadata.R
@@ -28,6 +28,7 @@ Collate:
     methods-compute_spectral_similarity.R
     methods-create_parent_nebula.R methods-create_child_nebulae.R
     methods-create_parent_layout.R methods-create_child_layouts.R
+    methods-activate_nebulae.R
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

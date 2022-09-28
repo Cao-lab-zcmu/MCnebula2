@@ -105,6 +105,11 @@ setMethod("palette_set",
           function(x){
             palette_set(mcn_palette(x))
           })
+setMethod("palette_gradient", 
+          signature = c(x = "mcnebula"),
+          function(x){
+            palette_gradient(mcn_palette(x))
+          })
 setMethod("palette_stat", 
           signature = c(x = "mcnebula"),
           function(x){

@@ -41,6 +41,7 @@ setMethod("initialize_mcnebula",
             ## set color palette
             colors <- .get_color_set()
             palette_set(x) <- colors
+            palette_gradient(x) <- .get_color_gradient()
             palette_stat(x) <- colors
             palette_ppcp(x) <- colors
             palette_label(x) <- .get_label_color()

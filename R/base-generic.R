@@ -11,6 +11,10 @@ setGeneric("palette_set",
            function(x) standardGeneric("palette_set"))
 setGeneric("palette_set<-", 
             function(x, value) standardGeneric("palette_set<-"))
+setGeneric("palette_gradient", 
+           function(x) standardGeneric("palette_gradient"))
+setGeneric("palette_gradient<-", 
+           function(x, value) standardGeneric("palette_gradient<-"))
 setGeneric("palette_stat", 
            function(x) standardGeneric("palette_stat"))
 setGeneric("palette_stat<-", 

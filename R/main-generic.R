@@ -143,3 +143,11 @@ setGeneric("create_child_layouts",
            function(x, ggraph_layouts, seeds, grid_layout,
                     viewports, panel_viewport, legend_viewport)
              standardGeneric("create_child_layouts"))
+## ------------------------------------- 
+setGeneric("activate_nebulae", 
+           signature = c(mcnebula = "x",
+                         "function" = "fun_default_parent",
+                         "function" = "fun_default_child"),
+           function(x, fun_default_parent, fun_default_child)
+             standardGeneric("activate_nebulae"))
+
