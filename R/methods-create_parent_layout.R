@@ -19,7 +19,7 @@ setMethod("create_parent_layout",
           signature = c(x = "mcnebula", ggraph_layout = "character",
                         seed = "numeric"),
           function(x, ggraph_layout, seed){
-            .get_info_formal("MCnebula2", "create_parent_layout")
+            .print_info_formal("MCnebula2", "create_parent_layout")
             .check_data(parent_nebula(x), list(igraph = "create_parent_nebula"))
             tbl_graph(parent_nebula(x)) <-
               tidygraph::as_tbl_graph(igraph(parent_nebula(x)))

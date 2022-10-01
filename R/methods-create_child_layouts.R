@@ -17,7 +17,7 @@ setMethod("create_child_layouts",
           function(x, ggraph_layouts, seeds,
                    grid_layout, viewports,
                    panel_viewport, legend_viewport){
-            .get_info_formal("MCnebula2", "create_child_layouts")
+            .print_info_formal("MCnebula2", "create_child_layouts")
             .check_data(child_nebulae(x), list(igraph = "create_child_nebulae"))
             len <- length(igraph(child_nebulae(x)))
             if (missing(ggraph_layouts)) {

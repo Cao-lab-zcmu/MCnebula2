@@ -33,9 +33,9 @@ setMethod("filter_ppcp",
                                  x = "mcnebula", fun_filter = "function",
                                  by_reference = "logical"),
           function(x, fun_filter, ..., by_reference){
-            .get_info_formal("MCnebula2", "filter_ppcp")
+            .print_info_formal("MCnebula2", "filter_ppcp")
             if (by_reference) {
-              .get_info("filter_ppcp", "by_reference == T")
+              .print_info("filter_ppcp", "by_reference == T")
               .check_data(x, list(specific_candidate = "create_reference"))
             }
             subscript <- c(".canopus", ".f3_canopus")
@@ -52,7 +52,7 @@ setMethod("filter_ppcp",
             msframe.lst <- extract_rawset(x, subscript = subscript[2])
             ## validate
             if ( !subscript[2] %in% names(dataset(mcn_dataset(x))) ) {
-              .get_info("filter_ppcp", "validate annotation data",
+              .print_info("filter_ppcp", "validate annotation data",
                         paste0(subscript, collapse = " >>> "))
               validate_ppcp_annotation(annotation, msframe.lst)
               ## add annotation into dataset

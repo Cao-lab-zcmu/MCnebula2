@@ -48,7 +48,7 @@ setMethod("show",
           signature = c(object = "child_nebulae"),
           function(object){
             slots_mapply(object, function(slot, name){
-                           if (class(slot)[1] == "viewport") {
+                           if (is(slot, "viewport")) {
                              num <- 1
                            } else if (is.list(slot)) {
                              num <- length(slot)

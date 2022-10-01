@@ -33,6 +33,15 @@ setClass("subscript",
                           ),
          prototype = NULL
          )
+setClass("export", 
+         contains = character(),
+         representation = 
+           representation("VIRTUAL",
+                          export_path = "character",
+                          export_name = "character"
+                          ),
+         prototype = NULL
+         )
 # ==========================================================================
 # validate
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -85,4 +94,19 @@ setReplaceMethod("subscript", "ANY",
                    initialize(x, subscript = value)
                  })
 ## ------------------------------------- 
-
+setMethod("export_name", 
+          signature = c(x = "ANY"),
+          function(x){ x@export_name })
+setReplaceMethod("export_name", 
+                 signature = c(x = "ANY"),
+                 function(x, value){
+                   initialize(x, export_name = value)
+                 })
+setMethod("export_path", 
+          signature = c(x = "ANY"),
+          function(x){ x@export_path })
+setReplaceMethod("export_path", 
+                 signature = c(x = "ANY"),
+                 function(x, value){
+                   initialize(x, export_path = value)
+                 })

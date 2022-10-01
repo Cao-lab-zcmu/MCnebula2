@@ -72,13 +72,29 @@ mapply_rename_col <-
            })
   }
 ## ------------------------------------- 
-.get_info <- 
+.print_info <- 
   function(main, sub, arg = NULL, sig = "##"){
     cat(sig, " ", main, ": ", sub, " ", arg, "\n", sep = "")
   }
-.get_info_formal <- 
+.print_info_formal <- 
   function(main, sub, arg = NULL, sig = "[INFO]"){
     cat(sig, " ", main, ": ", sub, " ", arg, "\n", sep = "")
+  }
+.print_info_viewport <- 
+  function(info = "info"){
+    .print_info(info, "current.viewport:",
+                paste0("\n\t", paste0(current.viewport())))
+  }
+.get_missing_x <- 
+  function(x, class, n = 2, envir = parent.frame(n)){
+    if (missing(x)) {
+      x <- get("x", envir = envir)
+      if (!is(x, class)) {
+        stop( paste0("there must be an `x` of '", class, 
+                     "' in `parent.frame(", n - 1, ")`" ) )
+      }
+    }
+    return(x)
   }
 ## ------------------------------------- 
 .check_data <- 
@@ -102,7 +118,7 @@ mapply_rename_col <-
   }
 .check_class <- 
   function(object, class = "layout", tip = "grid::grid.layout"){
-    if (!identical(as.character(class(object)), class)) {
+    if (!is(object, class)) {
       stop(paste0("`", paste0(substitute(object), collapse = ""),
                   "` should be a '", class, "' object created by ",
                   "`", tip, "`." ))
@@ -134,3 +150,30 @@ write_tsv <-
                 col.names = col.names, row.names = row.names, quote = F)
   }
 ## ------------------------------------- 
+#' @importFrom grid unit
+.element_textbox <- 
+  function(family = NULL, face = NULL, size = NULL,
+           colour = "white", fill = "lightblue",
+           box.colour = "white", linetype = 1, linewidth = NULL,
+           hjust = NULL, vjust = NULL,
+           halign = 0.5, valign = NULL, lineheight = NULL,
+           margin = match.fun("margin")(3, 3, 3, 3),
+           padding = match.fun("margin")(2, 0, 1, 0),
+           width = grid::unit(1, "npc"),
+           height = NULL, minwidth = NULL,
+           maxwidth = NULL, minheight = NULL, maxheight = NULL,
+           r = grid::unit(5, "pt"), orientation = NULL,
+           debug = FALSE, inherit.blank = FALSE
+           ){
+    structure(as.list(environment()),
+              class = c("element_textbox", "element_text", "element"))
+  }
+## ------------------------------------- 
+.get_legend <- 
+  function(p){
+    p <- ggplot2:::ggplot_build.ggplot(p)$plot
+    theme <- ggplot2:::plot_theme(p)
+    position <- theme$legend.position
+    ggplot2:::build_guides(p$scales, p$layers, p$mapping,
+                           position, theme, p$guides, p$labels)
+  }

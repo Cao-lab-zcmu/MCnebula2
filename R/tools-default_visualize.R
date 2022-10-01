@@ -5,12 +5,11 @@
 #' @importFrom ggraph geom_node_point
 #' @importFrom ggraph scale_edge_width
 #' @importFrom stringr str_wrap
-#' @importFrom ggtext element_textbox
 #' @importFrom stringr str_wrap
 .default_parent_edge <- function(edge_color = "lightblue"){
   set_command(ggraph::geom_edge_fan,
               aes(edge_width = similarity),
-              color = edge_color, show.legend = F
+              color = edge_color
   )
 }
 .default_parent_node <- function(){
@@ -19,11 +18,15 @@
                   fill = mz),
               shape = 21)
 }
-.default_parent_fill <- function(pal, range = c(100, 1000)){
-  set_command(scale_fill_gradientn, colours = pal, limits = range)
+.default_parent_fill <- function(pal){
+  set_command(scale_fill_gradientn, colours = pal)
 }
 .default_parent_labs <- function(){
-  set_command(labs, fill = "m/z", size = "Tanimoto similarity")
+  set_command(labs, fill = "m/z", size = "Tanimoto similarity",
+              edge_width = "Spectral similarity")
+}
+.default_parent_edge_width <- function(){
+  set_command(scale_edge_width, range = c(0, 0.7))
 }
 .default_parent_theme <- function(){
   set_command(theme,
@@ -42,15 +45,12 @@
   }
 .default_child_theme <- 
   function(fill){
-    ggset <- set_ggset(.default_parent_theme())
-    ggset <- mutate_layer(ggset, 1, plot.title = .get_title_textbox(fill))
-    layers(ggset)[[1]]
+    command <- .default_parent_theme()
+    command_args(command)[[ "plot.title" ]] <-
+      call_command(.default_title_textbox(fill))
+    command
   }
-.get_title_textbox <- function(fill){
-  ggtext::element_textbox(color = "white", fill = fill,
-                          box.color = "white",
-                          halign = 0.5, linetype = 1,
-                          r = unit(5, "pt"), width = unit(1, "npc"),
-                          padding = margin(2, 0, 1, 0),
-                          margin = margin(3, 3, 3, 3))
-}
+.default_title_textbox <- 
+  function(fill){
+    set_command(.element_textbox, fill = fill)
+  }

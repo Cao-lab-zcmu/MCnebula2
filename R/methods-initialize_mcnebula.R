@@ -7,9 +7,14 @@ setMethod("initialize_mcnebula",
                         sirius_project = "ANY"),
           function(x, sirius_version, sirius_project){
             if (missing(sirius_version))
-              sirius_version <- match.fun("sirius_version")(x)
+              sirius_version <- project_version(x)
+            else
+              project_version(x) <- sirius_version
             if (missing(sirius_project))
-              sirius_project <- match.fun("sirius_project")(x)
+              sirius_project <- project_path(x)
+            else
+              project_path(x) <- sirius_project
+            match.fun(paste0(".validate_", sirius_version))(sirius_project)
             item <- methods(initialize_mcnebula)
             item <- stringr::str_extract(item, "(?<=,).*(?=-method)")
             item <- gsub(",.*$", "", item)
@@ -18,32 +23,25 @@ setMethod("initialize_mcnebula",
               express <- paste0(i, "(x)",
                                 "<- initialize_mcnebula(",
                                 ## initialize slot
-                                i, "(x)",
-                                ", ",
+                                i, "(x)", ", ",
                                 ## other args
                                 "sirius_version = sirius_version,",
                                 "sirius_project = sirius_project",
                                 ")")
               eval( parse(text = express) )
             }
+            export_name(x) <- .get_export_name()
             return(x)
           })
 setMethod("initialize_mcnebula", 
-          signature = c(x = "mcn_path"),
-          function(x, sirius_project){
-            sirius_project(x) <- sirius_project
-            output_directory(x) <- paste0(sirius_project(x), "/mcnebula_results")
-            return(x)
-          })
-setMethod("initialize_mcnebula", 
-          signature = c(x = "mcn_palette"),
+          signature = c(x = "melody"),
           function(x){
             ## set color palette
             colors <- .get_color_set()
             palette_set(x) <- colors
             palette_gradient(x) <- .get_color_gradient()
             palette_stat(x) <- colors
-            palette_ppcp(x) <- colors
+            palette_col(x) <- colors
             palette_label(x) <- .get_label_color()
             return(x)
           })

@@ -1,14 +1,14 @@
 # ==========================================================================
 # a class to store hex color set.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-.mcn_palette <- 
-  setClass("mcn_palette", 
+.melody <- 
+  setClass("melody", 
            contains = character(),
            representation = 
              representation(palette_set = "character",
                             palette_gradient = "character",
                             palette_stat = "character",
-                            palette_ppcp = "character",
+                            palette_col = "character",
                             palette_label = "character"
                             ),
            prototype = NULL
@@ -17,61 +17,61 @@
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 setMethod("show", 
-          signature = c(object= "mcn_palette"),
+          signature = c(object= "melody"),
           function(object){
             .show(object)
           })
 ## ------------------------------------- 
-setMethod("mcn_palette", 
+setMethod("melody", 
           signature = c(x = "ANY"),
-          function(x){ x@mcn_palette })
-setReplaceMethod("mcn_palette", 
+          function(x){ x@melody })
+setReplaceMethod("melody", 
                  signature = c(x = "ANY"),
                  function(x, value){
-                   initialize(x, mcn_palette = value)
+                   initialize(x, melody = value)
                  })
 ## ------------------------------------- 
 setMethod("palette_set", 
-          signature = c(x = "mcn_palette"),
+          signature = c(x = "melody"),
           function(x){ x@palette_set })
 setReplaceMethod("palette_set", 
-                 signature = c(x = "mcn_palette"),
+                 signature = c(x = "melody"),
                  function(x, value){
                    initialize(x, palette_set = value)
                  })
 ## ------------------------------------- 
 setMethod("palette_gradient", 
-          signature = c(x = "mcn_palette"),
+          signature = c(x = "melody"),
           function(x){ x@palette_gradient })
 setReplaceMethod("palette_gradient", 
-                 signature = c(x = "mcn_palette"),
+                 signature = c(x = "melody"),
                  function(x, value){
                    initialize(x, palette_gradient = value)
                  })
 ## ------------------------------------- 
 setMethod("palette_stat", 
-          signature = c(x = "mcn_palette"),
+          signature = c(x = "melody"),
           function(x){ x@palette_stat })
 setReplaceMethod("palette_stat", 
-                 signature = c(x = "mcn_palette"),
+                 signature = c(x = "melody"),
                  function(x, value){
                    initialize(x, palette_stat = value)
                  })
 ## ------------------------------------- 
-setMethod("palette_ppcp", 
-          signature = c(x = "mcn_palette"),
-          function(x){ x@palette_ppcp })
-setReplaceMethod("palette_ppcp", 
-                 signature = c(x = "mcn_palette"),
+setMethod("palette_col", 
+          signature = c(x = "melody"),
+          function(x){ x@palette_col })
+setReplaceMethod("palette_col", 
+                 signature = c(x = "melody"),
                  function(x, value){
-                   initialize(x, palette_ppcp = value)
+                   initialize(x, palette_col = value)
                  })
 ## ------------------------------------- 
 setMethod("palette_label", 
-          signature = c(x = "mcn_palette"),
+          signature = c(x = "melody"),
           function(x){ x@palette_label })
 setReplaceMethod("palette_label", 
-                 signature = c(x = "mcn_palette"),
+                 signature = c(x = "melody"),
                  function(x, value){
                    initialize(x, palette_label = value)
                  })

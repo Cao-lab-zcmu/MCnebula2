@@ -9,24 +9,6 @@ setGeneric("initialize_mcnebula",
            function(x, sirius_version, sirius_project)
              standardGeneric("initialize_mcnebula"))
 ## ------------------------------------- 
-setGeneric("collate_data", 
-           signature = c(mcnebula = "x", "character" = "subscript",
-                         "function" = "fun_collate"),
-           function(x, subscript, fun_collate, ...) standardGeneric("collate_data"))
-setGeneric("read_data", 
-           signature = c(ANY = "x",
-                         project_metadata = "project_metadata",
-                         character = "subscript",
-                         character = "path",
-                         character = ".features_id",
-                         character = ".candidates_id",
-                         "function" = "fun_read",
-                         "function" = "fun_format"
-                         ),
-           function(x, project_metadata, subscript,
-                    path, .features_id, .candidates_id,
-                    fun_read, fun_format) standardGeneric("read_data"))
-## ------------------------------------- 
 setGeneric("filter_formula", 
            signature = c(mcnebula = "x",
                          "function" = "fun_filter",
@@ -150,4 +132,14 @@ setGeneric("activate_nebulae",
                          "function" = "fun_default_child"),
            function(x, fun_default_parent, fun_default_child)
              standardGeneric("activate_nebulae"))
-
+## ------------------------------------- 
+setGeneric("visualize", 
+           function(x, item, fun_modify) standardGeneric("visualize"))
+setGeneric("visualize_all", 
+           signature = c("ANY" = "x", "logical" = "newpage",
+                         "ANY" = "fun_modify",
+                         "ANY" = "legend_hierarchy"),
+           function(x, newpage, fun_modify, fun_modify_legend,
+                    legend_hierarchy)
+             standardGeneric("visualize_all"))
+## ------------------------------------- 

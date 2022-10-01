@@ -25,7 +25,7 @@ setMethod("create_parent_nebula",
                                  edge_cutoff = "numeric",
                                  remove_isolate = "logical"),
           function(x, edge_cutoff, remove_isolate){
-            .get_info_formal("MCnebula2", "create_parent_nebula")
+            .print_info_formal("MCnebula2", "create_parent_nebula")
             .check_data(x, list(features_annotation = "create_features_annotation",
                                 spectral_similarity = "compute_spectral_similarity"
                                 ))

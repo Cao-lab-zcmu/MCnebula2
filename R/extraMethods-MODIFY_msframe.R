@@ -51,8 +51,6 @@ setMethod("format_msframe",
           })
 .format_msframe <- 
   function(x, names, types){
-    ## ------------------------------------- 
-    ## rename col
     if( any(names(names) == "...sig") ) {
       rs <- which( names == subscript(x) & names(names) == "...sig")
       rs <- rs + 1
@@ -67,12 +65,19 @@ setMethod("format_msframe",
       names <- vec_unique_by_value(names)
       names <- names[names(names) != "...sig"]
     }
+    x <- .format_msframe_names(x, names)
+    names <- names[names(names) %in% colnames(entity(x))]
+    .format_msframe_types(x, names, types)
+  }
+.format_msframe_names <- 
+  function(x, names){
     pattern <- paste0("^", names, "$")
     colnames(entity(x)) <-
       mapply_rename_col(pattern, names(names), colnames(entity(x)))
-    ## ------------------------------------- 
-    ## check attributes type
-    names <- names[names(names) %in% colnames(entity(x))]
+    return(x)
+  }
+.format_msframe_types <- 
+  function(x, names, types){
     for (i in names(names)) {
       if (i %in% names(types))
         target_type <- types[[i]]
@@ -99,7 +104,7 @@ setMethod("filter_msframe",
                                  x = "msframe", fun_filter = "function",
                                  f = "formula"),
           function(x, fun_filter, f, ...){
-            .get_info("msframe", "filter_msframe",
+            .print_info("msframe", "filter_msframe",
                       paste0("group_by: ", paste0(f, collapse = " "))
             )
             entity <- lapply( split(entity(x), f = f), FUN = fun_filter, ...)

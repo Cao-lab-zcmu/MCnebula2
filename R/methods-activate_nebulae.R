@@ -14,6 +14,7 @@ setMethod("activate_nebulae",
                         fun_default_parent = "function",
                         fun_default_child = "function"),
           function(x, fun_default_parent, fun_default_child){
+            .print_info_formal("MCnebula2", "activate_nebulae")
             ggset(parent_nebula(x)) <- fun_default_parent(x)
             ggset(child_nebulae(x)) <- fun_default_child(x)
             return(x)
@@ -24,8 +25,8 @@ default_vis_parent_nebula <-
     set_ggset(set_command(ggraph::ggraph, layout_ggraph(parent_nebula(x))),
               .default_parent_edge(),
               .default_parent_node(),
-              .default_parent_labs(),
-              .default_parent_fill(palette_gradient(x), .get_mz_range(x)),
+              .default_parent_edge_width(),
+              .default_parent_fill(palette_gradient(x)),
               set_command(theme_grey),
               .default_parent_theme()
     )
@@ -33,33 +34,42 @@ default_vis_parent_nebula <-
 default_vis_child_nebulae <-
   function(x){
     set <- layout_ggraph(child_nebulae(x))
-    range <- .get_mz_range(x)
     hierarchy <- .get_hierarchy(x)
-    ggset <- lapply(names(set),
-                    function(name){
-                      fill <- palette_label(x)[[ hierarchy[[name]] ]]
-                      set_ggset(set_command(ggraph::ggraph, set[[ name ]]),
-                                .default_parent_edge("black"),
-                                .default_parent_node(),
-                                .default_parent_labs(),
-                                .default_parent_fill(palette_gradient(x), range),
-                                .default_child_title(name),
-                                set_command(theme_grey),
-                                .default_child_theme(fill)
-                      )
-                    })
+    ggset <-
+      lapply(names(set),
+             function(name){
+               fill <- palette_label(x)[[ hierarchy[[name]] ]]
+               set_ggset(set_command(ggraph::ggraph, set[[ name ]]),
+                         .default_parent_edge("black"),
+                         .default_parent_node(),
+                         .default_parent_edge_width(),
+                         .default_parent_fill(palette_gradient(x)),
+                         .default_child_title(name),
+                         set_command(theme_grey),
+                         .default_child_theme(fill)
+               )
+             })
     names(ggset) <- names(set)
     return(ggset)
-}
-.get_mz_range <- function(x){
-  range <- try(range(features_annotation(x)[[ "mz" ]]), silent = T)
-  if (inherits(range, "try-error"))
-    range <- c(100, 1000)
-  return(range)
+  }
+.get_node_attribute_range <- function(x, attr){
+  .check_data(x, list("features_annotation" = "create_features_annotation"))
+  range(features_annotation(x)[[ attr ]])
 }
 .get_hierarchy <- 
   function(x){
     hierarchy <- as.list(hierarchy(x)[["hierarchy"]])
     names(hierarchy) <- hierarchy(x)[["class.name"]]
     return(hierarchy)
+  }
+.get_textbox_fill <-
+  function(x, class.name){
+    if (missing(class.name)) {
+      class.name <- names(igraph(child_nebulae(x)))
+    }
+    hierarchy <- .get_hierarchy(x)
+    vapply(class.name, FUN.VALUE = "ch",
+           function(name){
+             palette_label(x)[[ hierarchy[[ name ]] ]]
+           })
   }

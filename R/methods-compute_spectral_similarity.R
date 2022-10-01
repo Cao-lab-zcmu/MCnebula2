@@ -38,11 +38,11 @@ setMethod("compute_spectral_similarity",
                                  sp2 = "data.frame"),
           function(sp1, sp2){
             if (ncol(sp1) == 2 & ncol(sp2) == 2) {
-              .get_info("compute_spectral_similarity", "ncol(sp) == 2",
+              .print_info("compute_spectral_similarity", "ncol(sp) == 2",
                         "\n\tguess columns are c('mz', 'intensity')")
               colnames(sp1) <- colnames(sp2) <- c("mz", "intensity")
             } else {
-              .get_info("compute_spectral_similarity", "ncol(sp) > 2",
+              .print_info("compute_spectral_similarity", "ncol(sp) > 2",
                         "\n\t select columns of c('mz', 'intensity')"
               )
             }
@@ -58,13 +58,13 @@ setMethod("compute_spectral_similarity",
                                  within_nebula = "logical",
                                  recompute = "logical"),
           function(x, within_nebula, recompute){
-            .get_info_formal("MCnebula2", "compute_spectral_similarity")
+            .print_info_formal("MCnebula2", "compute_spectral_similarity")
             .check_data(x, list(nebula_index = "create_nebula_index"))
             if (!is.null(spectral_similarity(x))) {
               if (recompute) {
-                .get_info("compute_spectral_similarity", "recompute == T")
+                .print_info("compute_spectral_similarity", "recompute == T")
               } else {
-                .get_info("compute_spectral_similarity", "recompute == F",
+                .print_info("compute_spectral_similarity", "recompute == F",
                           "\n\tdata already existed.")
                 return(x)
               }
@@ -93,7 +93,7 @@ setMethod("compute_spectral_similarity",
             }
             combn <- dplyr::rename(dplyr::distinct(data.frame(combn)),
                                    .features_id1 = 1, .features_id2 = 2)
-            .get_info("compute_spectral_similarity", "compareSpectra")
+            .print_info("compute_spectral_similarity", "compareSpectra")
             combn[[ "similarity" ]] <-
               pbapply::pbapply(combn, 1, function(vec){
                                  compareSpectra(lst_lightSpectrum[[ vec[1] ]],

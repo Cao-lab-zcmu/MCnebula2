@@ -2,6 +2,19 @@
 # directory and file names and path in SIRIUS 4 project, and some function
 # for how to read or format these data.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+.validate_sirius.v4 <- 
+  function(path){
+    sig <- paste0(path, "/.format")
+    content <- "%source_%name"
+    if (file.exists(sig)) {
+      if (!identical(readLines(sig, warn = F, n = 1), content)) {
+        stop("the content of file \"", sig,
+             "\" is not identical to \"", content, "\"")
+      }
+    }else{
+      stop("file \"", sig, "\" not exists")
+    }
+  }
 .get_file_name_sirius.v4 <- 
   function(){
     set <- c(.id = "FUN_get_id_sirius.v4",

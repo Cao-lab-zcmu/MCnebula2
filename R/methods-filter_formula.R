@@ -28,13 +28,13 @@ setMethod("filter_formula",
                                  fun_filter = "function",
                                  by_reference = "logical"),
           function(x, fun_filter, ..., by_reference){
-            .get_info_formal("MCnebula2", "filter_formula")
+            .print_info_formal("MCnebula2", "filter_formula")
             subscript <- ".f2_formula"
             x <- collate_data(x, subscript, .collate_formula.msframe)
             ## filter
             msframe.lst <- extract_rawset(x, subscript)
             if (by_reference) {
-              .get_info("filter_formula", "by_reference == T",
+              .print_info("filter_formula", "by_reference == T",
                         "\n\tcase formula, ignore `fun_filter`")
               .check_data(x, list(specific_candidate = "create_reference"))
               fun <- methods_match(project_api(x))[[ "generate_candidates_id" ]]

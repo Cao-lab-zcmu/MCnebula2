@@ -27,7 +27,7 @@ setMethod("create_stardust_classes",
                         inherit_dataset = "logical"),
           function(x, pp.threashold, hierarchy_priority,
                    position_isomerism, inherit_dataset){
-            .get_info_formal("MCnebula2", "create_stardust_classes")
+            .print_info_formal("MCnebula2", "create_stardust_classes")
             if (is.null(hierarchy(x)))
               x <- create_hierarchy(x)
             hierarchy <- hierarchy(x)

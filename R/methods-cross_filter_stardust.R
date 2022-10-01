@@ -19,7 +19,7 @@ setMethod("cross_filter_stardust",
           function(x, min_number, max_ratio,
                    types, cutoff, tolerance,
                    hierarchy_range, identical_factor){
-            .get_info_formal("MCnebula2", "cross_filter_stardust")
+            .print_info_formal("MCnebula2", "cross_filter_stardust")
             .check_data(x, list(stardust_classes = "create_stardust_classes"))
             args <- as.list(environment())
             args <- args[ !vapply(args, is.name, T) ]
@@ -42,7 +42,7 @@ setMethod("cross_filter_quantity",
                                  x = "mcnebula", min_number = "numeric",
                                  max_ratio = "numeric"),
           function(x, min_number, max_ratio){
-            .get_info("cross_filter_stardust", "quantity")
+            .print_info("cross_filter_stardust", "quantity")
             if (min_number < 1) {
               stop( "`min_number` must be a numeric greater or equal to 1" )
             }
@@ -63,7 +63,7 @@ setMethod("cross_filter_score",
                                  x = "mcnebula", types = "character",
                                  cutoff = "numeric", tolerance = "numeric"),
           function(x, types, cutoff, tolerance){
-            .get_info("cross_filter_stardust", "score")
+            .print_info("cross_filter_stardust", "score")
             .check_data(x, list(features_annotation = "create_features_annotation"))
             set <- split(stardust_classes(x), f = ~ rel.index)
             features <- features_annotation(x)
@@ -102,7 +102,7 @@ setMethod("cross_filter_identical",
                                  x = "mcnebula", hierarchy_range = "numeric",
                                  identical_factor = "numeric"),
           function(x, hierarchy_range, identical_factor){
-            .get_info("cross_filter_stardust", "identical")
+            .print_info("cross_filter_stardust", "identical")
             set <- dplyr::filter(stardust_classes(x),
                                  hierarchy %in% hierarchy_range)
             set <- split(set, f = ~ rel.index)

@@ -1,6 +1,24 @@
 # ==========================================================================
 # generic for class methods
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+setGeneric("collate_data", 
+           signature = c(ANY = "x", "character" = "subscript",
+                         "function" = "fun_collate"),
+           function(x, subscript, fun_collate, ...) standardGeneric("collate_data"))
+setGeneric("read_data", 
+           signature = c(ANY = "x",
+                         project_metadata = "project_metadata",
+                         character = "subscript",
+                         character = "path",
+                         character = ".features_id",
+                         character = ".candidates_id",
+                         "function" = "fun_read",
+                         "function" = "fun_format"
+                         ),
+           function(x, project_metadata, subscript,
+                    path, .features_id, .candidates_id,
+                    fun_read, fun_format) standardGeneric("read_data"))
+## ------------------------------------- 
 setGeneric("get_metadata", 
            signature = c(ANY = "x",
                          "character" = "subscript",

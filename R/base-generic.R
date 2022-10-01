@@ -1,11 +1,11 @@
 # ==========================================================================
 # Generic for base method (get or replace data in slots) of class
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-## class-mcn_palette
-setGeneric("mcn_palette", 
-           function(x) standardGeneric("mcn_palette"))
-setGeneric("mcn_palette<-", 
-           function(x, value) standardGeneric("mcn_palette<-"))
+## class-melody
+setGeneric("melody", 
+           function(x) standardGeneric("melody"))
+setGeneric("melody<-", 
+           function(x, value) standardGeneric("melody<-"))
 ## ------------------------------------- 
 setGeneric("palette_set", 
            function(x) standardGeneric("palette_set"))
@@ -19,10 +19,10 @@ setGeneric("palette_stat",
            function(x) standardGeneric("palette_stat"))
 setGeneric("palette_stat<-", 
            function(x, value) standardGeneric("palette_stat<-"))
-setGeneric("palette_ppcp", 
-           function(x) standardGeneric("palette_ppcp"))
-setGeneric("palette_ppcp<-", 
-           function(x, value) standardGeneric("palette_ppcp<-"))
+setGeneric("palette_col", 
+           function(x) standardGeneric("palette_col"))
+setGeneric("palette_col<-", 
+           function(x, value) standardGeneric("palette_col<-"))
 setGeneric("palette_label", 
            function(x) standardGeneric("palette_label"))
 setGeneric("palette_label<-", 
@@ -47,10 +47,6 @@ setGeneric("ion_mode",
            function(x) standardGeneric("ion_mode"))
 setGeneric("ion_mode<-", 
            function(x, value) standardGeneric("ion_mode<-"))
-setGeneric("sirius_version", 
-           function(x) standardGeneric("sirius_version"))
-setGeneric("sirius_version<-", 
-           function(x, value) standardGeneric("sirius_version<-"))
 setGeneric("match.features_id", 
            function(x) standardGeneric("match.features_id"))
 setGeneric("match.candidates_id", 
@@ -70,21 +66,15 @@ setGeneric("nebula_index",
 setGeneric("spectral_similarity", 
            function(x) standardGeneric("spectral_similarity"))
 ## ---------------------------------------------------------------------- 
-## class-mcn_path
-setGeneric("mcn_path", 
-           function(x) standardGeneric("mcn_path"))
-setGeneric("mcn_path<-", 
-           function(x, value) standardGeneric("mcn_path<-"))
-## ------------------------------------- 
-setGeneric("sirius_project", 
-           function(x) standardGeneric("sirius_project"))
-setGeneric("sirius_project<-", 
-           function(x, value) standardGeneric("sirius_project<-"))
-setGeneric("output_directory", 
-           function(x) standardGeneric("output_directory"))
-setGeneric("output_directory<-", 
-           function(x, value) standardGeneric("output_directory<-"))
-## ---------------------------------------------------------------------- 
+## class-project
+setGeneric("project_version", 
+           function(x) standardGeneric("project_version"))
+setGeneric("project_version<-", 
+           function(x, value) standardGeneric("project_version<-"))
+setGeneric("project_path", 
+           function(x) standardGeneric("project_path"))
+setGeneric("project_path<-", 
+           function(x, value) standardGeneric("project_path<-"))
 ## class-project_conformation
 setGeneric("project_conformation", 
            function(x) standardGeneric("project_conformation"))
@@ -207,6 +197,15 @@ setGeneric("backtrack",
            function(x) standardGeneric("backtrack"))
 setGeneric("backtrack<-", 
            function(x, value) standardGeneric("backtrack<-"))
+## ------------------------------------- 
+setGeneric("export_name", 
+           function(x) standardGeneric("export_name"))
+setGeneric("export_name<-", 
+           function(x, value) standardGeneric("export_name<-"))
+setGeneric("export_path", 
+           function(x) standardGeneric("export_path"))
+setGeneric("export_path<-", 
+           function(x, value) standardGeneric("export_path<-"))
 ## ------------------------------------- 
 setGeneric("igraph", 
            function(x) standardGeneric("igraph"))

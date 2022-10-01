@@ -5,7 +5,7 @@ setMethod("backtrack_stardust",
           signature = setMissing("backtrack_stardust",
                                  x = "mcnebula"),
           function(x){
-            .get_info("backtrack_stardust", "no args found",
+            .print_info("backtrack_stardust", "no args found",
                       "\n\tget filtered classes")
             set <- dplyr::filter(backtrack(mcn_dataset(x))[[ "stardust_classes" ]],
                                  !rel.index %in% stardust_classes(x)[[ "rel.index" ]])
@@ -40,7 +40,7 @@ setMethod("backtrack_stardust",
               remove <- F
             else if (!is.logical(remove))
               stop( "`remove` must be logical or as missing as `FALSE`" )
-            .get_info("backtrack_stardust", paste0("remove == ", remove))
+            .print_info("backtrack_stardust", paste0("remove == ", remove))
             .check_data(x, list(stardust_classes = "create_stardust_classes"))
             if (remove) {
               reference(mcn_dataset(x))[[ "stardust_classes" ]] <- 
