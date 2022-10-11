@@ -60,7 +60,7 @@ setMethod("mutate_layer",
               args <- list_unique_by_names(c(args, old))
             }
             layers(x)[[ layer ]] <- 
-              do.call(set_command,
+              do.call(new_command,
                       c(command_function(command), args,
                         name = command_name(command)))
             return(x)
@@ -87,7 +87,7 @@ setMethod("move_layers",
             return(x)
           })
 ## ------------------------------------- 
-setMethod("set_ggset", 
+setMethod("new_ggset", 
           signature = c(... = "ANY"),
           function(...){
             args <- list(...)

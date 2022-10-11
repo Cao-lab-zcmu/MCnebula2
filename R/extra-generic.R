@@ -4,7 +4,8 @@
 setGeneric("collate_data", 
            signature = c(ANY = "x", "character" = "subscript",
                          "function" = "fun_collate"),
-           function(x, subscript, fun_collate, ...) standardGeneric("collate_data"))
+           function(x, subscript, fun_collate, ...)
+             standardGeneric("collate_data"))
 setGeneric("read_data", 
            signature = c(ANY = "x",
                          project_metadata = "project_metadata",
@@ -18,6 +19,29 @@ setGeneric("read_data",
            function(x, project_metadata, subscript,
                     path, .features_id, .candidates_id,
                     fun_read, fun_format) standardGeneric("read_data"))
+setGeneric("draw_structures", 
+           signature = c(ANY = "x", "character" = "nebula_name"),
+           function(x, nebula_name)
+             standardGeneric("draw_structures"))
+setGeneric("show_structure", 
+           signature = c("ANY" = "x", "character" = ".features_id"),
+           function(x, .features_id)
+             standardGeneric("show_structure"))
+setGeneric("draw_nodes", 
+           signature = c(ANY = "x", "character" = "nebula_name",
+                         "character" = "nodes_color",
+                         "logical" = "add_id_text",
+                         "logical" = "add_structure", "logical" = "add_ppcp",
+                         "logical" = "add_statistic"),
+           function(x, nebula_name, nodes_color, add_id_text,
+                    add_structure, add_ppcp, add_statistic)
+             standardGeneric("draw_nodes"))
+setGeneric("set_ppcp_data", 
+           signature = c(ANY = "x", "character" = "classes"),
+           function(x, classes) standardGeneric("set_ppcp_data"))
+setGeneric("set_statistic_data", 
+           signature = c(ANY = "x", "logical" = "mean"),
+           function(x, mean) standardGeneric("set_statistic_data"))
 ## ------------------------------------- 
 setGeneric("get_metadata", 
            signature = c(ANY = "x",
@@ -68,16 +92,16 @@ setGeneric("filter_msframe",
                          "formula" = "f"),
            function(x, fun_filter, f, ...) standardGeneric("filter_msframe"))
 ## ---------------------------------------------------------------------- 
-setGeneric("set_command", 
+setGeneric("new_command", 
            signature = c("function" = "fun",
                          "character" = "name"),
            function(fun, ..., name)
-             standardGeneric("set_command"))
+             standardGeneric("new_command"))
 setGeneric("call_command", 
            function(x) standardGeneric("call_command"))
 ## ------------------------------------- 
-setGeneric("set_ggset",
-           function(...) standardGeneric("set_ggset"))
+setGeneric("new_ggset",
+           function(...) standardGeneric("new_ggset"))
 setGeneric("show_layers", 
            function(x) standardGeneric("show_layers"))
 setGeneric("mutate_layer", 

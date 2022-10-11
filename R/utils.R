@@ -74,11 +74,11 @@ mapply_rename_col <-
 ## ------------------------------------- 
 .print_info <- 
   function(main, sub, arg = NULL, sig = "##"){
-    cat(sig, " ", main, ": ", sub, " ", arg, "\n", sep = "")
+    message(sig, " ", main, ": ", sub, " ", arg)
   }
 .print_info_formal <- 
   function(main, sub, arg = NULL, sig = "[INFO]"){
-    cat(sig, " ", main, ": ", sub, " ", arg, "\n", sep = "")
+    message(sig, " ", main, ": ", sub, " ", arg)
   }
 .print_info_viewport <- 
   function(info = "info"){
@@ -98,11 +98,20 @@ mapply_rename_col <-
   }
 ## ------------------------------------- 
 .check_data <- 
-  function(object, lst){
+  function(object, lst, tip = "(...)"){
+    target <- substitute(object)
+    target <- paste0(target[1], "(", target[2], ")")
     mapply(lst, names(lst), FUN = function(value, name){
-             if (is.null(match.fun(name)(object))) {
-               stop(paste0("is.null(", name, "(x)) == T. ",
-                           "use `", value, "(...)` previously."))
+             obj <- match.fun(name)(object)
+             if (is.null(obj)) {
+               stop(paste0("is.null(", name, "(", target, ")) == T. ",
+                           "use `", value, tip, "` previously."))
+             }
+             if (is.list(obj)) {
+               if (length(obj) == 0) {
+                 stop(paste0("length(", name, "(", target, ")) == 0. ",
+                             "use `", value, tip, "` previously."))
+               }
              }
            })
   }
@@ -122,6 +131,29 @@ mapply_rename_col <-
       stop(paste0("`", paste0(substitute(object), collapse = ""),
                   "` should be a '", class, "' object created by ",
                   "`", tip, "`." ))
+    }
+  }
+.check_columns <- 
+  function(obj, lst, tip){
+    if (!is.data.frame(obj))
+      stop(paste0("'", tip, "' must be a 'data.frame'."))
+    lapply(lst, function(col){
+             if (is.null(obj[[ col ]]))
+               stop(paste0("'", tip, "' must contains a column of '", col, "'."))
+           })
+  }
+.check_type <- 
+  function(obj, type, tip){
+    fun <- match.fun(paste0("is.", type))
+    apply(obj, 2, function(col){
+            if (!fun(col))
+              stop(paste0("data columns in '", tip, "' must all be '", type, "'."))
+           })
+  }
+.check_path <- 
+  function(path){
+    if (!file.exists(path)) {
+      dir.create(path, recursive = T)
     }
   }
 ## ------------------------------------- 
@@ -176,4 +208,76 @@ write_tsv <-
     position <- theme$legend.position
     ggplot2:::build_guides(p$scales, p$layers, p$mapping,
                            position, theme, p$guides, p$labels)
+  }
+.depigment_col <- 
+  function(col, n = 10, level = 5){
+    colorRampPalette(c("white", col))(n)[level]
+  }
+## ------------------------------------- 
+.simulate_quant_set <- 
+  function(x){
+    quant <- .simulate_quant(features_annotation(test1)$.features_id)
+    meta <- group_strings(colnames(quant),
+                          c(control = "^control", model = "^model",
+                            treat = "^treat", pos = "^pos"), "sample")
+    features_quantification(test1) <- quant
+    sample_metadata(test1) <- meta
+    return(x)
+  }
+#' @importFrom tibble as_tibble
+.simulate_quant <- 
+  function(.features_id, mean = 50, sd = 20, seed = 555,
+           group = c("control", "model", "treat", "pos"), rep = 5){
+    quant <- data.frame(.features_id = .features_id)
+    set.seed(seed)
+    lst <- lapply(1:(length(group) * rep), function(x){
+                    rnorm(nrow(quant), mean, sd)
+           })
+    df <- apply(do.call(data.frame, lst), 2, abs)
+    df <- df[, hclust(dist(t(df)))$order]
+    colnames(df) <- unlist(lapply(group, paste0, "_", 1:rep))
+    tibble::as_tibble(cbind(quant, df))
+  }
+group_strings <- 
+  function(strings, patterns, target = NA){
+    if (is.null(names(patterns)))
+      stop("`patterns` must be characters with names.")
+    lst <- .find_and_sort_strings(strings, patterns)
+    lst <- lapply(names(lst), function(name){
+                    data.frame(target = lst[[name]], group = name)
+           })
+    df <- do.call(rbind, lst)
+    if (!is.na(target)) {
+      colnames(df)[1] <- target
+    }
+    tibble::as_tibble(df)
+  }
+.find_and_sort_strings <- 
+  function(strings, patterns){
+    lapply(patterns,
+           function(pattern){
+             strings[grepl(pattern, strings, perl = T)]
+           })
+  }
+.as_dic <- 
+  function(vec, names, default,
+           fill = T, as.list = T, na.rm = F){
+    if (is.null(names(vec)))
+      names(vec) <- names[1:length(vec)]
+    if (fill) {
+      if (any(!names %in% names(vec))) {
+        ex.names <- names[!names %in% names(vec)]
+        ex <- rep(default, length(ex.names))
+        names(ex) <- ex.names
+        vec <- c(vec, ex)
+      }
+    }
+    if (as.list) {
+      if (!is.list(vec))
+        vec <- as.list(vec)
+    }
+    if (na.rm) {
+      vec <- vec[!is.na(names(vec))]
+    }
+    vec
   }

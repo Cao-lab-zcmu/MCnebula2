@@ -21,7 +21,11 @@ setClass("child_nebulae",
                           viewports = "list",
                           panel_viewport = "ANY",
                           legend_viewport = "ANY",
-                          ggset = "list"
+                          ggset = "list",
+                          structures_grob = "list",
+                          nodes_grob = "list",
+                          ppcp_data = "list",
+                          statistic_data = "list"
                           ),
          prototype = NULL
          )
@@ -40,28 +44,33 @@ setClass("child_nebulae",
 setMethod("show", 
           signature = c(object = "parent_nebula"),
           function(object){
-            slots_mapply(object, function(slot, name){
-                           cat(name, ": ", class(slot)[1], "\n", sep = "")
-                            })
+            .show_nebulae_data(object)
+                            
           })
 setMethod("show", 
           signature = c(object = "child_nebulae"),
           function(object){
-            slots_mapply(object, function(slot, name){
-                           if (is(slot, "viewport")) {
-                             num <- 1
-                           } else if (is.list(slot)) {
-                             num <- length(slot)
-                           } else {
-                             if (is.null(slot))
-                               num <- 0
-                             else
-                               num <- 1
-                           }
-                           cat(name, ": ", class(slot)[1], " of ", num,
-                               "\n", sep = "")
-                            })
+            .show_nebulae_data(object)
           })
+.show_nebulae_data <- 
+  function(object){
+    slots_mapply(object, function(slot, name){
+                   if (is(slot, "viewport")) {
+                     num <- 1
+                   } else if (is.list(slot)) {
+                     num <- length(slot)
+                   } else {
+                     if (is.null(slot))
+                       num <- 0
+                     else
+                       num <- 1
+                   }
+                   if (num == 0 | is(slot, "name")) 
+                     return()
+                   cat(name, ": ", class(slot)[1], " of ", num,
+                       "\n", sep = "")
+                      })
+  }
 ## ------------------------------------- 
 setMethod("parent_nebula", 
           signature = c(x = "ANY"),
@@ -150,4 +159,40 @@ setReplaceMethod("legend_viewport",
                  signature = c(x = "ANY"),
                  function(x, value){
                    initialize(x, legend_viewport = value)
+                 })
+## ------------------------------------- 
+setMethod("structures_grob", 
+          signature = c(x = "ANY"),
+          function(x){ x@structures_grob })
+setReplaceMethod("structures_grob", 
+                 signature = c(x = "ANY"),
+                 function(x, value){
+                   initialize(x, structures_grob = value)
+                 })
+## ------------------------------------- 
+setMethod("nodes_grob", 
+          signature = c(x = "ANY"),
+          function(x){ x@nodes_grob })
+setReplaceMethod("nodes_grob", 
+                 signature = c(x = "ANY"),
+                 function(x, value){
+                   initialize(x, nodes_grob = value)
+                 })
+## ------------------------------------- 
+setMethod("ppcp_data", 
+          signature = c(x = "ANY"),
+          function(x){ x@ppcp_data })
+setReplaceMethod("ppcp_data", 
+                 signature = c(x = "ANY"),
+                 function(x, value){
+                   initialize(x, ppcp_data = value)
+                 })
+## ------------------------------------- 
+setMethod("statistic_data", 
+          signature = c(x = "ANY"),
+          function(x){ x@statistic_data })
+setReplaceMethod("statistic_data", 
+                 signature = c(x = "ANY"),
+                 function(x, value){
+                   initialize(x, statistic_data = value)
                  })

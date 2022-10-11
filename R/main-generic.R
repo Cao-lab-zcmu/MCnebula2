@@ -4,9 +4,10 @@
 setGeneric("initialize_mcnebula", 
            signature = c(ANY = "x",
                          "character" = "sirius_version",
-                         "character" = "sirius_project"
+                         "character" = "sirius_project",
+                         "character" = "output_directory"
                          ),
-           function(x, sirius_version, sirius_project)
+           function(x, sirius_version, sirius_project, output_directory)
              standardGeneric("initialize_mcnebula"))
 ## ------------------------------------- 
 setGeneric("filter_formula", 

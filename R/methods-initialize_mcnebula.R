@@ -4,8 +4,9 @@
 setMethod("initialize_mcnebula", 
           signature = c(x = "mcnebula",
                         sirius_version = "ANY",
-                        sirius_project = "ANY"),
-          function(x, sirius_version, sirius_project){
+                        sirius_project = "ANY",
+                        output_directory = "ANY"),
+          function(x, sirius_version, sirius_project, output_directory){
             if (missing(sirius_version))
               sirius_version <- project_version(x)
             else
@@ -14,6 +15,13 @@ setMethod("initialize_mcnebula",
               sirius_project <- project_path(x)
             else
               project_path(x) <- sirius_project
+            if (missing(output_directory)) {
+              if (length(export_path(x)) == 0) {
+                export_path(x) <- paste0(sirius_project, "/mcnebula_results")
+              }
+            } else {
+              export_path(x) <- output_directory
+            }
             match.fun(paste0(".validate_", sirius_version))(sirius_project)
             item <- methods(initialize_mcnebula)
             item <- stringr::str_extract(item, "(?<=,).*(?=-method)")
@@ -40,7 +48,7 @@ setMethod("initialize_mcnebula",
             colors <- .get_color_set()
             palette_set(x) <- colors
             palette_gradient(x) <- .get_color_gradient()
-            palette_stat(x) <- colors
+            palette_stat(x) <- .get_color_stat()
             palette_col(x) <- colors
             palette_label(x) <- .get_label_color()
             return(x)

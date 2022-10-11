@@ -6,8 +6,8 @@ setMethod("activate_nebulae",
           signature = setMissing("activate_nebulae",
                                  x = "mcnebula"),
           function(x){
-            activate_nebulae(x, default_vis_parent_nebula,
-                             default_vis_child_nebulae)
+            activate_nebulae(x, ggset_vis_parent_nebula,
+                             ggset_vis_child_nebulae)
           })
 setMethod("activate_nebulae", 
           signature = c(x = "mcnebula",
@@ -20,37 +20,37 @@ setMethod("activate_nebulae",
             return(x)
           })
 #' @importFrom ggraph ggraph
-default_vis_parent_nebula <- 
+ggset_vis_parent_nebula <- 
   function(x){
-    set_ggset(set_command(ggraph::ggraph, layout_ggraph(parent_nebula(x))),
+    new_ggset(new_command(ggraph::ggraph, layout_ggraph(parent_nebula(x))),
               .default_parent_edge(),
               .default_parent_node(),
               .default_parent_edge_width(),
               .default_parent_fill(palette_gradient(x)),
-              set_command(theme_grey),
+              new_command(match.fun(theme_grey), name = "theme_grey"),
               .default_parent_theme()
     )
   }
-default_vis_child_nebulae <-
+ggset_vis_child_nebulae <-
   function(x){
     set <- layout_ggraph(child_nebulae(x))
     hierarchy <- .get_hierarchy(x)
-    ggset <-
+    ggsets <-
       lapply(names(set),
              function(name){
                fill <- palette_label(x)[[ hierarchy[[name]] ]]
-               set_ggset(set_command(ggraph::ggraph, set[[ name ]]),
+               new_ggset(new_command(ggraph::ggraph, set[[ name ]]),
                          .default_parent_edge("black"),
                          .default_parent_node(),
                          .default_parent_edge_width(),
                          .default_parent_fill(palette_gradient(x)),
                          .default_child_title(name),
-                         set_command(theme_grey),
+                         new_command(match.fun(theme_grey), name = "theme_grey"),
                          .default_child_theme(fill)
                )
              })
-    names(ggset) <- names(set)
-    return(ggset)
+    names(ggsets) <- names(set)
+    return(ggsets)
   }
 .get_node_attribute_range <- function(x, attr){
   .check_data(x, list("features_annotation" = "create_features_annotation"))

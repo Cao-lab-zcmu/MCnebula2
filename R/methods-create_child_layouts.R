@@ -76,10 +76,8 @@ setMethod("create_child_layouts",
            panel_viewport, legend_viewport
            ){
     set <- igraph(child_nebulae(x))
-    if (is.null(names(ggraph_layouts)))
-      names(ggraph_layouts) <- names(set)[1:length(set)]
-    if (is.null(names(seeds)))
-      names(seeds) <- names(set)[1:length(set)]
+    ggraph_layouts <- .as_dic(ggraph_layouts, names(set), fill = F)
+    seeds <- .as_dic(seeds, names(set))
     if (!is.null(grid_layout))
       .check_class(grid_layout)
     .check_names(viewports, set, "viewports", "igraph(child_nebulae(x))")
@@ -87,23 +85,19 @@ setMethod("create_child_layouts",
       stop(paste0("`viewports` must be a list ",
                   "the same length as 'igraph(child_nebulae(x))'."))
     }
-    if (is.null(names(viewports)))
-      names(viewports) <- names(set)
+    viewports <- .as_dic(viewports, names(set), fill = F)
     .check_class(panel_viewport, "viewport", "grid::viewport")
     .check_class(legend_viewport, "viewport", "grid::viewport")
     tbl_graph(child_nebulae(x)) <- lapply(set, tidygraph::as_tbl_graph)
     layout_ggraph(child_nebulae(x)) <-
       lapply(names(tbl_graph(child_nebulae(x))),
              function(name){
-               graph <- tbl_graph(child_nebulae(x))[[ name ]]
-               seed <- seeds[[name]]
-               if (is.null(seed))
-                 seed <- 1
                layout <- ggraph_layouts[[name]]
                if (is.null(layout))
                  layout <- .default_graph_layout(graph)
-               set.seed(seed)
-               ggraph::create_layout(graph, layout = layout)
+               set.seed(seeds[[name]])
+               ggraph::create_layout(tbl_graph(child_nebulae(x))[[ name ]],
+                                     layout = layout)
              })
     names(layout_ggraph(child_nebulae(x))) <-
       names(tbl_graph(child_nebulae(x)))

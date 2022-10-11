@@ -21,3 +21,9 @@
   function(){
     colorRampPalette(c("#C6DBEFFF", "#3182BDFF", "red"))(10)
   }
+#' @importFrom ggsci pal_locuszoom
+.get_color_stat <- 
+  function(){
+    col <- ggsci::pal_locuszoom()(7)
+    vapply(col, .depigment_col, "ch", USE.NAMES = F)
+  }

@@ -18,7 +18,7 @@ modify_unify_scale_limits <-
                         spectral_similarity = "compute_spectral_similarity"))
     layers_name <- names(layers(ggset))
     args <- as.list(.get_mapping2(ggset))
-    for (i in c("fill", "color", "colour", "alpha", "size", "edge_width")) {
+    for (i in .LEGEND_mapping()) {
       if (is.null(args[[ i ]])) {
         next
       }
@@ -42,7 +42,7 @@ modify_unify_scale_limits <-
       } else {
         ggset <-
           add_layers(ggset,
-                     set_command(match.fun(fun),
+                     new_command(match.fun(fun),
                                  limits = range,
                                  name = fun
                                  ))
@@ -62,7 +62,7 @@ modify_set_labs <-
       stop( "multiple layers of 'labs' were found" )
     } else {
       ggset <- do.call(add_layers,
-                       c(ggset, do.call(set_command,
+                       c(ggset, do.call(new_command,
                                         c(match.fun(labs),
                                           args, name = "labs"))))
     }
@@ -70,14 +70,21 @@ modify_set_labs <-
   }
 #' @importFrom stringr str_extract
 .get_mapping2 <-
-  function(ggset){
+  function(ggset, only_legend = T){
     args <- .get_mapping(ggset)
     pattern <- "[a-z|A-Z|.|_]{1,}"
     args[] <-
       stringr::str_extract(args,
                            paste0("(?<=\\()", pattern, "(?=\\),)",
                                   "|^", pattern, "$"))
+    if (only_legend) {
+      args <- args[names(args) %in% .LEGEND_mapping()]
+    }
     args
+  }
+.LEGEND_mapping <- 
+  function(){
+    c("fill", "color", "colour", "alpha", "size", "edge_width")
   }
 .get_mapping <- 
   function(ggset){

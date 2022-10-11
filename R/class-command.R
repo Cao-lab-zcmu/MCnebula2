@@ -52,7 +52,7 @@ setReplaceMethod("command_args",
                    initialize(x, command_args = value)
                  })
 ## ---------------------------------------------------------------------- 
-setMethod("set_command", 
+setMethod("new_command", 
           signature = c(fun = "function",
                         name = "character"),
           function(fun, ..., name){
@@ -70,15 +70,15 @@ setMethod("set_command",
             new("command", command_name = name, command_function = fun,
                 command_args = args)
           })
-setMethod("set_command", 
-          signature = setMissing("set_command",
+setMethod("new_command", 
+          signature = setMissing("new_command",
                                  fun = "function"),
           function(fun, ...){
             name <- as.character(substitute(fun))
             if (length(name) != 1) {
               name <- paste0(name[2], name[1], name[3])
             }
-            set_command(fun, ..., name = name)
+            new_command(fun, ..., name = name)
           })
 setMethod("call_command", 
           signature = c(x = "command"),

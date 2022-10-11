@@ -152,7 +152,7 @@ setMethod("visualize_all",
     x <- .get_missing_x(x, "mcnebula")
     com_theme <- layers(ggset(set)[[1]])$theme
     if (is.null(com_theme)) {
-      com_theme <- set_command(match.fun(theme), name = "theme")
+      com_theme <- new_command(match.fun(theme), name = "theme")
     }
     .grob_legend_hierarchy(names(ggset(set)),
                            call_command(com_theme))

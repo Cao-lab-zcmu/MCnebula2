@@ -21,7 +21,8 @@
 setMethod("show", 
           signature = c(object = "mcnebula"),
           function(object){
-            cat( "A project of MCnebula2\n" )
+            message( "A project of MCnebula2", ": ",
+                    format(object.size(object), units = "MB"))
           })
 ## ------------------------------------- 
 setMethod("latest", 
@@ -142,8 +143,50 @@ setMethod("spectral_similarity",
           function(x){
             reference(x)[[ "spectral_similarity" ]]
           })
+setReplaceMethod("spectral_similarity", 
+                 signature = c(x = "mcnebula"),
+                 function(x, value){
+                   .check_columns(value, list(".features_id1", ".features_id2",
+                                              "similarity"),
+                                  "spectral_similarity")
+                   reference(mcn_dataset(x))$spectral_similarity <- value
+                   return(x)
+                 })
 setMethod("features_annotation", 
           signature = c(x = "mcnebula"),
           function(x){
             reference(x)[[ "features_annotation" ]]
           })
+setMethod("features_quantification", 
+          signature = c(x = "mcnebula"),
+          function(x){
+            reference(x)[[ "features_quantification" ]]
+          })
+#' @importFrom dplyr select
+setReplaceMethod("features_quantification", 
+                 signature = c(x = "mcnebula"),
+                 function(x, value){
+                   .check_columns(value, list(".features_id"),
+                                  "features_quantification")
+                   .check_type(dplyr::select(value, -.features_id),
+                               "numeric", "features_quantification")
+                   reference(mcn_dataset(x))$features_quantification <- value
+                   return(x)
+                 })
+setMethod("sample_metadata", 
+          signature = c(x = "mcnebula"),
+          function(x){
+            reference(x)[[ "sample_metadata" ]]
+          })
+setReplaceMethod("sample_metadata", 
+                 signature = c(x = "mcnebula"),
+                 function(x, value){
+                   .check_data(x, list(features_quantification =
+                                       "features_quantification"), "(x) <-")
+                   .check_columns(value, list("sample", "group"), "sample_metadata")
+                   if (any(!value$sample %in% colnames(features_quantification(x))))
+                     stop(paste0("the name in 'sample' column in 'sample_metadata' ",
+                                 "must all involved in 'features_quantification'"))
+                   reference(mcn_dataset(x))$sample_metadata <- value
+                   return(x)
+                 })

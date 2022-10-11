@@ -61,10 +61,20 @@ setGeneric("stardust_classes",
            function(x) standardGeneric("stardust_classes"))
 setGeneric("features_annotation", 
            function(x) standardGeneric("features_annotation"))
+setGeneric("features_quantification", 
+           function(x) standardGeneric("features_quantification"))
+setGeneric("features_quantification<-", 
+           function(x, value) standardGeneric("features_quantification<-"))
+setGeneric("sample_metadata", 
+           function(x) standardGeneric("sample_metadata"))
+setGeneric("sample_metadata<-", 
+           function(x, value) standardGeneric("sample_metadata<-"))
 setGeneric("nebula_index", 
            function(x) standardGeneric("nebula_index"))
 setGeneric("spectral_similarity", 
            function(x) standardGeneric("spectral_similarity"))
+setGeneric("spectral_similarity<-", 
+           function(x, value) standardGeneric("spectral_similarity<-"))
 ## ---------------------------------------------------------------------- 
 ## class-project
 setGeneric("project_version", 
@@ -235,4 +245,20 @@ setGeneric("legend_viewport",
            function(x) standardGeneric("legend_viewport"))
 setGeneric("legend_viewport<-", 
            function(x, value) standardGeneric("legend_viewport<-"))
+setGeneric("structures_grob", 
+           function(x) standardGeneric("structures_grob"))
+setGeneric("structures_grob<-", 
+           function(x, value) standardGeneric("structures_grob<-"))
+setGeneric("nodes_grob", 
+           function(x) standardGeneric("nodes_grob"))
+setGeneric("nodes_grob<-", 
+           function(x, value) standardGeneric("nodes_grob<-"))
+setGeneric("ppcp_data", 
+           function(x) standardGeneric("ppcp_data"))
+setGeneric("ppcp_data<-", 
+           function(x, value) standardGeneric("ppcp_data<-"))
+setGeneric("statistic_data", 
+           function(x) standardGeneric("statistic_data"))
+setGeneric("statistic_data<-", 
+           function(x, value) standardGeneric("statistic_data<-"))
 ## ------------------------------------- 
