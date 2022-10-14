@@ -5,45 +5,42 @@ setMethod("draw_nodes",
           signature = setMissing("draw_nodes",
                                  x = "missing"),
           function(){
-            list(nodes_color = "#D9D9D9",
+            list(nodes_color = "#FFF9F2",
                  add_id_text = T,
                  add_structure = T,
                  add_ppcp = T,
-                 add_statistic = T
+                 add_ration = T
             )
           })
 setMethod("draw_nodes", 
           signature = c(x = "mcnebula", nebula_name = "character"),
-          function(x, nebula_name){
-            args <- as.list(environment())
-            args <- args[ !vapply(args, is.name, T) ]
-            new_args <- draw_nodes()
-            for (i in names(args)) {
-              new_args[[i]] <- args[[i]]
-            }
-            do.call(draw_nodes, new_args)
+          function(x, nebula_name, nodes_color, add_id_text, 
+                   add_structure, add_ppcp, add_ration){
+            do.call(draw_nodes, .fresh_param(draw_nodes()))
           })
 #' @importFrom svglite svglite
 #' @importFrom grid pushViewport
 #' @importFrom grid viewport
 #' @importFrom grid popViewport
+#' @importFrom pbapply pblapply
 #' @importFrom tibble as_tibble
+#' @importFrom rsvg rsvg_svg
 setMethod("draw_nodes", 
           signature = c(x = "mcnebula", nebula_name = "character",
                         nodes_color = "character",
                         add_id_text = "logical",
                         add_structure = "logical",
                         add_ppcp = "logical",
-                        add_statistic = "logical"),
+                        add_ration = "logical"),
           function(x, nebula_name, nodes_color, add_id_text, 
-                   add_structure, add_ppcp, add_statistic){
+                   add_structure, add_ppcp, add_ration){
             if (add_ppcp) {
               if (length(ppcp_data(child_nebulae(x))) == 0)
                 x <- set_ppcp_data(x)
             }
-            if (add_statistic) {
-              if (length(statistic_data(child_nebulae(x))) == 0)
-                x <- set_statistic_data(x)
+            if (add_ration) {
+              if (length(ration_data(child_nebulae(x))) == 0)
+                x <- set_ration_data(x)
             }
             if (add_structure) {
               if (length(ppcp_data(child_nebulae(x))) == 0)
@@ -52,33 +49,102 @@ setMethod("draw_nodes",
             .features_id <-
               `[[`(tibble::as_tibble(tbl_graph(child_nebulae(x))[[nebula_name]]),
                    "name")
+            .features_id <-
+              unlist(lapply(.features_id,
+                            function(id){
+                              if (is.null(nodes_ggset(child_nebulae(x))[[id]]))
+                                id
+                            }))
             if (is.null(.features_id)) {
-              return(message("No features found for `nebula_name`"))
+              return(x)
             }
             ggsets <- ggset_vis_nodes(x, .features_id, nodes_color,
-                                     add_ppcp, add_statistic)
+                                     add_ppcp, add_ration)
+            nodes_ggset(child_nebulae(x)) <-
+              c(nodes_ggset(child_nebulae(x)), ggsets)
             path <- paste0(export_path(x), "/tmp/nodes")
             .check_path(path)
-            lapply(names(ggsets),
-                   function(id){
-                     svglite::svglite(paste0(path, "/", id, ".svg"),
-                                      bg = "transparent")
-                     print(call_command(modify_rm_legend(ggsets[[ id ]])))
-                     if (add_structure) {
-                       grid::pushViewport(grid::viewport(width = 0.7, height = 0.7))
-                       show_structure(x, id)
-                       grid::popViewport()
-                     }
-                     dev.off()
-                   })
+            .message_info("draw_nodes", "ggplot -> svg -> grob")
+            grImport2:::setPrefix("")
+            nodes_grob <- 
+              pbapply::pbsapply(names(ggsets), simplify = F,
+                                function(id){
+                                  file <- paste0(path, "/", id, ".svg")
+                                  svglite::svglite(file, bg = "transparent")
+                                  ggset <- modify_rm_legend(ggsets[[ id ]])
+                                  ggset <- modify_set_margin(ggset)
+                                  print(call_command(ggset))
+                                  if (add_structure) {
+                                    vp <- grid::viewport(width = 0.8, height = 0.8)
+                                    grid::pushViewport(vp)
+                                    show_structure(x, id)
+                                    grid::popViewport()
+                                  }
+                                  if (add_id_text) {
+                                    label <- paste0("ID: ", id)
+                                    grid::grid.draw(.grob_node_text(label))
+                                  }
+                                  dev.off()
+                                  rsvg::rsvg_svg(file, file)
+                                  .cairosvg_to_grob(file)
+                                })
+            nodes_grob(child_nebulae(x)) <- 
+              c(nodes_grob(child_nebulae(x)), nodes_grob)
+            return(x)
           })
+setMethod("show_node", 
+          signature = setMissing("show_node",
+                                 x = "missing"),
+          function(){
+            list(panel_viewport =
+                 grid::viewport(0, 0.5, 0.4, 1, just = c("left", "centre")),
+               legend_viewport =
+                 grid::viewport(0.4, 0.5, 0.6, 1, just = c("left", "centre"))
+            )
+          })
+setMethod("show_node", 
+          signature = c(x = "ANY", .features_id = "character"),
+          function(x, .features_id, panel_viewport, legend_viewport){
+            args <- .fresh_param(show_node())
+            args$.features_id <- .features_id
+            do.call(.show_node, args)
+          })
+.show_node <-
+  function(x, .features_id, panel_viewport, legend_viewport){
+    grob <- nodes_grob(child_nebulae(x))[[.features_id]]
+    if (is.null(grob))
+      stop("the node of `.features_id` has not been drawn")
+    .message_info_viewport("BEGIN")
+    if (!is.null(panel_viewport)) {
+      .check_class(panel_viewport, "viewport", "grid::viewport")
+      grid::pushViewport(panel_viewport)
+      upper <- T
+    } else {
+      upper <- F
+    }
+    .message_info_viewport()
+    grid::grid.draw(grob)
+    if (upper) {
+      grid::upViewport()
+    } else {
+      return(message(""))
+    }
+    if (!is.null(legend_viewport)) {
+      .check_class(legend_viewport, "viewport", "grid::viewport")
+      .message_info_viewport()
+      grid::pushViewport(legend_viewport)
+      p <- call_command(nodes_ggset(child_nebulae(x))[[.features_id]])
+      grid::grid.draw(.get_legend(p))
+    }
+    .message_info_viewport("END")
+  }
 ggset_vis_nodes <- 
-  function(x, .features_id, nodes_color = "#D9D9D9",
-           add_ppcp = T, add_statistic = T){
+  function(x, .features_id, nodes_color = "#FFF9F2",
+           add_ppcp = T, add_ration = T){
     if (add_ppcp) {
       .check_data(child_nebulae(x), list(ppcp_data = "set_ppcp_data"))
     }
-    nodes_color <- .as_dic(nodes_color, .features_id, "#D9D9D9")
+    nodes_color <- .as_dic(nodes_color, .features_id, "#FFF9F2")
     set <- .prepare_data_for_nodes(x, .features_id, add_ppcp)
     ggsets <-
       sapply(.features_id, simplify = F,
@@ -89,20 +155,20 @@ ggset_vis_nodes <-
                labels <- .as_dic(paste0("Bar: ", names, ": ", set[[id]]$class.name),
                                  names, fill = F, as.list = F)
                new_ggset(new_command(ggplot, set[[id]]),
-                         .default_node_nuclear(nodes_color[[id]]),
-                         .default_node_border(),
-                         .default_nodes_radial_bar(),
-                         .default_node_ylim(),
-                         .default_node_polar(),
-                         .default_node_fill(pal, labels),
+                         .command_node_nuclear(nodes_color[[id]]),
+                         .command_node_border(),
+                         .command_node_radial_bar(),
+                         .command_node_ylim(),
+                         .command_node_polar(),
+                         .command_node_fill(pal, labels),
                          new_command(theme_void),
-                         .default_node_theme()
+                         .command_node_theme()
                )
              })
-    if (add_statistic) {
-      .check_data(child_nebulae(x), list(statistic_data = "statistic_data"))
+    if (add_ration) {
+      .check_data(child_nebulae(x), list(ration_data = "set_ration_data"))
       axis.len <- vapply(set, function(df) tail(df$seq, n = 1), 1) + 1
-      set <- .prepare_data_for_statistic(x, .features_id, axis.len)
+      set <- .prepare_data_for_ration(x, .features_id, axis.len)
       group <- unique(sample_metadata(x)$group)
       pal.ex <- .as_dic(palette_stat(x), group,
                         fill = F, as.list = F, na.rm = T)
@@ -114,7 +180,7 @@ ggset_vis_nodes <-
                  if (is.null(set[[id]]))
                    return(ggsets[[id]])
                  ggset <- add_layers(ggsets[[id]],
-                                     .default_node_statistic(set[[id]]),
+                                     .command_node_ration(set[[id]]),
                                      new_command(labs, fill = "Classes / Groups"))
                  scale <- command_args(layers(ggset)$scale_fill_manual)
                  command_args(layers(ggset)$scale_fill_manual)$values <- 
@@ -144,9 +210,9 @@ ggset_vis_nodes <-
     }
     set
   }
-.prepare_data_for_statistic <- 
+.prepare_data_for_ration <- 
   function(x, .features_id, axis.len){
-    set <- statistic_data(child_nebulae(x))
+    set <- ration_data(child_nebulae(x))
     sapply(.features_id, simplify = F,
            function(id) {
              if (is.null(set[[id]]))
@@ -188,30 +254,30 @@ setMethod("set_ppcp_data",
 #' @importFrom dplyr group_by
 #' @importFrom dplyr summarise
 #' @importFrom dplyr ungroup
-setMethod("set_statistic_data", 
-          signature = setMissing("set_statistic_data",
+setMethod("set_ration_data", 
+          signature = setMissing("set_ration_data",
                                  x = "mcnebula"),
           function(x){
-            set_statistic_data(x, mean = T)
+            set_ration_data(x, mean = T)
           })
-setMethod("set_statistic_data", 
+setMethod("set_ration_data", 
           signature = c(x = "mcnebula", mean = "logical"),
           function(x, mean){
             .check_data(x, list(features_quantification = "features_quantification",
                                 sample_metadata = "sample_metadata"), "(x) <-")
-            statistic_data <-
+            ration_data <-
               tidyr::gather(features_quantification(x),
                             key = "sample", value = "value", -.features_id)
-            statistic_data <-
-              tibble::as_tibble(merge(statistic_data, sample_metadata(x),
+            ration_data <-
+              tibble::as_tibble(merge(ration_data, sample_metadata(x),
                                       by = "sample", all.x = T))
             if (mean) {
-              statistic_data <-
-                dplyr::summarise(dplyr::group_by(statistic_data, .features_id, group),
+              ration_data <-
+                dplyr::summarise(dplyr::group_by(ration_data, .features_id, group),
                                  value = mean(value, na.rm = T))
-              statistic_data <- dplyr::ungroup(statistic_data)
+              ration_data <- dplyr::ungroup(ration_data)
             }
-            statistic_data(child_nebulae(x)) <- 
-              split(statistic_data, ~.features_id)
+            ration_data(child_nebulae(x)) <- 
+              split(ration_data, ~.features_id)
             return(x)
           })

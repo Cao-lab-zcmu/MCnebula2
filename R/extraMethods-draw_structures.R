@@ -37,7 +37,8 @@ setMethod("show_structure",
     .check_path(path)
     df <- dplyr::mutate(df, path = paste0(!!path, "/", .features_id, ".svg"))
     df <- dplyr::filter(df, !is.na(smiles))
-    .print_info("draw_structures", "convert smiles")
+    .message_info("draw_structures", "smiles -> svg -> grob")
+    grImport2:::setPrefix("")
     lst <- pbapply::pbapply(dplyr::select(df, smiles, path), 1,
                             function(vec){
                               .smiles_to_cairosvg(vec[["smiles"]], vec[["path"]])
@@ -47,19 +48,6 @@ setMethod("show_structure",
     if (rm_backgroud) 
       lst <- lapply(lst, .rm_backgroud)
     return(lst)
-  }
-#' @importFrom ChemmineOB convertToImage
-#' @importFrom rsvg rsvg_svg
-.smiles_to_cairosvg <- 
-  function(smile, path){
-    ChemmineOB::convertToImage("SMI", "SVG", source = smile, toFile = path)
-    rsvg::rsvg_svg(path, path)
-  }
-#' @importFrom grImport2 readPicture
-#' @importFrom grImport2 grobify
-.cairosvg_to_grob <- 
-  function(path){
-    grImport2::grobify(grImport2::readPicture(path))
   }
 .rm_backgroud <- 
   function(grob){

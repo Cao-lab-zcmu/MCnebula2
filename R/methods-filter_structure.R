@@ -31,13 +31,13 @@ setMethod("filter_structure",
                                  fun_filter = "function",
                                  by_reference = "logical"),
           function(x, fun_filter, ..., by_reference){
-            .print_info_formal("MCnebula2", "filter_structure")
+            .message_info_formal("MCnebula2", "filter_structure")
             subscript <- ".f3_fingerid"
             x <- collate_data(x, subscript)
             ## filter
             msframe.lst <- extract_rawset(x, subscript)
             if (by_reference) {
-              .print_info("filter_structure", "by_reference == T")
+              .message_info("filter_structure", "by_reference == T")
               .check_data(x, list(specific_candidate = "create_reference"))
               entity(msframe.lst[[1]]) <- 
                 merge(specific_candidate(x), entity(msframe.lst[[1]]),

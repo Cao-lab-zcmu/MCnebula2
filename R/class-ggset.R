@@ -66,6 +66,20 @@ setMethod("mutate_layer",
             return(x)
           })
 ## ------------------------------------- 
+setMethod("mutate_layer", 
+          signature = c(x = "ANY", layer = "character"),
+          function(x, layer, ...){
+            seq <- which(names(layers(x)) == layer)
+            if (length(seq) == 0) {
+              stop( paste0("'", layer, "' not found") )
+            } else if (length(seq) > 1) {
+              stop(paste0("multiple layers of '", layer, "' were found"))
+            } else {
+              x <- mutate_layer(x, seq, ...)
+            }
+            return(x)
+          })
+## ------------------------------------- 
 setMethod("add_layers", 
           signature = c(x = "ggset"),
           function(x, ...){

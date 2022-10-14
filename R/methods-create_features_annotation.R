@@ -29,7 +29,7 @@ setMethod("create_features_annotation",
           signature = setMissing("create_features_annotation",
                                  x = "mcnebula"),
           function(x){
-            .print_info_formal("MCnebula2", "create_features_annotation")
+            .message_info_formal("MCnebula2", "create_features_annotation")
             .check_data(x, list(specific_candidate = "create_reference"))
             ref <- specific_candidate(x)
             ## formula dataset

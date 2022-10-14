@@ -37,6 +37,59 @@ setGeneric("child_nebulae",
            function(x) standardGeneric("child_nebulae"))
 setGeneric("child_nebulae<-", 
            function(x, value) standardGeneric("child_nebulae<-"))
+## ------------------------------------- 
+setGeneric("igraph", 
+           function(x) standardGeneric("igraph"))
+setGeneric("igraph<-", 
+           function(x, value) standardGeneric("igraph<-"))
+setGeneric("tbl_graph", 
+           function(x) standardGeneric("tbl_graph"))
+setGeneric("tbl_graph<-", 
+           function(x, value) standardGeneric("tbl_graph<-"))
+setGeneric("layout_ggraph", 
+           function(x) standardGeneric("layout_ggraph"))
+setGeneric("layout_ggraph<-", 
+           function(x, value) standardGeneric("layout_ggraph<-"))
+setGeneric("grid_layout", 
+           function(x) standardGeneric("grid_layout"))
+setGeneric("grid_layout<-", 
+           function(x, value) standardGeneric("grid_layout<-"))
+setGeneric("viewports", 
+           function(x) standardGeneric("viewports"))
+setGeneric("viewports<-", 
+           function(x, value) standardGeneric("viewports<-"))
+setGeneric("panel_viewport", 
+           function(x) standardGeneric("panel_viewport"))
+setGeneric("panel_viewport<-", 
+           function(x, value) standardGeneric("panel_viewport<-"))
+setGeneric("legend_viewport", 
+           function(x) standardGeneric("legend_viewport"))
+setGeneric("legend_viewport<-", 
+           function(x, value) standardGeneric("legend_viewport<-"))
+setGeneric("structures_grob", 
+           function(x) standardGeneric("structures_grob"))
+setGeneric("structures_grob<-", 
+           function(x, value) standardGeneric("structures_grob<-"))
+setGeneric("nodes_ggset", 
+           function(x) standardGeneric("nodes_ggset"))
+setGeneric("nodes_ggset<-", 
+           function(x, value) standardGeneric("nodes_ggset<-"))
+setGeneric("nodes_grob", 
+           function(x) standardGeneric("nodes_grob"))
+setGeneric("nodes_grob<-", 
+           function(x, value) standardGeneric("nodes_grob<-"))
+setGeneric("ppcp_data", 
+           function(x) standardGeneric("ppcp_data"))
+setGeneric("ppcp_data<-", 
+           function(x, value) standardGeneric("ppcp_data<-"))
+setGeneric("ration_data", 
+           function(x) standardGeneric("ration_data"))
+setGeneric("ration_data<-", 
+           function(x, value) standardGeneric("ration_data<-"))
+setGeneric("ggset_annotate", 
+           function(x) standardGeneric("ggset_annotate"))
+setGeneric("ggset_annotate<-", 
+           function(x, value) standardGeneric("ggset_annotate<-"))
 ## ---------------------------------------------------------------------- 
 ## class-mcnebula
 setGeneric("creation_time", 
@@ -216,49 +269,23 @@ setGeneric("export_path",
            function(x) standardGeneric("export_path"))
 setGeneric("export_path<-", 
            function(x, value) standardGeneric("export_path<-"))
+## ---------------------------------------------------------------------- 
+## class-statistic_set
+setGeneric("statistic_set", 
+           function(x) standardGeneric("statistic_set"))
+setGeneric("statistic_set<-", 
+           function(x, value) standardGeneric("statistic_set<-"))
 ## ------------------------------------- 
-setGeneric("igraph", 
-           function(x) standardGeneric("igraph"))
-setGeneric("igraph<-", 
-           function(x, value) standardGeneric("igraph<-"))
-setGeneric("tbl_graph", 
-           function(x) standardGeneric("tbl_graph"))
-setGeneric("tbl_graph<-", 
-           function(x, value) standardGeneric("tbl_graph<-"))
-setGeneric("layout_ggraph", 
-           function(x) standardGeneric("layout_ggraph"))
-setGeneric("layout_ggraph<-", 
-           function(x, value) standardGeneric("layout_ggraph<-"))
-setGeneric("grid_layout", 
-           function(x) standardGeneric("grid_layout"))
-setGeneric("grid_layout<-", 
-           function(x, value) standardGeneric("grid_layout<-"))
-setGeneric("viewports", 
-           function(x) standardGeneric("viewports"))
-setGeneric("viewports<-", 
-           function(x, value) standardGeneric("viewports<-"))
-setGeneric("panel_viewport", 
-           function(x) standardGeneric("panel_viewport"))
-setGeneric("panel_viewport<-", 
-           function(x, value) standardGeneric("panel_viewport<-"))
-setGeneric("legend_viewport", 
-           function(x) standardGeneric("legend_viewport"))
-setGeneric("legend_viewport<-", 
-           function(x, value) standardGeneric("legend_viewport<-"))
-setGeneric("structures_grob", 
-           function(x) standardGeneric("structures_grob"))
-setGeneric("structures_grob<-", 
-           function(x, value) standardGeneric("structures_grob<-"))
-setGeneric("nodes_grob", 
-           function(x) standardGeneric("nodes_grob"))
-setGeneric("nodes_grob<-", 
-           function(x, value) standardGeneric("nodes_grob<-"))
-setGeneric("ppcp_data", 
-           function(x) standardGeneric("ppcp_data"))
-setGeneric("ppcp_data<-", 
-           function(x, value) standardGeneric("ppcp_data<-"))
-setGeneric("statistic_data", 
-           function(x) standardGeneric("statistic_data"))
-setGeneric("statistic_data<-", 
-           function(x, value) standardGeneric("statistic_data<-"))
+setGeneric("design_matrix", 
+           function(x) standardGeneric("design_matrix"))
+setGeneric("design_matrix<-", 
+           function(x, value) standardGeneric("design_matrix<-"))
+setGeneric("contrast_matrix", 
+           function(x) standardGeneric("contrast_matrix"))
+setGeneric("contrast_matrix<-", 
+           function(x, value) standardGeneric("contrast_matrix<-"))
+setGeneric("top_table", 
+           function(x) standardGeneric("top_table"))
+setGeneric("top_table<-", 
+           function(x, value) standardGeneric("top_table<-"))
 ## ------------------------------------- 

@@ -143,7 +143,7 @@ setMethod("filter_msframe",
                                  x = "msframe", fun_filter = "function",
                                  f = "formula"),
           function(x, fun_filter, f, ...){
-            .print_info("msframe", "filter_msframe",
+            .message_info("msframe", "filter_msframe",
                       paste0("group_by: ", paste0(f, collapse = " "))
             )
             entity <- lapply( split(entity(x), f = f), FUN = fun_filter, ...)

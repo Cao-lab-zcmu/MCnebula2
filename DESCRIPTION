@@ -17,8 +17,9 @@ Collate:
     class-VIRTUAL_slots.R class-melody.R
     class-project_conformation.R class-project_metadata.R
     class-project_api.R class-project_dataset.R class-project.R
-    class-mcn_dataset.R class-msframe.R
-    class-command.R class-ggset.R class-nebula.R class-mcnebula.R
+    class-statistic_set.R class-mcn_dataset.R
+    class-msframe.R class-command.R class-ggset.R
+    class-nebula.R class-mcnebula.R 
     methods-initialize_mcnebula.R
     extraMethods-collate_data.R methods-filter_structure.R
     methods-filter_formula.R methods-filter_ppcp.R
@@ -31,18 +32,23 @@ Collate:
     methods-create_parent_layout.R methods-create_child_layouts.R
     methods-activate_nebulae.R methods-visualize.R
     extraMethods-draw_structures.R extraMethods-draw_nodes.R
+    methods-annotate_nebula.R extraMethods-binary_comparison.R
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
     data.table,
     dplyr,
+    ggimage,
     ggraph,
     ggsci,
+    ggtext,
     grid,
+    gridExtra,
     grImport2,
     igraph,
     pbapply,
+    rlang,
     stringr,
     svglite,
     tidyr

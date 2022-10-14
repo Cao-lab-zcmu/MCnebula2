@@ -66,7 +66,7 @@ setMethod("read_data",
             if (length(.features_id) == 0)
               .features_id <- subscript
             .candidates_id <- match.candidates_id(x)(path.df$files)
-            .print_info("collate_data", "read_data", subscript)
+            .message_info("collate_data", "read_data", subscript)
             msframe <- read_data(path = path, fun_read = fun_read,
                                  subscript = subscript, fun_format = fun_format,
                                  .features_id = .features_id,
@@ -156,7 +156,7 @@ setMethod("get_metadata",
                 df <- metadata(project_metadata)[[ api[i - 1] ]]
                 upper <- paste0(apply(df, 1, paste0, collapse = "/"))
                 ## ------------------------------------- 
-                .print_info("project_metadata", "get_metadata",
+                .message_info("project_metadata", "get_metadata",
                           paste0(target, "(", sub, ")"))
                 df <- .list_files(path, upper, target)
               }

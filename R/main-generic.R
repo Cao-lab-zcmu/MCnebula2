@@ -135,12 +135,15 @@ setGeneric("activate_nebulae",
              standardGeneric("activate_nebulae"))
 ## ------------------------------------- 
 setGeneric("visualize", 
-           function(x, item, fun_modify) standardGeneric("visualize"))
+           function(x, item, fun_modify, annotate)
+             standardGeneric("visualize"))
 setGeneric("visualize_all", 
            signature = c("ANY" = "x", "logical" = "newpage",
                          "ANY" = "fun_modify",
                          "ANY" = "legend_hierarchy"),
-           function(x, newpage, fun_modify, fun_modify_legend,
-                    legend_hierarchy)
+           function(x, newpage, fun_modify, legend_hierarchy)
              standardGeneric("visualize_all"))
 ## ------------------------------------- 
+setGeneric("annotate_nebula", 
+           function(x, nebula_name)
+             standardGeneric("annotate_nebula"))

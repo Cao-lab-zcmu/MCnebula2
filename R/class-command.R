@@ -70,11 +70,12 @@ setMethod("new_command",
             new("command", command_name = name, command_function = fun,
                 command_args = args)
           })
+#' @importFrom rlang as_label
 setMethod("new_command", 
           signature = setMissing("new_command",
                                  fun = "function"),
           function(fun, ...){
-            name <- as.character(substitute(fun))
+            name <- rlang::as_label(substitute(fun))
             if (length(name) != 1) {
               name <- paste0(name[2], name[1], name[3])
             }

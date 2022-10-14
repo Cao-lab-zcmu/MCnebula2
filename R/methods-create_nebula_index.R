@@ -10,7 +10,7 @@ setMethod("create_nebula_index",
 setMethod("create_nebula_index", 
           signature = c(x = "mcnebula", force = "logical"),
           function(x, force){
-            .print_info_formal("MCnebula2", "create_nebula_index")
+            .message_info_formal("MCnebula2", "create_nebula_index")
             .check_data(x, list(stardust_classes = "create_stardust_classes"))
             if (!force) {
               class_num <- length(unique(stardust_classes(x)[[ "rel.index" ]]))

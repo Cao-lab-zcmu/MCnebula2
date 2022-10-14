@@ -12,7 +12,7 @@ setMethod("create_reference",
             else
               x <- do.call(create_reference, args)
             if (fill) {
-              .print_info("create_reference", "fill == T",
+              .message_info("create_reference", "fill == T",
                         "\n\tfilling missing features with filtered formula")
               if (!missing(MoreArgs))
                 x <- do.call(filter_formula, c(x, MoreArgs))
@@ -49,7 +49,7 @@ setMethod("create_reference",
                                  x = "mcnebula",
                                  subscript = "character"),
           function(x, subscript){
-            .print_info_formal("MCnebula2", "create_reference")
+            .message_info_formal("MCnebula2", "create_reference")
             data <- try(entity(dataset(mcn_dataset(x))[[ subscript ]]), silent = T)
             if (inherits(data, "try-error")) {
               stop(paste0("the specified dataset not exists. use, e.g., ",

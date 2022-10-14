@@ -8,7 +8,8 @@
              representation(creation_time = "character",
                             ion_mode = "character",
                             melody = "melody",
-                            mcn_dataset = "mcn_dataset"
+                            mcn_dataset = "mcn_dataset",
+                            statistic_set = "statistic_set"
                             ),
            prototype = prototype(project_version = "sirius.v4",
                                  project_path = ".",
@@ -162,6 +163,15 @@ setMethod("features_quantification",
           function(x){
             reference(x)[[ "features_quantification" ]]
           })
+.features_quantification <- 
+  function(x){
+    data <- features_quantification(x)
+    .features_id <- data$.features_id
+    data$.features_id <- NULL
+    data <- as.matrix(data)
+    rownames(data) <- .features_id
+    data
+  }
 #' @importFrom dplyr select
 setReplaceMethod("features_quantification", 
                  signature = c(x = "mcnebula"),

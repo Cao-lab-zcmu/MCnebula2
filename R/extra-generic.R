@@ -32,16 +32,28 @@ setGeneric("draw_nodes",
                          "character" = "nodes_color",
                          "logical" = "add_id_text",
                          "logical" = "add_structure", "logical" = "add_ppcp",
-                         "logical" = "add_statistic"),
+                         "logical" = "add_ration"),
            function(x, nebula_name, nodes_color, add_id_text,
-                    add_structure, add_ppcp, add_statistic)
+                    add_structure, add_ppcp, add_ration)
              standardGeneric("draw_nodes"))
+setGeneric("show_node", 
+           signature = c(ANY = "x", "character" = ".features_id",
+                         ANY = "panel_viewport", ANY = "legend_viewport"),
+           function(x, .features_id, panel_viewport, legend_viewport)
+             standardGeneric("show_node"))
 setGeneric("set_ppcp_data", 
            signature = c(ANY = "x", "character" = "classes"),
            function(x, classes) standardGeneric("set_ppcp_data"))
-setGeneric("set_statistic_data", 
+setGeneric("set_ration_data", 
            signature = c(ANY = "x", "logical" = "mean"),
-           function(x, mean) standardGeneric("set_statistic_data"))
+           function(x, mean) standardGeneric("set_ration_data"))
+## ------------------------------------- 
+setGeneric("binary_comparison", 
+           signature = c(ANY = "x", "formula" = "formula",
+                         "function" = "fun_norm", "ANY" = "top_coef",
+                         "ANY" = "contrasts"),
+           function(x, ..., formula, fun_norm, top_coef, contrasts)
+             standardGeneric("binary_comparison"))
 ## ------------------------------------- 
 setGeneric("get_metadata", 
            signature = c(ANY = "x",
@@ -118,4 +130,4 @@ setGeneric("move_layers",
            signature = c(ggset = "x", "numeric" = "from", "numeric" = "to"),
            function(x, from, to)
              standardGeneric("move_layers"))
-
+## ------------------------------------- 

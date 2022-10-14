@@ -72,18 +72,19 @@ mapply_rename_col <-
            })
   }
 ## ------------------------------------- 
-.print_info <- 
+.message_info <- 
   function(main, sub, arg = NULL, sig = "##"){
     message(sig, " ", main, ": ", sub, " ", arg)
   }
-.print_info_formal <- 
+.message_info_formal <- 
   function(main, sub, arg = NULL, sig = "[INFO]"){
     message(sig, " ", main, ": ", sub, " ", arg)
   }
-.print_info_viewport <- 
+#' @importFrom grid current.viewport
+.message_info_viewport <- 
   function(info = "info"){
-    .print_info(info, "current.viewport:",
-                paste0("\n\t", paste0(current.viewport())))
+    .message_info(info, "current.viewport:",
+                  paste0("\n\t", paste0(grid::current.viewport())))
   }
 .get_missing_x <- 
   function(x, class, n = 2, envir = parent.frame(n)){
@@ -97,10 +98,10 @@ mapply_rename_col <-
     return(x)
   }
 ## ------------------------------------- 
+#' @importFrom rlang as_label
 .check_data <- 
   function(object, lst, tip = "(...)"){
-    target <- substitute(object)
-    target <- paste0(target[1], "(", target[2], ")")
+    target <- rlang::as_label(substitute(object))
     mapply(lst, names(lst), FUN = function(value, name){
              obj <- match.fun(name)(object)
              if (is.null(obj)) {
@@ -125,10 +126,11 @@ mapply_rename_col <-
       }
     }
   }
+#' @importFrom rlang as_label
 .check_class <- 
   function(object, class = "layout", tip = "grid::grid.layout"){
     if (!is(object, class)) {
-      stop(paste0("`", paste0(substitute(object), collapse = ""),
+      stop(paste0("`", rlang::as_label(substitute(object)),
                   "` should be a '", class, "' object created by ",
                   "`", tip, "`." ))
     }
@@ -155,6 +157,14 @@ mapply_rename_col <-
     if (!file.exists(path)) {
       dir.create(path, recursive = T)
     }
+  }
+.suggest_bio_package <- 
+  function(pkg){
+    if (!requireNamespace(pkg, quietly = T))
+      stop("package '", pkg, "' not installed. use folloing to install:\n",
+           '\nif (!require("BiocManager", quietly = TRUE))',
+           '\n\tinstall.packages("BiocManager")',
+           '\nBiocManager::install("', pkg, '")\n\n')
   }
 ## ------------------------------------- 
 .list_files <- function(path, upper, pattern){
@@ -183,6 +193,7 @@ write_tsv <-
   }
 ## ------------------------------------- 
 #' @importFrom grid unit
+#' @importFrom ggtext element_textbox
 .element_textbox <- 
   function(family = NULL, face = NULL, size = NULL,
            colour = "white", fill = "lightblue",
@@ -216,12 +227,12 @@ write_tsv <-
 ## ------------------------------------- 
 .simulate_quant_set <- 
   function(x){
-    quant <- .simulate_quant(features_annotation(test1)$.features_id)
+    quant <- .simulate_quant(features_annotation(x)$.features_id)
     meta <- group_strings(colnames(quant),
                           c(control = "^control", model = "^model",
                             treat = "^treat", pos = "^pos"), "sample")
-    features_quantification(test1) <- quant
-    sample_metadata(test1) <- meta
+    features_quantification(x) <- quant
+    sample_metadata(x) <- meta
     return(x)
   }
 #' @importFrom tibble as_tibble
@@ -280,4 +291,28 @@ group_strings <-
       vec <- vec[!is.na(names(vec))]
     }
     vec
+  }
+.fresh_param <- 
+  function(default, args){
+    if (missing(args))
+      args <- as.list(parent.frame())
+    args <- args[ !vapply(args, is.name, T) ]
+    for (i in names(args)) {
+      default[[i]] <- args[[i]]
+    }
+    default
+  }
+## ---------------------------------------------------------------------- 
+#' @importFrom grImport2 readPicture
+#' @importFrom grImport2 grobify
+.cairosvg_to_grob <- 
+  function(path){
+    grImport2::grobify(grImport2::readPicture(path))
+  }
+#' @importFrom ChemmineOB convertToImage
+#' @importFrom rsvg rsvg_svg
+.smiles_to_cairosvg <- 
+  function(smile, path){
+    ChemmineOB::convertToImage("SMI", "SVG", source = smile, toFile = path)
+    rsvg::rsvg_svg(path, path)
   }

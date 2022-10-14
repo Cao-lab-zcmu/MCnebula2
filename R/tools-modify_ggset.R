@@ -6,10 +6,27 @@ modify_default_child <-
     x <- .get_missing_x(x, "mcnebula")
     modify_rm_legend(modify_set_labs(modify_unify_scale_limits(ggset)))
   }
+modify_set_labs_and_unify_scale_limits <- 
+  function(ggset, x){
+    x <- .get_missing_x(x, "mcnebula")
+    modify_set_labs(modify_unify_scale_limits(ggset))
+  }
+modify_annotate_child <- 
+  function(ggset, x){
+    x <- .get_missing_x(x, "mcnebula")
+    mutate_layer(modify_set_labs(ggset), "theme",
+                 panel.grid = element_line("white", inherit.blank = T),
+                 panel.background = element_rect("grey92", color = NA,
+                                                 inherit.blank = T))
+  }
 modify_rm_legend <- 
   function(ggset){
-    command_args(layers(ggset)$theme)$legend.position <- "none"
-    return(ggset)
+    mutate_layer(ggset, "theme", legend.position = "none")
+  }
+#' @importFrom grid unit
+modify_set_margin <- 
+  function(ggset, margin = grid::unit(rep(-8, 4), "lines")){
+    mutate_layer(ggset, "theme", plot.margin = margin)
   }
 modify_unify_scale_limits <- 
   function(ggset, x){
@@ -37,8 +54,8 @@ modify_unify_scale_limits <-
       if (length(seq) == 1) {
         ggset <- mutate_layer(ggset, seq, limits = range)
       } else if (length(seq) > 1) {
-        stop("multiple layers of 'scale_", i,
-             ".*", "' were found")
+        stop(paste0("multiple layers of 'scale_", i,
+             ".*", "' were found"))
       } else {
         ggset <-
           add_layers(ggset,
@@ -93,7 +110,7 @@ modify_set_labs <-
                     mapping <- command_args(com)$mapping
                     if (!is.null(mapping)) {
                       vapply(mapping, FUN.VALUE = "ch",
-                             function(m) tail(as.character(m), 1))
+                             function(m) tail(paste0(m), 1))
                     }
                   }))
   }

@@ -13,21 +13,15 @@
 #' @importFrom dplyr arrange
 #' @importFrom dplyr select
 setMethod("create_child_layouts", 
-          signature = c(x = "mcnebula"),
-          function(x, ggraph_layouts, seeds,
-                   grid_layout, viewports,
-                   panel_viewport, legend_viewport){
-            .print_info_formal("MCnebula2", "create_child_layouts")
-            .check_data(child_nebulae(x), list(igraph = "create_child_nebulae"))
-            len <- length(igraph(child_nebulae(x)))
-            if (missing(ggraph_layouts)) {
+          signature = setMissing("create_child_layouts",
+                                 x = "missing"),
+          function(){
+            function(x){
+              .check_data(child_nebulae(x), list(igraph = "create_child_nebulae"))
+              len <- length(igraph(child_nebulae(x)))
               ggraph_layouts <-
-                vapply(igraph(child_nebulae(x)), .default_graph_layout, "ch")
-            }
-            if (missing(seeds)) {
+                vapply(igraph(child_nebulae(x)), .propose_graph_layout, "ch")
               seeds <- rep(1, len)
-            }
-            if (missing(grid_layout)) {
               ncol <- round(sqrt(len))
               if (ncol ^ 2 < len) {
                 nrow <- ncol + 1
@@ -35,8 +29,6 @@ setMethod("create_child_layouts",
                 nrow <- ncol
               }
               grid_layout <- grid::grid.layout(nrow, ncol)
-            }
-            if (missing(viewports)) {
               num_grid <- grid_layout$nrow * grid_layout$ncol
               if (num_grid < len) {
                 stop( "`grid_layout` must contains enough sub-panels for child_nebulae." )
@@ -45,30 +37,40 @@ setMethod("create_child_layouts",
                                                 levels = hierarchy(x)$class.name)))
               mtrx <- matrix(c(names, rep("...FILL", num_grid - len)),
                              ncol = grid_layout$ncol, byrow = T)
-              viewports <- unlist(recursive = F,
-                            mapply(apply(mtrx, 1, c, simplify = F), 1:nrow(mtrx),
-                                   SIMPLIFY = F,
-                                   FUN = function(names, row) {
-                                     lapply(1:length(names),
-                                            function(n) {
-                                              grid::viewport(layout = grid_layout,
-                                                             layout.pos.row = row,
-                                                             layout.pos.col = n)
-                                            })
-                                   }))[1:len]
+              viewports <-
+                unlist(recursive = F,
+                       mapply(apply(mtrx, 1, c, simplify = F), 1:nrow(mtrx),
+                              SIMPLIFY = F,
+                              FUN = function(names, row) {
+                                lapply(1:length(names),
+                                       function(n) {
+                                         grid::viewport(layout = grid_layout,
+                                                        layout.pos.row = row,
+                                                        layout.pos.col = n)
+                                       })
+                              }))[1:len]
               names(viewports) <- names
-            }
-            if (missing(panel_viewport)) {
               panel_viewport <-
                 grid::viewport(0, 0.5, 0.8, 1, just = c("left", "centre"))
-            }
-            if (missing(legend_viewport)) {
               legend_viewport <- 
                 grid::viewport(0.8, 0.5, 0.2, 1, just = c("left", "centre"))
+              list(ggraph_layouts = ggraph_layouts,
+                   seeds = seeds,
+                   grid_layout = grid_layout,
+                   viewports = viewports,
+                   panel_viewport = panel_viewport,
+                   legend_viewport = legend_viewport
+              )
             }
-            .create_child_layouts(x, ggraph_layouts, seeds,
-                                  grid_layout, viewports,
-                                  panel_viewport, legend_viewport)
+          })
+setMethod("create_child_layouts", 
+          signature = c(x = "mcnebula"),
+          function(x, ggraph_layouts, seeds,
+                   grid_layout, viewports,
+                   panel_viewport, legend_viewport){
+            .message_info_formal("MCnebula2", "create_child_layouts")
+            do.call(.create_child_layouts,
+                    .fresh_param(create_child_layouts()(x)))
           })
 .create_child_layouts <- 
   function(x, ggraph_layouts, seeds,
@@ -94,7 +96,7 @@ setMethod("create_child_layouts",
              function(name){
                layout <- ggraph_layouts[[name]]
                if (is.null(layout))
-                 layout <- .default_graph_layout(graph)
+                 layout <- .propose_graph_layout(graph)
                set.seed(seeds[[name]])
                ggraph::create_layout(tbl_graph(child_nebulae(x))[[ name ]],
                                      layout = layout)
@@ -107,7 +109,7 @@ setMethod("create_child_layouts",
     legend_viewport(child_nebulae(x)) <- legend_viewport
     return(x)
   }
-.default_graph_layout <- 
+.propose_graph_layout <- 
   function(graph){
     if (length(graph) >= 300 | length(graph) <= 10)
       "kk"

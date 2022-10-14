@@ -23,9 +23,11 @@ setClass("child_nebulae",
                           legend_viewport = "ANY",
                           ggset = "list",
                           structures_grob = "list",
+                          nodes_ggset = "list",
                           nodes_grob = "list",
                           ppcp_data = "list",
-                          statistic_data = "list"
+                          ration_data = "list",
+                          ggset_annotate = "list"
                           ),
          prototype = NULL
          )
@@ -170,6 +172,15 @@ setReplaceMethod("structures_grob",
                    initialize(x, structures_grob = value)
                  })
 ## ------------------------------------- 
+setMethod("nodes_ggset", 
+          signature = c(x = "ANY"),
+          function(x){ x@nodes_ggset })
+setReplaceMethod("nodes_ggset", 
+                 signature = c(x = "ANY"),
+                 function(x, value){
+                   initialize(x, nodes_ggset = value)
+                 })
+## ------------------------------------- 
 setMethod("nodes_grob", 
           signature = c(x = "ANY"),
           function(x){ x@nodes_grob })
@@ -188,11 +199,20 @@ setReplaceMethod("ppcp_data",
                    initialize(x, ppcp_data = value)
                  })
 ## ------------------------------------- 
-setMethod("statistic_data", 
+setMethod("ration_data", 
           signature = c(x = "ANY"),
-          function(x){ x@statistic_data })
-setReplaceMethod("statistic_data", 
+          function(x){ x@ration_data })
+setReplaceMethod("ration_data", 
                  signature = c(x = "ANY"),
                  function(x, value){
-                   initialize(x, statistic_data = value)
+                   initialize(x, ration_data = value)
+                 })
+## ------------------------------------- 
+setMethod("ggset_annotate", 
+          signature = c(x = "ANY"),
+          function(x){ x@ggset_annotate })
+setReplaceMethod("ggset_annotate", 
+                 signature = c(x = "ANY"),
+                 function(x, value){
+                   initialize(x, ggset_annotate = value)
                  })

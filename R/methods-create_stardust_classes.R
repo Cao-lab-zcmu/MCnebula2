@@ -2,22 +2,20 @@
 # filter classification for each features, as stardust classes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 setMethod("create_stardust_classes", 
-          signature = c(x = "mcnebula", rep("ANY", 4)),
+          signature = setMissing("create_stardust_classes",
+                                 x = "missing"),
+          function(){
+            list(pp.threashold = 0.5,
+                 hierarchy_priority = 5:2,
+                 position_isomerism = T,
+                 inherit_dataset = F)
+          })
+setMethod("create_stardust_classes", 
+          signature = c(x = "mcnebula"),
           function(x, pp.threashold, hierarchy_priority,
                    position_isomerism, inherit_dataset){
-            .default <- list(pp.threashold = 0.5,
-                             hierarchy_priority = 5:2,
-                             position_isomerism = T,
-                             inherit_dataset = F)
-            args <- as.list(environment())
-            args <- mapply(args, names(args), SIMPLIFY = F,
-                           FUN = function(value, name){
-                             if(is.name(value))
-                               .default[[ name ]]
-                             else
-                               value
-                            })
-            do.call(create_stardust_classes, args)
+            do.call(create_stardust_classes,
+                    .fresh_param(create_stardust_classes()))
           })
 setMethod("create_stardust_classes", 
           signature = c(x = "mcnebula",
@@ -27,7 +25,7 @@ setMethod("create_stardust_classes",
                         inherit_dataset = "logical"),
           function(x, pp.threashold, hierarchy_priority,
                    position_isomerism, inherit_dataset){
-            .print_info_formal("MCnebula2", "create_stardust_classes")
+            .message_info_formal("MCnebula2", "create_stardust_classes")
             if (is.null(hierarchy(x)))
               x <- create_hierarchy(x)
             hierarchy <- hierarchy(x)

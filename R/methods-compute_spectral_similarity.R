@@ -7,23 +7,20 @@
 #' @exportMethod compute_spectral_similarity
 setMethod("compute_spectral_similarity", 
           signature = setMissing("compute_spectral_similarity",
-                                 x = "mcnebula"),
-          function(x){
-            compute_spectral_similarity(x, T, F)
+                                 x = "missing"),
+          function(){
+            list(within_nebula = T,
+                 recompute = F
+            )
           })
 setMethod("compute_spectral_similarity", 
           signature = setMissing("compute_spectral_similarity",
                                  x = "mcnebula",
-                                 within_nebula = "logical"),
-          function(x, within_nebula){
-            compute_spectral_similarity(x, within_nebula, F)
-          })
-setMethod("compute_spectral_similarity", 
-          signature = setMissing("compute_spectral_similarity",
-                                 x = "mcnebula",
-                                 recompute = "logical"),
-          function(x, recompute){
-            compute_spectral_similarity(x, T, recompute)
+                                 within_nebula = "ANY",
+                                 recompute = "ANY"),
+          function(x, within_nebula, recompute, sp1, sp2){
+            do.call(compute_spectral_similarity,
+                    .fresh_param(compute_spectral_similarity()))
           })
 setMethod("compute_spectral_similarity", 
           signature = setMissing("compute_spectral_similarity",
@@ -38,11 +35,11 @@ setMethod("compute_spectral_similarity",
                                  sp2 = "data.frame"),
           function(sp1, sp2){
             if (ncol(sp1) == 2 & ncol(sp2) == 2) {
-              .print_info("compute_spectral_similarity", "ncol(sp) == 2",
+              .message_info("compute_spectral_similarity", "ncol(sp) == 2",
                         "\n\tguess columns are c('mz', 'intensity')")
               colnames(sp1) <- colnames(sp2) <- c("mz", "intensity")
             } else {
-              .print_info("compute_spectral_similarity", "ncol(sp) > 2",
+              .message_info("compute_spectral_similarity", "ncol(sp) > 2",
                         "\n\t select columns of c('mz', 'intensity')"
               )
             }
@@ -58,13 +55,13 @@ setMethod("compute_spectral_similarity",
                                  within_nebula = "logical",
                                  recompute = "logical"),
           function(x, within_nebula, recompute){
-            .print_info_formal("MCnebula2", "compute_spectral_similarity")
+            .message_info_formal("MCnebula2", "compute_spectral_similarity")
             .check_data(x, list(nebula_index = "create_nebula_index"))
             if (!is.null(spectral_similarity(x))) {
               if (recompute) {
-                .print_info("compute_spectral_similarity", "recompute == T")
+                .message_info("compute_spectral_similarity", "recompute == T")
               } else {
-                .print_info("compute_spectral_similarity", "recompute == F",
+                .message_info("compute_spectral_similarity", "recompute == F",
                           "\n\tdata already existed.")
                 return(x)
               }
@@ -93,7 +90,7 @@ setMethod("compute_spectral_similarity",
             }
             combn <- dplyr::rename(dplyr::distinct(data.frame(combn)),
                                    .features_id1 = 1, .features_id2 = 2)
-            .print_info("compute_spectral_similarity", "compareSpectra")
+            .message_info("compute_spectral_similarity", "compareSpectra")
             combn[[ "similarity" ]] <-
               pbapply::pbapply(combn, 1, function(vec){
                                  compareSpectra(lst_lightSpectrum[[ vec[1] ]],
