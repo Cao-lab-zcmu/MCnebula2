@@ -4,23 +4,17 @@
 #' @exportMethod filter_formula
 setMethod("filter_formula", 
           signature = setMissing("filter_formula",
-                                 x = "mcnebula", by_reference = "logical"),
-          function(x, by_reference){
-            filter_formula(x, fun_filter = .rank_by_default,
-                           by_reference = by_reference)
+                                 x = "missing"),
+          function(){
+            list(fun_filter = .rank_by_default,
+                 by_reference = F
+            )
           })
 setMethod("filter_formula", 
-          signature = setMissing("filter_formula",
-                                 x = "mcnebula"),
-          function(x){
-            filter_formula(x, fun_filter = .rank_by_default, by_reference = F)
-          })
-setMethod("filter_formula", 
-          signature = setMissing("filter_formula",
-                                 x = "mcnebula",
-                                 fun_filter = "function"),
-          function(x, fun_filter, ...){
-            filter_formula(x, fun_filter = fun_filter, ..., by_reference = F)
+          signature = c(x = "mcnebula"),
+          function(x, fun_filter, ..., by_reference){
+            reCallMethod("filter_formula",
+                         .fresh_param(filter_formula()), ...)
           })
 setMethod("filter_formula", 
           signature = setMissing("filter_formula",

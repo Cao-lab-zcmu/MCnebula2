@@ -14,13 +14,10 @@ setMethod("compute_spectral_similarity",
             )
           })
 setMethod("compute_spectral_similarity", 
-          signature = setMissing("compute_spectral_similarity",
-                                 x = "mcnebula",
-                                 within_nebula = "ANY",
-                                 recompute = "ANY"),
+          signature = c(x = "mcnebula"),
           function(x, within_nebula, recompute, sp1, sp2){
-            do.call(compute_spectral_similarity,
-                    .fresh_param(compute_spectral_similarity()))
+            reCallMethod("compute_spectral_similarity",
+                         .fresh_param(compute_spectral_similarity()))
           })
 setMethod("compute_spectral_similarity", 
           signature = setMissing("compute_spectral_similarity",

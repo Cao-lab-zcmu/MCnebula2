@@ -16,7 +16,8 @@ setMethod("draw_nodes",
           signature = c(x = "mcnebula", nebula_name = "character"),
           function(x, nebula_name, nodes_color, add_id_text, 
                    add_structure, add_ppcp, add_ration){
-            do.call(draw_nodes, .fresh_param(draw_nodes()))
+            reCallMethod("draw_nodes",
+                         .fresh_param(draw_nodes()))
           })
 #' @importFrom svglite svglite
 #' @importFrom grid pushViewport

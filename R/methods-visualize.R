@@ -92,7 +92,8 @@ setMethod("visualize_all",
 setMethod("visualize_all", 
           signature = c(x = "mcnebula"),
           function(x, newpage, fun_modify, legend_hierarchy){
-            do.call(visualize_all, .fresh_param(visualize_all()))
+            reCallMethod("visualize_all",
+                         .fresh_param(visualize_all()))
           })
 #' @importFrom grid grid.newpage
 #' @importFrom grid viewport

@@ -4,26 +4,17 @@
 #' @exportMethod filter_structure
 setMethod("filter_structure", 
           signature = setMissing("filter_structure",
-                                 x = "mcnebula"),
-          function(x){
-            filter_structure(x, fun_filter = .rank_by_csi.score,
-                             by_reference = F)
+                                 x = "missing"),
+          function(){
+            list(fun_filter = .rank_by_csi.score,
+                 by_reference = F
+            )
           })
 setMethod("filter_structure", 
-          signature = setMissing("filter_structure",
-                                 x = "mcnebula",
-                                 by_reference = "logical"),
-          function(x, by_reference){
-            filter_structure(x, fun_filter = .rank_by_csi.score,
-                             by_reference = by_reference)
-          })
-setMethod("filter_structure", 
-          signature = setMissing("filter_structure",
-                                 x = "mcnebula",
-                                 fun_filter = "function"),
-          function(x, fun_filter, ...){
-            filter_structure(x, fun_filter = fun_filter, ...,
-                             by_reference = F)
+          signature = c(x = "mcnebula"),
+          function(x, fun_filter, ..., by_reference){
+            reCallMethod("filter_structure",
+                         .fresh_param(filter_structure()), ...)
           })
 setMethod("filter_structure", 
           signature = setMissing("filter_structure",

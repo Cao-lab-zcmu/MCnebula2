@@ -4,29 +4,17 @@
 #' @exportMethod filter_ppcp
 setMethod("filter_ppcp", 
           signature = setMissing("filter_ppcp",
-                                 x = "mcnebula"),
-          function(x, ...){
-            filter_ppcp(x, .filter_ppcp_by_threashold, ..., by_reference = T)
+                                 x = "missing"),
+          function(){
+            list(fun_filter = .filter_ppcp_by_threashold,
+                 by_reference = T
+            )
           })
 setMethod("filter_ppcp", 
-          signature = setMissing("filter_ppcp",
-                                 x = "mcnebula", fun_filter = "function"),
-          function(x, fun_filter, ...){
-            filter_ppcp(x, fun_filter, ..., by_reference = T)
-          })
-setMethod("filter_ppcp", 
-          signature = setMissing("filter_ppcp",
-                                 x = "mcnebula",
-                                 by_reference = "logical"),
-          function(x, ..., by_reference){
-            filter_ppcp(x, .filter_ppcp_by_threashold, ..., by_reference)
-          })
-setMethod("filter_ppcp", 
-          signature = setMissing("filter_ppcp",
-                                 x = "mcnebula",
-                                 by_reference = "logical"),
-          function(x, by_reference){
-            filter_ppcp(x, .filter_ppcp_by_threashold, by_reference = by_reference)
+          signature = c(x = "mcnebula"),
+          function(x, fun_filter, ..., by_reference){
+            reCallMethod("filter_ppcp",
+                         .fresh_param(filter_ppcp()), ...)
           })
 setMethod("filter_ppcp", 
           signature = setMissing("filter_ppcp",

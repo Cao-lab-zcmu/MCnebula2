@@ -15,6 +15,40 @@ setMissing <-
     names(res) <- sig
     return(res)
   }
+reCallMethod <- 
+  function(funName, args, ...){
+    arg.order <- unname(getGeneric(funName)@signature)
+    args.missing <- !arg.order %in% names(args)
+    if (any(args.missing)) {
+      args.missing <- arg.order[args.missing]
+      args.missing <- sapply(args.missing, simplify = F,
+                             function(x) structure(0L, class = "missing"))
+      args <- c(args, args.missing)
+    }
+    args <- lapply(arg.order, function(i) args[[i]])
+    sig <- get_signature(args)
+    method <- selectMethod(funName, sig)
+    last_fun <- sys.function(1)
+    n <- 0
+    while (identical(last_fun, method@.Data, ignore.environment = T)) {
+      if (n == 0) {
+        mlist <- getMethodsForDispatch(getGeneric(funName))
+      }
+      n <- n + 1
+      rm(paste0(method@defined, collapse = "#"), envir = mlist)
+      method <- selectMethod(funName, sig, mlist = mlist)
+    }
+    expr <- paste0("method@.Data(",
+                   paste0(paste0(arg.order, " = args[[",
+                                 1:length(arg.order), "]]"),
+                          collapse = ", "),
+                   ", ...)")
+    eval(parse(text = expr))
+  }
+get_signature <- 
+  function(args){
+    vapply(args, function(arg) class(arg)[1], FUN.VALUE = "ch")
+  }
 match_methods <- 
   function(name, classes){
     methods <- showMethods(classes = classes, printTo = FALSE)

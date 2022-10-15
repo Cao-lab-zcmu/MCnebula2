@@ -19,8 +19,8 @@ setMethod("binary_comparison",
             } else if (missing(contrasts)) {
               contrasts <- as.character(substitute(list(...)))[-1]
             }
-            do.call(binary_comparison,
-                    .fresh_param(binary_comparison()))
+            reCallMethod("binary_comparison",
+                         .fresh_param(binary_comparison()))
           })
 setMethod("binary_comparison", 
           signature = c(x = "ANY", formula = "formula",

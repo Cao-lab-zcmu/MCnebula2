@@ -14,8 +14,8 @@ setMethod("create_stardust_classes",
           signature = c(x = "mcnebula"),
           function(x, pp.threashold, hierarchy_priority,
                    position_isomerism, inherit_dataset){
-            do.call(create_stardust_classes,
-                    .fresh_param(create_stardust_classes()))
+            reCallMethod("create_stardust_classes",
+                         .fresh_param(create_stardust_classes()))
           })
 setMethod("create_stardust_classes", 
           signature = c(x = "mcnebula",
