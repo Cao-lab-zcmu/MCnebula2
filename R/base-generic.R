@@ -230,6 +230,18 @@ setGeneric("command_args",
 setGeneric("command_args<-", 
            function(x, value) standardGeneric("command_args<-"))
 ## ---------------------------------------------------------------------- 
+## class-code_block
+setGeneric("code_block", 
+           function(x) standardGeneric("code_block"))
+setGeneric("code_block<-", 
+           function(x, value) standardGeneric("code_block<-"))
+## ------------------------------------- 
+setGeneric("codes", 
+           function(x) standardGeneric("codes"))
+setGeneric("codes<-", 
+           function(x, value) standardGeneric("codes<-"))
+## ---------------------------------------------------------------------- 
+## class-ggset
 setGeneric("ggset", 
            function(x) standardGeneric("ggset"))
 setGeneric("ggset<-", 
@@ -239,6 +251,25 @@ setGeneric("layers",
            function(x) standardGeneric("layers"))
 setGeneric("layers<-", 
            function(x, value) standardGeneric("layers<-"))
+## ---------------------------------------------------------------------- 
+## class-section
+setGeneric("section", 
+           function(x) standardGeneric("section"))
+setGeneric("section<-", 
+           function(x, value) standardGeneric("section<-"))
+setGeneric("heading", 
+           function(x) standardGeneric("heading"))
+setGeneric("heading<-", 
+           function(x, value) standardGeneric("heading<-"))
+## ------------------------------------- 
+setGeneric("level", 
+           function(x) standardGeneric("level"))
+setGeneric("level<-", 
+           function(x, value) standardGeneric("level<-"))
+setGeneric("paragraph", 
+           function(x) standardGeneric("paragraph"))
+setGeneric("paragraph<-", 
+           function(x, value) standardGeneric("paragraph<-"))
 ## ---------------------------------------------------------------------- 
 ## class-VIRTUAL
 setGeneric("subscript", 
@@ -289,3 +320,8 @@ setGeneric("top_table",
 setGeneric("top_table<-", 
            function(x, value) standardGeneric("top_table<-"))
 ## ------------------------------------- 
+## class-report
+setGeneric("yaml", 
+           function(x) standardGeneric("yaml"))
+setGeneric("yaml<-", 
+           function(x, value) standardGeneric("yaml<-"))

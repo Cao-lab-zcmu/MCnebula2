@@ -28,14 +28,14 @@ reCallMethod <-
     args <- lapply(arg.order, function(i) args[[i]])
     sig <- get_signature(args)
     method <- selectMethod(funName, sig)
-    last_fun <- sys.function(1)
+    last_fun <- sys.function(sys.parent())
     n <- 0
     while (identical(last_fun, method@.Data, ignore.environment = T)) {
       if (n == 0) {
         mlist <- getMethodsForDispatch(getGeneric(funName))
       }
       n <- n + 1
-      rm(paste0(method@defined, collapse = "#"), envir = mlist)
+      rm(list = paste0(method@defined, collapse = "#"), envir = mlist)
       method <- selectMethod(funName, sig, mlist = mlist)
     }
     expr <- paste0("method@.Data(",
@@ -105,14 +105,15 @@ mapply_rename_col <-
               cat("\n\n")
            })
   }
-## ------------------------------------- 
+# # ------------------------------------- 
+#' @importFrom crayon silver
 .message_info <- 
   function(main, sub, arg = NULL, sig = "##"){
-    message(sig, " ", main, ": ", sub, " ", arg)
+    message(crayon::silver(sig, " ", main, ": ", sub, " ", arg))
   }
 .message_info_formal <- 
   function(main, sub, arg = NULL, sig = "[INFO]"){
-    message(sig, " ", main, ": ", sub, " ", arg)
+    message(crayon::silver(sig, " ", main, ": ", sub, " ", arg))
   }
 #' @importFrom grid current.viewport
 .message_info_viewport <- 
@@ -331,10 +332,14 @@ group_strings <-
     if (missing(args))
       args <- as.list(parent.frame())
     args <- args[ !vapply(args, is.name, T) ]
-    for (i in names(args)) {
-      default[[i]] <- args[[i]]
-    }
-    default
+    sapply(unique(c(names(default), names(args))),
+           simplify = F,
+           function(name){
+             if (any(name == names(args)))
+               args[[ name ]]
+             else
+               default[[ name ]]
+           })
   }
 ## ---------------------------------------------------------------------- 
 #' @importFrom grImport2 readPicture

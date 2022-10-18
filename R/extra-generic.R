@@ -109,9 +109,30 @@ setGeneric("new_command",
                          "character" = "name"),
            function(fun, ..., name)
              standardGeneric("new_command"))
+## ---------------------------------------------------------------------- 
+setGeneric("new_block", 
+           signature = c(character = "language", "character" = "codes",
+                         "list" = "args", "logical" = "prettey",
+                         "function" = "fun_prettey"),
+           function(language, codes, args, prettey, fun_prettey)
+             standardGeneric("new_block"))
+setGeneric("new_block_table", 
+           signature = c(character = "name"),
+           function(name, ...)
+             standardGeneric("new_block_table"))
+setGeneric("new_block_figure", 
+           signature = c(character = "name"),
+           function(name, caption, ...)
+             standardGeneric("new_block_figure"))
 setGeneric("call_command", 
            function(x) standardGeneric("call_command"))
 ## ------------------------------------- 
+setGeneric("new_section", 
+           signature = c(character = "heading", "numeric" = "level",
+                         "character" = "paragraph", "ANY" = "code_block"),
+           function(heading, level, paragraph, code_block)
+             standardGeneric("new_section"))
+## ---------------------------------------------------------------------- 
 setGeneric("new_ggset",
            function(...) standardGeneric("new_ggset"))
 setGeneric("show_layers", 
