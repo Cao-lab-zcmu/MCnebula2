@@ -193,6 +193,18 @@ mapply_rename_col <-
       dir.create(path, recursive = T)
     }
   }
+validate_class_in_list <- 
+  function(lst, recepts, tip){
+    check <- 
+      lapply(lst, function(layer) {
+               check <- lapply(recepts, function(class) {
+                                 if (is(layer, class)) T })
+               if (any(unlist(check))) T else F
+           })
+    if (any(!unlist(check)))
+      stop(tip)
+    else T
+  }
 .suggest_bio_package <- 
   function(pkg){
     if (!requireNamespace(pkg, quietly = T))

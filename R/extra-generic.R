@@ -132,23 +132,26 @@ setGeneric("new_section",
                          "character" = "paragraph", "ANY" = "code_block"),
            function(heading, level, paragraph, code_block)
              standardGeneric("new_section"))
+setGeneric("new_report", 
+           function(..., yaml)
+             standardGeneric("new_report"))
 ## ---------------------------------------------------------------------- 
 setGeneric("new_ggset",
            function(...) standardGeneric("new_ggset"))
 setGeneric("show_layers", 
            function(x) standardGeneric("show_layers"))
 setGeneric("mutate_layer", 
-           signature = c(ggset = "x", "ANY" = "layer"),
+           signature = c(ANY = "x", "ANY" = "layer"),
            function(x, layer, ...)
              standardGeneric("mutate_layer"))
 setGeneric("add_layers", 
-           signature = c(ggset = "x"),
+           signature = c(ANY = "x"),
            function(x, ...) standardGeneric("add_layers"))
 setGeneric("delete_layers", 
-           signature = c(ggset = "x", "numeric" = "layers"),
+           signature = c(ANY = "x", "numeric" = "layers"),
            function(x, layers) standardGeneric("delete_layers"))
 setGeneric("move_layers",
-           signature = c(ggset = "x", "numeric" = "from", "numeric" = "to"),
+           signature = c(ANY = "x", "numeric" = "from", "numeric" = "to"),
            function(x, from, to)
              standardGeneric("move_layers"))
 ## ------------------------------------- 

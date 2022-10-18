@@ -25,14 +25,12 @@ setValidity("project_conformation",
                                } else {
                                  if ( is.character( names(slot) ))
                                    TRUE
-                                 else
-                                   FALSE
+                                 else FALSE
                                }
                              })
               if (any(!check))
                 "the colnames not matched."
-              else
-                TRUE
+              else TRUE
             })
 # ==========================================================================
 # method

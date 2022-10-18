@@ -42,6 +42,13 @@ setClass("export",
                           ),
          prototype = NULL
          )
+setClass("layerSet", 
+         contains = character(),
+         representation = 
+           representation("VIRTUAL",
+                          layers = "list"),
+         prototype = NULL
+         )
 # ==========================================================================
 # validate
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -110,3 +117,69 @@ setReplaceMethod("export_path",
                  function(x, value){
                    initialize(x, export_path = value)
                  })
+## ---------------------------------------------------------------------- 
+setMethod("layers", 
+          signature = c(x = "layerSet"),
+          function(x){ x@layers })
+setReplaceMethod("layers", 
+                 signature = c(x = "layerSet"),
+                 function(x, value){
+                   initialize(x, layers = value)
+                 })
+## ------------------------------------- 
+setMethod("show", 
+          signature = c(object = "layerSet"),
+          function(object){
+            show_layers(object)
+          })
+setMethod("mutate_layer", 
+          signature = c(x = "layerSet",
+                        layer = "numeric"),
+          function(x, layer, ...){
+            args <- list(...)
+            command <- layers(x)[[ layer ]]
+            old <- command_args(command)
+            if (length(old) > 0) {
+              args <- list_unique_by_names(c(args, old))
+            }
+            layers(x)[[ layer ]] <- 
+              do.call(new_command,
+                      c(command_function(command), args,
+                        name = command_name(command)))
+            return(x)
+          })
+## ------------------------------------- 
+setMethod("mutate_layer", 
+          signature = c(x = "ANY", layer = "character"),
+          function(x, layer, ...){
+            seq <- which(names(layers(x)) == layer)
+            if (length(seq) == 0) {
+              stop( paste0("'", layer, "' not found") )
+            } else if (length(seq) > 1) {
+              stop(paste0("multiple layers of '", layer, "' were found"))
+            } else {
+              x <- mutate_layer(x, seq, ...)
+            }
+            return(x)
+          })
+## ------------------------------------- 
+setMethod("add_layers", 
+          signature = c(x = "layerSet"),
+          function(x, ...){
+            args <- list(...)
+            names(args) <- vapply(args, command_name, "ch")
+            layers(x) <- c(layers(x), args)
+            return(x)
+          })
+setMethod("delete_layers", 
+          signature = c(x = "layerSet", layers = "numeric"),
+          function(x, layers){
+            layers(x)[layers] <- NULL
+            return(x)
+          })
+setMethod("move_layers", 
+          signature = c(x = "layerSet", from = "numeric", to = "numeric"),
+          function(x, from, to){
+            layers(x)[c(from, to)] <- layers(x)[c(to, from)]
+            return(x)
+          })

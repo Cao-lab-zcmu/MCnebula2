@@ -6,12 +6,12 @@
   setClass("code_block", 
            contains = c("command"),
            representation = 
-             representation(codes = "character"
-                            ),
-           prototype = prototype(command_name = "r",
-                                 command_function = .write_block,
-                                 command_args = .args_r_block(),
-                                 codes = "## codes"
+             representation(codes = "character"),
+           prototype =
+             prototype(command_name = "r",
+                       command_function = .write_block,
+                       command_args = .args_r_block(),
+                       codes = "## codes"
            )
   )
 .code_block_table <- 
