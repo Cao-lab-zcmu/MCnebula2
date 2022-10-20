@@ -132,37 +132,6 @@ setMethod("show",
           function(object){
             show_layers(object)
           })
-setMethod("mutate_layer", 
-          signature = c(x = "layerSet",
-                        layer = "numeric"),
-          function(x, layer, ...){
-            args <- list(...)
-            command <- layers(x)[[ layer ]]
-            old <- command_args(command)
-            if (length(old) > 0) {
-              args <- list_unique_by_names(c(args, old))
-            }
-            layers(x)[[ layer ]] <- 
-              do.call(new_command,
-                      c(command_function(command), args,
-                        name = command_name(command)))
-            return(x)
-          })
-## ------------------------------------- 
-setMethod("mutate_layer", 
-          signature = c(x = "ANY", layer = "character"),
-          function(x, layer, ...){
-            seq <- which(names(layers(x)) == layer)
-            if (length(seq) == 0) {
-              stop( paste0("'", layer, "' not found") )
-            } else if (length(seq) > 1) {
-              stop(paste0("multiple layers of '", layer, "' were found"))
-            } else {
-              x <- mutate_layer(x, seq, ...)
-            }
-            return(x)
-          })
-## ------------------------------------- 
 setMethod("add_layers", 
           signature = c(x = "layerSet"),
           function(x, ...){

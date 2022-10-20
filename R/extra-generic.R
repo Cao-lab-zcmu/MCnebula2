@@ -103,30 +103,46 @@ setGeneric("filter_msframe",
            signature = c(msframe = "x", "function" = "fun_filter",
                          "formula" = "f"),
            function(x, fun_filter, f, ...) standardGeneric("filter_msframe"))
-## ---------------------------------------------------------------------- 
+
+# ==========================================================================
+# for report and ggset
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 setGeneric("new_command", 
            signature = c("function" = "fun",
                          "character" = "name"),
            function(fun, ..., name)
              standardGeneric("new_command"))
+setGeneric("call_command", 
+           function(x) standardGeneric("call_command"))
 ## ---------------------------------------------------------------------- 
-setGeneric("new_block", 
+setGeneric("new_code_block", 
            signature = c(character = "language", "character" = "codes",
                          "list" = "args", "logical" = "prettey",
                          "function" = "fun_prettey"),
            function(language, codes, args, prettey, fun_prettey)
-             standardGeneric("new_block"))
-setGeneric("new_block_table", 
+             standardGeneric("new_code_block"))
+setGeneric("new_code_block_table", 
            signature = c(character = "name"),
            function(name, ...)
-             standardGeneric("new_block_table"))
-setGeneric("new_block_figure", 
+             standardGeneric("new_code_block_table"))
+setGeneric("new_code_block_figure", 
            signature = c(character = "name"),
            function(name, caption, ...)
-             standardGeneric("new_block_figure"))
-setGeneric("call_command", 
-           function(x) standardGeneric("call_command"))
+             standardGeneric("new_code_block_figure"))
+setGeneric("include_table", 
+           function(data, name, caption)
+             standardGeneric("include_table"))
+setGeneric("include_figure", 
+           function(file, name, caption)
+             standardGeneric("include_figure"))
+setGeneric("history_rblock", 
+           function(nrow, pattern_start, pattern_end, exclude)
+             standardGeneric("history_rblock"))
 ## ------------------------------------- 
+setGeneric("new_heading", 
+           function(heading, level)
+             standardGeneric("new_heading"))
 setGeneric("new_section", 
            signature = c(character = "heading", "numeric" = "level",
                          "character" = "paragraph", "ANY" = "code_block"),
@@ -140,10 +156,6 @@ setGeneric("new_ggset",
            function(...) standardGeneric("new_ggset"))
 setGeneric("show_layers", 
            function(x) standardGeneric("show_layers"))
-setGeneric("mutate_layer", 
-           signature = c(ANY = "x", "ANY" = "layer"),
-           function(x, layer, ...)
-             standardGeneric("mutate_layer"))
 setGeneric("add_layers", 
            signature = c(ANY = "x"),
            function(x, ...) standardGeneric("add_layers"))
@@ -154,4 +166,8 @@ setGeneric("move_layers",
            signature = c(ANY = "x", "numeric" = "from", "numeric" = "to"),
            function(x, from, to)
              standardGeneric("move_layers"))
+setGeneric("mutate_layer", 
+           signature = c(ANY = "x", "ANY" = "layer"),
+           function(x, layer, ...)
+             standardGeneric("mutate_layer"))
 ## ------------------------------------- 

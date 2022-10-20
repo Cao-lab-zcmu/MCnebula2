@@ -55,7 +55,6 @@ setMethod("show",
           signature = c(object = "code_block"),
           function(object){
             content <- call_command(object)
-            content <- strsplit(content, split = "\n")[[1]]
             content <- lapply(content,
                             function(text){
                               if (grepl("#\\s*#", text))
@@ -122,8 +121,8 @@ setReplaceMethod("codes",
                    initialize(x, codes = value)
                  })
 ## ------------------------------------- 
-setMethod("new_block", 
-          signature = setMissing("new_block",
+setMethod("new_code_block", 
+          signature = setMissing("new_code_block",
                                  x = "missing"),
           function(){
             list(language = "r",
@@ -133,12 +132,12 @@ setMethod("new_block",
                  fun_prettey = styler::style_text
             )
           })
-setMethod("new_block", 
+setMethod("new_code_block", 
           signature = c(language = "ANY"),
           function(language, codes, args, prettey, fun_prettey){
-            reCallMethod("new_block", .fresh_param(new_block()))
+            reCallMethod("new_code_block", .fresh_param(new_code_block()))
           })
-setMethod("new_block", 
+setMethod("new_code_block", 
           signature = c(language = "character", codes = "character",
                         args = "list", prettey = "logical",
                         fun_prettey = "function"),
@@ -151,20 +150,20 @@ setMethod("new_block",
             .code_block(command_name = language, codes = codes,
                         command_args = args)
           })
-setMethod("new_block_figure", 
+setMethod("new_code_block_figure", 
           signature = c(name = "character"),
           function(name, caption, ...){
-            args <- .fresh_param(new_block(), list(...))
+            args <- .fresh_param(new_code_block(), list(...))
             args$args$fig.cap <- caption
             args$language <- paste0("r ", name)
-            as(do.call(new_block, args), "code_block_figure")
+            as(do.call(new_code_block, args), "code_block_figure")
           })
-setMethod("new_block_table", 
+setMethod("new_code_block_table", 
           signature = c(name = "character"),
           function(name, ...){
-            args <- .fresh_param(new_block(), list(...))
+            args <- .fresh_param(new_code_block(), list(...))
             args$language <- paste0("r ", name)
-            as(do.call(new_block, args), "code_block_table")
+            as(do.call(new_code_block, args), "code_block_table")
           })
 ## ------------------------------------- 
 setMethod("call_command", 
@@ -192,6 +191,12 @@ setReplaceMethod("level",
                  function(x, value){
                    initialize(x, level = value)
                  })
+setMethod("new_heading", 
+          signature = c(heading = "character",
+                        level = "numeric"),
+          function(heading, level){
+            .heading(heading, level = level)
+          })
 setMethod("call_command", 
           signature = c(x = "heading"),
           function(x){
@@ -226,7 +231,7 @@ setMethod("new_section",
           })
 setMethod("new_section", 
           signature = c(heading = "character", level = "numeric",
-                        paragraph = "character", code_block = "code_block"),
+                        paragraph = "character"),
           function(heading, level, paragraph, code_block){
             .section(heading = .heading(heading, level = level),
                      paragraph = paragraph, code_block = code_block)
@@ -240,9 +245,9 @@ setMethod("new_section",
 setMethod("call_command", 
           signature = c(x = "section"),
           function(x){
-            c(call_command(heading(x)),
-              paragraph(x),
-              call_command(code_block(x))
+            .part(call_command(heading(x)),
+                  paragraph(x),
+                  call_command(code_block(x))
             )
           })
 ## ---------------------------------------------------------------------- 

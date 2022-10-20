@@ -11,6 +11,13 @@
                  stop("the args for r block must contain parameter names, ",
                       "e.g., 'eval = FALSE', 'echo = TRUE'")
              })
+      args <- lapply(args,
+                     function(arg) {
+                       if (is.character(arg))
+                         paste0("'", arg, "'")
+                       else
+                         arg
+                     })
       args <- paste0(paste0(names(args), " = ", args),
                      collapse = ", ")
       leader <- paste0("```{", command_name, ", ", args, "}")
@@ -18,9 +25,7 @@
       leader <- paste0("```{", command_name, "}")
     }
     end <- "```"
-    if (length(codes) > 1)
-      codes <- paste0(codes, collapse = "\n")
-    paste(leader, codes, end, sep = "\n")
+    c(leader, codes, end)
   }
 .args_r_block <-
   function(){
@@ -80,4 +85,42 @@ get_ref <-
 .text_fold <- 
   function(text, width = 200, ellipsis = crayon::silver("...(fold)")){
     stringr::str_trunc(text, width = width, ellipsis = ellipsis)
+  }
+.part <-
+  function(...){
+    args <- list(...)
+    unlist(lapply(args,
+                  function(obj) {
+                    if (!is.null(obj))
+                      c(obj, "")
+                  }))
+  }
+get_history <- 
+  function(exclude = 0){
+    file1 <- tempfile("Rrawhist")
+    savehistory(file1)
+    rawhist <- readLines(file1)
+    unlink(file1)
+    if (exclude > 0) {
+      exclude <- (length(rawhist) - exclude + 1):length(rawhist)
+      rawhist <- rawhist[-exclude]
+    }
+    rawhist
+  }
+document_mc_workflow <- 
+  function(x){
+    if (x == "abstract") {
+      obj <- new_section("Abstract", 1,
+                         MCnebula2_documents$abstract, NULL)
+    }
+    if (x == "introduction") {
+      obj <- new_section("Introduction", 1,
+                         MCnebula2_documents$introduction, NULL)
+    }
+    if (x == "setup") {
+      codes <- "library(MCnebula2)"
+      obj <- new_section("Set-up", 1, MCnebula2_documents$setup,
+                         new_code_block(codes = codes))
+    }
+    obj
   }

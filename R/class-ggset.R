@@ -52,6 +52,36 @@ setMethod("new_ggset",
             names(args) <- vapply(args, command_name, "ch")
             new("ggset", layers = args)
           })
+setMethod("mutate_layer", 
+          signature = c(x = "ggset",
+                        layer = "numeric"),
+          function(x, layer, ...){
+            args <- list(...)
+            command <- layers(x)[[ layer ]]
+            old <- command_args(command)
+            if (length(old) > 0) {
+              args <- list_unique_by_names(c(args, old))
+            }
+            layers(x)[[ layer ]] <- 
+              do.call(new_command,
+                      c(command_function(command), args,
+                        name = command_name(command)))
+            return(x)
+          })
+## ------------------------------------- 
+setMethod("mutate_layer", 
+          signature = c(x = "ANY", layer = "character"),
+          function(x, layer, ...){
+            seq <- which(names(layers(x)) == layer)
+            if (length(seq) == 0) {
+              stop( paste0("'", layer, "' not found") )
+            } else if (length(seq) > 1) {
+              stop(paste0("multiple layers of '", layer, "' were found"))
+            } else {
+              x <- mutate_layer(x, seq, ...)
+            }
+            return(x)
+          })
 ## ------------------------------------- 
 setMethod("call_command", 
           signature = c(x = "ggset"),

@@ -27,7 +27,7 @@ setValidity("report",
 setMethod("show_layers", 
           signature = c(x = "report"),
           function(x){
-            text <- strsplit(yaml(x), split = "\n")[[1]]
+            text <- yaml(x)
             textSh(crayon::blue$bold(text[1]), exdent = 0)
             lapply(c(head(as.list(crayon::cyan(text[-1])), n = 4),
                      crayon::silver("...")),
@@ -35,7 +35,12 @@ setMethod("show_layers",
                      textSh(text, pre_trunc = T, trunc_width = 60,
                             ending = "")
                    })
-            lapply(layers(x), show)
+            cat(crayon::silver("layers of", length(layers(x)), "\n\n"))
+            lapply(1:length(layers(x)),
+                   function(seq) {
+                     cat(crayon::silver("+++ layer", seq, "+++\n"))
+                     show(layers(x)[[ seq ]])
+                   })
           })
 setMethod("yaml", 
           signature = c(x = "ANY"),
@@ -60,4 +65,11 @@ setMethod("new_report",
           signature = c(yaml = "character"),
           function(..., yaml){
             .report(yaml = yaml, layers = list(...))
+          })
+setMethod("call_command", 
+          signature = c(x = "report"),
+          function(x){
+            yaml <- c("---", yaml(x), "---")
+            layers <- unlist(lapply(layers(x), call_command))
+            c(yaml, "", layers)
           })

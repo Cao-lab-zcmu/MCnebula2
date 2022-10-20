@@ -15,7 +15,8 @@ setMethod("create_nebula_index",
             if (!force) {
               class_num <- length(unique(stardust_classes(x)[[ "rel.index" ]]))
               if (class_num > 120)
-                stop("too many classes; length(unique(stardust_classes(x)$rel.index)) > 120")
+                stop("too many classes; ",
+                     "length(unique(stardust_classes(x)$rel.index)) > 120")
             }
             reference(mcn_dataset(x))[[ "nebula_index" ]] <- 
               dplyr::select(stardust_classes(x), rel.index, class.name,

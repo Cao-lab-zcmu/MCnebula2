@@ -1,0 +1,6 @@
+title: "MCnebula2 workflow for LC-MS/MS dataset analysis"
+bibliography: '`r system.file("extdata", "library.bib", package = "MCnebula2")`'
+csl: '`r system.file("extdata", "vancouver.csl", package = "MCnebula2")`'
+output:
+  BiocStyle::html_document:
+    fig_caption: true

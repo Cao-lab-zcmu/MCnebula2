@@ -193,6 +193,12 @@ mapply_rename_col <-
       dir.create(path, recursive = T)
     }
   }
+.check_file <- 
+  function(file){
+    if (!file.exists(file)) {
+      stop("file.exists(file) == F, `file` not exists.")
+    }
+  }
 validate_class_in_list <- 
   function(lst, recepts, tip){
     check <- 
