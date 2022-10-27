@@ -2,19 +2,53 @@
 # for creating parent layout, these layouts includes:
 # layouts for nodes position of ggraph.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod create_parent_layout
+#' @description \code{create_parent_layout()}: get the default parameters for the method
+#' \code{create_parent_layout}.
+#' @rdname create_parent_layout-methods
 setMethod("create_parent_layout", 
-          signature = setMissing("create_parent_layout",
-                                 x = "mcnebula",
-                                 ggraph_layout = "character"),
-          function(x, ggraph_layout){
-            create_parent_layout(x, ggraph_layout, seed = 1)
+          signature = setMissing("create_parent_layout"),
+          function(){
+            list(ggraph_layout = "kk", seed = 1)
           })
+#' @exportMethod create_parent_layout
+#' @description \code{create_parent_layout(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{create_parent_layout}.
+#' @rdname create_parent_layout-methods
 setMethod("create_parent_layout", 
-          signature = setMissing("create_parent_layout",
-                                 x = "mcnebula"),
-          function(x){
-            create_parent_layout(x, ggraph_layout = "kk", seed = 1)
+          signature = c(x = "mcnebula"),
+          function(x, ggraph_layout, seed){
+            reCallMethod("create_parent_layout",
+                         .fresh_param(create_parent_layout()))
           })
+#' @exportMethod create_parent_layout
+#'
+#' @aliases create_parent_layout
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param ggraph_layout ...
+#' @param seed ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname create_parent_layout-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' create_parent_layout(...)
+#' }
 setMethod("create_parent_layout", 
           signature = c(x = "mcnebula", ggraph_layout = "character",
                         seed = "numeric"),

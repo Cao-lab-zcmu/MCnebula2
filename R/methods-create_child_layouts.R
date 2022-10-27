@@ -12,6 +12,11 @@
 #' @importFrom dplyr desc
 #' @importFrom dplyr arrange
 #' @importFrom dplyr select
+#' @exportMethod create_child_layouts
+#' @description \code{create_child_layouts()}: get the function for generating
+#' default parameters for the method
+#' \code{create_child_layouts}.
+#' @rdname create_child_layouts-methods
 setMethod("create_child_layouts", 
           signature = setMissing("create_child_layouts",
                                  x = "missing"),
@@ -63,6 +68,40 @@ setMethod("create_child_layouts",
               )
             }
           })
+#' @exportMethod create_child_layouts
+#'
+#' @aliases create_child_layouts
+#'
+#' @title ...
+#'
+#' @description ...
+#' @description \code{create_child_layouts(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{create_child_layouts}.
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param ggraph_layouts ...
+#' @param seeds ...
+#' @param grid_layout ...
+#' @param viewports ...
+#' @param panel_viewport ...
+#' @param legend_viewport ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname create_child_layouts-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' create_child_layouts(...)
+#' }
 setMethod("create_child_layouts", 
           signature = c(x = "mcnebula"),
           function(x, ggraph_layouts, seeds,

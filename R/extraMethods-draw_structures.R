@@ -4,6 +4,7 @@
 #' @importFrom dplyr filter
 #' @importFrom dplyr select
 #' @importFrom tibble as_tibble
+#' @importFrom tibble as_tibble
 setMethod("draw_structures", 
           signature = c(x = "mcnebula", nebula_name = "character"),
           function(x, nebula_name){

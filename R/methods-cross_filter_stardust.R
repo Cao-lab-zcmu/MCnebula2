@@ -1,6 +1,10 @@
 # ==========================================================================
 # across attributes of each other features to filter classes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod cross_filter_stardust
+#' @description \code{cross_filter_stardust()}: get the default parameters for the method
+#' \code{cross_filter_stardust}.
+#' @rdname cross_filter_stardust-methods
 setMethod("cross_filter_stardust", 
           signature = setMissing("cross_filter_stardust",
                                  x = "missing"),
@@ -14,6 +18,23 @@ setMethod("cross_filter_stardust",
                  identical_factor = 0.7
             )
           })
+#' @exportMethod cross_filter_stardust
+#' @title ...
+#' @description \code{cross_filter_stardust(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{cross_filter_stardust}.
+#' @description \code{cross_filter_stardust} include 3 parts: \code{cross_filter_quantity},
+#'
+#' @param x ...
+#' @param min_number ...
+#' @param max_ratio ...
+#' @param types ...
+#' @param cutoff ...
+#' @param tolerance ...
+#' @param hierarchy_range ...
+#' @param identical_factor ...
+#'
+#' \code{cross_filter_score}, \code{cross_filter_identical}.
+#' @rdname cross_filter_stardust-methods
 setMethod("cross_filter_stardust", 
           signature = c(x = "mcnebula"),
           function(x, min_number, max_ratio,
@@ -32,6 +53,24 @@ setMethod("cross_filter_stardust",
               stardust_classes(x)
             return(new_args[[ "x" ]])
           })
+#' @exportMethod cross_filter_quantity
+#'
+#' @aliases cross_filter_quantity
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @rdname cross_filter_stardust-methods
+#'
+#' @examples
+#' \dontrun{
+#' cross_filter_quantity(...)
+#' }
 setMethod("cross_filter_quantity", 
           signature = setMissing("cross_filter_quantity",
                                  x = "mcnebula", min_number = "numeric",
@@ -53,6 +92,26 @@ setMethod("cross_filter_quantity",
               dplyr::as_tibble(data.table::rbindlist(set))
             return(x)
           })
+#' @exportMethod cross_filter_score
+#'
+#' @aliases cross_filter_score
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname cross_filter_stardust-methods
+#'
+#' @examples
+#' \dontrun{
+#' cross_filter_score(...)
+#' }
 setMethod("cross_filter_score", 
           signature = setMissing("cross_filter_score",
                                  x = "mcnebula", types = "character",
@@ -92,6 +151,26 @@ setMethod("cross_filter_score",
               dplyr::as_tibble(data.table::rbindlist(set))
             return(x)
           })
+#' @exportMethod cross_filter_identical
+#'
+#' @aliases cross_filter_identical
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname cross_filter_stardust-methods
+#'
+#' @examples
+#' \dontrun{
+#' cross_filter_identical(...)
+#' }
 setMethod("cross_filter_identical", 
           signature = setMissing("cross_filter_identical",
                                  x = "mcnebula", hierarchy_range = "numeric",

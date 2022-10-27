@@ -1,6 +1,29 @@
 # ==========================================================================
 # set default value for project of MCnebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod initialize_mcnebula
+#'
+#' @aliases initialize_mcnebula
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x [mcnebula-class] object.
+#' @param sirius_version character. e.g., "sirius.v4".
+#' @param sirius_project character. The path of SIRIUS project space.
+#' @param output_directory character. The path for output.
+#'
+#' @return [mcnebula-class] object.
+#'
+#' @rdname initialize_mcnebula-methods
+#'
+#' @examples
+#' \dontrun{
+#' initialize_mcnebula(...)
+#' }
 setMethod("initialize_mcnebula", 
           signature = c(x = "mcnebula",
                         sirius_version = "ANY",
@@ -41,6 +64,29 @@ setMethod("initialize_mcnebula",
             export_name(x) <- .get_export_name()
             return(x)
           })
+#' @exportMethod initialize_mcnebula
+#'
+#' @aliases initialize_mcnebula
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x [melody-class] object.
+#'
+#' @return [melody-class] object.
+#'
+#' @seealso [ggsci::pal_simpsons()], [ggsci::pal_igv()], [ggsci::pal_ucscgb()],
+#' [ggsci::pal_d3()]...
+#'
+#' @rdname initialize_mcnebula-methods
+#'
+#' @examples
+#' \dontrun{
+#' initialize_mcnebula(...)
+#' }
 setMethod("initialize_mcnebula", 
           signature = c(x = "melody"),
           function(x){

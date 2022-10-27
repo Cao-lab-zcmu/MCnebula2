@@ -4,6 +4,9 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @importFrom igraph graph_from_data_frame
 #' @exportMethod create_parent_nebula
+#' @description \code{create_parent_nebula()}: get the default parameters for the method
+#' \code{create_parent_nebula}.
+#' @rdname create_parent_nebula-methods
 setMethod("create_parent_nebula", 
           signature = setMissing("create_parent_nebula",
                                  x = "mcnebula"),
@@ -11,6 +14,10 @@ setMethod("create_parent_nebula",
             create_parent_nebula(x, edge_cutoff = 0.5,
                                  remove_isolate = T)
           })
+#' @exportMethod create_parent_nebula
+#' @description \code{create_parent_nebula(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{create_parent_nebula}.
+#' @rdname create_parent_nebula-methods
 setMethod("create_parent_nebula", 
           signature = setMissing("create_parent_nebula",
                                  x = "mcnebula",
@@ -19,6 +26,34 @@ setMethod("create_parent_nebula",
             create_parent_nebula(x, edge_cutoff = edge_cutoff,
                                  remove_isolate = T)
           })
+#' @exportMethod create_parent_nebula
+#'
+#' @aliases create_parent_nebula
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param edge_cutoff ...
+#' @param remove_isolate ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname create_parent_nebula-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' create_parent_nebula(...)
+#' }
 setMethod("create_parent_nebula", 
           signature = setMissing("create_parent_nebula",
                                  x = "mcnebula",

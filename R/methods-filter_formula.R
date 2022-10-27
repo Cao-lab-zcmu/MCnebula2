@@ -2,6 +2,9 @@
 # collate formula dataset in sirius project and do filtering
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @exportMethod filter_formula
+#' @description \code{filter_formula()}: get the default parameters for the method
+#' \code{filter_formula}.
+#' @rdname filter_formula-methods
 setMethod("filter_formula", 
           signature = setMissing("filter_formula",
                                  x = "missing"),
@@ -10,12 +13,42 @@ setMethod("filter_formula",
                  by_reference = F
             )
           })
+#' @exportMethod filter_formula
+#' @description \code{filter_formula(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{filter_formula}.
+#' @rdname filter_formula-methods
 setMethod("filter_formula", 
           signature = c(x = "mcnebula"),
           function(x, fun_filter, ..., by_reference){
             reCallMethod("filter_formula",
                          .fresh_param(filter_formula()), ...)
           })
+#' @exportMethod filter_formula
+#'
+#' @aliases filter_formula
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param param ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname filter_formula-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' filter_formula(...)
+#' }
 setMethod("filter_formula", 
           signature = setMissing("filter_formula",
                                  x = "mcnebula",

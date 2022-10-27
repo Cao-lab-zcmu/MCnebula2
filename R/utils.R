@@ -106,14 +106,13 @@ mapply_rename_col <-
            })
   }
 # # ------------------------------------- 
-#' @importFrom crayon silver
 .message_info <- 
   function(main, sub, arg = NULL, sig = "##"){
-    message(crayon::silver(sig, " ", main, ": ", sub, " ", arg))
+    message(sig, " ", main, ": ", sub, " ", arg)
   }
 .message_info_formal <- 
   function(main, sub, arg = NULL, sig = "[INFO]"){
-    message(crayon::silver(sig, " ", main, ": ", sub, " ", arg))
+    message(sig, " ", main, ": ", sub, " ", arg)
   }
 #' @importFrom grid current.viewport
 .message_info_viewport <- 

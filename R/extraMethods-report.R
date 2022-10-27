@@ -2,6 +2,30 @@
 # some methods for class 'report', to fast generate layer of 'section' or
 # 'code_block' etc.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod include_figure
+#'
+#' @aliases include_figure
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param file ...
+#' @param name ...
+#' @param caption ...
+#'
+#' @return ...
+#'
+#' @seealso \code{\link{report-class}}, \code{\link{code_block-class}}...
+#'
+#' @rdname include_figure-methods
+#'
+#' @examples
+#' \dontrun{
+#' include_figure(...)
+#' }
 setMethod("include_figure", 
           signature = c(file = "character",
                         name = "character",
@@ -15,6 +39,30 @@ setMethod("include_figure",
                                   codes = codes,
                                   args = args)
           })
+#' @exportMethod include_table
+#'
+#' @aliases include_table
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param data ...
+#' @param name ...
+#' @param caption ...
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname include_table-methods
+#'
+#' @examples
+#' \dontrun{
+#' include_table(...)
+#' }
 setMethod("include_table", 
           signature = c(data = "data.frame",
                         name = "character",
@@ -29,17 +77,54 @@ setMethod("include_table",
                                  codes = codes,
                                  args = args)
           })
+#' @exportMethod history_rblock
+#' @description \code{history_rblock()}: get the default parameters for the method
+#' \code{history_rblock}.
+#' @rdname history_rblock-methods
 setMethod("history_rblock", 
           signature = setMissing("history_rblock"),
           function(){
             list(exclude = 1)
           })
+#' @exportMethod history_rblock
+#' @description \code{history_rblock(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{history_rblock}.
+#' @rdname history_rblock-methods
 setMethod("history_rblock", 
           signature = c(nrow  = "numeric"),
           function(nrow, pattern_start, pattern_end, exclude){
             reCallMethod("history_rblock",
                          .fresh_param(history_rblock()))
           })
+#' @exportMethod history_rblock
+#'
+#' @aliases history_rblock
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param nrow ...
+#' @param pattern_start ...
+#' @param pattern_end ...
+#' @param exclude ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso \code{\link{report-class}}, \code{\link{code_block-class}}...
+#'
+#' @rdname history_rblock-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' history_rblock(...)
+#' }
 setMethod("history_rblock", 
           signature = setMissing("history_rblock",
                                  nrow = "numeric",
@@ -49,6 +134,8 @@ setMethod("history_rblock",
             args <- list(echo = T, eval = F)
             new_code_block(codes = his, args = args)
           })
+#' @exportMethod history_rblock
+#' @rdname history_rblock-methods
 setMethod("history_rblock", 
           signature = setMissing("history_rblock",
                                  pattern_start = "character",

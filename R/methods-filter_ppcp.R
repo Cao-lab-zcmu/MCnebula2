@@ -2,6 +2,9 @@
 # collate ppcp dataset in sirius project and do filtering
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @exportMethod filter_ppcp
+#' @description \code{filter_ppcp()}: get the default parameters for the method
+#' \code{filter_ppcp}.
+#' @rdname filter_ppcp-methods
 setMethod("filter_ppcp", 
           signature = setMissing("filter_ppcp",
                                  x = "missing"),
@@ -10,12 +13,42 @@ setMethod("filter_ppcp",
                  by_reference = T
             )
           })
+#' @exportMethod filter_ppcp
+#' @description \code{filter_ppcp(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{filter_ppcp}.
+#' @rdname filter_ppcp-methods
 setMethod("filter_ppcp", 
           signature = c(x = "mcnebula"),
           function(x, fun_filter, ..., by_reference){
             reCallMethod("filter_ppcp",
                          .fresh_param(filter_ppcp()), ...)
           })
+#' @exportMethod filter_ppcp
+#'
+#' @aliases filter_ppcp
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param param ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname filter_ppcp-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' filter_ppcp(...)
+#' }
 setMethod("filter_ppcp", 
           signature = setMissing("filter_ppcp",
                                  x = "mcnebula", fun_filter = "function",

@@ -5,6 +5,10 @@
 #' @importFrom pbapply pblapply
 #' @importFrom pbapply pbmapply
 #' @exportMethod compute_spectral_similarity
+#' @exportMethod compute_spectral_similarity
+#' @description \code{compute_spectral_similarity()}: get the default parameters for the method
+#' \code{compute_spectral_similarity}.
+#' @rdname compute_spectral_similarity-methods
 setMethod("compute_spectral_similarity", 
           signature = setMissing("compute_spectral_similarity",
                                  x = "missing"),
@@ -13,12 +17,19 @@ setMethod("compute_spectral_similarity",
                  recompute = F
             )
           })
+#' @exportMethod compute_spectral_similarity
+#' @description \code{compute_spectral_similarity(x, ...)}:
+#' use the default parameters whatever 'missing'
+#' while performing the method \code{compute_spectral_similarity}.
+#' @rdname compute_spectral_similarity-methods
 setMethod("compute_spectral_similarity", 
           signature = c(x = "mcnebula"),
           function(x, within_nebula, recompute, sp1, sp2){
             reCallMethod("compute_spectral_similarity",
                          .fresh_param(compute_spectral_similarity()))
           })
+#' @exportMethod compute_spectral_similarity
+#' @rdname compute_spectral_similarity-methods
 setMethod("compute_spectral_similarity", 
           signature = setMissing("compute_spectral_similarity",
                                  sp1 = "lightSpectrum",
@@ -26,6 +37,8 @@ setMethod("compute_spectral_similarity",
           function(sp1, sp2){
             compareSpectra(sp1, sp2)
           })
+#' @exportMethod compute_spectral_similarity
+#' @rdname compute_spectral_similarity-methods
 setMethod("compute_spectral_similarity", 
           signature = setMissing("compute_spectral_similarity",
                                  sp1 = "data.frame",
@@ -46,6 +59,36 @@ setMethod("compute_spectral_similarity",
                        intensity = sp2[[ "intensity" ]])
             compareSpectra(sp1, sp2)
           })
+#' @exportMethod compute_spectral_similarity
+#'
+#' @aliases compute_spectral_similarity
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param within_nebula ...
+#' @param recompute ...
+#' @param sp1 ...
+#' @param sp2 ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname compute_spectral_similarity-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' compute_spectral_similarity(...)
+#' }
 setMethod("compute_spectral_similarity", 
           signature = setMissing("compute_spectral_similarity",
                                  x = "mcnebula",

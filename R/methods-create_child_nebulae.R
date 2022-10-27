@@ -2,26 +2,54 @@
 # use features annotation and spectral similarity data to create network
 # for child-nebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod create_child_nebulae
+#' @description \code{create_child_nebulae()}: get the default parameters for the method
+#' \code{create_child_nebulae}.
+#' @rdname create_child_nebulae-methods
 setMethod("create_child_nebulae", 
-          signature = setMissing("create_child_nebulae",
-                                 x = "mcnebula"),
-          function(x){
-            create_child_nebulae(x, 0.5, 5)
+          signature = setMissing("create_child_nebulae"),
+          function(){
+            list(edge_cutoff = 0.5,
+                 max_edge_number = 5)
           })
+#' @exportMethod create_child_nebulae
+#' @description \code{create_child_nebulae(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{create_child_nebulae}.
+#' @rdname create_child_nebulae-methods
 setMethod("create_child_nebulae", 
-          signature = setMissing("create_child_nebulae",
-                                 x = "mcnebula",
-                                 edge_cutoff = "numeric"),
-          function(x, edge_cutoff){
-            create_child_nebulae(x, edge_cutoff, 5)
+          signature = c(x = "mcnebula"),
+          function(x, edge_cutoff, max_edge_number){
+            reCallMethod("create_child_nebulae",
+                         .fresh_param(create_child_nebulae()))
           })
-setMethod("create_child_nebulae", 
-          signature = setMissing("create_child_nebulae",
-                                 x = "mcnebula",
-                                 max_edge_number = "numeric"),
-          function(x, max_edge_number){
-            create_child_nebulae(x, 0.5, max_edge_number)
-          })
+#' @exportMethod create_child_nebulae
+#'
+#' @aliases create_child_nebulae
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param edge_cutoff ...
+#' @param max_edge_number ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname create_child_nebulae-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' create_child_nebulae(...)
+#' }
 setMethod("create_child_nebulae", 
           signature = setMissing("create_child_nebulae",
                                  x = "mcnebula",

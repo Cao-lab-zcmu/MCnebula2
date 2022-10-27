@@ -2,6 +2,8 @@
 # create features annotation data.frame, involves formula and structure,
 # based on `specific_candidate`
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod create_features_annotation
+#' @rdname create_features_annotation-methods
 setMethod("create_features_annotation", 
           signature = setMissing("create_features_annotation",
                                  x = "mcnebula",
@@ -11,6 +13,8 @@ setMethod("create_features_annotation",
             colnames(extra_data)[column] <- ".features_id"
             create_features_annotation(x, extra_data)
           })
+#' @exportMethod create_features_annotation
+#' @rdname create_features_annotation-methods
 setMethod("create_features_annotation", 
           signature = setMissing("create_features_annotation",
                                  x = "mcnebula",
@@ -25,6 +29,34 @@ setMethod("create_features_annotation",
                     by = ".features_id", all.x = T)
             return(x)
           })
+#' @exportMethod create_features_annotation
+#'
+#' @aliases create_features_annotation
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param extra_data ...
+#' @param column ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname create_features_annotation-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' create_features_annotation(...)
+#' }
 setMethod("create_features_annotation", 
           signature = setMissing("create_features_annotation",
                                  x = "mcnebula"),

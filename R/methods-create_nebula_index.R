@@ -1,12 +1,52 @@
 # ==========================================================================
 # create nebula index from filtered stardust classes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod create_nebula_index
+#' @description \code{create_nebula_index()}: get the default parameters for the method
+#' \code{create_nebula_index}.
+#' @rdname create_nebula_index-methods
 setMethod("create_nebula_index", 
-          signature = setMissing("create_nebula_index",
-                                 x = "mcnebula"),
-          function(x){
-            create_nebula_index(x, force = F)
+          signature = setMissing("create_nebula_index"),
+          function(){
+            list(force = F)
           })
+#' @exportMethod create_nebula_index
+#' @description \code{create_nebula_index(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{create_nebula_index}.
+#' @rdname create_nebula_index-methods
+setMethod("create_nebula_index", 
+          signature = c(x = "mcnebula"),
+          function(x, force){
+            reCallMethod("create_nebula_index",
+                         .fresh_param(create_nebula_index()))
+          })
+#' @exportMethod create_nebula_index
+#'
+#' @aliases create_nebula_index
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param force ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname create_nebula_index-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' create_nebula_index(...)
+#' }
 setMethod("create_nebula_index", 
           signature = c(x = "mcnebula", force = "logical"),
           function(x, force){

@@ -1,6 +1,25 @@
 # ==========================================================================
 # msframe: class based on data.frame
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportClass msframe
+#'
+#' @aliases msframe
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @family subscripts
+#'
+#' @slot entity ...
+#' @slot subscript ...
+#'
+#' @rdname msframe-class
+#'
+#' @examples
+#' \dontrun{
+#' new('msframe', ...)
+#' }
 .msframe <- 
   setClass("msframe", 
            contains = "subscript",
@@ -11,35 +30,71 @@
 # ==========================================================================
 # methods
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod show
+#' @aliases show
+#' @rdname msframe-class
 setMethod("show", 
           signature = c(object = "msframe"),
           function(object){
             cat( "A class of \"msframe\" of", subscript(object), "\n")
           })
+## ------------------------------------- 
+#' @exportMethod msframe
+#' @aliases msframe
+#' @description \code{msframe}, \code{msframe<-}: getter and setter
+#' for the \code{msframe} slot of the object.
+#' @rdname msframe-class
 setMethod("msframe", 
           signature = c(x = "ANY"),
           function(x){ x@msframe })
+#' @exportMethod msframe<-
+#' @aliases msframe<-
+#' @param value The value for the slot.
+#' @rdname msframe-class
 setReplaceMethod("msframe", 
                  signature = c(x = "ANY"),
                  function(x, value){
                    initialize(x, msframe = value)
                  })
 ## ------------------------------------- 
+#' @exportMethod latest
+#' @aliases latest
+#' @description \code{latest}: get data inside \code{entity(object)} and format as
+#' 'tbl'.
+#' @family latests
+#' @seealso [tibble::as_tibble()]
+#' @rdname msframe-class
+#' @examples
+#' \dontrun{
+#' latest(...)
+#' }
 setMethod("latest", 
           signature = c(x = "msframe"),
           function(x){
             tibble::as_tibble(entity(x))
           })
 ## ------------------------------------- 
+#' @exportMethod entity
+#' @aliases entity
+#' @description \code{entity}, \code{entity<-}: getter and setter
+#' for the \code{entity} slot of the object.
+#' @rdname msframe-class
 setMethod("entity", 
           signature = c(x = "msframe"),
           function(x){ x@entity })
+#' @exportMethod entity<-
+#' @aliases entity<-
+#' @param value The value for the slot.
+#' @rdname msframe-class
 setReplaceMethod("entity", 
                  signature = c(x = "msframe"),
                  function(x, value){
                    initialize(x, entity = value)
                  })
 ## ---------------------------------------------------------------------- 
+#' @exportMethod format_msframe
+#' @aliases format_msframe
+#' @rdname msframe-class
 setMethod("format_msframe", 
           signature = setMissing("format_msframe",
                                  x = "msframe",
@@ -48,6 +103,9 @@ setMethod("format_msframe",
             entity(x) <- format_msframe(entity(x), fun_format = fun_format)
             return(x)
           })
+#' @exportMethod format_msframe
+#' @aliases format_msframe
+#' @rdname msframe-class
 setMethod("format_msframe", 
           signature = setMissing("format_msframe",
                                  x = "data.frame",
@@ -60,6 +118,9 @@ setMethod("format_msframe",
             return(x)
           })
 ## ------------------------------------- 
+#' @exportMethod format_msframe
+#' @aliases format_msframe
+#' @rdname msframe-class
 setMethod("format_msframe", 
           signature = setMissing("format_msframe",
                                  x = "msframe",
@@ -72,6 +133,9 @@ setMethod("format_msframe",
               stop( "the `types` is unformat" )
             .format_msframe(x, names, types)
           })
+#' @exportMethod format_msframe
+#' @aliases format_msframe
+#' @rdname msframe-class
 setMethod("format_msframe", 
           signature = setMissing("format_msframe",
                                  x = "msframe"),
@@ -80,6 +144,29 @@ setMethod("format_msframe",
             types <- .get_attribute_type_sirius.v4()
             .format_msframe(x, names, types)
           })
+#' @exportMethod format_msframe
+#'
+#' @aliases format_msframe
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param names ...
+#' @param fun_names ...
+#' @param types ...
+#' @param fun_types ...
+#' @param fun_format ...
+#'
+#' @rdname format_msframe-methods
+#'
+#' @examples
+#' \dontrun{
+#' format_msframe(...)
+#' }
 setMethod("format_msframe", 
           signature = setMissing("format_msframe",
                                  x = "msframe",
@@ -131,6 +218,9 @@ setMethod("format_msframe",
     return(x)
   }
 ## ------------------------------------- 
+#' @exportMethod filter_msframe
+#' @aliases filter_msframe
+#' @rdname msframe-class
 setMethod("filter_msframe", 
           signature = setMissing("filter_msframe",
                                  x = "msframe", fun_filter = "function"),
@@ -138,6 +228,35 @@ setMethod("filter_msframe",
             filter_msframe(x, fun_filter = fun_filter,
                            f = ~ .features_id, ...)
           })
+#' @exportMethod filter_msframe
+#'
+#' @aliases filter_msframe
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param fun_filter ...
+#' @param f ...
+#' @param ... ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname filter_msframe-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' filter_msframe(...)
+#' }
 setMethod("filter_msframe", 
           signature = setMissing("filter_msframe",
                                  x = "msframe", fun_filter = "function",

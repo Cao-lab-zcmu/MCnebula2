@@ -15,23 +15,56 @@
 #' @importFrom data.table fread
 #' @importFrom stringr str_extract
 #' @exportMethod collate_data
+#' @description \code{collate_data()}: get the default parameters for the method
+#' \code{collate_data}.
+#' @rdname collate_data-methods
 setMethod("collate_data", 
-          signature = setMissing("collate_data",
-                                 x = "ANY", subscript = "character"),
-          function(x, subscript){
-            collate_data(x, subscript, .collate_data.msframe)
+          signature = setMissing("collate_data"),
+          function(){
+            list(fun_collate = .collate_data.msframe)
           })
-setMethod("collate_data",
-          signature = setMissing("collate_data",
-                                 x = "ANY",
-                                 subscript = "character"),
-          function(x, subscript, ...){
-            collate_data(x, subscript, .collate_data.msframe, ...)
+#' @exportMethod collate_data
+#' @description \code{collate_data(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{collate_data}.
+#' @rdname collate_data-methods
+setMethod("collate_data", 
+          signature = c(x = "ANY"),
+          function(x, subscript, fun_collate, ...){
+            reCallMethod("collate_data",
+                         .fresh_param(collate_data()), ...)
           })
+#' @exportMethod collate_data
+#'
+#' @aliases collate_data
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param subscript ...
+#' @param fun_collate ...
+#' @param ... ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname collate_data-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' collate_data(...)
+#' }
 setMethod("collate_data", 
           signature = c(x = "ANY", subscript = "character",
-                        fun_collate = "function"
-                        ),
+                        fun_collate = "function"),
           function(x, subscript, fun_collate, ...){
             x <- get_metadata(x, subscript)
             msframe.lst <- extract_rawset(x, subscript, fun_collate, ...)
@@ -52,6 +85,25 @@ setMethod("collate_data",
               subscript = subscript)
   }
 ## ---------------------------------------------------------------------- 
+#' @exportMethod read_data
+#'
+#' @description ...
+#'
+#' @param x ...
+#' @param project_metadata ...
+#' @param subscript ...
+#' @param path ...
+#' @param .features_id ...
+#' @param .candidates_id ...
+#' @param fun_read ...
+#' @param fun_format ...
+#'
+#' @rdname collate_data-methods
+#'
+#' @examples
+#' \dontrun{
+#' read_data(...)
+#' }
 setMethod("read_data", 
           signature = setMissing("read_data",
                                  x = "ANY",
@@ -73,6 +125,8 @@ setMethod("read_data",
                                  .candidates_id = .candidates_id
             )
           })
+#' @exportMethod read_data
+#' @rdname collate_data-methods
 setMethod("read_data", 
           signature = setMissing("read_data",
                        subscript = "character", path = "character",
@@ -97,73 +151,5 @@ setMethod("read_data",
                                       .features_id, .candidates_id)
             msframe <- new("msframe", subscript = subscript, entity = entity)
             fun_format(msframe)
-          })
-setMethod("extract_metadata", 
-          signature = c(x = "ANY", subscript = "character"),
-          function(x, subscript){
-            x <- get_metadata(x, subscript = subscript)
-            path.set <- metadata(project_metadata(x))[[ subscript ]]
-            ## build project_metadata
-            path.set <- list(path.set)
-            names(path.set) <- subscript
-            new("project_metadata", metadata = path.set)
-          })
-## ---------------------------------------------------------------------- 
-setMethod("get_metadata", 
-          signature = c(x = "ANY", subscript = "character"),
-          function(x, subscript){
-            exits_meta <- names( metadata(project_metadata(x)) )
-            if (!subscript %in% exits_meta) {
-              project_metadata(x) <-
-                get_metadata(subscript = subscript,
-                             project_metadata = project_metadata(x),
-                             project_conformation = project_conformation(x),
-                             path = project_path(x)
-                )
-            }
-            return(x)
-          })
-setMethod("get_metadata", 
-          signature = setMissing("get_metadata",
-                                 subscript = "character",
-                                 project_metadata = "project_metadata",
-                                 project_conformation = "project_conformation",
-                                 path = "character"),
-          function(subscript, project_metadata, project_conformation, path){
-            file_name <- file_name(project_conformation)
-            file_api <- file_api(project_conformation)
-            if (!subscript %in% names(file_api) )
-              stop( "`subscript` not descriped in `names(file_api(project_conformation))`" )
-            ## ------------------------------------- 
-            api <- file_api[[ subscript ]]
-            api <- strsplit(api, split = "/")[[1]]
-            ## ------------------------------------- 
-            for (i in 1:length(api)) {
-              sub <- api[i]
-              if ( any(sub == names(metadata(project_metadata))) )
-                next
-              if ( !sub %in% names(file_name) )
-                stop( "`subscript` not descriped in `names(file_name(project_conformation))`" )
-              ## get the name of file, or the function name to get file name
-              target <- file_name[[sub]]
-              ## get the target of filename
-              if ( grepl("^FUN_", target) )
-                target <- match.fun(target)()
-              if ( i == 1 ) {
-                df <- data.frame(files = list.files(path = path, pattern = target))
-              } else {
-                ## get the metadata of upper directory
-                df <- metadata(project_metadata)[[ api[i - 1] ]]
-                upper <- paste0(apply(df, 1, paste0, collapse = "/"))
-                ## ------------------------------------- 
-                .message_info("project_metadata", "get_metadata",
-                          paste0(target, "(", sub, ")"))
-                df <- .list_files(path, upper, target)
-              }
-              lst <- list( df )
-              names(lst) <- sub
-              project_metadata <- add_dataset(project_metadata, lst)
-            }
-            return(project_metadata)
           })
 

@@ -2,6 +2,9 @@
 # collate structure dataset in sirius project and do filtering
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @exportMethod filter_structure
+#' @description \code{filter_structure()}: get the default parameters for the method
+#' \code{filter_structure}.
+#' @rdname filter_structure-methods
 setMethod("filter_structure", 
           signature = setMissing("filter_structure",
                                  x = "missing"),
@@ -10,12 +13,43 @@ setMethod("filter_structure",
                  by_reference = F
             )
           })
+#' @exportMethod filter_structure
+#' @description \code{filter_structure(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{filter_structure}.
+#' @rdname filter_structure-methods
 setMethod("filter_structure", 
           signature = c(x = "mcnebula"),
           function(x, fun_filter, ..., by_reference){
             reCallMethod("filter_structure",
                          .fresh_param(filter_structure()), ...)
           })
+#' @exportMethod filter_structure
+#'
+#' @aliases filter_structure
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x [mcnebula-class] object.
+#' @param fun_filter function. e.g., [dplyr::filter()], [dplyr::slice()] [head()]...
+#' @param ... parameters pass to 'fun_filter'.
+#' @param by_reference ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname filter_structure-methods
+#'
+#' @examples
+#' \dontrun{
+#' filter_structure(...)
+#' }
 setMethod("filter_structure", 
           signature = setMissing("filter_structure",
                                  x = "mcnebula",

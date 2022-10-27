@@ -59,7 +59,7 @@ setMethod("draw_nodes",
             if (is.null(.features_id)) {
               return(x)
             }
-            ggsets <- ggset_vis_nodes(x, .features_id, nodes_color,
+            ggsets <- ggset_activate_nodes(x, .features_id, nodes_color,
                                      add_ppcp, add_ration)
             nodes_ggset(child_nebulae(x)) <-
               c(nodes_ggset(child_nebulae(x)), ggsets)
@@ -139,7 +139,7 @@ setMethod("show_node",
     }
     .message_info_viewport("END")
   }
-ggset_vis_nodes <- 
+ggset_activate_nodes <- 
   function(x, .features_id, nodes_color = "#FFF9F2",
            add_ppcp = T, add_ration = T){
     if (add_ppcp) {

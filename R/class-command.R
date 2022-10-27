@@ -1,6 +1,28 @@
 # ==========================================================================
 # a class to store function and its name and args
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportClass command
+#'
+#' @aliases command
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+# @family commands
+#'
+# @seealso \code{\link{<class>-class}}
+#'
+#' @slot command_name ...
+#' @slot command_function ...
+#' @slot command_args ...
+#'
+#' @rdname command-class
+#'
+#' @examples
+#' \dontrun{
+#' new('command', ...)
+#' }
 .command <- 
   setClass("command", 
            contains = character(),
@@ -14,6 +36,9 @@
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod show
+#' @aliases show
+#' @rdname command-class
 setMethod("show", 
           signature = c(object = "command"),
           function(object){
@@ -27,31 +52,71 @@ setMethod("show",
                          "list()"), "\n")
             }
           })
+#' @exportMethod command_name
+#' @aliases command_name
+#' @description \code{command_name}, \code{command_name<-}: getter and setter
+#' for the \code{command_name} slot of the object.
+#' @rdname command-class
 setMethod("command_name", 
           signature = c(x = "command"),
           function(x){ x@command_name })
+#' @exportMethod command_name<-
+#' @aliases command_name<-
+#' @param value The value for the slot.
+#' @rdname command-class
 setReplaceMethod("command_name", 
                  signature = c(x = "command"),
                  function(x, value){
                    initialize(x, command_name = value)
                  })
+#' @exportMethod command_function
+#' @aliases command_function
+#' @description \code{command_function}, \code{command_function<-}: getter and setter
+#' for the \code{command_function} slot of the object.
+#' @rdname command-class
 setMethod("command_function", 
           signature = c(x = "command"),
           function(x){ x@command_function })
+#' @exportMethod command_function<-
+#' @aliases command_function<-
+#' @param value The value for the slot.
+#' @rdname command-class
 setReplaceMethod("command_function", 
                  signature = c(x = "command"),
                  function(x, value){
                    initialize(x, command_function = value)
                  })
+#' @exportMethod command_args
+#' @aliases command_args
+#' @description \code{command_args}, \code{command_args<-}: getter and setter
+#' for the \code{command_args} slot of the object.
+#' @rdname command-class
 setMethod("command_args", 
           signature = c(x = "command"),
           function(x){ x@command_args })
+#' @exportMethod command_args<-
+#' @aliases command_args<-
+#' @param value The value for the slot.
+#' @rdname command-class
 setReplaceMethod("command_args", 
                  signature = c(x = "command"),
                  function(x, value){
                    initialize(x, command_args = value)
                  })
 ## ---------------------------------------------------------------------- 
+#' @exportMethod new_command
+#' @aliases new_command
+#' @description \code{new_command}: ...
+#' @param fun ...
+#' @param ... ...
+#' @param name ...
+# @family ...s
+# @seealso [fun()]
+#' @rdname command-class
+#' @examples
+#' \dontrun{
+#' new_command(...)
+#' }
 setMethod("new_command", 
           signature = c(fun = "function",
                         name = "character"),
@@ -71,6 +136,9 @@ setMethod("new_command",
                 command_args = args)
           })
 #' @importFrom rlang as_label
+#' @exportMethod new_command
+#' @aliases new_command
+#' @rdname command-class
 setMethod("new_command", 
           signature = setMissing("new_command",
                                  fun = "function"),
@@ -81,6 +149,16 @@ setMethod("new_command",
             }
             new_command(fun, ..., name = name)
           })
+#' @exportMethod call_command
+#' @aliases call_command
+#' @description \code{call_command}: ...
+# @family ...s
+# @seealso [fun()]
+#' @rdname command-class
+#' @examples
+#' \dontrun{
+#' call_command(...)
+#' }
 setMethod("call_command", 
           signature = c(x = "command"),
           function(x){

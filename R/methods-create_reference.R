@@ -1,6 +1,38 @@
 # ==========================================================================
 # create reference data based on mcn_dataset
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod create_reference
+#'
+#' @aliases create_reference
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param from ...
+#' @param subscript ...
+#' @param data ...
+#' @param columns ...
+#' @param fill ...
+#' @param MoreArgs ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname create_reference-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' create_reference(...)
+#' }
 setMethod("create_reference", 
           signature = c(x = "mcnebula", fill = "logical"),
           function(x, from, subscript, data, columns, fill, MoreArgs){
@@ -27,12 +59,16 @@ setMethod("create_reference",
             }
             return(x)
           })
+#' @exportMethod create_reference
+#' @rdname create_reference-methods
 setMethod("create_reference", 
           signature = setMissing("create_reference",
                                  x = "mcnebula"),
           function(x){
             create_reference(x, "structure", fill = T)
           })
+#' @exportMethod create_reference
+#' @rdname create_reference-methods
 setMethod("create_reference", 
           signature = setMissing("create_reference",
                                  x = "mcnebula", from = "character"),
@@ -44,6 +80,8 @@ setMethod("create_reference",
             )
             create_reference(x, subscript = subscript)
           })
+#' @exportMethod create_reference
+#' @rdname create_reference-methods
 setMethod("create_reference", 
           signature = setMissing("create_reference",
                                  x = "mcnebula",
@@ -60,6 +98,8 @@ setMethod("create_reference",
             }
             create_reference(x, data = data)
           })
+#' @exportMethod create_reference
+#' @rdname create_reference-methods
 setMethod("create_reference", 
           signature = setMissing("create_reference",
                                  x = "mcnebula",
@@ -72,6 +112,8 @@ setMethod("create_reference",
               c(".features_id", ".candidates_id")
             create_reference(x, data = data)
           })
+#' @exportMethod create_reference
+#' @rdname create_reference-methods
 setMethod("create_reference", 
           signature = setMissing("create_reference",
                                  x = "mcnebula",
@@ -83,6 +125,8 @@ setMethod("create_reference",
             colnames(data)[columns] <- c(".features_id", ".candidates_id")
             create_reference(x, data = data)
           })
+#' @exportMethod create_reference
+#' @rdname create_reference-methods
 setMethod("create_reference", 
           signature = setMissing("create_reference",
                                  x = "mcnebula",

@@ -1,6 +1,10 @@
 # ==========================================================================
 # filter classification for each features, as stardust classes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod create_stardust_classes
+#' @description \code{create_stardust_classes()}: get the default parameters for the method
+#' \code{create_stardust_classes}.
+#' @rdname create_stardust_classes-methods
 setMethod("create_stardust_classes", 
           signature = setMissing("create_stardust_classes",
                                  x = "missing"),
@@ -10,6 +14,11 @@ setMethod("create_stardust_classes",
                  position_isomerism = T,
                  inherit_dataset = F)
           })
+#' @exportMethod create_stardust_classes
+#' @description \code{create_stardust_classes(x, ...)}:
+#' use the default parameters whatever 'missing'
+#' while performing the method \code{create_stardust_classes}.
+#' @rdname create_stardust_classes-methods
 setMethod("create_stardust_classes", 
           signature = c(x = "mcnebula"),
           function(x, pp.threashold, hierarchy_priority,
@@ -17,6 +26,36 @@ setMethod("create_stardust_classes",
             reCallMethod("create_stardust_classes",
                          .fresh_param(create_stardust_classes()))
           })
+#' @exportMethod create_stardust_classes
+#'
+#' @aliases create_stardust_classes
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param pp.threashold ...
+#' @param hierarchy_priority ...
+#' @param position_isomerism ...
+#' @param inherit_dataset ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [fun()]
+#'
+#' @rdname create_stardust_classes-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' create_stardust_classes(...)
+#' }
 setMethod("create_stardust_classes", 
           signature = c(x = "mcnebula",
                         pp.threashold = "numeric",
