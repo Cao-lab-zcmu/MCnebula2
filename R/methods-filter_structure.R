@@ -42,7 +42,7 @@ setMethod("filter_structure",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname filter_structure-methods
 #'

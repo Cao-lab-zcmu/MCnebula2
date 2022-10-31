@@ -54,6 +54,3 @@
 create_reference(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

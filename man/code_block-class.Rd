@@ -151,7 +151,8 @@ call_command(...)
 \code{\link{command-class}}
 
 Other call_commands: 
-\code{\link{heading-class}},
-\code{\link{report-class}}
+\code{\link{ggset-class}},
+\code{\link{report-class}},
+\code{\link{section-class}}
 }
 \concept{call_commands}

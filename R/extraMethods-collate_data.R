@@ -52,7 +52,7 @@ setMethod("collate_data",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname collate_data-methods
 #'

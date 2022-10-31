@@ -1,6 +1,35 @@
 # ==========================================================================
 # comparation after filtering; add or remove classes for stardust_classes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod backtrack_stardust
+#'
+#' @aliases backtrack_stardust
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param class.name ...
+#' @param rel.index ...
+#' @param remove ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso \code{\link{cross_filter_stardust}}
+#'
+#' @rdname backtrack_stardust-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' backtrack_stardust(...)
+#' }
 setMethod("backtrack_stardust", 
           signature = setMissing("backtrack_stardust",
                                  x = "mcnebula"),
@@ -17,6 +46,16 @@ setMethod("backtrack_stardust",
                         by = "rel.index", all.x = T)
             tibble::as_tibble(df)
           })
+#' @exportMethod backtrack_stardust
+#'
+#' @description ...
+#'
+#' @rdname backtrack_stardust-methods
+#'
+#' @examples
+#' \dontrun{
+#' backtrack_stardust(...)
+#' }
 setMethod("backtrack_stardust", 
           signature = setMissing("backtrack_stardust",
                                  x = "mcnebula",
@@ -30,6 +69,16 @@ setMethod("backtrack_stardust",
                             class.name %in% !!class.name)[[ "rel.index" ]]
             backtrack_stardust(x, rel.index = rel.index, remove = remove)
           })
+#' @exportMethod backtrack_stardust
+#'
+#' @description ...
+#'
+#' @rdname backtrack_stardust-methods
+#'
+#' @examples
+#' \dontrun{
+#' backtrack_stardust(...)
+#' }
 setMethod("backtrack_stardust", 
           signature = setMissing("backtrack_stardust",
                                  x = "mcnebula",

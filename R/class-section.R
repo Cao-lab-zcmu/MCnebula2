@@ -18,6 +18,7 @@
 #' @seealso \code{\link{command-class}}
 #'
 #' @rdname code_block-class
+#' @order 1
 #'
 #' @examples
 #' \dontrun{
@@ -108,6 +109,7 @@
 #' @slot code_block ...
 #'
 #' @rdname section-class
+#' @order 1
 #'
 #' @examples
 #' \dontrun{

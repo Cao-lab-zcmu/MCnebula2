@@ -40,6 +40,3 @@ while performing the method \code{create_parent_layout}.
 create_parent_layout(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

@@ -55,7 +55,7 @@ setMethod("include_figure",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname include_table-methods
 #'

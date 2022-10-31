@@ -89,8 +89,3 @@ cross_filter_score(...)
 cross_filter_identical(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-
-\code{\link[=fun]{fun()}}
-}

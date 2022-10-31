@@ -7,6 +7,13 @@
 #' @importFrom ggsci pal_d3
 .get_color_set <- 
   function(){
+    unique(c(rev(ggsci::pal_d3("category20")(20))[-3],
+             ggsci::pal_simpsons()(16)[-3],
+             ggsci::pal_ucscgb()(6)
+             ))
+  }
+.get_color_col <- 
+  function(){
     unique(c(ggsci::pal_simpsons()(16),
              ggsci::pal_igv("default")(51),
              ggsci::pal_ucscgb()(26),

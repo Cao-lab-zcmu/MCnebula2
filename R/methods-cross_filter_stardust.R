@@ -104,7 +104,7 @@ setMethod("cross_filter_quantity",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname cross_filter_stardust-methods
 #'
@@ -163,7 +163,7 @@ setMethod("cross_filter_score",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname cross_filter_stardust-methods
 #'

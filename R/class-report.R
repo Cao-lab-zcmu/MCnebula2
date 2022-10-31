@@ -10,11 +10,12 @@
 #' @description ...
 #'
 #' @family layerSets
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @slot yaml ...
 #'
 #' @rdname report-class
+#' @order 1
 #'
 #' @examples
 #' \dontrun{

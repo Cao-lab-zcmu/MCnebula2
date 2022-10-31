@@ -1,11 +1,50 @@
 # ==========================================================================
 # collate and build classification hierarchy annotation data
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod create_hierarchy
+#' @description \code{create_hierarchy()}: get the default parameters for the method
+#' \code{create_hierarchy}.
+#' @rdname create_hierarchy-methods
+setMethod("create_hierarchy", 
+          signature = setMissing("create_hierarchy"),
+          function(){
+            list(fun_organize = .build_hierarchy)
+          })
+#' @exportMethod create_hierarchy
+#' @description \code{create_hierarchy(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{create_hierarchy}.
+#' @rdname create_hierarchy-methods
 setMethod("create_hierarchy", 
           signature = c(x = "mcnebula"),
-          function(x){
-            create_hierarchy(x, .build_hierarchy)
+          function(x, fun_organize){
+            reCallMethod("create_hierarchy",
+                         .fresh_param(create_hierarchy()))
           })
+#' @exportMethod create_hierarchy
+#'
+#' @aliases create_hierarchy
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param fun_organize ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @rdname create_hierarchy-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' create_hierarchy(...)
+#' }
 setMethod("create_hierarchy", 
           signature = c(x = "mcnebula", fun_organize = "function"),
           function(x, fun_organize){

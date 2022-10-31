@@ -68,6 +68,3 @@ if(interactive()){
  }
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

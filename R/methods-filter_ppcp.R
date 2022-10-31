@@ -39,7 +39,7 @@ setMethod("filter_ppcp",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname filter_ppcp-methods
 #'

@@ -36,6 +36,3 @@ while performing the method \code{filter_ppcp}.
 filter_ppcp(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

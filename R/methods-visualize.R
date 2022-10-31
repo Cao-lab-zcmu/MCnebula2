@@ -2,10 +2,16 @@
 # extract and visualize 'ggset' in 'mcnebula' object
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @importFrom tibble tibble
+setClassUnion("numeric_or_character", c("numeric", "character"))
+#' @exportMethod visualize
+#' @description \code{visualize(x)}: get a 'tbl' about child-nebulae candidates
+#' for \code{visualize} methods to visualize.
+#' @rdname visualize-methods
 setMethod("visualize", 
           signature = setMissing("visualize",
-                                 x = "mcnebula"),
-          function(x){
+                                 x = "mcnebula",
+                                 fun_modify = "ANY"),
+          function(x, fun_modify){
             .message_info_formal("MCnebula2", "visualize")
             cat("\tSpecify item as following to visualize:\n\n")
             class.name <- names(ggset(child_nebulae(x)))
@@ -16,22 +22,47 @@ setMethod("visualize",
                            class.name = class.name
             )
           })
+#' @exportMethod visualize
+#' @description \code{visualize()}: get the default parameters for the method
+#' \code{visualize}.
+#' @rdname visualize-methods
 setMethod("visualize", 
-          signature = setMissing("visualize",
-                                 x = "mcnebula",
-                                 item = "character"),
-          function(x, item){
-            visualize(x, item = item,
-                      fun_modify = modify_set_labs)
+          signature = setMissing("visualize"),
+          function(){
+            list(fun_modify = modify_set_labs)
           })
+#' @exportMethod visualize
+#' @description \code{visualize(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{visualize}.
+#' @rdname visualize-methods
 setMethod("visualize", 
-          signature = setMissing("visualize",
-                                 x = "mcnebula",
-                                 item = "numeric"),
-          function(x, item){
-            visualize(x, item = item,
-                      fun_modify = modify_set_labs)
+          signature = c(x = "mcnebula"),
+          function(x, item, fun_modify, annotate){
+            reCallMethod("visualize", .fresh_param(visualize()))
           })
+#' @exportMethod visualize
+#'
+#' @aliases visualize
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param item ...
+#' @param fun_modify ...
+#' @param annotate ...
+#'
+#' @rdname visualize-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' visualize(...)
+#' }
 setMethod("visualize", 
           signature = setMissing("visualize",
                                  x = "mcnebula",
@@ -50,6 +81,8 @@ setMethod("visualize",
               }
             }
           })
+#' @exportMethod visualize
+#' @rdname visualize-methods
 setMethod("visualize", 
           signature = setMissing("visualize",
                                  x = "mcnebula",
@@ -59,11 +92,13 @@ setMethod("visualize",
             .message_info_formal("MCnebula2", "visualize")
             call_command(fun_modify(ggset(child_nebulae(x))[[ item ]]))
           })
+#' @exportMethod visualize
+#' @rdname visualize-methods
 setMethod("visualize", 
           signature = setMissing("visualize",
                                  x = "mcnebula",
-                                 item = "ANY",
-                                 fun_modify = "ANY",
+                                 item = "numeric_or_character",
+                                 fun_modify = "function",
                                  annotate = "logical"),
           function(x, item, fun_modify, annotate){
             if (annotate) {
@@ -71,15 +106,16 @@ setMethod("visualize",
               if (is.null(obj)) {
                 stop( "the `item` not found in `ggset_annotate(child_nebula(x))`" )
               } else {
-                if (missing(fun_modify)) {
-                  fun_modify <- modify_set_labs
-                }
-                call_command(modify_set_labs(obj))
+                call_command(fun_modify(obj))
               }
             } else {
               visualize(x, item)
             }
           })
+#' @exportMethod visualize_all
+#' @description \code{visualize_all()}: get the default parameters for the method
+#' \code{visualize_all}.
+#' @rdname visualize-methods
 setMethod("visualize_all", 
           signature = setMissing("visualize_all",
                                  x = "missing"),
@@ -89,6 +125,10 @@ setMethod("visualize_all",
                  legend_hierarchy = T
             )
           })
+#' @exportMethod visualize_all
+#' @description \code{visualize_all(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{visualize_all}.
+#' @rdname visualize-methods
 setMethod("visualize_all", 
           signature = c(x = "mcnebula"),
           function(x, newpage, fun_modify, legend_hierarchy){
@@ -100,6 +140,21 @@ setMethod("visualize_all",
 #' @importFrom grid pushViewport
 #' @importFrom grid upViewport
 #' @importFrom grid grid.draw
+#' @exportMethod visualize_all
+#'
+#' @description ...
+#'
+#' @param x ...
+#' @param newpage ...
+#' @param fun_modify ...
+#' @param legend_hierarchy ...
+#'
+#' @rdname visualize-methods
+#'
+#' @examples
+#' \dontrun{
+#' visualize_all(...)
+#' }
 setMethod("visualize_all", 
           signature = setMissing("visualize_all",
                                  x = "mcnebula",

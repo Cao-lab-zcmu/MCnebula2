@@ -1,10 +1,10 @@
 # # ==========================================================================
 # for creating child layout, these layouts includes:
-# layouts for nodes position of ggraph;
-# layouts of size and position of grid panel;
-# layouts of viewports of each child_nebula (in which grid panel).
-# layout of viewport of panel of overall child_nebulae;
-# layout of viewport of legend of child_nebulae.
+# layouts for nodes position of ggraph (layout_ggraph slot);
+# layouts of size and position of grid panel (grid_layout slot);
+# layouts of viewports of each child_nebula (in which grid panel) (viewports slot).
+# layout of viewport of panel of overall child_nebulae (panel_viewport slot);
+# layout of viewport of legend of child_nebulae (legend_viewport slot).
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @importFrom grid grid.layout
 #' @importFrom grid viewport
@@ -92,7 +92,7 @@ setMethod("create_child_layouts",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname create_child_layouts-methods
 #'

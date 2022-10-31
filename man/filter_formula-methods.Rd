@@ -36,6 +36,3 @@ while performing the method \code{filter_formula}.
 filter_formula(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

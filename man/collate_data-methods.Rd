@@ -65,6 +65,3 @@ collate_data(...)
 read_data(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

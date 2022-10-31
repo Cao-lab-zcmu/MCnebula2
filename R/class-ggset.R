@@ -1,6 +1,26 @@
 # ==========================================================================
 # a class to store a series of 'command' for consisting of a plot of 'ggplot'
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportClass ggset
+#'
+#' @aliases ggset
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @family layerSets
+#'
+# @seealso \code{\link{<class>-class}}
+#'
+#' @slot layers ...
+#'
+#' @rdname ggset-class
+#'
+#' @examples
+#' \dontrun{
+#' new('ggset', ...)
+#' }
 .ggset <- 
   setClass("ggset", 
            contains = c("layerSet"),
@@ -22,6 +42,16 @@ setValidity("ggset",
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @importFrom crayon silver
 #' @importFrom crayon yellow
+#' @exportMethod show_layers
+#' @aliases show_layers
+#' @description \code{show_layers}: ...
+# @family ...s
+# @seealso [fun()]
+#' @rdname ggset-class
+#' @examples
+#' \dontrun{
+#' show_layers(...)
+#' }
 setMethod("show_layers", 
           signature = c(x = "ggset"),
           function(x){
@@ -45,6 +75,17 @@ setMethod("show_layers",
             cat("\n")
           })
 ## ------------------------------------- 
+#' @exportMethod new_ggset
+#' @aliases new_ggset
+#' @description \code{new_ggset}: ...
+#' @param ... ...
+# @family ...s
+# @seealso [fun()]
+#' @rdname ggset-class
+#' @examples
+#' \dontrun{
+#' new_ggset(...)
+#' }
 setMethod("new_ggset", 
           signature = c(... = "ANY"),
           function(...){
@@ -52,6 +93,19 @@ setMethod("new_ggset",
             names(args) <- vapply(args, command_name, "ch")
             new("ggset", layers = args)
           })
+#' @exportMethod mutate_layer
+#' @aliases mutate_layer
+#' @description \code{mutate_layer}: ...
+#' @param x ...
+#' @param layer ...
+#' @param ... ...
+# @family ...s
+# @seealso [fun()]
+#' @rdname ggset-class
+#' @examples
+#' \dontrun{
+#' mutate_layer(...)
+#' }
 setMethod("mutate_layer", 
           signature = c(x = "ggset",
                         layer = "numeric"),
@@ -69,8 +123,11 @@ setMethod("mutate_layer",
             return(x)
           })
 ## ------------------------------------- 
+#' @exportMethod mutate_layer
+#' @aliases mutate_layer
+#' @rdname ggset-class
 setMethod("mutate_layer", 
-          signature = c(x = "ANY", layer = "character"),
+          signature = c(x = "ggset", layer = "character"),
           function(x, layer, ...){
             seq <- which(names(layers(x)) == layer)
             if (length(seq) == 0) {
@@ -83,6 +140,11 @@ setMethod("mutate_layer",
             return(x)
           })
 ## ------------------------------------- 
+#' @exportMethod call_command
+#' @aliases call_command
+#' @description \code{call_command}: plot as 'ggplot' object.
+#' @family call_commands
+#' @rdname ggset-class
 setMethod("call_command", 
           signature = c(x = "ggset"),
           function(x){

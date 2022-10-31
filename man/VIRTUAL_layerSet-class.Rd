@@ -9,20 +9,52 @@
 \alias{layers}
 \alias{layers<-,layerSet-method}
 \alias{layers<-}
+\alias{show,layerSet-method}
+\alias{show}
+\alias{add_layers,layerSet-method}
+\alias{add_layers}
+\alias{delete_layers,layerSet,numeric-method}
+\alias{delete_layers}
+\alias{move_layers,layerSet,numeric,numeric-method}
+\alias{move_layers}
 \title{Share slots and methods for classes inherite from VIRTUAL_layerSet}
 \usage{
 \S4method{layers}{layerSet}(x)
 
 \S4method{layers}{layerSet}(x) <- value
+
+\S4method{show}{layerSet}(object)
+
+\S4method{add_layers}{layerSet}(x, ...)
+
+\S4method{delete_layers}{layerSet,numeric}(x, layers)
+
+\S4method{move_layers}{layerSet,numeric,numeric}(x, from, to)
 }
 \arguments{
+\item{x}{...}
+
 \item{value}{The value for the slot.}
+
+\item{...}{...}
+
+\item{layers}{...}
+
+\item{from}{...}
+
+\item{to}{...}
 }
 \description{
 ...
 
 \code{layers}, \code{layers<-}: getter and setter
 for the \code{layers} slot of the object.
+
+\code{add_layers}: ...
+
+\code{delete_layers}: ...
+
+\code{move_layers}: ...
 }
 \section{Slots}{
 
@@ -30,8 +62,20 @@ for the \code{layers} slot of the object.
 \item{\code{layers}}{...}
 }}
 
+\examples{
+\dontrun{
+add_layers(...)
+}
+\dontrun{
+delete_layers(...)
+}
+\dontrun{
+move_layers(...)
+}
+}
 \seealso{
 Other layerSets: 
+\code{\link{ggset-class}},
 \code{\link{report-class}}
 }
 \concept{layerSets}

@@ -44,7 +44,7 @@ setMethod("create_parent_nebula",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname create_parent_nebula-methods
 #'

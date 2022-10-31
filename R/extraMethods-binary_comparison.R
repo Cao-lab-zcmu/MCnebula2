@@ -1,6 +1,10 @@
 # ==========================================================================
 # use 'limma' package to conduct binary comparison between sample group
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod binary_comparison
+#' @description \code{binary_comparison()}: get the default parameters for the method
+#' \code{binary_comparison}.
+#' @rdname binary_comparison-methods
 setMethod("binary_comparison", 
           signature = setMissing("binary_comparison",
                                  x = "missing"),
@@ -10,6 +14,10 @@ setMethod("binary_comparison",
                  top_coef = "all"
             )
           })
+#' @exportMethod binary_comparison
+#' @description \code{binary_comparison(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{binary_comparison}.
+#' @rdname binary_comparison-methods
 setMethod("binary_comparison", 
           signature = c(x = "ANY"),
           function(x, ..., formula, fun_norm, top_coef, contrasts){
@@ -22,6 +30,38 @@ setMethod("binary_comparison",
             reCallMethod("binary_comparison",
                          .fresh_param(binary_comparison()))
           })
+#' @exportMethod binary_comparison
+#'
+#' @aliases binary_comparison
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param ... ...
+#' @param formula ...
+#' @param fun_norm ...
+#' @param top_coef ...
+#' @param contrasts ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [stats::model.matrix()], [limma::makeContrasts()], [limma::lmFit()],
+#' [limma::eBayes()], [limma::contrasts.fit()], [limma::topTable()]...
+#'
+#' @rdname binary_comparison-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' binary_comparison(...)
+#' }
 setMethod("binary_comparison", 
           signature = c(x = "ANY", formula = "formula",
                         fun_norm = "function", top_coef = "ANY",

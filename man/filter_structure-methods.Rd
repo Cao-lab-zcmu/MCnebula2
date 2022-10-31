@@ -42,6 +42,3 @@ while performing the method \code{filter_structure}.
 filter_structure(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

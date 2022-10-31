@@ -161,7 +161,7 @@ setMethod("format_msframe",
 #' @param fun_types ...
 #' @param fun_format ...
 #'
-#' @rdname format_msframe-methods
+#' @rdname msframe-class
 #'
 #' @examples
 #' \dontrun{
@@ -247,7 +247,7 @@ setMethod("filter_msframe",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname filter_msframe-methods
 #'

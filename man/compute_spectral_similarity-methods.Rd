@@ -51,6 +51,3 @@ while performing the method \code{compute_spectral_similarity}.
 compute_spectral_similarity(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

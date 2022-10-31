@@ -28,6 +28,3 @@
 include_table(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

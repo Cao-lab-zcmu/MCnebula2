@@ -57,6 +57,3 @@ while performing the method \code{create_stardust_classes}.
 create_stardust_classes(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

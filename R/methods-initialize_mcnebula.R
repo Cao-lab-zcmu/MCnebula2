@@ -91,11 +91,10 @@ setMethod("initialize_mcnebula",
           signature = c(x = "melody"),
           function(x){
             ## set color palette
-            colors <- .get_color_set()
-            palette_set(x) <- colors
+            palette_set(x) <- .get_color_set()
             palette_gradient(x) <- .get_color_gradient()
             palette_stat(x) <- .get_color_stat()
-            palette_col(x) <- colors
+            palette_col(x) <- .get_color_col()
             palette_label(x) <- .get_label_color()
             return(x)
           })

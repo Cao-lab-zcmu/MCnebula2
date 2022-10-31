@@ -5,6 +5,31 @@
 #' @importFrom dplyr select
 #' @importFrom tibble as_tibble
 #' @importFrom tibble as_tibble
+#' @exportMethod draw_structures
+#'
+#' @aliases draw_structures
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param nebula_name ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @rdname draw_structures-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' draw_structures(...)
+#' }
 setMethod("draw_structures", 
           signature = c(x = "mcnebula", nebula_name = "character"),
           function(x, nebula_name){
@@ -24,6 +49,20 @@ setMethod("draw_structures",
             return(x)
           })
 #' @importFrom grid grid.draw
+#' @exportMethod show_structure
+#'
+#' @description ...
+#'
+#' @param .features_id ...
+#'
+# @seealso ...
+#'
+#' @rdname draw_structures-methods
+#'
+#' @examples
+#' \dontrun{
+#' show_structure(...)
+#' }
 setMethod("show_structure", 
           signature = c(x = "ANY", .features_id = "character"),
           function(x, .features_id){

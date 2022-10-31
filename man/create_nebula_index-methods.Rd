@@ -38,6 +38,3 @@ while performing the method \code{create_nebula_index}.
 create_nebula_index(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

@@ -11,7 +11,7 @@
 #'
 #' @family projects
 #' @family datasets
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @slot dataset ...
 #'

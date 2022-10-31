@@ -1,23 +1,39 @@
 # ==========================================================================
 # draw all nodes (with annotation) for a specified child-nebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @exportMethod draw_nodes
+#' @description \code{draw_nodes()}: get the function for generating
+#' default parameters for the method
+#' \code{draw_nodes}.
+#' @rdname draw_nodes-methods
 setMethod("draw_nodes", 
           signature = setMissing("draw_nodes",
                                  x = "missing"),
           function(){
-            list(nodes_color = "#FFF9F2",
-                 add_id_text = T,
-                 add_structure = T,
-                 add_ppcp = T,
-                 add_ration = T
-            )
+            function(x) {
+              if (!is.null(nebula_index(x)[[ "tracer_color" ]])) {
+                nodes_color <- nebula_index(x)[[ "tracer_color" ]]
+              } else {
+                nodes_color <- "#FFF9F2"
+              }
+              list(nodes_color = nodes_color,
+                   add_id_text = T,
+                   add_structure = T,
+                   add_ppcp = T,
+                   add_ration = T
+              )
+            }
           })
+#' @exportMethod draw_nodes
+#' @description \code{draw_nodes(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{draw_nodes}.
+#' @rdname draw_nodes-methods
 setMethod("draw_nodes", 
           signature = c(x = "mcnebula", nebula_name = "character"),
           function(x, nebula_name, nodes_color, add_id_text, 
                    add_structure, add_ppcp, add_ration){
             reCallMethod("draw_nodes",
-                         .fresh_param(draw_nodes()))
+                         .fresh_param(draw_nodes()(x)))
           })
 #' @importFrom svglite svglite
 #' @importFrom grid pushViewport
@@ -26,6 +42,38 @@ setMethod("draw_nodes",
 #' @importFrom pbapply pblapply
 #' @importFrom tibble as_tibble
 #' @importFrom rsvg rsvg_svg
+#' @exportMethod draw_nodes
+#'
+#' @aliases draw_nodes
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param nebula_name ...
+#' @param nodes_color ...
+#' @param add_id_text ...
+#' @param add_structure ...
+#' @param add_ppcp ...
+#' @param add_ration ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+# @seealso ...
+#'
+#' @rdname draw_nodes-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' draw_nodes(...)
+#' }
 setMethod("draw_nodes", 
           signature = c(x = "mcnebula", nebula_name = "character",
                         nodes_color = "character",
@@ -93,6 +141,10 @@ setMethod("draw_nodes",
               c(nodes_grob(child_nebulae(x)), nodes_grob)
             return(x)
           })
+#' @exportMethod show_node
+#' @description \code{show_node()}: get the default parameters for the method
+#' \code{show_node}.
+#' @rdname draw_nodes-methods
 setMethod("show_node", 
           signature = setMissing("show_node",
                                  x = "missing"),
@@ -103,6 +155,35 @@ setMethod("show_node",
                  grid::viewport(0.4, 0.5, 0.6, 1, just = c("left", "centre"))
             )
           })
+#' @exportMethod show_node
+#'
+#' @aliases show_node
+#'
+#' @title ...
+#'
+#' @description ...
+#' @description \code{show_node(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{show_node}.
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param .features_id ...
+#' @param panel_viewport ...
+#' @param legend_viewport ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+# @seealso ...
+#'
+#' @rdname draw_nodes-methods
+#'
+#' @examples
+#' \dontrun{
+#' show_node(...)
+#' }
 setMethod("show_node", 
           signature = c(x = "ANY", .features_id = "character"),
           function(x, .features_id, panel_viewport, legend_viewport){
@@ -139,6 +220,18 @@ setMethod("show_node",
     }
     .message_info_viewport("END")
   }
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname draw_nodes-methods
+#' @export 
 ggset_activate_nodes <- 
   function(x, .features_id, nodes_color = "#FFF9F2",
            add_ppcp = T, add_ration = T){
@@ -227,14 +320,46 @@ ggset_activate_nodes <-
              df
            })
   }
+#' @exportMethod set_ppcp_data
+#' @description \code{set_ppcp_data()}: get the function for generating
+#' default parameters for the method
+#' \code{set_ppcp_data}.
+#' @rdname set_ppcp_data-methods
+setMethod("set_ppcp_data", 
+          signature = setMissing("set_ppcp_data"),
+          function(){
+            function(x){
+              list(classes = names(tbl_graph(child_nebulae(x))))
+            }
+          })
 #' @importFrom dplyr filter
 #' @importFrom dplyr mutate
+#' @exportMethod set_ppcp_data
+#' @description \code{set_ppcp_data(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{set_ppcp_data}.
+#' @rdname set_ppcp_data-methods
 setMethod("set_ppcp_data", 
-          signature = setMissing("set_ppcp_data",
-                                 x = "mcnebula"),
-          function(x){
-            set_ppcp_data(x, classes = names(tbl_graph(child_nebulae(x))))
+          signature = c(x = "mcnebula"),
+          function(x, classes){
+            reCallMethod("set_ppcp_data",
+                         .fresh_param(set_ppcp_data()(x)))
           })
+#' @exportMethod set_ppcp_data
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @param x ...
+#' @param classes ...
+#'
+#' @rdname set_ppcp_data-methods
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' set_ppcp_data(...)
+#' }
 setMethod("set_ppcp_data", 
           signature = c(x = "mcnebula", classes = "character"),
           function(x, classes){
@@ -255,12 +380,41 @@ setMethod("set_ppcp_data",
 #' @importFrom dplyr group_by
 #' @importFrom dplyr summarise
 #' @importFrom dplyr ungroup
+#' @exportMethod set_ration_data
+#' @description \code{set_ration_data()}: get the default parameters for the method
+#' \code{set_ration_data}.
+#' @rdname set_ration_data-methods
 setMethod("set_ration_data", 
-          signature = setMissing("set_ration_data",
-                                 x = "mcnebula"),
-          function(x){
-            set_ration_data(x, mean = T)
+          signature = setMissing("set_ration_data"),
+          function(){
+            list(mean = T)
           })
+#' @exportMethod set_ration_data
+#' @description \code{set_ration_data(x, ...)}: use the default parameters whatever 'missing'
+#' while performing the method \code{set_ration_data}.
+#' @rdname set_ration_data-methods
+setMethod("set_ration_data", 
+          signature = c(x = "mcnebula"),
+          function(x, mean){
+            reCallMethod("set_ration_data",
+                         .fresh_param(set_ration_data()))
+          })
+#' @exportMethod set_ration_data
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @param x ...
+#' @param mean ...
+#'
+#' @rdname set_ration_data-methods
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' set_ration_data(...)
+#' }
 setMethod("set_ration_data", 
           signature = c(x = "mcnebula", mean = "logical"),
           function(x, mean){

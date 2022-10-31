@@ -109,8 +109,9 @@ setGeneric("create_parent_nebula",
 setGeneric("create_child_nebulae", 
            signature = c(mcnebula = "x",
                          "numeric" = "edge_cutoff",
-                         "numeric" = "max_edge_number"),
-           function(x, edge_cutoff, max_edge_number)
+                         "numeric" = "max_edge_number",
+                         "logical" = "use_tracer"),
+           function(x, edge_cutoff, max_edge_number, use_tracer)
              standardGeneric("create_child_nebulae"))
 ## ------------------------------------- 
 setGeneric("create_parent_layout", 

@@ -222,12 +222,10 @@ latest(x, "mcn_dataset")
 }
 }
 \seealso{
-\code{\link[=fun]{fun()}}
-
 \code{\link[tibble:as_tibble]{tibble::as_tibble()}}
 
 Other nebulae: 
-\code{\link{parent_nebula-class}}
+\code{\link{nebula-class}}
 
 Other latests: 
 \code{\link{mcn_dataset-class}},

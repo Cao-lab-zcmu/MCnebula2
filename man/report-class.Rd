@@ -78,16 +78,16 @@ call_command(...)
 }
 }
 \seealso{
-\code{\link[=fun]{fun()}}
-
 \code{\link[=writeLines]{writeLines()}}, \code{\link[rmarkdown:render]{rmarkdown::render()}}...
 
 Other layerSets: 
+\code{\link{ggset-class}},
 \code{\link{layerSet-class}}
 
 Other call_commands: 
 \code{\link{code_block-class}},
-\code{\link{heading-class}}
+\code{\link{ggset-class}},
+\code{\link{section-class}}
 }
 \concept{call_commands}
 \concept{layerSets}

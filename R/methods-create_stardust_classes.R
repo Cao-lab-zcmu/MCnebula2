@@ -46,7 +46,7 @@ setMethod("create_stardust_classes",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname create_stardust_classes-methods
 #'

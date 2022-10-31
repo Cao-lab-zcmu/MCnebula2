@@ -47,6 +47,12 @@ setGeneric("set_ppcp_data",
 setGeneric("set_ration_data", 
            signature = c(ANY = "x", "logical" = "mean"),
            function(x, mean) standardGeneric("set_ration_data"))
+setGeneric("set_nodes_color", 
+           function(x, attribute, extra_data, use_tracer)
+             standardGeneric("set_nodes_color"))
+setGeneric("set_tracer", 
+           function(x, .features_id, colors, rest)
+             standardGeneric("set_tracer"))
 ## ------------------------------------- 
 setGeneric("binary_comparison", 
            signature = c(ANY = "x", "formula" = "formula",

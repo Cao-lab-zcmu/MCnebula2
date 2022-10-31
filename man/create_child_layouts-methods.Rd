@@ -54,6 +54,3 @@ default parameters for the method
 create_child_layouts(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

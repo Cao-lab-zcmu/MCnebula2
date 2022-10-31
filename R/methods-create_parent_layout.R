@@ -39,7 +39,7 @@ setMethod("create_parent_layout",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname create_parent_layout-methods
 #'

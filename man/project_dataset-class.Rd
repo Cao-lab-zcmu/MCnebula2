@@ -70,8 +70,6 @@ extract_rawset(object, ".f3_fingerid")
 }
 }
 \seealso{
-\code{\link[=fun]{fun()}}
-
 \code{\link[tibble:as_tibble]{tibble::as_tibble()}}
 
 Other projects: 

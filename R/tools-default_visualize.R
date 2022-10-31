@@ -21,6 +21,9 @@
 .command_parent_fill <- function(pal){
   new_command(scale_fill_gradientn, colours = pal)
 }
+.command_parent_fill2 <- function(pal){
+  new_command(scale_fill_manual, values = pal)
+}
 .command_parent_labs <- function(){
   new_command(labs, fill = "m/z", size = "Tanimoto similarity",
               edge_width = "Spectral similarity")

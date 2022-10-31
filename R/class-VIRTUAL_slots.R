@@ -257,11 +257,26 @@ setReplaceMethod("layers",
                    initialize(x, layers = value)
                  })
 ## ------------------------------------- 
+#' @exportMethod show
+#' @aliases show
+#' @rdname VIRTUAL_layerSet-class
 setMethod("show", 
           signature = c(object = "layerSet"),
           function(object){
             show_layers(object)
           })
+#' @exportMethod add_layers
+#' @aliases add_layers
+#' @description \code{add_layers}: ...
+#' @param x ...
+#' @param ... ...
+# @family ...s
+# @seealso [fun()]
+#' @rdname VIRTUAL_layerSet-class
+#' @examples
+#' \dontrun{
+#' add_layers(...)
+#' }
 setMethod("add_layers", 
           signature = c(x = "layerSet"),
           function(x, ...){
@@ -270,12 +285,37 @@ setMethod("add_layers",
             layers(x) <- c(layers(x), args)
             return(x)
           })
+#' @exportMethod delete_layers
+#' @aliases delete_layers
+#' @description \code{delete_layers}: ...
+#' @param x ...
+#' @param layers ...
+# @family ...s
+# @seealso [fun()]
+#' @rdname VIRTUAL_layerSet-class
+#' @examples
+#' \dontrun{
+#' delete_layers(...)
+#' }
 setMethod("delete_layers", 
           signature = c(x = "layerSet", layers = "numeric"),
           function(x, layers){
             layers(x)[layers] <- NULL
             return(x)
           })
+#' @exportMethod move_layers
+#' @aliases move_layers
+#' @description \code{move_layers}: ...
+#' @param x ...
+#' @param from ...
+#' @param to ...
+# @family ...s
+# @seealso [fun()]
+#' @rdname VIRTUAL_layerSet-class
+#' @examples
+#' \dontrun{
+#' move_layers(...)
+#' }
 setMethod("move_layers", 
           signature = c(x = "layerSet", from = "numeric", to = "numeric"),
           function(x, from, to){

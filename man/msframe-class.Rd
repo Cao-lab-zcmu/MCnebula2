@@ -21,6 +21,7 @@
 \alias{format_msframe,data.frame,missing,missing,missing,missing,function-method}
 \alias{format_msframe,msframe,character,missing,character,missing,missing-method}
 \alias{format_msframe,msframe,missing,missing,missing,missing,missing-method}
+\alias{format_msframe,msframe,missing,function,missing,function,missing-method}
 \alias{filter_msframe,msframe,function,missing-method}
 \alias{filter_msframe}
 \title{...}
@@ -45,10 +46,24 @@
 
 \S4method{format_msframe}{msframe,missing,missing,missing,missing,missing}(x)
 
+\S4method{format_msframe}{msframe,missing,`function`,missing,`function`,missing}(x, fun_names, fun_types)
+
 \S4method{filter_msframe}{msframe,`function`,missing}(x, fun_filter, f, ...)
 }
 \arguments{
+\item{x}{...}
+
 \item{value}{The value for the slot.}
+
+\item{fun_format}{...}
+
+\item{names}{...}
+
+\item{types}{...}
+
+\item{fun_names}{...}
+
+\item{fun_types}{...}
 }
 \description{
 ...
@@ -61,6 +76,11 @@ for the \code{msframe} slot of the object.
 
 \code{entity}, \code{entity<-}: getter and setter
 for the \code{entity} slot of the object.
+
+...
+}
+\details{
+...
 }
 \section{Slots}{
 
@@ -76,6 +96,9 @@ new('msframe', ...)
 }
 \dontrun{
 latest(...)
+}
+\dontrun{
+format_msframe(...)
 }
 }
 \seealso{

@@ -23,7 +23,7 @@
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname create_reference-methods
 #'

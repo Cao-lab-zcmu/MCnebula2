@@ -1,6 +1,20 @@
 # ==========================================================================
 # MCnebula overall object
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases MCnebula2
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @param ... ...
+#'
+#' @details ...
+#'
+#' @name MCnebula2
+NULL
+#> NULL
+
 #' @exportClass mcnebula
 #'
 #' @aliases mcnebula
@@ -10,7 +24,7 @@
 #' @description ...
 #'
 #' @family nebulae
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @slot creation_time ...
 #' @slot ion_mode ...

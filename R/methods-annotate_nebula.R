@@ -3,6 +3,33 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @importFrom dplyr select
 #' @importFrom gridExtra arrangeGrob
+#' @exportMethod annotate_nebula
+#'
+#' @aliases annotate_nebula
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param nebula_name ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso \code{\link{draw_nodes}}, \code{\link{draw_structures}}...
+#'
+#' @rdname annotate_nebula-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' annotate_nebula(...)
+#' }
 setMethod("annotate_nebula", 
           signature = c(x = "ANY", nebula_name = "character"),
           function(x, nebula_name){

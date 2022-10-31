@@ -39,7 +39,7 @@ setMethod("filter_formula",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname filter_formula-methods
 #'

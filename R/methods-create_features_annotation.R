@@ -47,7 +47,7 @@ setMethod("create_features_annotation",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname create_features_annotation-methods
 #'

@@ -79,7 +79,7 @@ setMethod("compute_spectral_similarity",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname compute_spectral_similarity-methods
 #'

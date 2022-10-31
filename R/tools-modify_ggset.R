@@ -1,16 +1,43 @@
 # ==========================================================================
 # functions to modify 'ggset' object
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases fun_modify
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @param ggset ...
+#' @param x ...
+#'
+#' @details ...
+#'
+#' @name fun_modify
+NULL
+#> NULL
+
+#' @export modify_default_child
+#' @aliases modify_default_child
+#' @description \code{modify_default_child}: ...
+#' @rdname fun_modify
 modify_default_child <- 
   function(ggset, x){
     x <- .get_missing_x(x, "mcnebula")
     modify_rm_legend(modify_set_labs(modify_unify_scale_limits(ggset)))
   }
+#' @export modify_set_labs_and_unify_scale_limits
+#' @aliases modify_set_labs_and_unify_scale_limits
+#' @description \code{modify_set_labs_and_unify_scale_limits}: ...
+#' @rdname fun_modify
 modify_set_labs_and_unify_scale_limits <- 
   function(ggset, x){
     x <- .get_missing_x(x, "mcnebula")
     modify_set_labs(modify_unify_scale_limits(ggset))
   }
+#' @export modify_annotate_child
+#' @aliases modify_annotate_child
+#' @description \code{modify_annotate_child}: ...
+#' @rdname fun_modify
 modify_annotate_child <- 
   function(ggset, x){
     x <- .get_missing_x(x, "mcnebula")
@@ -19,15 +46,27 @@ modify_annotate_child <-
                  panel.background = element_rect("grey92", color = NA,
                                                  inherit.blank = T))
   }
+#' @export modify_rm_legend
+#' @aliases modify_rm_legend
+#' @description \code{modify_rm_legend}: ...
+#' @rdname fun_modify
 modify_rm_legend <- 
   function(ggset){
     mutate_layer(ggset, "theme", legend.position = "none")
   }
 #' @importFrom grid unit
+#' @export modify_set_margin
+#' @aliases modify_set_margin
+#' @description \code{modify_set_margin}: ...
+#' @rdname fun_modify
 modify_set_margin <- 
   function(ggset, margin = grid::unit(rep(-8, 4), "lines")){
     mutate_layer(ggset, "theme", plot.margin = margin)
   }
+#' @export modify_unify_scale_limits
+#' @aliases modify_unify_scale_limits
+#' @description \code{modify_unify_scale_limits}: ...
+#' @rdname fun_modify
 modify_unify_scale_limits <- 
   function(ggset, x){
     x <- .get_missing_x(x, "mcnebula")
@@ -67,11 +106,21 @@ modify_unify_scale_limits <-
     }
     ggset
   }
+#' @export modify_set_labs
+#' @aliases modify_set_labs
+#' @description \code{modify_set_labs}: ...
+#' @rdname fun_modify
 modify_set_labs <- 
   function(ggset, x){
     x <- .get_missing_x(x, "mcnebula")
-    args <- vapply(.get_mapping2(ggset),
-                   function(n) export_name(x)[[ n ]], "ch")
+    export_name <- as.list(export_name(x))
+    args <- vapply(.get_mapping2(ggset), FUN.VALUE = "ch",
+                   function(attr) {
+                     if (is.null(export_name[[ attr ]]))
+                       attr
+                     else
+                       export_name[[ attr ]]
+                   })
     seq <- grep("^labs$|^ggplot2::labs$", names(layers(ggset)))
     if ( length(seq) == 1) {
       ggset <- do.call(mutate_layer, c(ggset, seq, args))

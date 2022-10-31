@@ -40,6 +40,3 @@ while performing the method \code{create_parent_nebula}.
 create_parent_nebula(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

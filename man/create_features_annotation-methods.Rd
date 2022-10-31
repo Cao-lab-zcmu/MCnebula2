@@ -34,6 +34,3 @@
 create_features_annotation(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

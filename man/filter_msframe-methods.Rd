@@ -30,6 +30,3 @@
 filter_msframe(...)
 }
 }
-\seealso{
-\code{\link[=fun]{fun()}}
-}

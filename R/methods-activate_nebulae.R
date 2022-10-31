@@ -40,7 +40,7 @@ setMethod("activate_nebulae",
 #'
 #' @return ...
 #'
-#' @seealso [fun()]
+# @seealso ...
 #'
 #' @rdname activate_nebulae-methods
 #'
@@ -56,8 +56,20 @@ setMethod("activate_nebulae",
                         fun_default_child = "function"),
           function(x, fun_default_parent, fun_default_child){
             .message_info_formal("MCnebula2", "activate_nebulae")
-            ggset(parent_nebula(x)) <- fun_default_parent(x)
-            ggset(child_nebulae(x)) <- fun_default_child(x)
+            if (!is.null(layout_ggraph(parent_nebula(x)))) {
+              ggset(parent_nebula(x)) <- fun_default_parent(x)
+              parent <- T
+            } else {
+              parent <- F
+            }
+            if (!is.null(layout_ggraph(child_nebulae(x)))) {
+              ggset(child_nebulae(x)) <- fun_default_child(x)
+              child <- T
+            } else {
+              child <- F
+            }
+            if (any(!(parent | child)))
+              stop("nothing need to be activate")
             return(x)
           })
 #' @description FUNCTION_DESCRIPTION
@@ -75,6 +87,7 @@ setMethod("activate_nebulae",
 #' @importFrom ggraph ggraph
 ggset_activate_parent_nebula <- 
   function(x){
+    .check_data(parent_nebula(x), list(layout_ggraph = "create_parent_layout"))
     new_ggset(new_command(ggraph::ggraph, layout_ggraph(parent_nebula(x))),
               .command_parent_edge(),
               .command_parent_node(),
@@ -99,6 +112,7 @@ ggset_activate_parent_nebula <-
 #' @importFrom ggraph ggraph
 ggset_activate_child_nebulae <-
   function(x){
+    .check_data(child_nebulae(x), list(layout_ggraph = "create_child_layouts"))
     set <- layout_ggraph(child_nebulae(x))
     hierarchy <- .get_hierarchy(x)
     ggsets <-
@@ -139,3 +153,137 @@ ggset_activate_child_nebulae <-
              palette_label(x)[[ hierarchy[[ name ]] ]]
            })
   }
+#' @importFrom dplyr select
+#' @exportMethod set_nodes_color
+#'
+#' @aliases set_nodes_color
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @param x ...
+#' @param attribute ...
+#' @param extra_data ...
+#' @param use_tracer ...
+#'
+# @inheritParams rdname
+#'
+#' @return ...
+#'
+#' @seealso [activate_nebulae()], [visualize()]...
+#'
+#' @rdname set_nodes_color-methods
+#'
+#' @order 1
+#'
+#' @examples
+#' \dontrun{
+#' set_nodes_color(...)
+#' }
+setMethod("set_nodes_color", 
+          signature = setMissing("set_nodes_color",
+                                 x = "mcnebula",
+                                 attribute = "character",
+                                 extra_data = "data.frame"),
+          function(x, attribute, extra_data){
+            .check_data(child_nebulae(x), list(ggset = "activate_nebulae"))
+            if (length(attribute) != 1) {
+              stop( "`attribute` must be a character `length(attribute) == 1`." )
+            }
+            if (any(!(c(".features_id", attribute) %in% colnames(extra_data)))) {
+              stop("extra_data must contains columns of '.features_id' and the ",
+                   "specified `attribute`.")
+            }
+            if (is.numeric(extra_data[[ attribute ]])) {
+              command_scale <- .command_parent_fill(palette_gradient(x))
+            } else {
+              command_scale <- .command_parent_fill2(palette_set(x))
+            }
+            attribute <- as.name(attribute)
+            aes_ex <- aes(fill = !!attribute)
+            ggset(child_nebulae(x)) <-
+              lapply(ggset(child_nebulae(x)),
+                     function(ggset) {
+                       data <- command_args(layers(ggset)[[ 
+                                            "ggraph::ggraph" 
+                                            ]])[[ "graph" ]]
+                       mapped_attr <- .get_mapping2(ggset)
+                       mapped_attr <- mapped_attr[names(mapped_attr) != "fill"]
+                       mapped_attr <- mapped_attr[mapped_attr %in% colnames(data)]
+                       data <- dplyr::select(data, x, y, name,
+                                             dplyr::all_of(unname(mapped_attr)))
+                       data <- merge(data, extra_data, by.x = "name", by.y = ".features_id",
+                                     all.x = T)
+                       mapping <-
+                         command_args(layers(ggset)[[ "ggraph::geom_node_point" ]])$mapping
+                       mapping$fill <- NULL
+                       mapping <- ggraph:::aes_intersect(mapping, aes_ex)
+                       ggset <- mutate_layer(ggset, "ggraph::geom_node_point",
+                                             data = data,
+                                             mapping = mapping)
+                       seq <- grep(paste0("^scale_fill|^ggplot2::scale_fill"),
+                                   names(layers(ggset)))
+                       layers(ggset)[[ seq ]] <- NULL
+                       add_layers(ggset, command_scale)
+                     })
+            return(x)
+          })
+#' @exportMethod set_nodes_color
+#' @rdname set_nodes_color-methods
+setMethod("set_nodes_color", 
+          signature = setMissing("set_nodes_color",
+                                 x = "mcnebula",
+                                 attribute = "character"),
+          function(x, attribute){
+            attr <- as.name(attribute)
+            aes_ex <- aes(fill = !!attr)
+            ggset(child_nebulae(x)) <-
+              lapply(ggset(child_nebulae(x)),
+                     function(ggset) {
+                       mapping <-
+                         command_args(layers(ggset)[[
+                                      "ggraph::geom_node_point"
+                                      ]])$mapping
+                       mapping$fill <- NULL
+                       mapping <- ggraph:::aes_intersect(mapping, aes_ex)
+                       ggset <- mutate_layer(ggset, "ggraph::geom_node_point",
+                                             data = NULL,
+                                             mapping = mapping)
+                       data <- command_args(layers(ggset)[[ 
+                                            "ggraph::ggraph"
+                                            ]])[[ "graph" ]]
+                       if (is.numeric(data[[ attribute ]])) {
+                         command_scale <- .command_parent_fill(palette_gradient(x))
+                       } else {
+                         command_scale <- .command_parent_fill2(palette_set(x))
+                       }
+                       seq <- grep(paste0("^scale_fill|^ggplot2::scale_fill"),
+                                   names(layers(ggset)))
+                       layers(ggset)[[ seq ]] <- NULL
+                       add_layers(ggset, command_scale)
+                     })
+            return(x)
+          })
+#' @exportMethod set_nodes_color
+#' @rdname set_nodes_color-methods
+setMethod("set_nodes_color", 
+          signature = setMissing("set_nodes_color",
+                                 x = "mcnebula",
+                                 use_tracer = "logical"),
+          function(x, use_tracer){
+            .check_data(x, list(nebula_index = "create_nebula_index"))
+            if (use_tracer & is.logical(nebula_index(x)[[ "tracer" ]])) {
+              data <- dplyr::distinct(nebula_index(x),
+                                      .features_id, tracer_color, tracer)
+              data <- dplyr::mutate(data, tracer = ifelse(tracer, .features_id,
+                                                          "Others"))
+              pal <- dplyr::distinct(data, tracer, tracer_color)
+              palette_set(melody(x)) <-
+                .as_dic(pal$tracer_color, pal$tracer, fill = F, as.list = F)
+              x <- set_nodes_color(x, attribute = "tracer", extra_data = data)
+            }
+            return(x)
+          })
