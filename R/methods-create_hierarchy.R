@@ -1,6 +1,20 @@
 # ==========================================================================
 # collate and build classification hierarchy annotation data
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases create_hierarchy
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name create_hierarchy-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod create_hierarchy
 #' @description \code{create_hierarchy()}: get the default parameters for the method
 #' \code{create_hierarchy}.
@@ -38,8 +52,6 @@ setMethod("create_hierarchy",
 #' @return ...
 #'
 #' @rdname create_hierarchy-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

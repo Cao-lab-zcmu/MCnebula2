@@ -2,6 +2,20 @@
 # create features annotation data.frame, involves formula and structure,
 # based on `specific_candidate`
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases create_features_annotation
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name create_features_annotation-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod create_features_annotation
 #' @rdname create_features_annotation-methods
 setMethod("create_features_annotation", 

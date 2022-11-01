@@ -2,6 +2,20 @@
 # for creating parent layout, these layouts includes:
 # layouts for nodes position of ggraph.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases create_parent_layout
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name create_parent_layout-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod create_parent_layout
 #' @description \code{create_parent_layout()}: get the default parameters for the method
 #' \code{create_parent_layout}.
@@ -42,8 +56,6 @@ setMethod("create_parent_layout",
 # @seealso ...
 #'
 #' @rdname create_parent_layout-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

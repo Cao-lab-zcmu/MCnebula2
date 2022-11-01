@@ -6,7 +6,7 @@
 #'
 #' @aliases project_metadata
 #'
-#' @title ...
+#' @title Metadata of files
 #'
 #' @description ...
 #'

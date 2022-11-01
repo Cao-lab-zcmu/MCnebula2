@@ -249,9 +249,7 @@ setMethod("filter_msframe",
 #'
 # @seealso ...
 #'
-#' @rdname filter_msframe-methods
-#'
-#' @order 1
+#' @rdname msframe-class
 #'
 #' @examples
 #' \dontrun{

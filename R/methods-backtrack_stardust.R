@@ -1,6 +1,20 @@
 # ==========================================================================
 # comparation after filtering; add or remove classes for stardust_classes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases backtrack_stardust
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name backtrack_stardust-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod backtrack_stardust
 #'
 #' @aliases backtrack_stardust
@@ -23,8 +37,6 @@
 #' @seealso \code{\link{cross_filter_stardust}}
 #'
 #' @rdname backtrack_stardust-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

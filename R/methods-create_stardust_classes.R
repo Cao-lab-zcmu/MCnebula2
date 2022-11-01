@@ -1,6 +1,20 @@
 # ==========================================================================
 # filter classification for each features, as stardust classes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases create_stardust_classes
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name create_stardust_classes-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod create_stardust_classes
 #' @description \code{create_stardust_classes()}: get the default parameters for the method
 #' \code{create_stardust_classes}.
@@ -49,8 +63,6 @@ setMethod("create_stardust_classes",
 # @seealso ...
 #'
 #' @rdname create_stardust_classes-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

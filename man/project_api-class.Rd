@@ -22,7 +22,7 @@
 \alias{methods_match}
 \alias{methods_match<-,project_api-method}
 \alias{methods_match<-}
-\title{...}
+\title{Function set for extracting data}
 \usage{
 \S4method{show}{project_api}(object)
 

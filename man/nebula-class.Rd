@@ -75,7 +75,7 @@
 \alias{ggset_annotate}
 \alias{ggset_annotate<-,ANY-method}
 \alias{ggset_annotate<-}
-\title{...}
+\title{Visualization component of chemical nebulae/nebula}
 \usage{
 \S4method{show}{parent_nebula}(object)
 

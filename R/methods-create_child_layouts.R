@@ -6,6 +6,20 @@
 # layout of viewport of panel of overall child_nebulae (panel_viewport slot);
 # layout of viewport of legend of child_nebulae (legend_viewport slot).
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases create_child_layouts
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name create_child_layouts-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @importFrom grid grid.layout
 #' @importFrom grid viewport
 #' @importFrom grid pushViewport
@@ -95,8 +109,6 @@ setMethod("create_child_layouts",
 # @seealso ...
 #'
 #' @rdname create_child_layouts-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

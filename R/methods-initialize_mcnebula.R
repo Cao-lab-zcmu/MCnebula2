@@ -1,6 +1,20 @@
 # ==========================================================================
 # set default value for project of MCnebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases initialize_mcnebula
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name initialize_mcnebula-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod initialize_mcnebula
 #'
 #' @aliases initialize_mcnebula

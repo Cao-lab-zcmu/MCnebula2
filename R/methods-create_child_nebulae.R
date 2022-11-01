@@ -2,6 +2,20 @@
 # use features annotation and spectral similarity data to create network
 # for child-nebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases create_child_nebulae
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name create_child_nebulae-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod create_child_nebulae
 #' @description \code{create_child_nebulae()}: get the default parameters for the method
 #' \code{create_child_nebulae}.
@@ -44,8 +58,6 @@ setMethod("create_child_nebulae",
 # @seealso ...
 #'
 #' @rdname create_child_nebulae-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

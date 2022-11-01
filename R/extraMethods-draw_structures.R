@@ -1,6 +1,20 @@
 # ==========================================================================
 # draw all chemical structures for a specified child-nebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases draw_structures
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name draw_structures-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @importFrom dplyr filter
 #' @importFrom dplyr select
 #' @importFrom tibble as_tibble
@@ -23,8 +37,6 @@
 #' @return ...
 #'
 #' @rdname draw_structures-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

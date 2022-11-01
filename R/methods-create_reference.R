@@ -1,6 +1,20 @@
 # ==========================================================================
 # create reference data based on mcn_dataset
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases create_reference
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name create_reference-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod create_reference
 #'
 #' @aliases create_reference
@@ -26,8 +40,6 @@
 # @seealso ...
 #'
 #' @rdname create_reference-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

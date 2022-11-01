@@ -1,6 +1,20 @@
 # ==========================================================================
 # collate formula dataset in sirius project and do filtering
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases filter_formula
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name filter_formula-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod filter_formula
 #' @description \code{filter_formula()}: get the default parameters for the method
 #' \code{filter_formula}.
@@ -42,8 +56,6 @@ setMethod("filter_formula",
 # @seealso ...
 #'
 #' @rdname filter_formula-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

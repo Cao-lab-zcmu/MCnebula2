@@ -1,6 +1,20 @@
 # ==========================================================================
 # visualize the nebula and annotate it with multiple attributes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases annotate_nebula
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name annotate_nebula-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @importFrom dplyr select
 #' @importFrom gridExtra arrangeGrob
 #' @exportMethod annotate_nebula
@@ -23,8 +37,6 @@
 #' @seealso \code{\link{draw_nodes}}, \code{\link{draw_structures}}...
 #'
 #' @rdname annotate_nebula-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

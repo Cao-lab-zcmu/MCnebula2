@@ -3,6 +3,7 @@
 export(ggset_activate_child_nebulae)
 export(ggset_activate_nodes)
 export(ggset_activate_parent_nebula)
+export(mcnebula)
 export(modify_annotate_child)
 export(modify_default_child)
 export(modify_rm_legend)

@@ -1,6 +1,20 @@
 # ==========================================================================
 # extract and visualize 'ggset' in 'mcnebula' object
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases visualize
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name visualize-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @importFrom tibble tibble
 setClassUnion("numeric_or_character", c("numeric", "character"))
 #' @exportMethod visualize
@@ -56,8 +70,6 @@ setMethod("visualize",
 #' @param annotate ...
 #'
 #' @rdname visualize-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

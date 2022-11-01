@@ -6,13 +6,13 @@
 #'
 #' @aliases project
 #'
-#' @title ...
+#' @title Collection of Interface for extracting data from raw directory
 #'
 #' @description ...
 #'
 #' @family projects
 #'
-#' @slot project_version ...
+#' @slot project_version character.
 #' @slot project_path ...
 #' @slot project_conformation ...
 #' @slot project_metadata ...
@@ -83,9 +83,9 @@ setReplaceMethod("project_path",
 #' fast channel to obtain
 #' the downstream slot. e.g., getter
 #' for the \code{file_name} slot in sub-object
-#' of \code{project_conformation} slot of the object.
-#' \code{file_name(project_conformation(object))}
-#' equals to \code{file_name(object)}.
+#' of \code{project_conformation} slot of the object. Equals:
+#' - \code{file_name(project_conformation(object))}
+#' - \code{file_name(object)}.
 #' @rdname project-class
 setMethod("file_name", 
           signature = c(x = "ANY"),
@@ -114,9 +114,9 @@ setMethod("attribute_name",
 #' @description  \code{project_metadata}: fast channel to obtain
 #' the downstream slot, getter
 #' for the \code{project_metadata} slot in sub-object
-#' of \code{project_metadata} slot of the object.
-#' \code{project_metadata(project_metadata(object))}
-#' equals to \code{project_metadata(object)}.
+#' of \code{project_metadata} slot of the object. Equals:
+#' - \code{project_metadata(project_metadata(object))}
+#' - \code{project_metadata(object)}.
 #' @rdname project-class
 setMethod("metadata", 
           signature = c(x = "ANY"),
@@ -130,9 +130,9 @@ setMethod("metadata",
 #' fast channel to obtain
 #' the downstream slot. e.g., getter
 #' for the \code{methods_read} slot in sub-object
-#' of \code{project_api} slot of the object.
-#' \code{methods_read(project_api(object))}
-#' equals to \code{methods_read(object)}.
+#' of \code{project_api} slot of the object. Equals:
+#' - \code{methods_read(project_api(object))}
+#' - \code{methods_read(object)}.
 #' @rdname project-class
 setMethod("methods_read", 
           signature = c(x = "ANY"),
@@ -162,9 +162,9 @@ setMethod("methods_match",
 #' data (mostly 'tbl' or 'data.frame') inside the downstream slot ('list'), getter
 #' for the data named \code{match.candidates_id} in
 #' \code{methods_match} slot (a 'list') in sub-object
-#' of \code{project_api} slot of the object.
-#' \code{methods_match(project_api(object))$match.candidates_id}
-#' equals to \code{match.candidates_id(object)}.
+#' of \code{project_api} slot of the object. Equals:
+#' - \code{methods_match(project_api(object))$match.candidates_id}
+#' - \code{match.candidates_id(object)}.
 #' @rdname project-class
 setMethod("match.candidates_id", 
           signature = c(x = "ANY"),

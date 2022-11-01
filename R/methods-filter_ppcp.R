@@ -1,6 +1,20 @@
 # ==========================================================================
 # collate ppcp dataset in sirius project and do filtering
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases filter_ppcp
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name filter_ppcp-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod filter_ppcp
 #' @description \code{filter_ppcp()}: get the default parameters for the method
 #' \code{filter_ppcp}.
@@ -42,8 +56,6 @@ setMethod("filter_ppcp",
 # @seealso ...
 #'
 #' @rdname filter_ppcp-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

@@ -2,6 +2,20 @@
 # collate any dataset in target project without filtering or arranging,
 # relative to class-project
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases collate_data
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name collate_data-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @importFrom dplyr mutate
 #' @importFrom dplyr relocate
 #' @importFrom dplyr select
@@ -55,8 +69,6 @@ setMethod("collate_data",
 # @seealso ...
 #'
 #' @rdname collate_data-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

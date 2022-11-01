@@ -1,6 +1,20 @@
 # ==========================================================================
 # across attributes of each other features to filter classes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases cross_filter_stardust
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name cross_filter_stardust-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod cross_filter_stardust
 #' @description \code{cross_filter_stardust()}: get the default parameters for the method
 #' \code{cross_filter_stardust}.

@@ -5,7 +5,7 @@
 #'
 #' @aliases project_dataset
 #'
-#' @title ...
+#' @title Store extracted dataset
 #'
 #' @description ...
 #'
@@ -50,8 +50,9 @@ setReplaceMethod("project_dataset",
 #' @exportMethod latest
 #' @aliases latest
 #' @description \code{latest}: get the first data in \code{dataset} slot ('list') and
-#' format as 'tbl'. The \code{latest(object)} equals to
-#' \code{tibble::as_tibble(entity(dataset(object)[[1]]))}
+#' format as 'tbl'. Equals:
+#' - \code{latest(object)}
+#' - \code{tibble::as_tibble(entity(dataset(object)[[1]]))}
 #' @family latests
 #' @seealso [tibble::as_tibble()]
 #' @rdname project_dataset-class

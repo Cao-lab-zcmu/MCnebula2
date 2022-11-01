@@ -1,6 +1,20 @@
 # ==========================================================================
 # draw all nodes (with annotation) for a specified child-nebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases draw_nodes
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name draw_nodes-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod draw_nodes
 #' @description \code{draw_nodes()}: get the function for generating
 #' default parameters for the method
@@ -67,8 +81,6 @@ setMethod("draw_nodes",
 # @seealso ...
 #'
 #' @rdname draw_nodes-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{
@@ -320,6 +332,20 @@ ggset_activate_nodes <-
              df
            })
   }
+#' @aliases set_ppcp_data
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name set_ppcp_data-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod set_ppcp_data
 #' @description \code{set_ppcp_data()}: get the function for generating
 #' default parameters for the method
@@ -354,7 +380,6 @@ setMethod("set_ppcp_data",
 #' @param classes ...
 #'
 #' @rdname set_ppcp_data-methods
-#' @order 1
 #'
 #' @examples
 #' \dontrun{
@@ -375,6 +400,20 @@ setMethod("set_ppcp_data",
                      })
             return(x)
           })
+#' @aliases set_ration_data
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name set_ration_data-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @importFrom tidyr gather
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr group_by
@@ -409,7 +448,6 @@ setMethod("set_ration_data",
 #' @param mean ...
 #'
 #' @rdname set_ration_data-methods
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

@@ -1,6 +1,20 @@
 # ==========================================================================
 # use 'limma' package to conduct binary comparison between sample group
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases binary_comparison
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name binary_comparison-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod binary_comparison
 #' @description \code{binary_comparison()}: get the default parameters for the method
 #' \code{binary_comparison}.
@@ -55,8 +69,6 @@ setMethod("binary_comparison",
 #' [limma::eBayes()], [limma::contrasts.fit()], [limma::topTable()]...
 #'
 #' @rdname binary_comparison-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

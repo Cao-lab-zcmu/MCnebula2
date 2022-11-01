@@ -76,7 +76,7 @@
 #'
 #' @aliases nebula
 #'
-#' @title ...
+#' @title Visualization component of chemical nebulae/nebula
 #'
 #' @description ...
 #'

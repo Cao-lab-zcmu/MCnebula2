@@ -13,7 +13,7 @@
 \alias{extract_rawset,ANY,character,ANY-method}
 \alias{extract_rawset}
 \alias{extract_rawset,ANY,character,function-method}
-\title{...}
+\title{Store extracted dataset}
 \usage{
 \S4method{project_dataset}{ANY}(x)
 
@@ -46,8 +46,11 @@ it will be used to collate data. This parameter is not for normal use.}
 for the \code{project_dataset} slot of the object.
 
 \code{latest}: get the first data in \code{dataset} slot ('list') and
-format as 'tbl'. The \code{latest(object)} equals to
-\code{tibble::as_tibble(entity(dataset(object)[[1]]))}
+format as 'tbl'. Equals:
+\itemize{
+\item \code{latest(object)}
+\item \code{tibble::as_tibble(entity(dataset(object)[[1]]))}
+}
 
 \code{extract_rawset}: For fast extract data in object which containing
 \code{project_dataset} slot. Normally not used.

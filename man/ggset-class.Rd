@@ -11,7 +11,7 @@
 \alias{new_ggset}
 \alias{mutate_layer,ggset,numeric-method}
 \alias{mutate_layer}
-\alias{mutate_layer,ANY,character-method}
+\alias{mutate_layer,ggset,character-method}
 \alias{call_command,ggset-method}
 \alias{call_command}
 \title{...}
@@ -22,7 +22,7 @@
 
 \S4method{mutate_layer}{ggset,numeric}(x, layer, ...)
 
-\S4method{mutate_layer}{ANY,character}(x, layer, ...)
+\S4method{mutate_layer}{ggset,character}(x, layer, ...)
 
 \S4method{call_command}{ggset}(x)
 }

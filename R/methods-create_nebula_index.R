@@ -1,6 +1,20 @@
 # ==========================================================================
 # create nebula index from filtered stardust classes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases create_nebula_index
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name create_hierarchy-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod create_nebula_index
 #' @description \code{create_nebula_index()}: get the default parameters for the method
 #' \code{create_nebula_index}.
@@ -41,8 +55,6 @@ setMethod("create_nebula_index",
 #'
 #' @rdname create_nebula_index-methods
 #'
-#' @order 1
-#'
 #' @examples
 #' \dontrun{
 #' create_nebula_index(...)
@@ -63,6 +75,21 @@ setMethod("create_nebula_index",
                             hierarchy, .features_id)
             return(x)
           })
+
+#' @aliases set_tracer
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name set_tracer-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod set_tracer
 #' @description \code{set_tracer()}: get the function for generating
 #' default parameters for the method
@@ -118,8 +145,6 @@ setMethod("set_tracer",
 #' @seealso [create_nebula_index()]
 #'
 #' @rdname set_tracer-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

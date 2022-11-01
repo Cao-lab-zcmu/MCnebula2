@@ -6,7 +6,8 @@
 #'
 #' @aliases project_conformation
 #'
-#' @title ...
+#' @title Clarify the name, path and attribute name of files
+#' in the project (directory)
 #'
 #' @description ...
 #'

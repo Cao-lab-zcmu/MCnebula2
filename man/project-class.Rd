@@ -33,7 +33,7 @@
 \alias{match.features_id}
 \alias{get_upper_dir_subscript,ANY,character,missing-method}
 \alias{get_upper_dir_subscript}
-\title{...}
+\title{Collection of Interface for extracting data from raw directory}
 \usage{
 \S4method{project_version}{ANY}(x)
 
@@ -83,40 +83,48 @@ for the \code{project_path} slot of the object.
 fast channel to obtain
 the downstream slot. e.g., getter
 for the \code{file_name} slot in sub-object
-of \code{project_conformation} slot of the object.
-\code{file_name(project_conformation(object))}
-equals to \code{file_name(object)}.
+of \code{project_conformation} slot of the object. Equals:
+\itemize{
+\item \code{file_name(project_conformation(object))}
+\item \code{file_name(object)}.
+}
 
 \code{project_metadata}: fast channel to obtain
 the downstream slot, getter
 for the \code{project_metadata} slot in sub-object
-of \code{project_metadata} slot of the object.
-\code{project_metadata(project_metadata(object))}
-equals to \code{project_metadata(object)}.
+of \code{project_metadata} slot of the object. Equals:
+\itemize{
+\item \code{project_metadata(project_metadata(object))}
+\item \code{project_metadata(object)}.
+}
 
 \code{methods_read}, \code{methods_format}, \code{methods_match}:
 fast channel to obtain
 the downstream slot. e.g., getter
 for the \code{methods_read} slot in sub-object
-of \code{project_api} slot of the object.
-\code{methods_read(project_api(object))}
-equals to \code{methods_read(object)}.
+of \code{project_api} slot of the object. Equals:
+\itemize{
+\item \code{methods_read(project_api(object))}
+\item \code{methods_read(object)}.
+}
 
 \code{match.candidates_id}, \code{match.features_id}:
 fast channel to obtain
 data (mostly 'tbl' or 'data.frame') inside the downstream slot ('list'), getter
 for the data named \code{match.candidates_id} in
 \code{methods_match} slot (a 'list') in sub-object
-of \code{project_api} slot of the object.
-\code{methods_match(project_api(object))$match.candidates_id}
-equals to \code{match.candidates_id(object)}.
+of \code{project_api} slot of the object. Equals:
+\itemize{
+\item \code{methods_match(project_api(object))$match.candidates_id}
+\item \code{match.candidates_id(object)}.
+}
 
 \code{get_upper_dir_subscript}: ...
 }
 \section{Slots}{
 
 \describe{
-\item{\code{project_version}}{...}
+\item{\code{project_version}}{character.}
 
 \item{\code{project_path}}{...}
 

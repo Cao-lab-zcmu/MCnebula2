@@ -2,6 +2,20 @@
 # make up 'ggset' (a meta class for visualizing ggplot object),
 # based on layout of parent nebula and child nebulae.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases activate_nebulae
+#'
+#' @title generate 'ggset' for visualization
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name activate_nebulae-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod activate_nebulae
 #' @description \code{activate_nebulae()}: get the default parameters for the method
 #' \code{activate_nebulae}.
@@ -43,8 +57,6 @@ setMethod("activate_nebulae",
 # @seealso ...
 #'
 #' @rdname activate_nebulae-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{
@@ -153,6 +165,21 @@ ggset_activate_child_nebulae <-
              palette_label(x)[[ hierarchy[[ name ]] ]]
            })
   }
+
+#' @aliases set_nodes_color
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name set_nodes_color-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @importFrom dplyr select
 #' @exportMethod set_nodes_color
 #'
@@ -176,8 +203,6 @@ ggset_activate_child_nebulae <-
 #' @seealso [activate_nebulae()], [visualize()]...
 #'
 #' @rdname set_nodes_color-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

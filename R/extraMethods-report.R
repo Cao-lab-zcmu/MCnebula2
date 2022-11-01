@@ -2,6 +2,20 @@
 # some methods for class 'report', to fast generate layer of 'section' or
 # 'code_block' etc.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases include_figure
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name include_figure-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod include_figure
 #'
 #' @aliases include_figure
@@ -39,6 +53,21 @@ setMethod("include_figure",
                                   codes = codes,
                                   args = args)
           })
+
+#' @aliases include_table
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name include_table-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod include_table
 #'
 #' @aliases include_table
@@ -77,6 +106,21 @@ setMethod("include_table",
                                  codes = codes,
                                  args = args)
           })
+
+#' @aliases history_rblock
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name history_rblock-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod history_rblock
 #' @description \code{history_rblock()}: get the default parameters for the method
 #' \code{history_rblock}.
@@ -118,8 +162,6 @@ setMethod("history_rblock",
 #' @seealso \code{\link{report-class}}, \code{\link{code_block-class}}...
 #'
 #' @rdname history_rblock-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

@@ -3,7 +3,6 @@
 \docType{class}
 \name{mcnebula-class}
 \alias{mcnebula-class}
-\alias{.mcnebula}
 \alias{mcnebula}
 \alias{show,mcnebula-method}
 \alias{show}
@@ -54,7 +53,7 @@
 \alias{sample_metadata<-}
 \alias{classification,mcnebula-method}
 \alias{classification}
-\title{...}
+\title{Overall object class of MCnebula2}
 \usage{
 \S4method{show}{mcnebula}(object)
 
@@ -138,15 +137,20 @@ for the \code{ion_mode} slot of the object.
 \code{palette_set}, \code{palette_gradient}, \code{palette_stat},
 \code{palette_col}: fast channel to obtain the downstream slot.
 For \code{palette_set}, e.g., getter for the \code{palette_set} slot in sub-object
-of \code{melody} slot of the object. \code{palette_set(melody(object))}
-equals to \code{palette_set(object)}.
+of \code{melody} slot of the object. Equals:
+\itemize{
+\item \code{palette_set(melody(object))}
+\item \code{palette_set(object)}.
+}
 
 \code{reference}: fast channel to obtain
 the downstream slot, getter
 for the \code{reference} slot in sub-object
-of \code{mcn_dataset} slot of the object.
-\code{reference(mcn_dataset(object))}
-equals to \code{reference(object)}.
+of \code{mcn_dataset} slot of the object. Equals:
+\itemize{
+\item \code{reference(mcn_dataset(object))}
+\item \code{reference(object)}
+}
 
 \code{specific_candidate}, \code{hierarchy}, \code{stardust_classes},
 \code{nebula_index}, \code{spectral_similarity}, \code{features_annotation},
@@ -155,27 +159,34 @@ fast channel to obtain data (mostly 'tbl' or 'data.frame')
 inside the downstream slot ('list'). e.g., getter
 for the data named \code{specific_candidate} in
 \code{reference} slot (a 'list') in sub-object
-of \code{mcn_dataset} slot of the object.
-\code{reference(mcn_dataset(object))$specific_candidate}
-equals to \code{specific_candidate(object)}.
+of \code{mcn_dataset} slot of the object. Equals:
+\itemize{
+\item \code{reference(mcn_dataset(object))$specific_candidate}
+\item \code{specific_candidate(object)}.
+}
 
 \code{spectral_similarity<-}, \code{features_quantification<-},
 \code{sample_metadata<-}: fast channel to replace
 data (mostly 'tbl' or 'data.frame') inside the downstream slot ('list'). e.g., setter
 for the data named \code{spectral_similarity} in
 \code{reference} slot (a 'list') in sub-object
-of \code{mcn_dataset} slot of the object.
-\code{reference(mcn_dataset(object))$spectral_similarity<-}
-similar to \code{spectral_similarity(object)<-}.
+of \code{mcn_dataset} slot of the object. Similar:
+\itemize{
+\item \code{reference(mcn_dataset(object))$spectral_similarity<-}
+\item \code{spectral_similarity(object)<-}.
+}
+
 But the latter not only replace and also validate.
 
 \code{classification}: fast channel to obtain
 data deeply inside the downstream slot ('list'), getter
 for the data named \code{".canopus"} in
 \code{dataset} slot (a 'list') in sub-object
-of \code{project_dataset} slot of the object.
-\code{tibble::as_tibble(entity(dataset(project_dataset(object))$.canopus))}
-equals to \code{classification(object)}.
+of \code{project_dataset} slot of the object. Equals:
+\itemize{
+\item \code{tibble::as_tibble(entity(dataset(project_dataset(object))$.canopus))}
+\item \code{classification(object)}.
+}
 }
 \section{Slots}{
 
@@ -214,6 +225,7 @@ equals to \code{classification(object)}.
 \examples{
 \dontrun{
 new('mcnebula', ...)
+mcnebula()
 }
 \dontrun{
 latest(x)

@@ -24,6 +24,7 @@
 \alias{format_msframe,msframe,missing,function,missing,function,missing-method}
 \alias{filter_msframe,msframe,function,missing-method}
 \alias{filter_msframe}
+\alias{filter_msframe,msframe,function,formula-method}
 \title{...}
 \usage{
 \S4method{show}{msframe}(object)
@@ -49,6 +50,8 @@
 \S4method{format_msframe}{msframe,missing,`function`,missing,`function`,missing}(x, fun_names, fun_types)
 
 \S4method{filter_msframe}{msframe,`function`,missing}(x, fun_filter, f, ...)
+
+\S4method{filter_msframe}{msframe,`function`,formula}(x, fun_filter, f, ...)
 }
 \arguments{
 \item{x}{...}
@@ -64,6 +67,15 @@
 \item{fun_names}{...}
 
 \item{fun_types}{...}
+
+\item{fun_filter}{...}
+
+\item{f}{...}
+
+\item{...}{...}
+}
+\value{
+...
 }
 \description{
 ...
@@ -78,8 +90,12 @@ for the \code{msframe} slot of the object.
 for the \code{entity} slot of the object.
 
 ...
+
+...
 }
 \details{
+...
+
 ...
 }
 \section{Slots}{
@@ -99,6 +115,9 @@ latest(...)
 }
 \dontrun{
 format_msframe(...)
+}
+\dontrun{
+filter_msframe(...)
 }
 }
 \seealso{

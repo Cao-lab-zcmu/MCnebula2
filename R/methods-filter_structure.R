@@ -1,6 +1,20 @@
 # ==========================================================================
 # collate structure dataset in sirius project and do filtering
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases filter_structure
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name filter_structure-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @exportMethod filter_structure
 #' @description \code{filter_structure()}: get the default parameters for the method
 #' \code{filter_structure}.

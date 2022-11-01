@@ -23,7 +23,7 @@
 \alias{get_metadata,ANY,character,ANY,ANY,ANY-method}
 \alias{get_metadata}
 \alias{get_metadata,missing,character,project_metadata,project_conformation,character-method}
-\title{...}
+\title{Metadata of files}
 \usage{
 \S4method{show}{project_metadata}(object)
 

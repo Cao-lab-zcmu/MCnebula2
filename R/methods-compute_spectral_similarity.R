@@ -1,6 +1,20 @@
 # ==========================================================================
 # compute spectral similarity of features within each nebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases compute_spectral_similarity
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name compute_spectral_similarity-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @importFrom pbapply pbapply
 #' @importFrom pbapply pblapply
 #' @importFrom pbapply pbmapply
@@ -82,8 +96,6 @@ setMethod("compute_spectral_similarity",
 # @seealso ...
 #'
 #' @rdname compute_spectral_similarity-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

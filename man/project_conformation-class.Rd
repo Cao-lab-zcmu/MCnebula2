@@ -22,7 +22,8 @@
 \alias{attribute_name}
 \alias{attribute_name<-,project_conformation-method}
 \alias{attribute_name<-}
-\title{...}
+\title{Clarify the name, path and attribute name of files
+in the project (directory)}
 \usage{
 \S4method{show}{project_conformation}(object)
 

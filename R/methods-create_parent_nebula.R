@@ -2,6 +2,20 @@
 # use features annotation and spectral similarity data to create network
 # for parent-nebula
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @aliases create_parent_nebula
+#'
+#' @title ...
+#'
+#' @description ...
+#'
+#' @details ...
+#'
+#' @name create_parent_nebula-methods
+#'
+#' @order 1
+NULL
+#> NULL
+
 #' @importFrom igraph graph_from_data_frame
 #' @exportMethod create_parent_nebula
 #' @description \code{create_parent_nebula()}: get the default parameters for the method
@@ -47,8 +61,6 @@ setMethod("create_parent_nebula",
 # @seealso ...
 #'
 #' @rdname create_parent_nebula-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{
