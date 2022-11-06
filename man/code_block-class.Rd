@@ -34,7 +34,7 @@
 \alias{new_code_block_table}
 \alias{call_command,code_block-method}
 \alias{call_command}
-\title{...}
+\title{Sequestrate code and setting run parameters.}
 \usage{
 \S4method{show}{code_block}(object)
 
@@ -69,28 +69,34 @@
 \arguments{
 \item{value}{The value for the slot.}
 
-\item{language}{...}
+\item{language}{character(1). For slot \code{command_name}.}
 
-\item{codes}{...}
+\item{codes}{character. For slot \code{codes}.}
 
-\item{args}{...}
+\item{args}{list. For slot \code{command_args}.}
 
-\item{prettey}{...}
+\item{prettey}{logical. If ture, use \code{\link[styler:style_text]{styler::style_text()}} to pretty the codes.}
 
-\item{fun_prettey}{...}
+\item{fun_prettey}{function. Default is \code{styler::style_text}.}
 
-\item{name}{...}
+\item{name}{character(1). For cross-reference in document.
+See \url{https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html#cross-ref}.}
 
-\item{caption}{...}
+\item{caption}{character(1). Caption of figure display in document.}
 
-\item{...}{...}
+\item{...}{Other parameters passed to \code{\link[=new_code_block]{new_code_block()}}.}
 }
 \description{
-...
+Mainly desiged for R code block.
+The job of this class object is to record the codes and the running parameters
+of its source language or program;
+These information can then be output as formatted code block text (use \code{\link[=call_command]{call_command()}}).
 
-...
+\code{code_block_table}: class inherit from \code{code_block}, with
+default values for slot \code{command_args} facilitate showing table in document.
 
-...
+\code{code_block_figure}: class inherit from \code{code_block}, with
+default values for slot \code{command_args} facilitate showing figure in document.
 
 \code{code_block}, \code{code_block<-}: getter and setter
 for the \code{code_block} slot of the object.
@@ -98,7 +104,7 @@ for the \code{code_block} slot of the object.
 \code{codes}, \code{codes<-}: getter and setter
 for the \code{codes} slot of the object.
 
-\code{new_code_block}: ...
+\code{new_code_block}: create a \linkS4class{code_block} object.
 
 \code{new_code_block()}: get the default parameters
 for the method \code{new_code_block}.
@@ -106,22 +112,24 @@ for the method \code{new_code_block}.
 \code{new_code_block(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{new_code_block}.
 
-\code{new_code_block_figure}: ...
+\code{new_code_block_figure}: create \linkS4class{code_block_figure} object.
+This methods simplified parameter settings for displaying figures in documents.
 
-\code{new_code_block_table}: ...
+\code{new_code_block_table}: create \linkS4class{code_block_table} object.
+This methods simplified parameter settings for displaying table in documents.
 
 \code{call_command}: Format 'code_block' object as character.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{codes}}{...}
+\item{\code{codes}}{character. Codes.}
 
-\item{\code{command_name}}{...}
+\item{\code{command_name}}{character(1). Program or language. e.g., "r".}
 
-\item{\code{command_function}}{...}
+\item{\code{command_function}}{function. Used for gather the codes and args as code block.}
 
-\item{\code{command_args}}{...}
+\item{\code{command_args}}{list. Args passed to program.}
 }}
 
 \examples{
@@ -148,9 +156,12 @@ call_command(...)
 }
 }
 \seealso{
-\code{\link{command-class}}
+\code{\link{command-class}}.
+\url{https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html#cross-ref}.
+\url{https://bookdown.org/yihui/rmarkdown/compile.html}.
 
 Other call_commands: 
+\code{\link{command-class}},
 \code{\link{ggset-class}},
 \code{\link{report-class}},
 \code{\link{section-class}}

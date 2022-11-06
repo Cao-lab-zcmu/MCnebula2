@@ -3,11 +3,17 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases filter_formula
 #'
-#' @title ...
+#' @title Collate and filter candidates of chemical formula for each 'feature'
 #'
-#' @description ...
+#' @description This methods provide an approach to
+#' collate and filter chemical formula candidates data in baches for each
+#' 'feature'.
 #'
-#' @details ...
+#' @details In SIRIUS project directory, if the computation job has done,
+#' each 'feature' has multiple prediction candidates whether for chemical formula,
+#' structure, or classification. This method provides an approach to collate
+#' and filter these data in baches. See \link{MCnebula2} for details of chemical
+#' formula, structure and classification.
 #'
 #' @name filter_formula-methods
 #'
@@ -41,19 +47,19 @@ setMethod("filter_formula",
 #'
 #' @aliases filter_formula
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param param ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param x [mcnebula-class] object.
+#' 
+#' @param fun_filter function. Used to filter data.frame. The function would
+#' run for candidates data (data.frame) for each 'features'. Such as:
+#' - \code{lapply(split(all_data, ~.features_id), fun_filter, ...)}.
+#' 
+#' This parameter provides an elegant and flexible way to filter data.
+#' Users can pass function [dplyr::filter()] to specify
+#' any attributes condition to filter the data.
+#' 
+#' @param ... Other parameters passed to the function \code{fun_filter}.
+#' @param by_reference logical. Use \code{specific_candidate(object)} data to filter
+#' candidates data. See [create_reference()].
 #'
 #' @rdname filter_formula-methods
 #'

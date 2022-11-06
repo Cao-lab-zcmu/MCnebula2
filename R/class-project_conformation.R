@@ -9,15 +9,24 @@
 #' @title Clarify the name, path and attribute name of files
 #' in the project (directory)
 #'
-#' @description ...
+#' @description 
+#' This is a class object used to record the name, path and attribute name of the file.
+#' These records can be retrieved by "subscript" (see [subscript-class]).
+#' See [project-class] for joint application with other related classes.
+#'
+#' @note The class is not for normal use of the package.
 #'
 #' @family projects
+#' @family subscripts
 #'
-# @seealso \code{\link{<class>-class}}
-#'
-#' @slot file_name ...
-#' @slot file_api ...
-#' @slot attribute_name ...
+#' @slot file_name character with names.
+#' Record the filenames or pattern string or function name (begin with "FUN_")
+#' for each "subscript" (imply file names).
+#' @slot file_api character with names.
+#' Record the file path for each "subscript" (imply file names).
+#' The path is descriped by "subscript" with "/".
+#' @slot attribute_name character with names.
+#' Record the attribute name for each "subscript" (imply column names).
 #'
 #' @rdname project_conformation-class
 #'

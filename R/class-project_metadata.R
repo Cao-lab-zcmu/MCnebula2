@@ -8,13 +8,15 @@
 #'
 #' @title Metadata of files
 #'
-#' @description ...
+#' @description This is a class object used to store metadata of files.
+#' See [project-class] for joint application with other related classes.
+#'
+#' @note The class is not for normal use of the package.
 #'
 #' @family projects
 #'
-# @seealso \code{\link{<class>-class}}
-#'
-#' @slot metadata ...
+#' @slot metadata a list with names of [subscript-class].
+#' Each element of the list is a data.frame.
 #'
 #' @rdname project_metadata-class
 #'
@@ -74,8 +76,7 @@ setReplaceMethod("project_metadata",
 #' @aliases latest
 #' @description \code{latest}: get the first data in \code{metadata} slot and
 #' format as "tbl".
-# @family ...s
-# @seealso [fun()]
+#' @family latests
 #' @rdname project_metadata-class
 #' @examples
 #' \dontrun{
@@ -107,11 +108,8 @@ setReplaceMethod("metadata",
 ## ---------------------------------------------------------------------- 
 #' @exportMethod add_dataset
 #' @aliases add_dataset
-#' @description \code{add_dataset}: ...
-#' @param x ...
-#' @param list ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{add_dataset}: add the list into slot \code{metadata}.
+#' @param list a list (with names) of metadata (data.frame) with names.
 #' @rdname project_metadata-class
 #' @examples
 #' \dontrun{
@@ -127,11 +125,10 @@ setMethod("add_dataset",
           })
 #' @exportMethod extract_metadata
 #' @aliases extract_metadata
-#' @description \code{extract_metadata}: ...
-#' @param x ...
-#' @param subscript ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{extract_metadata}: use "subscript" to extract metadata from an
+#' object with slot \code{project_metadata},
+#' and then return it as a new \code{project_metadata}.
+#' @param subscript see [subscript-class].
 #' @rdname project_metadata-class
 #' @examples
 #' \dontrun{
@@ -149,14 +146,16 @@ setMethod("extract_metadata",
           })
 #' @exportMethod get_metadata
 #' @aliases get_metadata
-#' @description \code{get_metadata}: ...
-#' @param x ...
-#' @param subscript ...
-#' @param project_metadata ...
-#' @param project_conformation ...
-#' @param path ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{get_metadata}: for an object with slot of \code{project_metadata},
+#' get the metadata of files of specified "subscript", then return the object.
+#' @param project_metadata [project_metadata-class] object.
+#' Used by \code{get_metadata()}. If 'missing', the slot \code{project_metadata} inside
+#' the object will be used.
+#' @param project_conformation [project_conformation-class] object.
+#' Used by \code{get_metadata()}. If 'missing', the slot \code{project_conformation} inside
+#' the object will be used.
+#' @param path character. The path of the project directory (generally, SIRIUS project).
+#' If 'missing', the slot \code{project_path} inside the object will be used.
 #' @rdname project_metadata-class
 #' @examples
 #' \dontrun{

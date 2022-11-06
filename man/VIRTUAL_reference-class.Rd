@@ -18,7 +18,7 @@
 \item{value}{The value for the slot.}
 }
 \description{
-...
+This VIRTUAL class provides a slot for storing processed data.
 
 \code{reference}, \code{reference<-}: getter and setter
 for the \code{reference} slot of the object.
@@ -26,7 +26,7 @@ for the \code{reference} slot of the object.
 \section{Slots}{
 
 \describe{
-\item{\code{reference}}{...}
+\item{\code{reference}}{list with names (formal name).}
 }}
 
 \concept{references}

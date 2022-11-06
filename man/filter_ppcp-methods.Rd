@@ -6,7 +6,7 @@
 \alias{filter_ppcp,missing,missing,missing-method}
 \alias{filter_ppcp,mcnebula,ANY,ANY-method}
 \alias{filter_ppcp,mcnebula,function,logical-method}
-\title{...}
+\title{Collate and filter candidates of chemical classification for each 'feature'}
 \usage{
 \S4method{filter_ppcp}{missing,missing,missing}()
 
@@ -15,26 +15,39 @@
 \S4method{filter_ppcp}{mcnebula,`function`,logical}(x, fun_filter, ..., by_reference)
 }
 \arguments{
-\item{param}{...}
+\item{x}{\linkS4class{mcnebula} object.}
+
+\item{fun_filter}{function. Used to filter data.frame. The function would
+run for candidates data (data.frame) for each 'features'. Such as:
+\itemize{
+\item \code{lapply(split(all_data, ~.features_id), fun_filter, ...)}.
 }
-\value{
-...
+
+This parameter provides an elegant and flexible way to filter data.
+Users can pass function \code{\link[dplyr:filter]{dplyr::filter()}} to specify
+any attributes condition to filter the data.}
+
+\item{...}{Other parameters passed to the function \code{fun_filter}.}
+
+\item{by_reference}{logical. Use \code{specific_candidate(object)} data to filter
+candidates data. See \code{\link[=create_reference]{create_reference()}}.}
 }
 \description{
-...
+This methods provide an approach to
+collate and filter chemical classification candidates data in baches for each
+'feature'.
 
 \code{filter_ppcp()}: get the default parameters for the method
 \code{filter_ppcp}.
 
 \code{filter_ppcp(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{filter_ppcp}.
-
-...
 }
 \details{
-...
-
-...
+Filter for PPCP (posterior probability of classification prediction) data.
+See details about classification prediction for compounds:
+\url{http://www.nature.com/articles/s41587-020-0740-8}.
+See other details in \code{\link[=filter_formula]{filter_formula()}}.
 }
 \examples{
 \dontrun{

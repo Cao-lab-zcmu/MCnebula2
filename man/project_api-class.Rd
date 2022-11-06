@@ -46,7 +46,8 @@
 \item{value}{The value for the slot.}
 }
 \description{
-...
+This is a class object used to store various functions for extracting and formatting data.
+See \linkS4class{project} for joint application with other related classes.
 
 \code{project_api}, \code{project_api<-}: getter and setter
 for the \code{project_api} slot of the object.
@@ -63,13 +64,18 @@ for the \code{methods_match} slot of the object.
 \section{Slots}{
 
 \describe{
-\item{\code{methods_read}}{...}
+\item{\code{methods_read}}{list. Store a list of functions for reading data.
+The list with the names: "read" + "subscript". e.g., "read.f3_fingerid".}
 
-\item{\code{methods_format}}{...}
+\item{\code{methods_format}}{function. The function is used to format the data
+(e.g., rename the column names; convert the columns of character type into numeric).}
 
-\item{\code{methods_match}}{...}
+\item{\code{methods_match}}{list. Store a list of functions for matching and extracting string.}
 }}
 
+\note{
+The class is not for normal use of the package.
+}
 \examples{
 \dontrun{
 new('project_api', ...)

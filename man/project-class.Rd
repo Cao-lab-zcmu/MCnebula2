@@ -64,14 +64,17 @@
 \S4method{get_upper_dir_subscript}{ANY,character,missing}(x, subscript)
 }
 \arguments{
-\item{x}{...}
+\item{x}{Maybe object of class inherit \linkS4class{project}.}
 
 \item{value}{The value for the slot.}
 
-\item{subscript}{...}
+\item{subscript}{the "subscript" name of file. See \linkS4class{subscript}.}
 }
 \description{
-...
+This is a class object designed to extract files in the project directory.
+Its responsibility is to describe the name,
+path and reading method of the file under the project directory;
+Use these information to extract and store data.
 
 \code{project_version}, \code{project_version<-}: getter and setter
 for the \code{project_version} slot of the object.
@@ -89,13 +92,13 @@ of \code{project_conformation} slot of the object. Equals:
 \item \code{file_name(object)}.
 }
 
-\code{project_metadata}: fast channel to obtain
+\code{metadata}: fast channel to obtain
 the downstream slot, getter
-for the \code{project_metadata} slot in sub-object
+for the \code{metadata} slot in sub-object
 of \code{project_metadata} slot of the object. Equals:
 \itemize{
-\item \code{project_metadata(project_metadata(object))}
-\item \code{project_metadata(object)}.
+\item \code{metadata(project_metadata(object))}
+\item \code{metadata(object)}.
 }
 
 \code{methods_read}, \code{methods_format}, \code{methods_match}:
@@ -119,22 +122,56 @@ of \code{project_api} slot of the object. Equals:
 \item \code{match.candidates_id(object)}.
 }
 
-\code{get_upper_dir_subscript}: ...
+\code{get_upper_dir_subscript}: Get the "subscript" name of the folder.
+}
+\details{
+It is a collection of classes whose names start with "project_":
+\itemize{
+\item \linkS4class{project_conformation}: The name, path and attribute name of the file are described.
+\item \linkS4class{project_api}: Functions for reading and formatting data are provided.
+\item \linkS4class{project_metadata}: Metadata, which records the files stored in the project directory.
+\item \linkS4class{project_dataset}: The extracted data is stored here.
+}
+
+The above class objects are coordinated into a whole through the "subscript" name
+(see \linkS4class{subscript}).
+For example, when a command (\code{collate_data(x, ".f3_fingerid")}) requests to
+extract the files of subscript of ".f3_fingerid", the data extraction module:
+\itemize{
+\item from slot of \code{project_conformation},
+get the file name (pattern string) and path of subscript of ".f3_fingerid";
+\item match the files under the path with the pattern string (i.e., get the metadata of the files),
+then stored the metadata into slot of \code{project_metadata};
+\item from slot of \code{project_api}, get the functions of subscript of ".f3_fingerid";
+\item use these functions to read and format the data in batches;
+\item store the extracted data into slot of \code{project_dataset}.
+}
+
+This class is mainly designed for extracting files under the SIRIUS project directory.
+These files are: mainly "tables" that can be read through functions such as \code{read.table};
+numerous and have multiple directories; need to be processed in batches.
+SIRIUS project may alter the name and path of internal files during version changes,
+which is in fact deadly for MCnebula2.
+To make the data extraction module of MCnebula2 free from version issues,
+this class object is designed to flexibly handle the extraction of internal files.
+Most contents need to be considered by MCnebula2 developers.
+The only thing users need to know:
+slot of \linkS4class{project_dataset} object stores the extracted data.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{project_version}}{character.}
+\item{\code{project_version}}{character(1). The target project version. e.g., "sirius.v4".}
 
-\item{\code{project_path}}{...}
+\item{\code{project_path}}{character(1). The target project path.}
 
-\item{\code{project_conformation}}{...}
+\item{\code{project_conformation}}{\linkS4class{project_conformation} object.}
 
-\item{\code{project_metadata}}{...}
+\item{\code{project_metadata}}{\linkS4class{project_metadata} object.}
 
-\item{\code{project_api}}{...}
+\item{\code{project_api}}{\linkS4class{project_api} object.}
 
-\item{\code{project_dataset}}{...}
+\item{\code{project_dataset}}{\linkS4class{project_dataset} object.}
 }}
 
 \examples{
@@ -142,7 +179,8 @@ of \code{project_api} slot of the object. Equals:
 new('project', ...)
 }
 \dontrun{
-get_upper_dir_subscript(...)
+object <- initialize_mcnebula(mcnebula())
+get_upper_dir_subscript(object, ".f3_fingerid")
 }
 }
 \seealso{

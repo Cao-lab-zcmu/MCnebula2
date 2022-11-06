@@ -46,22 +46,26 @@
 \S4method{get_metadata}{missing,character,project_metadata,project_conformation,character}(subscript, project_metadata, project_conformation, path)
 }
 \arguments{
-\item{x}{...}
-
 \item{value}{The value for the slot.}
 
-\item{list}{...}
+\item{list}{a list (with names) of metadata (data.frame) with names.}
 
-\item{subscript}{...}
+\item{subscript}{see \linkS4class{subscript}.}
 
-\item{project_metadata}{...}
+\item{project_metadata}{\linkS4class{project_metadata} object.
+Used by \code{get_metadata()}. If 'missing', the slot \code{project_metadata} inside
+the object will be used.}
 
-\item{project_conformation}{...}
+\item{project_conformation}{\linkS4class{project_conformation} object.
+Used by \code{get_metadata()}. If 'missing', the slot \code{project_conformation} inside
+the object will be used.}
 
-\item{path}{...}
+\item{path}{character. The path of the project directory (generally, SIRIUS project).
+If 'missing', the slot \code{project_path} inside the object will be used.}
 }
 \description{
-...
+This is a class object used to store metadata of files.
+See \linkS4class{project} for joint application with other related classes.
 
 \code{project_metadata}, \code{project_metadata<-}: getter and setter
 for the \code{project_metadata} slot of the object.
@@ -72,18 +76,25 @@ format as "tbl".
 \code{metadata}, \code{metadata<-}: getter and setter
 for the \code{metadata} slot of the object.
 
-\code{add_dataset}: ...
+\code{add_dataset}: add the list into slot \code{metadata}.
 
-\code{extract_metadata}: ...
+\code{extract_metadata}: use "subscript" to extract metadata from an
+object with slot \code{project_metadata},
+and then return it as a new \code{project_metadata}.
 
-\code{get_metadata}: ...
+\code{get_metadata}: for an object with slot of \code{project_metadata},
+get the metadata of files of specified "subscript", then return the object.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{metadata}}{...}
+\item{\code{metadata}}{a list with names of \linkS4class{subscript}.
+Each element of the list is a data.frame.}
 }}
 
+\note{
+The class is not for normal use of the package.
+}
 \examples{
 \dontrun{
 new('project_metadata', ...)
@@ -107,5 +118,12 @@ Other projects:
 \code{\link{project_api-class}},
 \code{\link{project_conformation-class}},
 \code{\link{project_dataset-class}}
+
+Other latests: 
+\code{\link{mcn_dataset-class}},
+\code{\link{mcnebula-class}},
+\code{\link{msframe-class}},
+\code{\link{project_dataset-class}}
 }
+\concept{latests}
 \concept{projects}

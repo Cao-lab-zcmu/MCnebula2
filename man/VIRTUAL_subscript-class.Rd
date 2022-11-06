@@ -18,7 +18,28 @@
 \item{value}{The value for the slot.}
 }
 \description{
-...
+This VIRTUAL class provides a slot for signing the data.
+The "subscript" like the signature for data, used to distinguish different data
+or file and retrieve it accurately.
+The "subscript" is mostly used for \linkS4class{project} (as well as its related classes):
+\itemize{
+\item imply file names. e.g., for "sirius.v4", ".f3_fingerid" indicate all files in
+directory of "fingerid" for each features.
+\item imply attribute names. e.g., for "sirius.v4", "tani.score" indicate attribute name
+of "tanimotoSimilarity".
+}
+
+In essence, "subscript" is the alias of a file or data or attribute.
+In this package, using the "subscript" system means that
+all external data names are given an alias.
+In fact, this makes things more complicated. Why did we do this?
+Because the naming system of external data is not constant,
+these names may change with the version of the data source.
+In order to enable this R package to accurately extract and call these data,
+it is necessary to establish a set of aliases within the package.
+"Subscript" names are used internally by this package.
+They correspond to external data and are equivalent to providing an interface
+to interface with external data.
 
 \code{subscript}, \code{subscript<-}: getter and setter
 for the \code{subscript} slot of the object.
@@ -26,12 +47,13 @@ for the \code{subscript} slot of the object.
 \section{Slots}{
 
 \describe{
-\item{\code{subscript}}{...}
+\item{\code{subscript}}{character(1).}
 }}
 
 \seealso{
 Other subscripts: 
 \code{\link{mcnebula-class}},
-\code{\link{msframe-class}}
+\code{\link{msframe-class}},
+\code{\link{project_conformation-class}}
 }
 \concept{subscripts}

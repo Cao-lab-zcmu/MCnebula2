@@ -30,7 +30,7 @@
 \alias{palette_label}
 \alias{palette_label<-,melody-method}
 \alias{palette_label<-}
-\title{...}
+\title{Mutiple color palette in hexadecimal code}
 \usage{
 \S4method{show}{melody}(object)
 
@@ -62,7 +62,11 @@
 \item{value}{The value for the slot.}
 }
 \description{
-...
+This is a class object store Hex color used for visualization.
+In default (use \code{\link[=initialize_mcnebula]{initialize_mcnebula()}} to initialize the object),
+these these Hex color in each palette were get from package \code{ggsci}.
+Most of these palette in this package would passed to \link[ggplot2:scale_manual]{ggplot2::scale_fill_manual} for
+filling color. So, let these Hex color with names may work well to specify target.
 
 \code{melody}, \code{melody<-}: getter and setter
 for the \code{melody} slot of the object.
@@ -85,15 +89,15 @@ for the \code{palette_label} slot of the object.
 \section{Slots}{
 
 \describe{
-\item{\code{palette_set}}{...}
+\item{\code{palette_set}}{character with names or not. Hex color.}
 
-\item{\code{palette_gradient}}{...}
+\item{\code{palette_gradient}}{character with names or not. Hex color.}
 
-\item{\code{palette_stat}}{...}
+\item{\code{palette_stat}}{character with names or not. Hex color.}
 
-\item{\code{palette_col}}{...}
+\item{\code{palette_col}}{character with names or not. Hex color.}
 
-\item{\code{palette_label}}{...}
+\item{\code{palette_label}}{character with names or not. Hex color.}
 }}
 
 \examples{

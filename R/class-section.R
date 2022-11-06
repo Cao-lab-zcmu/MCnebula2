@@ -6,16 +6,21 @@
 #'
 #' @aliases code_block
 #'
-#' @title ...
+#' @title Sequestrate code and setting run parameters.
 #'
-#' @description ...
+#' @description Mainly desiged for R code block.
+#' The job of this class object is to record the codes and the running parameters
+#' of its source language or program;
+#' These information can then be output as formatted code block text (use [call_command()]).
 #'
-#' @slot codes ...
-#' @slot command_name ...
-#' @slot command_function ...
-#' @slot command_args ...
+#' @slot codes character. Codes.
+#' @slot command_name character(1). Program or language. e.g., "r".
+#' @slot command_function function. Used for gather the codes and args as code block.
+#' @slot command_args list. Args passed to program.
 #'
-#' @seealso \code{\link{command-class}}
+#' @seealso \code{\link{command-class}}.
+#' \url{https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html#cross-ref}.
+#' \url{https://bookdown.org/yihui/rmarkdown/compile.html}.
 #'
 #' @rdname code_block-class
 #' @order 1
@@ -40,7 +45,8 @@
 #'
 #' @aliases code_block_table
 #'
-#' @description ...
+#' @description \code{code_block_table}: class inherit from \code{code_block}, with
+#' default values for slot \code{command_args} facilitate showing table in document.
 #'
 #' @rdname code_block-class
 #'
@@ -59,7 +65,8 @@
 #'
 #' @aliases code_block_figure
 #'
-#' @description ...
+#' @description \code{code_block_figure}: class inherit from \code{code_block}, with
+#' default values for slot \code{command_args} facilitate showing figure in document.
 #'
 #' @rdname code_block-class
 #'
@@ -78,10 +85,10 @@
 #'
 #' @aliases heading
 #'
-#' @description ...
+#' @description This is a class object used to clarify the heading and its hierarchy.
 #'
-#' @slot .Data ...
-#' @slot level ...
+#' @slot .Data character(1). Text of heading.
+#' @slot level numeric. Level of heading.
 #'
 #' @rdname section-class
 #'
@@ -100,13 +107,14 @@
 #'
 #' @aliases section
 #'
-#' @title ...
+#' @title Basic cells in the report
 #'
-#' @description ...
+#' @description A class object consist of [heading-class], paragraph (character),
+#' and [code_block-class]. These [section-class] belong to basic cells of report.
 #'
-#' @slot heading ...
-#' @slot paragraph ...
-#' @slot code_block ...
+#' @slot heading [heading-class] object.
+#' @slot paragraph character. Text for description.
+#' @slot code_block [code_block-class] object.
 #'
 #' @rdname section-class
 #' @order 1
@@ -237,14 +245,12 @@ setReplaceMethod("codes",
 ## ------------------------------------- 
 #' @exportMethod new_code_block
 #' @aliases new_code_block
-#' @description \code{new_code_block}: ...
-#' @param language ...
-#' @param codes ...
-#' @param args ...
-#' @param prettey ...
-#' @param fun_prettey ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{new_code_block}: create a [code_block-class] object.
+#' @param language character(1). For slot \code{command_name}.
+#' @param codes character. For slot \code{codes}.
+#' @param args list. For slot \code{command_args}.
+#' @param prettey logical. If ture, use [styler::style_text()] to pretty the codes.
+#' @param fun_prettey function. Default is \code{styler::style_text}.
 #' @rdname code_block-class
 #' @examples
 #' \dontrun{
@@ -291,12 +297,12 @@ setMethod("new_code_block",
 ## ------------------------------------- 
 #' @exportMethod new_code_block_figure
 #' @aliases new_code_block_figure
-#' @description \code{new_code_block_figure}: ...
-#' @param name ...
-#' @param caption ...
-#' @param ... ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{new_code_block_figure}: create [code_block_figure-class] object.
+#' This methods simplified parameter settings for displaying figures in documents.
+#' @param name character(1). For cross-reference in document.
+#' See \url{https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html#cross-ref}.
+#' @param caption character(1). Caption of figure display in document.
+#' @param ... Other parameters passed to [new_code_block()].
 #' @rdname code_block-class
 #' @examples
 #' \dontrun{
@@ -312,9 +318,8 @@ setMethod("new_code_block_figure",
           })
 #' @exportMethod new_code_block_table
 #' @aliases new_code_block_table
-#' @description \code{new_code_block_table}: ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{new_code_block_table}: create [code_block_table-class] object.
+#' This methods simplified parameter settings for displaying table in documents.
 #' @rdname code_block-class
 #' @examples
 #' \dontrun{
@@ -382,9 +387,9 @@ setReplaceMethod("level",
                  })
 #' @exportMethod new_heading
 #' @aliases new_heading
-#' @description \code{new_heading}: ...
-#' @param heading ...
-#' @param level ...
+#' @description \code{new_heading}: create [heading-class] object.
+#' @param heading character(1). For slot \code{.Data}.
+#' @param level numeric(1). For slot \code{level}.
 #' @rdname section-class
 #' @examples
 #' \dontrun{
@@ -456,13 +461,9 @@ setMethod("new_section",
           })
 #' @exportMethod new_section
 #' @aliases new_section
-#' @description \code{new_section}: ...
-#' @param heading ...
-#' @param level ...
-#' @param paragraph ...
-#' @param code_block ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{new_section}: create [section-class] object.
+#' @param paragraph character. Text for description.
+#' @param code_block [code_block-class] object.
 #' @rdname section-class
 #' @examples
 #' \dontrun{

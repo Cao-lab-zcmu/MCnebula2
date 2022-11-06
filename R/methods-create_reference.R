@@ -3,11 +3,44 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases create_reference
 #'
-#' @title ...
+#' @title Establish 'specific candidate' for each 'feature'
 #'
-#' @description ...
+#' @description
+#' According to the filtered data, whether obtained by [filter_formula()],
+#' [filter_structure()] or [filter_ppcp()],
+#' establishing specific candidate of each 'feature' for subsequent data filtering.
+#' This step is an important intermediate link for the three part of data filtering,
+#' makes the final filtered results of chemical formula, structure and classification
+#' consistent.
 #'
-#' @details ...
+#' @details
+#' \bold{Establish reference upon top candidate}
+#' Suppose we predicted a potential compound represented by LC-MS/MS spectrum,
+#' and obtained the candidates of chemical molecular formula,
+#' structure and chemical class.
+#' These candidates include both positive and negative results:
+#' for chemical molecular formula and chemical structure,
+#' the positive prediction was unique; for chemical class,
+#' multiple positive predictions that belong to various classification were involved.
+#' We did not know the exact negative and positive.
+#' Normally, we ranked and filtered these according to the scores.
+#' There were numerious scores, for isotopes, for mass error, for structural similarity,
+#' for chemical classes...
+#' Which score selected to rank candidates depends on the purpose
+#' of research. Such as:
+#' - To find out the chemical structure mostly be positive, ranking the candidates
+#' by structural score.
+#' - To determine whether the potential compound may be of a certain chemical classes,
+#' ranking the candidates by the classified score.
+#' 
+#' Ether by [filter_formula()], [filter_structure()] or [filter_ppcp()], the
+#' candidate with top score can be obtained.
+#' However, for the three module (formula, structure, classes), sometimes
+#' thier top score candidates were not in line with each other.
+#' That is, thier top score towards different chemical molecular formulas.
+#' To find out the corresponding data in other modules,
+#' \code{create_reference} should be performed to establish the
+#' 'specific_candidate' for subsequent filtering.
 #'
 #' @name create_reference-methods
 #'
@@ -19,25 +52,22 @@ NULL
 #'
 #' @aliases create_reference
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param from ...
-#' @param subscript ...
-#' @param data ...
-#' @param columns ...
-#' @param fill ...
-#' @param MoreArgs ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param x [mcnebula-class] object.
+#' @param from character(1). "structure", "formula" or "ppcp".
+#' @param subscript character(1). ".f3_fingerid", ".f2_formula" or ".f3_canopus".
+#' See [subscript-class].
+#' @param data data.frame. An external channel for user to specify candidate customarily.
+#' Normally not used.
+#' @param columns character(2) or numeric(2). Specify the key columns in the parameter
+#' of data. Normally not used.
+#' @param fill logical. If \code{TRUE}, run post modification.
+#' Run [filter_formula(object)], and use its results to fill the data
+#' \code{specific_candidate} for 'features' without specified top candidate.
+#' Only useful when the data \code{specific_candidate} were
+#' based on scores of chemical structure or classes, as for some 'features'
+#' there may be no chemical structural
+#' or classified candidates but candidates for chemical formula.
+#' @param MoreArgs list. Used only \code{fill = T}. Parameters passed to [filter_formula()].
 #'
 #' @rdname create_reference-methods
 #'

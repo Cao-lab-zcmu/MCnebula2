@@ -87,7 +87,7 @@
 #' The core of MCnebula2 is its chemical filtering algorithm, called ABC selection algorithm.
 #'
 #' \bold{Chemical structure and formula.} To explain the ABC selection algorithm in detail,
-#' we need to start with MS/MS spectral analysis and identification of compounds.
+#' we need to start with MS/MS spectral analysis and identification of compounds:
 #' The analysis of MS/MS spectrum is a process of inference and prediction.
 #' For example, we speculate the composition of elements based on the molecular weight of MS1;
 #' combined with the possible fragmentation pattern of MS2 spectrum,
@@ -99,22 +99,30 @@
 #' It can be assumed that there are complex candidates
 #' for the potential chemical molecular formula,
 #' chemical structure and chemical class behind MS/MS spectrum.
+#' Suppose we have these data of candidates now,
 #' MCnebula2 extracted these candidates and obtained the unique
 #' molecular formula and chemical structure for each MS/MS spectrum
 #' based on the highest score of
 #' chemical structure prediction; in this process, as most algorithms do,
 #' we make a choice based on the score,
-#' and only select the result with the highest score.
-#' Above, we talked about chemical molecular formula,
-#' chemical structural formula and chemical classes.
-#' We obtained the unique chemical molecular formula and chemical structure formula
-#' for reference by scoring and ranking.
-#' But for chemical classes, we can't adopt such a simple way to get things done.
+#' and only select the result of highest score.
+#'
 #' The chemical formula and structure candidates can obtain by methods:
 #'
 #' - [filter_formula()]
 #' - [filter_structure()]
 #'
+#' In order to obtain the best (maybe), corresponding and unique chemical formula
+#' and structure from complex candidates, an important intermediate link:
+#'
+#' - [create_reference()]
+#'
+#' Above, we talked about chemical molecular formula,
+#' chemical structural formula and chemical classes.
+#' We obtained the unique chemical molecular formula and chemical structure formula
+#' for reference by scoring and ranking.
+#' But for chemical classes, we can't adopt such a simple way to get things done.
+#' 
 #' \bold{Chemical classification.} Chemical classification is a complex system.
 #' Here, we only discuss the structure based chemotaxonomy system,
 #' because the MS/MS spectrum is more indicative of the structure of compounds
@@ -176,26 +184,17 @@ NULL
 #'
 #' @title Overall object class of MCnebula2
 #'
-#' @description ...
+#' @description For analysis of MCnebula2, all data stored in this class object,
+#' all main methods performed with this object.
 #'
 #' @family nebulae
-# @seealso ...
 #'
-#' @slot creation_time ...
-#' @slot ion_mode ...
-#' @slot melody ...
-#' @slot mcn_dataset ...
-#' @slot statistic_set ...
-#' @slot project_version ...
-#' @slot project_path ...
-#' @slot project_conformation ...
-#' @slot project_metadata ...
-#' @slot project_api ...
-#' @slot project_dataset ...
-#' @slot parent_nebula ...
-#' @slot child_nebulae ...
-#' @slot export_path ...
-#' @slot export_name ...
+#' @slot creation_time character(1).
+#' @slot ion_mode character(1).
+#' @slot melody [melody-class] object.
+#' @slot mcn_dataset [mcn_dataset-class] object.
+#' @slot statistic_set [statistic_set-class] object.
+#' @slot ... Slots inherit from [project-class], [nebula-class], [export-class].
 #'
 #' @rdname mcnebula-class
 #'

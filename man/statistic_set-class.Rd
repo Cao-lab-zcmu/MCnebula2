@@ -20,7 +20,7 @@
 \alias{top_table}
 \alias{top_table<-,ANY-method}
 \alias{top_table<-}
-\title{...}
+\title{Data used for statistic analysis}
 \usage{
 \S4method{statistic_set}{ANY}(x)
 
@@ -42,7 +42,8 @@
 \item{value}{The value for the slot.}
 }
 \description{
-...
+A class object for statistic analysis, associate with package of "limma"
+for binary comparison.
 
 \code{statistic_set}, \code{statistic_set<-}: getter and setter
 for the \code{statistic_set} slot of the object.
@@ -59,13 +60,14 @@ for the \code{top_table} slot of the object.
 \section{Slots}{
 
 \describe{
-\item{\code{design_matrix}}{...}
+\item{\code{design_matrix}}{matrix. Create by \code{\link[stats:model.matrix]{stats::model.matrix()}}.}
 
-\item{\code{contrast_matrix}}{...}
+\item{\code{contrast_matrix}}{matrix. Create by \code{\link[limma:makeContrasts]{limma::makeContrasts()}}.}
 
-\item{\code{dataset}}{...}
+\item{\code{dataset}}{ANY. Dataset used for \code{\link[limma:lmFit]{limma::lmFit()}}, \code{\link[limma:ebayes]{limma::eBayes()}}
+and other functions.}
 
-\item{\code{top_table}}{...}
+\item{\code{top_table}}{list with names. Each element of list should be "data.frame" or "tbl".}
 }}
 
 \examples{

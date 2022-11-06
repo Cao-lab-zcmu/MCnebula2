@@ -8,16 +8,51 @@
 #'
 #' @title Collection of Interface for extracting data from raw directory
 #'
-#' @description ...
+#' @description 
+#' 
+#' This is a class object designed to extract files in the project directory.
+#' Its responsibility is to describe the name,
+#' path and reading method of the file under the project directory;
+#' Use these information to extract and store data.
+#'
+#' @details
+#' It is a collection of classes whose names start with "project_":
+#' - [project_conformation-class]: The name, path and attribute name of the file are described.
+#' - [project_api-class]: Functions for reading and formatting data are provided.
+#' - [project_metadata-class]: Metadata, which records the files stored in the project directory.
+#' - [project_dataset-class]: The extracted data is stored here.
+#'
+#' The above class objects are coordinated into a whole through the "subscript" name
+#' (see [subscript-class]).
+#' For example, when a command (\code{collate_data(x, ".f3_fingerid")}) requests to
+#' extract the files of subscript of ".f3_fingerid", the data extraction module:
+#' - from slot of \code{project_conformation},
+#' get the file name (pattern string) and path of subscript of ".f3_fingerid";
+#' - match the files under the path with the pattern string (i.e., get the metadata of the files),
+#' then stored the metadata into slot of \code{project_metadata};
+#' - from slot of \code{project_api}, get the functions of subscript of ".f3_fingerid";
+#' - use these functions to read and format the data in batches;
+#' - store the extracted data into slot of \code{project_dataset}.
+#'
+#' This class is mainly designed for extracting files under the SIRIUS project directory.
+#' These files are: mainly "tables" that can be read through functions such as \code{read.table};
+#' numerous and have multiple directories; need to be processed in batches.
+#' SIRIUS project may alter the name and path of internal files during version changes,
+#' which is in fact deadly for MCnebula2.
+#' To make the data extraction module of MCnebula2 free from version issues,
+#' this class object is designed to flexibly handle the extraction of internal files.
+#' Most contents need to be considered by MCnebula2 developers.
+#' The only thing users need to know:
+#' slot of [project_dataset-class] object stores the extracted data.
 #'
 #' @family projects
 #'
-#' @slot project_version character.
-#' @slot project_path ...
-#' @slot project_conformation ...
-#' @slot project_metadata ...
-#' @slot project_api ...
-#' @slot project_dataset ...
+#' @slot project_version character(1). The target project version. e.g., "sirius.v4".
+#' @slot project_path character(1). The target project path.
+#' @slot project_conformation [project_conformation-class] object.
+#' @slot project_metadata [project_metadata-class] object.
+#' @slot project_api [project_api-class] object.
+#' @slot project_dataset [project_dataset-class] object.
 #'
 #' @rdname project-class
 #'
@@ -111,12 +146,12 @@ setMethod("attribute_name",
 ## ------------------------------------- 
 #' @exportMethod project_metadata
 #' @aliases project_metadata
-#' @description  \code{project_metadata}: fast channel to obtain
+#' @description \code{metadata}: fast channel to obtain
 #' the downstream slot, getter
-#' for the \code{project_metadata} slot in sub-object
+#' for the \code{metadata} slot in sub-object
 #' of \code{project_metadata} slot of the object. Equals:
-#' - \code{project_metadata(project_metadata(object))}
-#' - \code{project_metadata(object)}.
+#' - \code{metadata(project_metadata(object))}
+#' - \code{metadata(object)}.
 #' @rdname project-class
 setMethod("metadata", 
           signature = c(x = "ANY"),
@@ -182,13 +217,14 @@ setMethod("match.features_id",
 ## ---------------------------------------------------------------------- 
 #' @exportMethod get_upper_dir_subscript
 #' @aliases get_upper_dir_subscript
-#' @description \code{get_upper_dir_subscript}: ...
-#' @param x ...
-#' @param subscript ...
+#' @description \code{get_upper_dir_subscript}: Get the "subscript" name of the folder.
+#' @param x Maybe object of class inherit [project-class].
+#' @param subscript the "subscript" name of file. See [subscript-class].
 #' @rdname project-class
 #' @examples
 #' \dontrun{
-#' get_upper_dir_subscript(...)
+#' object <- initialize_mcnebula(mcnebula())
+#' get_upper_dir_subscript(object, ".f3_fingerid")
 #' }
 setMethod("get_upper_dir_subscript", 
           signature = setMissing("get_upper_dir_subscript",

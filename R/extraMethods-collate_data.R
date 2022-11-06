@@ -4,11 +4,21 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases collate_data
 #'
-#' @title ...
+#' @title Extract and format data from raw project directory
 #'
-#' @description ...
+#' @description 
+#' The primary method used to extract data from the raw project directory.
+#' By specifying [subscript-class], this method reads all corresponding files,
+#' followed by gathering and formating the data, then stores these data in the slot
+#' (\code{dataset(project_dataset(object))}).
 #'
-#' @details ...
+#' @note Normally, users do not need to use this method for MCnebula2 analysis.
+#' [filter_formula()], [filter_structure()], [filter_ppcp()]
+#' provide more understandable usage.
+#'
+#' @details 
+#' This methods requires the name and path of the file in the raw project directory,
+#' as well as the reading function; These are recorded in [project-class].
 #'
 #' @name collate_data-methods
 #'
@@ -51,22 +61,12 @@ setMethod("collate_data",
 #'
 #' @aliases collate_data
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param subscript ...
-#' @param fun_collate ...
-#' @param ... ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param x [project-class] object or other class object inheriting it.
+#' @param subscript character(1). See [subscript-class].
+#' @param fun_collate function.
+#' Used to extract and format the data from raw project directory.
+#' The default is \code{MCnebula2:::.collate_data.msframe}.
+#' @param ... Other parameters passed to the fun_collate.
 #'
 #' @rdname collate_data-methods
 #'
@@ -99,16 +99,15 @@ setMethod("collate_data",
 ## ---------------------------------------------------------------------- 
 #' @exportMethod read_data
 #'
-#' @description ...
+#' @description \code{read_data}: basic methods used to extract and format
+#' data from raw project directory.
 #'
-#' @param x ...
-#' @param project_metadata ...
-#' @param subscript ...
-#' @param path ...
-#' @param .features_id ...
-#' @param .candidates_id ...
-#' @param fun_read ...
-#' @param fun_format ...
+#' @param project_metadata [project_metadata-class] object. Specifying the files to read.
+#' @param path character(1). The path of raw project directory.
+#' @param .features_id character. ID for signing files in sub-directory of each 'features'.
+#' @param .candidates_id character. ID for signing each candidates of 'features'.
+#' @param fun_read function. Used to read files from raw project directory.
+#' @param fun_format function. Used to format the data.
 #'
 #' @rdname collate_data-methods
 #'

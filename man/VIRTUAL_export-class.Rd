@@ -27,7 +27,8 @@
 \item{value}{The value for the slot.}
 }
 \description{
-...
+This VIRTUAL class provides slots for recording export path
+and export name of attributes.
 
 \code{export_name}, \code{export_name<-}: getter and setter
 for the \code{export_name} slot of the object.
@@ -38,9 +39,10 @@ for the \code{export_path} slot of the object.
 \section{Slots}{
 
 \describe{
-\item{\code{export_path}}{...}
+\item{\code{export_path}}{character(1). The export directory path.}
 
-\item{\code{export_name}}{...}
+\item{\code{export_name}}{character with names.
+While export, the attribute name will be converted to the value.}
 }}
 
 \concept{exports}

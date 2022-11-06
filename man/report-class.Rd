@@ -11,12 +11,12 @@
 \alias{yaml}
 \alias{yaml<-,ANY-method}
 \alias{yaml<-}
-\alias{new_report,missing-method}
 \alias{new_report,character-method}
 \alias{new_report}
+\alias{new_report,missing-method}
 \alias{call_command,report-method}
 \alias{call_command}
-\title{...}
+\title{Creating a formatted report}
 \usage{
 \S4method{show_layers}{report}(x)
 
@@ -24,21 +24,29 @@
 
 \S4method{yaml}{ANY}(x) <- value
 
-\S4method{new_report}{missing}(..., yaml)
-
 \S4method{new_report}{character}(..., yaml)
+
+\S4method{new_report}{missing}(..., yaml)
 
 \S4method{call_command}{report}(x)
 }
 \arguments{
 \item{value}{The value for the slot.}
 
-\item{...}{...}
+\item{...}{An arbitrary number of \linkS4class{heading},
+\linkS4class{section} or \linkS4class{code_block} in sequence.}
 
-\item{yaml}{...}
+\item{yaml}{character. Passed to .Rmd for setting format of documentation.}
 }
 \description{
-...
+The report module can create output report quickly for
+and not just for the mcnebula2 workflow.
+The report system is primarily a class object that manages text and code blocks.
+Heading or paragraphs or code blocks were treated as individual report units
+and deposited sequentially in "layers".
+The report system provides methods to exhibit, modify these layers.
+Reports can be exported as ".Rmd" text files, and subsequently,
+users can call \code{\link[rmarkdown:render]{rmarkdown::render()}} for output formatted documents.
 
 \code{show_layers}: show \code{layers} slots in a pretty
 and readable style.
@@ -46,21 +54,25 @@ and readable style.
 \code{yaml}, \code{yaml<-}: getter and setter
 for the \code{yaml} slot of the object.
 
+\code{new_report}: Create a \linkS4class{report} object.
+
 \code{new_report()}: get the default parameters for the method \code{new_report}.
 
 \code{new_report(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{new_report}.
 
-\code{new_report}: ...
-
 \code{call_command}: Format 'report' object as character, which can be output
-by \code{writeLines()} function as '.Rmd' file and than use \code{rmarkdown::render} as
-pdf, html, or other format files.
+by \code{writeLines()} function as '.Rmd' file and than use \code{rmarkdown::render} output
+as pdf, html, or other format files.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{yaml}}{...}
+\item{\code{yaml}}{character. Metadata passed to .Rmd for setting format of documentation.
+See \url{https://bookdown.org/yihui/rmarkdown/compile.html} for details.}
+
+\item{\code{layers}}{list. Element in list must be \linkS4class{section},
+\linkS4class{heading} or \linkS4class{code_block}.}
 }}
 
 \examples{
@@ -86,6 +98,7 @@ Other layerSets:
 
 Other call_commands: 
 \code{\link{code_block-class}},
+\code{\link{command-class}},
 \code{\link{ggset-class}},
 \code{\link{section-class}}
 }

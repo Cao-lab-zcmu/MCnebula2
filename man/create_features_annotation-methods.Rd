@@ -3,36 +3,42 @@
 \name{create_features_annotation-methods}
 \alias{create_features_annotation-methods}
 \alias{create_features_annotation}
-\alias{create_features_annotation,mcnebula,missing,missing-method}
 \alias{create_features_annotation,mcnebula,data.frame,numeric-method}
 \alias{create_features_annotation,mcnebula,data.frame,missing-method}
-\title{...}
+\alias{create_features_annotation,mcnebula,missing,missing-method}
+\title{merge annotation for 'features'}
 \usage{
-\S4method{create_features_annotation}{mcnebula,missing,missing}(x)
-
 \S4method{create_features_annotation}{mcnebula,data.frame,numeric}(x, extra_data, column)
 
 \S4method{create_features_annotation}{mcnebula,data.frame,missing}(x, extra_data)
+
+\S4method{create_features_annotation}{mcnebula,missing,missing}(x)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{extra_data}{...}
+\item{extra_data}{data.frame.}
 
-\item{column}{...}
-}
-\value{
-...
+\item{column}{numeric(1). If name of columns not contain ".features_id",
+used to specify ID column for 'features'.}
 }
 \description{
-...
-
-...
+According to \code{specific_candidate(object)} data, merge the latest
+filtered chemical formulae annotation, structural annotation. The ion mass
+and retention time for each 'feature' would also be gathered.
+User can also pass custom annotation for each 'feature', as long as the
+'data.frame' with column of '.features_id'.
 }
 \details{
-...
+The 'features_annotation' data created from:
+\itemize{
+\item The 'specific_candidate' data: \code{specific_candidate(object)}
+\item The filtered chemical formula data: \code{latest(object, subscript = ".f2_formula")}
+\item The filtered structural data: \code{latest(object, subscript = ".f3_fingerid")}
+\item The ion mass and retention time (m/z and RT): latest(object, "project_dataset", ".f2_info")
+}
 
-...
+The last would be collated via: \code{collate_data(object, subscript = ".f2_info")}
 }
 \examples{
 \dontrun{

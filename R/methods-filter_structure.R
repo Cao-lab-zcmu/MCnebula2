@@ -3,11 +3,13 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases filter_structure
 #'
-#' @title ...
+#' @title Collate and filter candidates of chemical structure for each 'feature'
 #'
-#' @description ...
+#' @description This methods provide an approach to
+#' collate and filter chemical structure candidates data in baches for each
+#' 'feature'.
 #'
-#' @details ...
+#' @details See details in [filter_formula()].
 #'
 #' @name filter_structure-methods
 #'
@@ -41,22 +43,7 @@ setMethod("filter_structure",
 #'
 #' @aliases filter_structure
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x [mcnebula-class] object.
-#' @param fun_filter function. e.g., [dplyr::filter()], [dplyr::slice()] [head()]...
-#' @param ... parameters pass to 'fun_filter'.
-#' @param by_reference ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @inheritParams filter_formula-methods
 #'
 #' @rdname filter_structure-methods
 #'

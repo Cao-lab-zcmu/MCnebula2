@@ -5,14 +5,15 @@
 #'
 #' @aliases msframe
 #'
-#' @title ...
+#' @title format and filter table data
 #'
-#' @description ...
+#' @description
+#' Class for table data manipulation inside this package.
 #'
 #' @family subscripts
 #'
-#' @slot entity ...
-#' @slot subscript ...
+#' @slot entity data.frame.
+#' @slot subscript character(1). See [subscript-class].
 #'
 #' @rdname msframe-class
 #'
@@ -148,18 +149,20 @@ setMethod("format_msframe",
 #'
 #' @aliases format_msframe
 #'
-#' @title ...
+#' @description
+#' \code{format_msframe}:
 #'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param names ...
-#' @param fun_names ...
-#' @param types ...
-#' @param fun_types ...
-#' @param fun_format ...
+#' @param x [msframe-class] object.
+#' @param names character with names.
+#' e.g., c(tani.score = "tanimotoSimilarity", mol.formula = "molecularFormula").
+#' @param fun_names function to get names.
+#' e.g., \code{MCnebula2:::.get_attribute_name_sirius.v4()}
+#' @param types character with names.
+#' e.g., c(tani.score = "numeric", mol.formula = "character").
+#' @param fun_types function to get types.
+#' e.g., \code{MCnebula2:::.get_attribute_type_sirius.v4()}
+#' @param fun_format function to format slot \code{entity}.
+#' e.g., \code{MCnebula2:::.format_msframe()}
 #'
 #' @rdname msframe-class
 #'
@@ -232,22 +235,14 @@ setMethod("filter_msframe",
 #'
 #' @aliases filter_msframe
 #'
-#' @title ...
+#' @description \code{filter_msframe}: filter data in slot \code{entity} (data.frame).
+#' @note The class is not for normal use of the package.
 #'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param fun_filter ...
-#' @param f ...
-#' @param ... ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param x [msframe-class] object.
+#' @param fun_filter function used to filter the slot \code{entity} (data.frame).
+#' e.g., \code{dplyr::filter()}, \code{head()}.
+#' @param f formula passed to \code{split()}.
+#' @param ... extra parameter passed to fun_filter.
 #'
 #' @rdname msframe-class
 #'

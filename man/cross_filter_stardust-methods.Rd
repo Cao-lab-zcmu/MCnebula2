@@ -11,7 +11,7 @@
 \alias{cross_filter_score}
 \alias{cross_filter_identical,mcnebula,numeric,numeric-method}
 \alias{cross_filter_identical}
-\title{...}
+\title{'Cross' filter for 'stardust_classes' data}
 \usage{
 \S4method{cross_filter_stardust}{missing}()
 
@@ -47,27 +47,19 @@
 
 \item{hierarchy_range}{...}
 
-\item{identical_factor}{...
-
-\code{cross_filter_score}, \code{cross_filter_identical}.}
-}
-\value{
-...
-
-...
-
-...
+\item{identical_factor}{...}
 }
 \description{
 ...
+Run after \code{\link[=create_stardust_classes]{create_stardust_classes()}}.
 
-\code{cross_filter_stardust()}: get the default parameters for the method
+\code{cross_filter_stardust()}:
+get the default parameters for the method
 \code{cross_filter_stardust}.
 
-\code{cross_filter_stardust(x, ...)}: use the default parameters whatever 'missing'
+\code{cross_filter_stardust(x, ...)}:
+use the default parameters whatever 'missing'
 while performing the method \code{cross_filter_stardust}.
-
-\code{cross_filter_stardust} include 3 parts: \code{cross_filter_quantity},
 
 ...
 

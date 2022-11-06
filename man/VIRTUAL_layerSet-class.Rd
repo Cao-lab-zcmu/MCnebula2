@@ -32,34 +32,35 @@
 \S4method{move_layers}{layerSet,numeric,numeric}(x, from, to)
 }
 \arguments{
-\item{x}{...}
+\item{x}{object contains slot \code{layers}.}
 
 \item{value}{The value for the slot.}
 
-\item{...}{...}
+\item{...}{extra "layer".}
 
-\item{layers}{...}
+\item{layers}{numeric. The specified "layer" in slot \code{layers}.}
 
-\item{from}{...}
+\item{from}{sequence (sequence in list) of "layer" move from.}
 
-\item{to}{...}
+\item{to}{sequence (sequence in list) of "layer" move to.}
 }
 \description{
-...
+This VIRTUAL class provides: slot \code{layers} for storing
+hierarchical data; and methods for modify slot \code{layers}.
 
 \code{layers}, \code{layers<-}: getter and setter
 for the \code{layers} slot of the object.
 
-\code{add_layers}: ...
+\code{add_layers}: add extra "layer" into slot \code{layers}.
 
-\code{delete_layers}: ...
+\code{delete_layers}: delete "layer" in slot \code{layers}.
 
-\code{move_layers}: ...
+\code{move_layers}: change the order of "layer" in slot \code{layers}.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{layers}}{...}
+\item{\code{layers}}{list with names.}
 }}
 
 \examples{

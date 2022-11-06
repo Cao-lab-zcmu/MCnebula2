@@ -8,7 +8,7 @@
 \alias{collate_data,ANY,character,function-method}
 \alias{read_data,ANY,project_metadata,character,missing,missing,missing,missing,missing-method}
 \alias{read_data,missing,missing,character,character,character,character,function,function-method}
-\title{...}
+\title{Extract and format data from raw project directory}
 \usage{
 \S4method{collate_data}{missing,missing,missing}()
 
@@ -21,31 +21,33 @@
 \S4method{read_data}{missing,missing,character,character,character,character,`function`,`function`}(subscript, path, .features_id, .candidates_id, fun_read, fun_format)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{project} object or other class object inheriting it.}
 
-\item{subscript}{...}
+\item{subscript}{character(1). See \linkS4class{subscript}.}
 
-\item{fun_collate}{...}
+\item{fun_collate}{function.
+Used to extract and format the data from raw project directory.
+The default is \code{MCnebula2:::.collate_data.msframe}.}
 
-\item{...}{...}
+\item{...}{Other parameters passed to the fun_collate.}
 
-\item{project_metadata}{...}
+\item{project_metadata}{\linkS4class{project_metadata} object. Specifying the files to read.}
 
-\item{path}{...}
+\item{path}{character(1). The path of raw project directory.}
 
-\item{.features_id}{...}
+\item{.features_id}{character. ID for signing files in sub-directory of each 'features'.}
 
-\item{.candidates_id}{...}
+\item{.candidates_id}{character. ID for signing each candidates of 'features'.}
 
-\item{fun_read}{...}
+\item{fun_read}{function. Used to read files from raw project directory.}
 
-\item{fun_format}{...}
-}
-\value{
-...
+\item{fun_format}{function. Used to format the data.}
 }
 \description{
-...
+The primary method used to extract data from the raw project directory.
+By specifying \linkS4class{subscript}, this method reads all corresponding files,
+followed by gathering and formating the data, then stores these data in the slot
+(\code{dataset(project_dataset(object))}).
 
 \code{collate_data()}: get the default parameters for the method
 \code{collate_data}.
@@ -53,14 +55,17 @@
 \code{collate_data(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{collate_data}.
 
-...
-
-...
+\code{read_data}: basic methods used to extract and format
+data from raw project directory.
 }
 \details{
-...
-
-...
+This methods requires the name and path of the file in the raw project directory,
+as well as the reading function; These are recorded in \linkS4class{project}.
+}
+\note{
+Normally, users do not need to use this method for MCnebula2 analysis.
+\code{\link[=filter_formula]{filter_formula()}}, \code{\link[=filter_structure]{filter_structure()}}, \code{\link[=filter_ppcp]{filter_ppcp()}}
+provide more understandable usage.
 }
 \examples{
 \dontrun{

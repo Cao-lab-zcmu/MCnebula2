@@ -50,12 +50,12 @@ setGeneric("create_features_annotation",
              standardGeneric("create_features_annotation"))
 setGeneric("create_stardust_classes", 
            signature = c(mcnebula = "x",
-                         "numeric" = "pp.threashold",
+                         "numeric" = "pp.threshold",
                          "numeric" = "hierarchy_priority",
                          "logical" = "position_isomerism",
                          "logical" = "inherit_dataset"
                          ),
-           function(x, pp.threashold, hierarchy_priority,
+           function(x, pp.threshold, hierarchy_priority,
                     position_isomerism, inherit_dataset)
              standardGeneric("create_stardust_classes"))
 ## ------------------------------------- 

@@ -25,7 +25,7 @@
 \alias{filter_msframe,msframe,function,missing-method}
 \alias{filter_msframe}
 \alias{filter_msframe,msframe,function,formula-method}
-\title{...}
+\title{format and filter table data}
 \usage{
 \S4method{show}{msframe}(object)
 
@@ -54,31 +54,34 @@
 \S4method{filter_msframe}{msframe,`function`,formula}(x, fun_filter, f, ...)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{msframe} object.}
 
 \item{value}{The value for the slot.}
 
-\item{fun_format}{...}
+\item{fun_format}{function to format slot \code{entity}.
+e.g., \code{MCnebula2:::.format_msframe()}}
 
-\item{names}{...}
+\item{names}{character with names.
+e.g., c(tani.score = "tanimotoSimilarity", mol.formula = "molecularFormula").}
 
-\item{types}{...}
+\item{types}{character with names.
+e.g., c(tani.score = "numeric", mol.formula = "character").}
 
-\item{fun_names}{...}
+\item{fun_names}{function to get names.
+e.g., \code{MCnebula2:::.get_attribute_name_sirius.v4()}}
 
-\item{fun_types}{...}
+\item{fun_types}{function to get types.
+e.g., \code{MCnebula2:::.get_attribute_type_sirius.v4()}}
 
-\item{fun_filter}{...}
+\item{fun_filter}{function used to filter the slot \code{entity} (data.frame).
+e.g., \code{dplyr::filter()}, \code{head()}.}
 
-\item{f}{...}
+\item{f}{formula passed to \code{split()}.}
 
-\item{...}{...}
-}
-\value{
-...
+\item{...}{extra parameter passed to fun_filter.}
 }
 \description{
-...
+Class for table data manipulation inside this package.
 
 \code{msframe}, \code{msframe<-}: getter and setter
 for the \code{msframe} slot of the object.
@@ -89,23 +92,21 @@ for the \code{msframe} slot of the object.
 \code{entity}, \code{entity<-}: getter and setter
 for the \code{entity} slot of the object.
 
-...
+\code{format_msframe}:
 
-...
-}
-\details{
-...
-
-...
+\code{filter_msframe}: filter data in slot \code{entity} (data.frame).
 }
 \section{Slots}{
 
 \describe{
-\item{\code{entity}}{...}
+\item{\code{entity}}{data.frame.}
 
-\item{\code{subscript}}{...}
+\item{\code{subscript}}{character(1). See \linkS4class{subscript}.}
 }}
 
+\note{
+The class is not for normal use of the package.
+}
 \examples{
 \dontrun{
 new('msframe', ...)
@@ -125,12 +126,14 @@ filter_msframe(...)
 
 Other subscripts: 
 \code{\link{mcnebula-class}},
+\code{\link{project_conformation-class}},
 \code{\link{subscript-class}}
 
 Other latests: 
 \code{\link{mcn_dataset-class}},
 \code{\link{mcnebula-class}},
-\code{\link{project_dataset-class}}
+\code{\link{project_dataset-class}},
+\code{\link{project_metadata-class}}
 }
 \concept{latests}
 \concept{subscripts}

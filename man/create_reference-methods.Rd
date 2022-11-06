@@ -10,7 +10,7 @@
 \alias{create_reference,mcnebula,missing,missing,data.frame,character,missing,missing-method}
 \alias{create_reference,mcnebula,missing,missing,data.frame,integer,missing,missing-method}
 \alias{create_reference,mcnebula,missing,missing,data.frame,missing,missing,missing-method}
-\title{...}
+\title{Establish 'specific candidate' for each 'feature'}
 \usage{
 \S4method{create_reference}{mcnebula,ANY,ANY,ANY,ANY,logical,ANY}(x, from, subscript, data, columns, fill, MoreArgs)
 
@@ -27,32 +27,67 @@
 \S4method{create_reference}{mcnebula,missing,missing,data.frame,missing,missing,missing}(x, data)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{from}{...}
+\item{from}{character(1). "structure", "formula" or "ppcp".}
 
-\item{subscript}{...}
+\item{subscript}{character(1). ".f3_fingerid", ".f2_formula" or ".f3_canopus".
+See \linkS4class{subscript}.}
 
-\item{data}{...}
+\item{data}{data.frame. An external channel for user to specify candidate customarily.
+Normally not used.}
 
-\item{columns}{...}
+\item{columns}{character(2) or numeric(2). Specify the key columns in the parameter
+of data. Normally not used.}
 
-\item{fill}{...}
+\item{fill}{logical. If \code{TRUE}, run post modification.
+Run \link{filter_formula(object)}, and use its results to fill the data
+\code{specific_candidate} for 'features' without specified top candidate.
+Only useful when the data \code{specific_candidate} were
+based on scores of chemical structure or classes, as for some 'features'
+there may be no chemical structural
+or classified candidates but candidates for chemical formula.}
 
-\item{MoreArgs}{...}
-}
-\value{
-...
+\item{MoreArgs}{list. Used only \code{fill = T}. Parameters passed to \code{\link[=filter_formula]{filter_formula()}}.}
 }
 \description{
-...
-
-...
+According to the filtered data, whether obtained by \code{\link[=filter_formula]{filter_formula()}},
+\code{\link[=filter_structure]{filter_structure()}} or \code{\link[=filter_ppcp]{filter_ppcp()}},
+establishing specific candidate of each 'feature' for subsequent data filtering.
+This step is an important intermediate link for the three part of data filtering,
+makes the final filtered results of chemical formula, structure and classification
+consistent.
 }
 \details{
-...
+\bold{Establish reference upon top candidate}
+Suppose we predicted a potential compound represented by LC-MS/MS spectrum,
+and obtained the candidates of chemical molecular formula,
+structure and chemical class.
+These candidates include both positive and negative results:
+for chemical molecular formula and chemical structure,
+the positive prediction was unique; for chemical class,
+multiple positive predictions that belong to various classification were involved.
+We did not know the exact negative and positive.
+Normally, we ranked and filtered these according to the scores.
+There were numerious scores, for isotopes, for mass error, for structural similarity,
+for chemical classes...
+Which score selected to rank candidates depends on the purpose
+of research. Such as:
+\itemize{
+\item To find out the chemical structure mostly be positive, ranking the candidates
+by structural score.
+\item To determine whether the potential compound may be of a certain chemical classes,
+ranking the candidates by the classified score.
+}
 
-...
+Ether by \code{\link[=filter_formula]{filter_formula()}}, \code{\link[=filter_structure]{filter_structure()}} or \code{\link[=filter_ppcp]{filter_ppcp()}}, the
+candidate with top score can be obtained.
+However, for the three module (formula, structure, classes), sometimes
+thier top score candidates were not in line with each other.
+That is, thier top score towards different chemical molecular formulas.
+To find out the corresponding data in other modules,
+\code{create_reference} should be performed to establish the
+'specific_candidate' for subsequent filtering.
 }
 \examples{
 \dontrun{

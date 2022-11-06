@@ -47,7 +47,9 @@ in the project (directory)}
 \item{value}{The value for the slot.}
 }
 \description{
-...
+This is a class object used to record the name, path and attribute name of the file.
+These records can be retrieved by "subscript" (see \linkS4class{subscript}).
+See \linkS4class{project} for joint application with other related classes.
 
 \code{project_conformation}, \code{project_conformation<-}: getter and setter
 for the \code{project_conformation} slot of the object.
@@ -64,13 +66,21 @@ for the \code{attribute_name} slot of the object.
 \section{Slots}{
 
 \describe{
-\item{\code{file_name}}{...}
+\item{\code{file_name}}{character with names.
+Record the filenames or pattern string or function name (begin with "FUN_")
+for each "subscript" (imply file names).}
 
-\item{\code{file_api}}{...}
+\item{\code{file_api}}{character with names.
+Record the file path for each "subscript" (imply file names).
+The path is descriped by "subscript" with "/".}
 
-\item{\code{attribute_name}}{...}
+\item{\code{attribute_name}}{character with names.
+Record the attribute name for each "subscript" (imply column names).}
 }}
 
+\note{
+The class is not for normal use of the package.
+}
 \examples{
 \dontrun{
 new('project_conformation', ...)
@@ -82,5 +92,11 @@ Other projects:
 \code{\link{project_api-class}},
 \code{\link{project_dataset-class}},
 \code{\link{project_metadata-class}}
+
+Other subscripts: 
+\code{\link{mcnebula-class}},
+\code{\link{msframe-class}},
+\code{\link{subscript-class}}
 }
 \concept{projects}
+\concept{subscripts}

@@ -14,7 +14,7 @@
 \alias{mutate_layer,ggset,character-method}
 \alias{call_command,ggset-method}
 \alias{call_command}
-\title{...}
+\title{Management for 'ggplot' visualzation}
 \usage{
 \S4method{show_layers}{ggset}(x)
 
@@ -27,33 +27,36 @@
 \S4method{call_command}{ggset}(x)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{ggset} object}
 
-\item{...}{...}
+\item{...}{parameters passed to the layer.}
 
-\item{layer}{...}
+\item{layer}{numeric(1) or character(1). If "character", the name must be unique
+in slot \code{layers}.}
 }
 \description{
-...
+Let each packed "ggplot2" function (packed as \linkS4class{command} object)
+into layers in sequence, allowing post modifications programmatically
+and visualizing as "ggplot2" plot at any time.
 
-\code{show_layers}: ...
+\code{show_layers}: show functions and parameters in layers
+with a pretty and readable form.
 
-\code{new_ggset}: ...
+\code{new_ggset}: Simplified creation of \linkS4class{ggset} object.
 
-\code{mutate_layer}: ...
+\code{mutate_layer}:
+Pass new parameters or modify pre-existing parameters to the packed function.
 
 \code{call_command}: plot as 'ggplot' object.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{layers}}{...}
+\item{\code{layers}}{list with names. Each element of list must be a \linkS4class{command} object
+packed 'ggplot2' function and its args.}
 }}
 
 \examples{
-\dontrun{
-new('ggset', ...)
-}
 \dontrun{
 show_layers(...)
 }
@@ -71,6 +74,7 @@ Other layerSets:
 
 Other call_commands: 
 \code{\link{code_block-class}},
+\code{\link{command-class}},
 \code{\link{report-class}},
 \code{\link{section-class}}
 }

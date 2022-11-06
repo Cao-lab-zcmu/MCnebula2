@@ -149,11 +149,13 @@
 \item{value}{The value for the slot.}
 }
 \description{
-...
+This class store multiple components for visualization.
 
-...
+\code{parent_nebula}: Store data for visualization of
+parent-nebula.
 
-...
+\code{child_nebulae}: store data for visualization of
+child-nebulae.
 
 \code{parent_nebula}, \code{parent_nebula<-}: getter and setter
 for the \code{parent_nebula} slot of the object.
@@ -206,37 +208,60 @@ for the \code{ggset_annotate} slot of the object.
 \section{Slots}{
 
 \describe{
-\item{\code{parent_nebula}}{...}
+\item{\code{parent_nebula}}{\linkS4class{parent_nebula} object.}
 
-\item{\code{child_nebulae}}{...}
+\item{\code{child_nebulae}}{\linkS4class{child_nebulae} object.}
 
-\item{\code{igraph}}{...}
+\item{\code{igraph}}{"igraph" object or its list. See \code{\link[igraph:graph_from_data_frame]{igraph::graph_from_data_frame()}}.
+The slot contains edges and nodes data of child-nebulae or parent-nebula.
+The "igraph" object can be output use \code{\link[igraph:write_graph]{igraph::write_graph()}} as ".graphml" file,
+which belong to a network data format that can be operated by other software such as
+Cytoscape (\url{https://cytoscape.org/}).}
 
-\item{\code{tbl_graph}}{...}
+\item{\code{tbl_graph}}{"tbl_graph" object or its list. See \code{\link[tidygraph:tbl_graph]{tidygraph::as_tbl_graph()}}.
+Converted from slot \code{igraph}.}
 
-\item{\code{layout_ggraph}}{...}
+\item{\code{layout_ggraph}}{"layout_ggraph" object or its list. See \code{\link[ggraph:ggraph]{ggraph::create_layout()}}.
+Create from slot \code{tbl_graph}, passed to \code{\link[ggraph:ggraph]{ggraph::ggraph()}} for visualization.}
 
-\item{\code{grid_layout}}{...}
+\item{\code{grid_layout}}{"layout" object. See \code{\link[grid:grid.layout]{grid::grid.layout()}}.
+Grid layout for position of each child-nebula to visualize.}
 
-\item{\code{viewports}}{...}
+\item{\code{viewports}}{list with names. Each element must be "viewport" object.
+See \code{\link[grid:viewport]{grid::viewport()}}. Position for each child-nebula to visualize.}
 
-\item{\code{panel_viewport}}{...}
+\item{\code{panel_viewport}}{"viewport" object. See \code{\link[grid:viewport]{grid::viewport()}}. For visualization,
+the position to place overall child-nebulae.}
 
-\item{\code{legend_viewport}}{...}
+\item{\code{legend_viewport}}{"viewport" object. See \code{\link[grid:viewport]{grid::viewport()}}. For visualization,
+the position to place legend.}
 
-\item{\code{ggset}}{...}
+\item{\code{ggset}}{\linkS4class{ggset} object or its list with names. Each \linkS4class{ggset} object
+can be visualized directly use \code{\link[=call_command]{call_command()}}.}
 
-\item{\code{structures_grob}}{...}
+\item{\code{structures_grob}}{list with names. Each element is a "grob" object.
+See \code{\link[grid:grid.grob]{grid::grob()}}. Use \code{\link[grid:grid.draw]{grid::grid.draw()}} to visualize the chemical structure.}
 
-\item{\code{nodes_ggset}}{...}
+\item{\code{nodes_ggset}}{list of \linkS4class{ggset} object. For drawing each node of 'features'
+('features' means the detected peaks while processing LC-MS data)
+with annotation. Use \code{\link[=call_command]{call_command()}} to visualize the \linkS4class{ggset}.}
 
-\item{\code{nodes_grob}}{...}
+\item{\code{nodes_grob}}{list of "grob" object. Converted from slot \code{nodes_ggset} with slot
+\code{structures_grob}. Use \code{\link[grid:grid.draw]{grid::grid.draw()}} to visualize the "grob".}
 
-\item{\code{ppcp_data}}{...}
+\item{\code{ppcp_data}}{list with names. Each element is a data.frame. This is an
+annotation data of 'features' which would be visualize in nodes border
+as a radial bar plot. \code{ppcp_data}, i.e., posterior probability of
+classification prediction. See \code{\link[=filter_ppcp]{filter_ppcp()}}.}
 
-\item{\code{ration_data}}{...}
+\item{\code{ration_data}}{list with names. Each element is a data.frame. This is an
+annotation data of 'features' which would be visualize in nodes nucleus as
+ring plot. Generally, \code{ration_data} is the statistic data for samples.}
 
-\item{\code{ggset_annotate}}{...}
+\item{\code{ggset_annotate}}{a list of \linkS4class{ggset} object. The annotated child-nebulae
+gathered from slot \code{ggset} and slot \code{nodes_grob}.
+Use \code{\link[=call_command]{call_command()}} to visualize the \linkS4class{ggset}. Be care, the object
+sometimes is too large that need lot of time to loading for visualization.}
 }}
 
 \examples{

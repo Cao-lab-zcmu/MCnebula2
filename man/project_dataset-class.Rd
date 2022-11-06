@@ -13,7 +13,7 @@
 \alias{extract_rawset,ANY,character,ANY-method}
 \alias{extract_rawset}
 \alias{extract_rawset,ANY,character,function-method}
-\title{Store extracted dataset}
+\title{Store extracted data}
 \usage{
 \S4method{project_dataset}{ANY}(x)
 
@@ -40,7 +40,8 @@ it will be used to collate data. This parameter is not for normal use.}
 \item{...}{parameters passed to 'fun_collate'.}
 }
 \description{
-...
+This is a class object used to store extracted data (raw data).
+See \linkS4class{project} for joint application with other related classes.
 
 \code{project_dataset}, \code{project_dataset<-}: getter and setter
 for the \code{project_dataset} slot of the object.
@@ -58,7 +59,7 @@ format as 'tbl'. Equals:
 \section{Slots}{
 
 \describe{
-\item{\code{dataset}}{...}
+\item{\code{dataset}}{list. See \linkS4class{dataset}.}
 }}
 
 \examples{
@@ -88,7 +89,8 @@ Other datasets:
 Other latests: 
 \code{\link{mcn_dataset-class}},
 \code{\link{mcnebula-class}},
-\code{\link{msframe-class}}
+\code{\link{msframe-class}},
+\code{\link{project_metadata-class}}
 }
 \concept{datasets}
 \concept{latests}

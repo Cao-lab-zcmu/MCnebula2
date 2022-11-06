@@ -30,7 +30,7 @@
 \alias{new_section,NULL,numeric,character,maybe_code_block-method}
 \alias{call_command,section-method}
 \alias{call_command,NULL-method}
-\title{...}
+\title{Basic cells in the report}
 \usage{
 \S4method{heading}{ANY}(x)
 
@@ -63,18 +63,19 @@
 \arguments{
 \item{value}{The value for the slot.}
 
-\item{heading}{...}
+\item{heading}{character(1). For slot \code{.Data}.}
 
-\item{level}{...}
+\item{level}{numeric(1). For slot \code{level}.}
 
-\item{paragraph}{...}
+\item{paragraph}{character. Text for description.}
 
-\item{code_block}{...}
+\item{code_block}{\linkS4class{code_block} object.}
 }
 \description{
-...
+A class object consist of \linkS4class{heading}, paragraph (character),
+and \linkS4class{code_block}. These \linkS4class{section} belong to basic cells of report.
 
-...
+This is a class object used to clarify the heading and its hierarchy.
 
 \code{heading}, \code{heading<-}: getter and setter
 for the \code{heading} slot of the object.
@@ -82,7 +83,7 @@ for the \code{heading} slot of the object.
 \code{level}, \code{level<-}: getter and setter
 for the \code{level} slot of the object.
 
-\code{new_heading}: ...
+\code{new_heading}: create \linkS4class{heading} object.
 
 \code{call_command}: Format 'heading' object as character.
 
@@ -95,22 +96,22 @@ the method \code{new_section}.
 \code{new_section(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{new_section}.
 
-\code{new_section}: ...
+\code{new_section}: create \linkS4class{section} object.
 
 \code{call_command}: Format 'section' object as character.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{heading}}{...}
+\item{\code{heading}}{\linkS4class{heading} object.}
 
-\item{\code{paragraph}}{...}
+\item{\code{paragraph}}{character. Text for description.}
 
-\item{\code{code_block}}{...}
+\item{\code{code_block}}{\linkS4class{code_block} object.}
 
-\item{\code{.Data}}{...}
+\item{\code{.Data}}{character(1). Text of heading.}
 
-\item{\code{level}}{...}
+\item{\code{level}}{numeric. Level of heading.}
 }}
 
 \examples{
@@ -136,6 +137,7 @@ call_command(...)
 \seealso{
 Other call_commands: 
 \code{\link{code_block-class}},
+\code{\link{command-class}},
 \code{\link{ggset-class}},
 \code{\link{report-class}}
 }

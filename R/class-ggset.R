@@ -5,22 +5,21 @@
 #'
 #' @aliases ggset
 #'
-#' @title ...
+#' @title Management for 'ggplot' visualzation
 #'
-#' @description ...
+#' @description
+#' Let each packed "ggplot2" function (packed as [command-class] object)
+#' into layers in sequence, allowing post modifications programmatically
+#' and visualizing as "ggplot2" plot at any time.
 #'
 #' @family layerSets
 #'
-# @seealso \code{\link{<class>-class}}
-#'
-#' @slot layers ...
+#' @slot layers list with names. Each element of list must be a [command-class] object
+#' packed 'ggplot2' function and its args.
 #'
 #' @rdname ggset-class
+#' @order 1
 #'
-#' @examples
-#' \dontrun{
-#' new('ggset', ...)
-#' }
 .ggset <- 
   setClass("ggset", 
            contains = c("layerSet"),
@@ -44,9 +43,8 @@ setValidity("ggset",
 #' @importFrom crayon yellow
 #' @exportMethod show_layers
 #' @aliases show_layers
-#' @description \code{show_layers}: ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{show_layers}: show functions and parameters in layers
+#' with a pretty and readable form.
 #' @rdname ggset-class
 #' @examples
 #' \dontrun{
@@ -77,10 +75,8 @@ setMethod("show_layers",
 ## ------------------------------------- 
 #' @exportMethod new_ggset
 #' @aliases new_ggset
-#' @description \code{new_ggset}: ...
-#' @param ... ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{new_ggset}: Simplified creation of [ggset-class] object.
+#' @param ... An arbitrary number of [command-class] object.
 #' @rdname ggset-class
 #' @examples
 #' \dontrun{
@@ -95,12 +91,12 @@ setMethod("new_ggset",
           })
 #' @exportMethod mutate_layer
 #' @aliases mutate_layer
-#' @description \code{mutate_layer}: ...
-#' @param x ...
-#' @param layer ...
-#' @param ... ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{mutate_layer}:
+#' Pass new parameters or modify pre-existing parameters to the packed function.
+#' @param x [ggset-class] object
+#' @param layer numeric(1) or character(1). If "character", the name must be unique
+#' in slot \code{layers}.
+#' @param ... parameters passed to the layer.
 #' @rdname ggset-class
 #' @examples
 #' \dontrun{

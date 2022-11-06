@@ -3,11 +3,17 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases filter_ppcp
 #'
-#' @title ...
+#' @title Collate and filter candidates of chemical classification for each 'feature'
 #'
-#' @description ...
+#' @description This methods provide an approach to
+#' collate and filter chemical classification candidates data in baches for each
+#' 'feature'.
 #'
-#' @details ...
+#' @details 
+#' Filter for PPCP (posterior probability of classification prediction) data.
+#' See details about classification prediction for compounds:
+#' \url{http://www.nature.com/articles/s41587-020-0740-8}.
+#' See other details in [filter_formula()].
 #'
 #' @name filter_ppcp-methods
 #'
@@ -23,7 +29,7 @@ setMethod("filter_ppcp",
           signature = setMissing("filter_ppcp",
                                  x = "missing"),
           function(){
-            list(fun_filter = .filter_ppcp_by_threashold,
+            list(fun_filter = .filter_ppcp_by_threshold,
                  by_reference = T
             )
           })
@@ -41,19 +47,7 @@ setMethod("filter_ppcp",
 #'
 #' @aliases filter_ppcp
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param param ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @inheritParams filter_formula-methods
 #'
 #' @rdname filter_ppcp-methods
 #'

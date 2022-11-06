@@ -5,19 +5,23 @@
 #'
 #' @aliases melody
 #'
-#' @title ...
+#' @title Mutiple color palette in hexadecimal code
 #'
-#' @description ...
+#' @description
+#' This is a class object store Hex color used for visualization.
+#' In default (use [initialize_mcnebula()] to initialize the object),
+#' these these Hex color in each palette were get from package \code{ggsci}.
+#' Most of these palette in this package would passed to [ggplot2::scale_fill_manual] for
+#' filling color. So, let these Hex color with names may work well to specify target.
 #'
-# @family melodys
 #' @seealso [ggsci::pal_simpsons()], [ggsci::pal_igv()], [ggsci::pal_ucscgb()],
 #' [ggsci::pal_d3()]...
 #'
-#' @slot palette_set ...
-#' @slot palette_gradient ...
-#' @slot palette_stat ...
-#' @slot palette_col ...
-#' @slot palette_label ...
+#' @slot palette_set character with names or not. Hex color.
+#' @slot palette_gradient character with names or not. Hex color.
+#' @slot palette_stat character with names or not. Hex color.
+#' @slot palette_col character with names or not. Hex color.
+#' @slot palette_label character with names or not. Hex color.
 #'
 #' @rdname melody-class
 #'

@@ -5,15 +5,16 @@
 #'
 #' @aliases project_dataset
 #'
-#' @title Store extracted dataset
+#' @title Store extracted data
 #'
-#' @description ...
+#' @description 
+#' This is a class object used to store extracted data (raw data).
+#' See [project-class] for joint application with other related classes.
 #'
 #' @family projects
 #' @family datasets
-# @seealso ...
 #'
-#' @slot dataset ...
+#' @slot dataset list. See [dataset-class].
 #'
 #' @rdname project_dataset-class
 #'

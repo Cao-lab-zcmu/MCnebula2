@@ -18,7 +18,7 @@
 \item{value}{The value for the slot.}
 }
 \description{
-...
+This VIRTUAL class provides a slot for storing discarded data.
 
 \code{backtrack}, \code{backtrack<-}: getter and setter
 for the \code{backtrack} slot of the object.
@@ -26,7 +26,7 @@ for the \code{backtrack} slot of the object.
 \section{Slots}{
 
 \describe{
-\item{\code{backtrack}}{...}
+\item{\code{backtrack}}{list with names.}
 }}
 
 \concept{backtracks}

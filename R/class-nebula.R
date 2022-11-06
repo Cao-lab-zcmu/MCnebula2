@@ -5,7 +5,8 @@
 #'
 #' @aliases parent_nebula
 #'
-#' @description ...
+#' @description \code{parent_nebula}: Store data for visualization of
+#' parent-nebula.
 #'
 #' @rdname nebula-class
 #'
@@ -28,22 +29,59 @@
 #'
 #' @aliases child_nebulae
 #'
-#' @description ...
+#' @description \code{child_nebulae}: store data for visualization of
+#' child-nebulae.
 #'
-#' @slot igraph ...
-#' @slot tbl_graph ...
-#' @slot layout_ggraph ...
-#' @slot grid_layout ...
-#' @slot viewports ...
-#' @slot panel_viewport ...
-#' @slot legend_viewport ...
-#' @slot ggset ...
-#' @slot structures_grob ...
-#' @slot nodes_ggset ...
-#' @slot nodes_grob ...
-#' @slot ppcp_data ...
-#' @slot ration_data ...
-#' @slot ggset_annotate ...
+#' @slot igraph "igraph" object or its list. See [igraph::graph_from_data_frame()].
+#' The slot contains edges and nodes data of child-nebulae or parent-nebula.
+#' The "igraph" object can be output use [igraph::write_graph()] as ".graphml" file,
+#' which belong to a network data format that can be operated by other software such as
+#' Cytoscape (\url{https://cytoscape.org/}).
+#'
+#' @slot tbl_graph "tbl_graph" object or its list. See [tidygraph::as_tbl_graph()].
+#' Converted from slot \code{igraph}.
+#'
+#' @slot layout_ggraph "layout_ggraph" object or its list. See [ggraph::create_layout()].
+#' Create from slot \code{tbl_graph}, passed to [ggraph::ggraph()] for visualization.
+#'
+#' @slot grid_layout "layout" object. See [grid::grid.layout()].
+#' Grid layout for position of each child-nebula to visualize.
+#'
+#' @slot viewports list with names. Each element must be "viewport" object.
+#' See [grid::viewport()]. Position for each child-nebula to visualize.
+#'
+#' @slot panel_viewport "viewport" object. See [grid::viewport()]. For visualization,
+#' the position to place overall child-nebulae.
+#'
+#' @slot legend_viewport "viewport" object. See [grid::viewport()]. For visualization,
+#' the position to place legend.
+#'
+#' @slot ggset [ggset-class] object or its list with names. Each [ggset-class] object
+#' can be visualized directly use [call_command()].
+#'
+#' @slot structures_grob list with names. Each element is a "grob" object.
+#' See [grid::grob()]. Use [grid::grid.draw()] to visualize the chemical structure.
+#'
+#' @slot nodes_ggset list of [ggset-class] object. For drawing each node of 'features'
+#' ('features' means the detected peaks while processing LC-MS data)
+#' with annotation. Use [call_command()] to visualize the [ggset-class].
+#'
+#' @slot nodes_grob list of "grob" object. Converted from slot \code{nodes_ggset} with slot
+#' \code{structures_grob}. Use [grid::grid.draw()] to visualize the "grob".
+#'
+#' @slot ppcp_data list with names. Each element is a data.frame. This is an
+#' annotation data of 'features' which would be visualize in nodes border
+#' as a radial bar plot. \code{ppcp_data}, i.e., posterior probability of
+#' classification prediction. See [filter_ppcp()].
+#'
+#' @slot ration_data list with names. Each element is a data.frame. This is an
+#' annotation data of 'features' which would be visualize in nodes nucleus as
+#' ring plot. Generally, \code{ration_data} is the statistic data for samples.
+#'
+#' @slot ggset_annotate a list of [ggset-class] object. The annotated child-nebulae
+#' gathered from slot \code{ggset} and slot \code{nodes_grob}. 
+#' Use [call_command()] to visualize the [ggset-class]. Be care, the object
+#' sometimes is too large that need lot of time to loading for visualization.
 #'
 #' @rdname nebula-class
 #'
@@ -78,13 +116,12 @@
 #'
 #' @title Visualization component of chemical nebulae/nebula
 #'
-#' @description ...
+#' @description This class store multiple components for visualization.
 #'
 #' @family nebulae
-# @seealso ...
 #'
-#' @slot parent_nebula ...
-#' @slot child_nebulae ...
+#' @slot parent_nebula [parent_nebula-class] object.
+#' @slot child_nebulae [child_nebulae-class] object.
 #'
 #' @rdname nebula-class
 #' @order 1

@@ -18,7 +18,8 @@
 \item{value}{The value for the slot.}
 }
 \description{
-...
+This VIRTUAL class provides a slot for storing data and methods
+for accessing data in slot.
 
 \code{dataset}, \code{dataset<-}: getter and setter
 for the \code{dataset} slot of the object.
@@ -26,7 +27,7 @@ for the \code{dataset} slot of the object.
 \section{Slots}{
 
 \describe{
-\item{\code{dataset}}{...}
+\item{\code{dataset}}{list with names (subscript, imply file names).}
 }}
 
 \seealso{

@@ -5,14 +5,24 @@
 #'
 #' @aliases report
 #'
-#' @title ...
+#' @title Creating a formatted report
 #'
-#' @description ...
+#' @description
+#' The report module can create output report quickly for
+#' and not just for the mcnebula2 workflow.
+#' The report system is primarily a class object that manages text and code blocks.
+#' Heading or paragraphs or code blocks were treated as individual report units
+#' and deposited sequentially in "layers".
+#' The report system provides methods to exhibit, modify these layers.
+#' Reports can be exported as ".Rmd" text files, and subsequently,
+#' users can call [rmarkdown::render()] for output formatted documents.
 #'
 #' @family layerSets
-# @seealso ...
 #'
-#' @slot yaml ...
+#' @slot yaml character. Metadata passed to .Rmd for setting format of documentation.
+#' See \url{https://bookdown.org/yihui/rmarkdown/compile.html} for details.
+#' @slot layers list. Element in list must be [section-class],
+#' [heading-class] or [code_block-class].
 #'
 #' @rdname report-class
 #' @order 1
@@ -91,6 +101,22 @@ setReplaceMethod("yaml",
                  })
 ## ---------------------------------------------------------------------- 
 #' @exportMethod new_report
+#' @aliases new_report
+#' @description \code{new_report}: Create a [report-class] object.
+#' @param ... An arbitrary number of [heading-class],
+#' [section-class] or [code_block-class] in sequence.
+#' @param yaml character. Passed to .Rmd for setting format of documentation.
+#' @rdname report-class
+#' @examples
+#' \dontrun{
+#' new_report(...)
+#' }
+setMethod("new_report", 
+          signature = c(yaml = "character"),
+          function(..., yaml){
+            .report(yaml = yaml, layers = list(...))
+          })
+#' @exportMethod new_report
 #' @description \code{new_report()}: get the default parameters for the method \code{new_report}.
 #' @description \code{new_report(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{new_report}.
@@ -105,26 +131,11 @@ setMethod("new_report",
             else
               reCallMethod("new_report", args, ...)
           })
-#' @exportMethod new_report
-#' @aliases new_report
-#' @description \code{new_report}: ...
-#' @param ... ...
-#' @param yaml ...
-#' @rdname report-class
-#' @examples
-#' \dontrun{
-#' new_report(...)
-#' }
-setMethod("new_report", 
-          signature = c(yaml = "character"),
-          function(..., yaml){
-            .report(yaml = yaml, layers = list(...))
-          })
 #' @exportMethod call_command
 #' @aliases call_command
 #' @description \code{call_command}: Format 'report' object as character, which can be output
-#' by \code{writeLines()} function as '.Rmd' file and than use \code{rmarkdown::render} as
-#' pdf, html, or other format files.
+#' by \code{writeLines()} function as '.Rmd' file and than use \code{rmarkdown::render} output
+#' as pdf, html, or other format files.
 #' @family call_commands
 #' @seealso [writeLines()], [rmarkdown::render()]...
 #' @rdname report-class

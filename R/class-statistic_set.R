@@ -5,18 +5,16 @@
 #'
 #' @aliases statistic_set
 #'
-#' @title ...
+#' @title Data used for statistic analysis
 #'
-#' @description ...
+#' @description A class object for statistic analysis, associate with package of "limma"
+#' for binary comparison.
 #'
-# @family statistic_sets
-#'
-# @seealso \code{\link{<class>-class}}
-#'
-#' @slot design_matrix ...
-#' @slot contrast_matrix ...
-#' @slot dataset ...
-#' @slot top_table ...
+#' @slot design_matrix matrix. Create by [stats::model.matrix()].
+#' @slot contrast_matrix matrix. Create by [limma::makeContrasts()].
+#' @slot dataset ANY. Dataset used for [limma::lmFit()], [limma::eBayes()]
+#' and other functions.
+#' @slot top_table list with names. Each element of list should be "data.frame" or "tbl".
 #'
 #' @rdname statistic_set-class
 #'

@@ -9,9 +9,9 @@
   function(df){
     head(df, n = 1)
   }
-.filter_ppcp_by_threashold <- 
-  function(df, pp.threashold = 0.5){
-    dplyr::filter(df, pp.value > pp.threashold)
+.filter_ppcp_by_threshold <- 
+  function(df, pp.threshold = 0.5){
+    dplyr::filter(df, pp.value > pp.threshold)
   }
 .decrease_edges <-
   function(edges, max_edge_number = 5){

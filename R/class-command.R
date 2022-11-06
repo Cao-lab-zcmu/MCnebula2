@@ -5,17 +5,16 @@
 #'
 #' @aliases command
 #'
-#' @title ...
+#' @title Preparation of an instruction to be executed
 #'
-#' @description ...
+#' @description Packing the funciton and the args inside this class object,
+#' so that it can be performed easily at any time.
 #'
-# @family commands
+#' @family call_commands
 #'
-# @seealso \code{\link{<class>-class}}
-#'
-#' @slot command_name ...
-#' @slot command_function ...
-#' @slot command_args ...
+#' @slot command_name character(1). Describe the command name.
+#' @slot command_function function.
+#' @slot command_args the parameters passed to the function.
 #'
 #' @rdname command-class
 #'
@@ -106,12 +105,10 @@ setReplaceMethod("command_args",
 ## ---------------------------------------------------------------------- 
 #' @exportMethod new_command
 #' @aliases new_command
-#' @description \code{new_command}: ...
-#' @param fun ...
-#' @param ... ...
-#' @param name ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{new_command}: create an object of [command-class].
+#' @param fun function.
+#' @param ... parameters (with names or without names) passed to the function.
+#' @param name character(1). Name to slot \code{command_name}.
 #' @rdname command-class
 #' @examples
 #' \dontrun{
@@ -151,9 +148,9 @@ setMethod("new_command",
           })
 #' @exportMethod call_command
 #' @aliases call_command
-#' @description \code{call_command}: ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{call_command}: Execute the function (slot \code{command_function})
+#' with the parameters (slot \code{command_args}).
+#' @family call_commands
 #' @rdname command-class
 #' @examples
 #' \dontrun{

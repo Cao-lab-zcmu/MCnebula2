@@ -5,17 +5,19 @@
 #'
 #' @aliases mcn_dataset
 #'
-#' @title ...
+#' @title Store processed data 
 #'
-#' @description ...
+#' @description
+#' This is a class object used to store filtered data and formated data.
+#' These data would be used for further analysis or visualization.
 #'
-# @family mcn_datasets
+#' @seealso [dataset-class]
+#' @seealso [subscript-class]
 #'
-# @seealso \code{\link{<class>-class}}
-#'
-#' @slot dataset ...
-#' @slot reference ...
-#' @slot backtrack ...
+#' @slot dataset list with names of [subscript-class]. Store preliminary filtered data.
+#' @slot reference list with names of standard names. Store formated data, which is useful
+#' reference for further analysis or visualization.
+#' @slot backtrack list with names. Recovery stations halfway through data processing.
 #'
 #' @rdname mcn_dataset-class
 #'
@@ -52,10 +54,11 @@ setReplaceMethod("mcn_dataset",
 #' @exportMethod latest
 #' @aliases latest
 #' @description \code{latest}: get the first data in \code{dataset} slot and
-#' format as "tbl".
+#' format as "tbl". Equals:
+#' - \code{latest(object)}
+#' - \code{tibble::as_tibble(entity(dataset(x)[[1]]))}.
 #' @family datasets
 #' @family latests
-# @seealso [fun()]
 #' @rdname mcn_dataset-class
 #' @examples
 #' \dontrun{
@@ -71,10 +74,7 @@ setMethod("latest",
 #' @aliases extract_mcnset
 #' @description \code{extract_mcnset}: For fast extract data in object which containing
 #' \code{mcn_dataset} slot. Normally not used.
-#' @param x ...
-#' @param subscript ...
-# @family ...s
-# @seealso [fun()]
+#' @param subscript See [subscript-class]
 #' @rdname mcn_dataset-class
 #' @examples
 #' \dontrun{

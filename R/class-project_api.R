@@ -7,13 +7,18 @@
 #'
 #' @title Function set for extracting data
 #'
-#' @description ...
-#'
+#' @description 
+#' This is a class object used to store various functions for extracting and formatting data.
+#' See [project-class] for joint application with other related classes.
 #' @family projects
 #'
-#' @slot methods_read ...
-#' @slot methods_format ...
-#' @slot methods_match ...
+#' @note The class is not for normal use of the package.
+#'
+#' @slot methods_read list. Store a list of functions for reading data.
+#' The list with the names: "read" + "subscript". e.g., "read.f3_fingerid".
+#' @slot methods_format function. The function is used to format the data
+#' (e.g., rename the column names; convert the columns of character type into numeric).
+#' @slot methods_match list. Store a list of functions for matching and extracting string.
 #'
 #' @rdname project_api-class
 #'

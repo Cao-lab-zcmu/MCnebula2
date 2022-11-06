@@ -24,7 +24,7 @@
 \alias{new_command,function,missing-method}
 \alias{call_command,command-method}
 \alias{call_command}
-\title{...}
+\title{Preparation of an instruction to be executed}
 \usage{
 \S4method{show}{command}(object)
 
@@ -49,14 +49,15 @@
 \arguments{
 \item{value}{The value for the slot.}
 
-\item{fun}{...}
+\item{fun}{function.}
 
-\item{...}{...}
+\item{...}{parameters (with names or without names) passed to the function.}
 
-\item{name}{...}
+\item{name}{character(1). Name to slot \code{command_name}.}
 }
 \description{
-...
+Packing the funciton and the args inside this class object,
+so that it can be performed easily at any time.
 
 \code{command_name}, \code{command_name<-}: getter and setter
 for the \code{command_name} slot of the object.
@@ -67,18 +68,19 @@ for the \code{command_function} slot of the object.
 \code{command_args}, \code{command_args<-}: getter and setter
 for the \code{command_args} slot of the object.
 
-\code{new_command}: ...
+\code{new_command}: create an object of \linkS4class{command}.
 
-\code{call_command}: ...
+\code{call_command}: Execute the function (slot \code{command_function})
+with the parameters (slot \code{command_args}).
 }
 \section{Slots}{
 
 \describe{
-\item{\code{command_name}}{...}
+\item{\code{command_name}}{character(1). Describe the command name.}
 
-\item{\code{command_function}}{...}
+\item{\code{command_function}}{function.}
 
-\item{\code{command_args}}{...}
+\item{\code{command_args}}{the parameters passed to the function.}
 }}
 
 \examples{
@@ -92,3 +94,17 @@ new_command(...)
 call_command(...)
 }
 }
+\seealso{
+Other call_commands: 
+\code{\link{code_block-class}},
+\code{\link{ggset-class}},
+\code{\link{report-class}},
+\code{\link{section-class}}
+
+Other call_commands: 
+\code{\link{code_block-class}},
+\code{\link{ggset-class}},
+\code{\link{report-class}},
+\code{\link{section-class}}
+}
+\concept{call_commands}

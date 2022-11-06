@@ -4,12 +4,24 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases create_features_annotation
 #'
-#' @title ...
+#' @title merge annotation for 'features'
 #'
-#' @description ...
+#' @description
+#' According to \code{specific_candidate(object)} data, merge the latest
+#' filtered chemical formulae annotation, structural annotation. The ion mass
+#' and retention time for each 'feature' would also be gathered.
+#' User can also pass custom annotation for each 'feature', as long as the
+#' 'data.frame' with column of '.features_id'.
 #'
-#' @details ...
-#'
+#' @details
+#' The 'features_annotation' data created from:
+#' - The 'specific_candidate' data: \code{specific_candidate(object)}
+#' - The filtered chemical formula data: \code{latest(object, subscript = ".f2_formula")}
+#' - The filtered structural data: \code{latest(object, subscript = ".f3_fingerid")}
+#' - The ion mass and retention time (m/z and RT): latest(object, "project_dataset", ".f2_info")
+#' 
+#' The last would be collated via: \code{collate_data(object, subscript = ".f2_info")}
+#' 
 #' @name create_features_annotation-methods
 #'
 #' @order 1
@@ -47,25 +59,12 @@ setMethod("create_features_annotation",
 #'
 #' @aliases create_features_annotation
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param extra_data ...
-#' @param column ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param x [mcnebula-class] object.
+#' @param extra_data data.frame.
+#' @param column numeric(1). If name of columns not contain ".features_id",
+#' used to specify ID column for 'features'.
 #'
 #' @rdname create_features_annotation-methods
-#'
-#' @order 1
 #'
 #' @examples
 #' \dontrun{

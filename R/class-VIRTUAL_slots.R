@@ -5,11 +5,12 @@
 #'
 #' @title Share slots and methods for classes inherite from VIRTUAL_dataset
 #'
-#' @description ...
+#' @description This VIRTUAL class provides a slot for storing data and methods
+#' for accessing data in slot.
 #'
 #' @family datasets
 #'
-#' @slot dataset ...
+#' @slot dataset list with names (subscript, imply file names).
 #'
 #' @rdname VIRTUAL_dataset-class
 setClass("dataset", 
@@ -24,11 +25,11 @@ setClass("dataset",
 #'
 #' @title Share slots and methods for classes inherite from VIRTUAL_reference
 #'
-#' @description ...
+#' @description This VIRTUAL class provides a slot for storing processed data.
 #'
 #' @family references
 #'
-#' @slot reference ...
+#' @slot reference list with names (formal name).
 #'
 #' @rdname VIRTUAL_reference-class
 setClass("reference", 
@@ -43,11 +44,11 @@ setClass("reference",
 #'
 #' @title Share slots and methods for classes inherite from VIRTUAL_backtrack
 #'
-#' @description ...
+#' @description This VIRTUAL class provides a slot for storing discarded data.
 #'
 #' @family backtracks
 #'
-#' @slot backtrack ...
+#' @slot backtrack list with names.
 #'
 #' @rdname VIRTUAL_backtrack-class
 setClass("backtrack", 
@@ -62,11 +63,30 @@ setClass("backtrack",
 #'
 #' @title Share slots and methods for classes inherite from VIRTUAL_subscript
 #'
-#' @description ...
+#' @description This VIRTUAL class provides a slot for signing the data.
+#' The "subscript" like the signature for data, used to distinguish different data
+#' or file and retrieve it accurately.
+#' The "subscript" is mostly used for [project-class] (as well as its related classes):
+#' - imply file names. e.g., for "sirius.v4", ".f3_fingerid" indicate all files in
+#' directory of "fingerid" for each features.
+#' - imply attribute names. e.g., for "sirius.v4", "tani.score" indicate attribute name
+#' of "tanimotoSimilarity".
+#'
+#' In essence, "subscript" is the alias of a file or data or attribute.
+#' In this package, using the "subscript" system means that
+#' all external data names are given an alias.
+#' In fact, this makes things more complicated. Why did we do this?
+#' Because the naming system of external data is not constant,
+#' these names may change with the version of the data source.
+#' In order to enable this R package to accurately extract and call these data,
+#' it is necessary to establish a set of aliases within the package.
+#' "Subscript" names are used internally by this package.
+#' They correspond to external data and are equivalent to providing an interface
+#' to interface with external data.
 #'
 #' @family subscripts
 #'
-#' @slot subscript ...
+#' @slot subscript character(1).
 #'
 #' @rdname VIRTUAL_subscript-class
 setClass("subscript", 
@@ -81,12 +101,14 @@ setClass("subscript",
 #'
 #' @title Share slots and methods for classes inherite from VIRTUAL_export
 #'
-#' @description ...
+#' @description This VIRTUAL class provides slots for recording export path
+#' and export name of attributes.
 #'
 #' @family exports
 #'
-#' @slot export_path ...
-#' @slot export_name ...
+#' @slot export_path character(1). The export directory path.
+#' @slot export_name character with names.
+#' While export, the attribute name will be converted to the value.
 #'
 #' @rdname VIRTUAL_export-class
 setClass("export", 
@@ -102,11 +124,12 @@ setClass("export",
 #'
 #' @title Share slots and methods for classes inherite from VIRTUAL_layerSet
 #'
-#' @description ...
+#' @description This VIRTUAL class provides: slot \code{layers} for storing
+#' hierarchical data; and methods for modify slot \code{layers}.
 #'
 #' @family layerSets
 #'
-#' @slot layers ...
+#' @slot layers list with names.
 #'
 #' @rdname VIRTUAL_layerSet-class
 setClass("layerSet", 
@@ -267,11 +290,9 @@ setMethod("show",
           })
 #' @exportMethod add_layers
 #' @aliases add_layers
-#' @description \code{add_layers}: ...
-#' @param x ...
-#' @param ... ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{add_layers}: add extra "layer" into slot \code{layers}.
+#' @param x object contains slot \code{layers}.
+#' @param ... extra "layer".
 #' @rdname VIRTUAL_layerSet-class
 #' @examples
 #' \dontrun{
@@ -287,11 +308,8 @@ setMethod("add_layers",
           })
 #' @exportMethod delete_layers
 #' @aliases delete_layers
-#' @description \code{delete_layers}: ...
-#' @param x ...
-#' @param layers ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{delete_layers}: delete "layer" in slot \code{layers}.
+#' @param layers numeric. The specified "layer" in slot \code{layers}.
 #' @rdname VIRTUAL_layerSet-class
 #' @examples
 #' \dontrun{
@@ -305,12 +323,9 @@ setMethod("delete_layers",
           })
 #' @exportMethod move_layers
 #' @aliases move_layers
-#' @description \code{move_layers}: ...
-#' @param x ...
-#' @param from ...
-#' @param to ...
-# @family ...s
-# @seealso [fun()]
+#' @description \code{move_layers}: change the order of "layer" in slot \code{layers}.
+#' @param from sequence (sequence in list) of "layer" move from.
+#' @param to sequence (sequence in list) of "layer" move to.
 #' @rdname VIRTUAL_layerSet-class
 #' @examples
 #' \dontrun{

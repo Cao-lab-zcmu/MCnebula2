@@ -117,7 +117,8 @@
 \item{value}{The value for the slot.}
 }
 \description{
-...
+For analysis of MCnebula2, all data stored in this class object,
+all main methods performed with this object.
 
 \code{latest(x, slot, subscript)}: get the data in slot
 (\code{mcn_dataset(object)} or \code{prject_dataset(object)})
@@ -191,35 +192,17 @@ of \code{project_dataset} slot of the object. Equals:
 \section{Slots}{
 
 \describe{
-\item{\code{creation_time}}{...}
+\item{\code{creation_time}}{character(1).}
 
-\item{\code{ion_mode}}{...}
+\item{\code{ion_mode}}{character(1).}
 
-\item{\code{melody}}{...}
+\item{\code{melody}}{\linkS4class{melody} object.}
 
-\item{\code{mcn_dataset}}{...}
+\item{\code{mcn_dataset}}{\linkS4class{mcn_dataset} object.}
 
-\item{\code{statistic_set}}{...}
+\item{\code{statistic_set}}{\linkS4class{statistic_set} object.}
 
-\item{\code{project_version}}{...}
-
-\item{\code{project_path}}{...}
-
-\item{\code{project_conformation}}{...}
-
-\item{\code{project_metadata}}{...}
-
-\item{\code{project_api}}{...}
-
-\item{\code{project_dataset}}{...}
-
-\item{\code{parent_nebula}}{...}
-
-\item{\code{child_nebulae}}{...}
-
-\item{\code{export_path}}{...}
-
-\item{\code{export_name}}{...}
+\item{\code{...}}{Slots inherit from \linkS4class{project}, \linkS4class{nebula}, \linkS4class{export}.}
 }}
 
 \examples{
@@ -242,10 +225,12 @@ Other nebulae:
 Other latests: 
 \code{\link{mcn_dataset-class}},
 \code{\link{msframe-class}},
-\code{\link{project_dataset-class}}
+\code{\link{project_dataset-class}},
+\code{\link{project_metadata-class}}
 
 Other subscripts: 
 \code{\link{msframe-class}},
+\code{\link{project_conformation-class}},
 \code{\link{subscript-class}}
 }
 \concept{latests}
