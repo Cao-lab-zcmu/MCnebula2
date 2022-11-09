@@ -30,6 +30,7 @@
            contains = c("dataset", "reference", "backtrack"),
            prototype = NULL
            )
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -41,6 +42,7 @@
 setMethod("mcn_dataset", 
           signature = c(x = "ANY"),
           function(x){ x@mcn_dataset })
+
 #' @exportMethod mcn_dataset<-
 #' @aliases mcn_dataset<-
 #' @param value The value for the slot.
@@ -50,6 +52,7 @@ setReplaceMethod("mcn_dataset",
                  function(x, value){
                    initialize(x, mcn_dataset = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod latest
 #' @aliases latest
@@ -69,6 +72,7 @@ setMethod("latest",
           function(x){
             tibble::as_tibble(entity(dataset(x)[[1]]))
           })
+
 ## ------------------------------------- 
 #' @exportMethod extract_mcnset
 #' @aliases extract_mcnset
@@ -91,5 +95,6 @@ setMethod("extract_mcnset",
             names(lst) <- subscript
             return(lst)
           })
+
 ## ------------------------------------- 
 

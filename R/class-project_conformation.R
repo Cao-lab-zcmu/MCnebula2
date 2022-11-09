@@ -44,6 +44,7 @@
                             ),
            prototype = NULL
            )
+
 # ==========================================================================
 # validity
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -64,6 +65,7 @@ setValidity("project_conformation",
                 "the colnames not matched."
               else TRUE
             })
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -75,6 +77,7 @@ setMethod("show",
           function(object){
             .show(object)
           })
+
 ## ------------------------------------- 
 #' @exportMethod project_conformation
 #' @aliases project_conformation
@@ -84,6 +87,7 @@ setMethod("show",
 setMethod("project_conformation", 
           signature = "ANY",
           function(x){ x@project_conformation })
+
 #' @exportMethod project_conformation<-
 #' @aliases project_conformation<-
 #' @param value The value for the slot.
@@ -93,6 +97,7 @@ setReplaceMethod("project_conformation",
                  function(x, value){
                    initialize(x, project_conformation = value)
                  })
+
 ## ---------------------------------------------------------------------- 
 #' @exportMethod file_name
 #' @aliases file_name
@@ -102,6 +107,7 @@ setReplaceMethod("project_conformation",
 setMethod("file_name", 
           signature = c(x = "project_conformation"),
           function(x){ x@file_name })
+
 #' @exportMethod file_name<-
 #' @aliases file_name<-
 #' @param value The value for the slot.
@@ -111,6 +117,7 @@ setReplaceMethod("file_name",
                  function(x, value){
                    initialize(x, file_name = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod file_api
 #' @aliases file_api
@@ -120,6 +127,7 @@ setReplaceMethod("file_name",
 setMethod("file_api", 
           signature = c(x = "project_conformation"),
           function(x){ x@file_api })
+
 #' @exportMethod file_api<-
 #' @aliases file_api<-
 #' @param value The value for the slot.
@@ -129,6 +137,7 @@ setReplaceMethod("file_api",
                  function(x, value){
                    initialize(x, file_api = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod attribute_name
 #' @aliases attribute_name
@@ -138,6 +147,7 @@ setReplaceMethod("file_api",
 setMethod("attribute_name", 
           signature = c(x = "project_conformation"),
           function(x){ x@attribute_name })
+
 #' @exportMethod attribute_name<-
 #' @aliases attribute_name<-
 #' @param value The value for the slot.
@@ -147,5 +157,6 @@ setReplaceMethod("attribute_name",
                  function(x, value){
                    initialize(x, attribute_name = value)
                  })
+
 ## ------------------------------------- 
 

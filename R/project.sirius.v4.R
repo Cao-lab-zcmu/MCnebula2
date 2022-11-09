@@ -15,6 +15,7 @@
       stop("file \"", sig, "\" not exists")
     }
   }
+
 .get_file_name_sirius.v4 <- 
   function(){
     set <- c(.id = "FUN_get_id_sirius.v4",
@@ -38,12 +39,14 @@
              .f3_spectra = "\\.tsv$"
     )
   }
+
 FUN_get_id_sirius.v4 <- 
   function(x){
     if (missing(x))
       return("^[0-9](.*)_(.*)_(.*)$")
     stringr::str_extract(x, "(?<=_)[^_|^/]{1,}(?=/|$)")
   }
+
 .get_file_api_sirius.v4 <- 
   function(){
     set <- c(.id = ".id",
@@ -67,6 +70,7 @@ FUN_get_id_sirius.v4 <-
              .f3_spectra = ".id/.dir_spectra/.f3_spectra"
     )
   }
+
 .get_attribute_name_sirius.v4 <- 
   function(){
     set <- c(
@@ -141,6 +145,7 @@ FUN_get_id_sirius.v4 <-
              ...sig = "END"
     )
   }
+
 .get_attribute_type_sirius.v4 <- 
   function(){
     set <- c(
@@ -170,6 +175,7 @@ FUN_get_id_sirius.v4 <-
              pp.value = "numeric"
     )
   }
+
 .get_methods_read_sirius.v4 <- 
   function(){
     set <- c(
@@ -186,6 +192,7 @@ FUN_get_id_sirius.v4 <-
              read.f3_canopus = .pbsapply_read_fpt
     )
   }
+
 pbsapply_read_info <- function(path){
   pbapply::pbsapply(path, simplify = F,
                      function(path){
@@ -197,6 +204,7 @@ pbsapply_read_info <- function(path){
                        )
                      })
 }
+
 .pbsapply_read_fpt <- function(path){
   pbapply::pbsapply(path, simplify = F,
                     function(path){
@@ -205,6 +213,7 @@ pbsapply_read_info <- function(path){
                       df
                     })
 }
+
 .get_methods_match_sirius.v4 <- 
   function(){
     set <- c(

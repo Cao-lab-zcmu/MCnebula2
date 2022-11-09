@@ -32,6 +32,7 @@
                             ),
            prototype = NULL
            )
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -51,6 +52,7 @@ setMethod("show",
                          "list()"), "\n")
             }
           })
+
 #' @exportMethod command_name
 #' @aliases command_name
 #' @description \code{command_name}, \code{command_name<-}: getter and setter
@@ -59,6 +61,7 @@ setMethod("show",
 setMethod("command_name", 
           signature = c(x = "command"),
           function(x){ x@command_name })
+
 #' @exportMethod command_name<-
 #' @aliases command_name<-
 #' @param value The value for the slot.
@@ -68,6 +71,7 @@ setReplaceMethod("command_name",
                  function(x, value){
                    initialize(x, command_name = value)
                  })
+
 #' @exportMethod command_function
 #' @aliases command_function
 #' @description \code{command_function}, \code{command_function<-}: getter and setter
@@ -76,6 +80,7 @@ setReplaceMethod("command_name",
 setMethod("command_function", 
           signature = c(x = "command"),
           function(x){ x@command_function })
+
 #' @exportMethod command_function<-
 #' @aliases command_function<-
 #' @param value The value for the slot.
@@ -85,6 +90,7 @@ setReplaceMethod("command_function",
                  function(x, value){
                    initialize(x, command_function = value)
                  })
+
 #' @exportMethod command_args
 #' @aliases command_args
 #' @description \code{command_args}, \code{command_args<-}: getter and setter
@@ -93,6 +99,7 @@ setReplaceMethod("command_function",
 setMethod("command_args", 
           signature = c(x = "command"),
           function(x){ x@command_args })
+
 #' @exportMethod command_args<-
 #' @aliases command_args<-
 #' @param value The value for the slot.
@@ -102,6 +109,7 @@ setReplaceMethod("command_args",
                  function(x, value){
                    initialize(x, command_args = value)
                  })
+
 ## ---------------------------------------------------------------------- 
 #' @exportMethod new_command
 #' @aliases new_command
@@ -132,6 +140,7 @@ setMethod("new_command",
             new("command", command_name = name, command_function = fun,
                 command_args = args)
           })
+
 #' @importFrom rlang as_label
 #' @exportMethod new_command
 #' @aliases new_command
@@ -146,6 +155,7 @@ setMethod("new_command",
             }
             new_command(fun, ..., name = name)
           })
+
 #' @exportMethod call_command
 #' @aliases call_command
 #' @description \code{call_command}: Execute the function (slot \code{command_function})

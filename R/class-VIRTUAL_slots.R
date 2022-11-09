@@ -21,6 +21,7 @@ setClass("dataset",
                           ),
          prototype = NULL
          )
+
 #' @aliases VIRTUAL_reference reference
 #'
 #' @title Share slots and methods for classes inherite from VIRTUAL_reference
@@ -40,6 +41,7 @@ setClass("reference",
                           ),
          prototype = NULL
          )
+
 #' @aliases VIRTUAL_backtrack backtrack
 #'
 #' @title Share slots and methods for classes inherite from VIRTUAL_backtrack
@@ -59,6 +61,7 @@ setClass("backtrack",
                           ),
          prototype = NULL
          )
+
 #' @aliases VIRTUAL_subscript subscript
 #'
 #' @title Share slots and methods for classes inherite from VIRTUAL_subscript
@@ -97,6 +100,7 @@ setClass("subscript",
                           ),
          prototype = NULL
          )
+
 #' @aliases VIRTUAL_export export
 #'
 #' @title Share slots and methods for classes inherite from VIRTUAL_export
@@ -120,6 +124,7 @@ setClass("export",
                           ),
          prototype = NULL
          )
+
 #' @aliases VIRTUAL_layerSet layerSet
 #'
 #' @title Share slots and methods for classes inherite from VIRTUAL_layerSet
@@ -139,6 +144,7 @@ setClass("layerSet",
                           layers = "list"),
          prototype = NULL
          )
+
 # ==========================================================================
 # validate
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -151,6 +157,7 @@ setValidity("reference",
               else
                 TRUE
             })
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -161,6 +168,7 @@ setValidity("reference",
 #' @rdname VIRTUAL_dataset-class
 setMethod("dataset", "ANY",
           function(x){ x@dataset })
+
 #' @exportMethod dataset<-
 #' @aliases dataset<-
 #' @param value The value for the slot.
@@ -169,6 +177,7 @@ setReplaceMethod("dataset", "ANY",
                  function(x, value){
                    initialize(x, dataset = value)
                  })
+
 ## ------------------------------------- 
 setMethod("add_dataset", 
           signature = c(x = "ANY", list = "list"),
@@ -177,6 +186,7 @@ setMethod("add_dataset",
             dataset(x) <- list_unique_by_names(dataset)
             return(x)
           })
+
 ## ------------------------------------- 
 #' @exportMethod reference
 #' @aliases reference
@@ -185,6 +195,7 @@ setMethod("add_dataset",
 #' @rdname VIRTUAL_reference-class
 setMethod("reference", "ANY",
           function(x){ x@reference })
+
 #' @exportMethod reference<-
 #' @aliases reference<-
 #' @param value The value for the slot.
@@ -193,6 +204,7 @@ setReplaceMethod("reference", "ANY",
                  function(x, value){
                    initialize(x, reference = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod backtrack
 #' @aliases backtrack
@@ -201,6 +213,7 @@ setReplaceMethod("reference", "ANY",
 #' @rdname VIRTUAL_backtrack-class
 setMethod("backtrack", "ANY",
           function(x){ x@backtrack })
+
 #' @exportMethod backtrack<-
 #' @aliases backtrack<-
 #' @param value The value for the slot.
@@ -210,6 +223,7 @@ setReplaceMethod("backtrack",
                  function(x, value){
                    initialize(x, backtrack = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod subscript
 #' @aliases subscript
@@ -218,6 +232,7 @@ setReplaceMethod("backtrack",
 #' @rdname VIRTUAL_subscript-class
 setMethod("subscript", "ANY",
           function(x){ x@subscript })
+
 #' @exportMethod subscript<-
 #' @aliases subscript<-
 #' @param value The value for the slot.
@@ -226,6 +241,7 @@ setReplaceMethod("subscript", "ANY",
                  function(x, value){
                    initialize(x, subscript = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod export_name
 #' @aliases export_name
@@ -235,6 +251,7 @@ setReplaceMethod("subscript", "ANY",
 setMethod("export_name", 
           signature = c(x = "ANY"),
           function(x){ x@export_name })
+
 #' @exportMethod export_name<-
 #' @aliases export_name<-
 #' @param value The value for the slot.
@@ -244,6 +261,7 @@ setReplaceMethod("export_name",
                  function(x, value){
                    initialize(x, export_name = value)
                  })
+
 #' @exportMethod export_path
 #' @aliases export_path
 #' @description \code{export_path}, \code{export_path<-}: getter and setter
@@ -252,6 +270,7 @@ setReplaceMethod("export_name",
 setMethod("export_path", 
           signature = c(x = "ANY"),
           function(x){ x@export_path })
+
 #' @exportMethod export_path<-
 #' @aliases export_path<-
 #' @param value The value for the slot.
@@ -261,6 +280,7 @@ setReplaceMethod("export_path",
                  function(x, value){
                    initialize(x, export_path = value)
                  })
+
 ## ---------------------------------------------------------------------- 
 #' @exportMethod layers
 #' @aliases layers
@@ -270,6 +290,7 @@ setReplaceMethod("export_path",
 setMethod("layers", 
           signature = c(x = "layerSet"),
           function(x){ x@layers })
+
 #' @exportMethod layers<-
 #' @aliases layers<-
 #' @param value The value for the slot.
@@ -279,6 +300,7 @@ setReplaceMethod("layers",
                  function(x, value){
                    initialize(x, layers = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod show
 #' @aliases show
@@ -288,6 +310,7 @@ setMethod("show",
           function(object){
             show_layers(object)
           })
+
 #' @exportMethod add_layers
 #' @aliases add_layers
 #' @description \code{add_layers}: add extra "layer" into slot \code{layers}.
@@ -306,6 +329,7 @@ setMethod("add_layers",
             layers(x) <- c(layers(x), args)
             return(x)
           })
+
 #' @exportMethod delete_layers
 #' @aliases delete_layers
 #' @description \code{delete_layers}: delete "layer" in slot \code{layers}.
@@ -321,6 +345,7 @@ setMethod("delete_layers",
             layers(x)[layers] <- NULL
             return(x)
           })
+
 #' @exportMethod move_layers
 #' @aliases move_layers
 #' @description \code{move_layers}: change the order of "layer" in slot \code{layers}.

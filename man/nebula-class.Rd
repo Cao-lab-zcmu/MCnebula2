@@ -75,7 +75,7 @@
 \alias{ggset_annotate}
 \alias{ggset_annotate<-,ANY-method}
 \alias{ggset_annotate<-}
-\title{Visualization component of chemical nebulae/nebula}
+\title{Visualization component of chemical Nebulae/Nebula}
 \usage{
 \S4method{show}{parent_nebula}(object)
 
@@ -152,10 +152,10 @@
 This class store multiple components for visualization.
 
 \code{parent_nebula}: Store data for visualization of
-parent-nebula.
+Parent-Nebula.
 
 \code{child_nebulae}: store data for visualization of
-child-nebulae.
+Child-Nebulae.
 
 \code{parent_nebula}, \code{parent_nebula<-}: getter and setter
 for the \code{parent_nebula} slot of the object.
@@ -213,7 +213,7 @@ for the \code{ggset_annotate} slot of the object.
 \item{\code{child_nebulae}}{\linkS4class{child_nebulae} object.}
 
 \item{\code{igraph}}{"igraph" object or its list. See \code{\link[igraph:graph_from_data_frame]{igraph::graph_from_data_frame()}}.
-The slot contains edges and nodes data of child-nebulae or parent-nebula.
+The slot contains edges and nodes data of Child-Nebulae or Parent-Nebula.
 The "igraph" object can be output use \code{\link[igraph:write_graph]{igraph::write_graph()}} as ".graphml" file,
 which belong to a network data format that can be operated by other software such as
 Cytoscape (\url{https://cytoscape.org/}).}
@@ -225,13 +225,13 @@ Converted from slot \code{igraph}.}
 Create from slot \code{tbl_graph}, passed to \code{\link[ggraph:ggraph]{ggraph::ggraph()}} for visualization.}
 
 \item{\code{grid_layout}}{"layout" object. See \code{\link[grid:grid.layout]{grid::grid.layout()}}.
-Grid layout for position of each child-nebula to visualize.}
+Grid layout for position of each Child-Nebula to visualize.}
 
 \item{\code{viewports}}{list with names. Each element must be "viewport" object.
-See \code{\link[grid:viewport]{grid::viewport()}}. Position for each child-nebula to visualize.}
+See \code{\link[grid:viewport]{grid::viewport()}}. Position for each Child-Nebula to visualize.}
 
 \item{\code{panel_viewport}}{"viewport" object. See \code{\link[grid:viewport]{grid::viewport()}}. For visualization,
-the position to place overall child-nebulae.}
+the position to place overall Child-Nebulae.}
 
 \item{\code{legend_viewport}}{"viewport" object. See \code{\link[grid:viewport]{grid::viewport()}}. For visualization,
 the position to place legend.}
@@ -258,7 +258,7 @@ classification prediction. See \code{\link[=filter_ppcp]{filter_ppcp()}}.}
 annotation data of 'features' which would be visualize in nodes nucleus as
 ring plot. Generally, \code{ration_data} is the statistic data for samples.}
 
-\item{\code{ggset_annotate}}{a list of \linkS4class{ggset} object. The annotated child-nebulae
+\item{\code{ggset_annotate}}{a list of \linkS4class{ggset} object. The annotated Child-Nebulae
 gathered from slot \code{ggset} and slot \code{nodes_grob}.
 Use \code{\link[=call_command]{call_command()}} to visualize the \linkS4class{ggset}. Be care, the object
 sometimes is too large that need lot of time to loading for visualization.}

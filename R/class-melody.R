@@ -41,6 +41,7 @@
                             ),
            prototype = NULL
   )
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -52,6 +53,7 @@ setMethod("show",
           function(object){
             .show(object)
           })
+
 ## ------------------------------------- 
 #' @exportMethod melody
 #' @aliases melody
@@ -61,6 +63,7 @@ setMethod("show",
 setMethod("melody", 
           signature = c(x = "ANY"),
           function(x){ x@melody })
+
 #' @exportMethod melody<-
 #' @aliases melody<-
 #' @param value The value for the slot.
@@ -70,6 +73,7 @@ setReplaceMethod("melody",
                  function(x, value){
                    initialize(x, melody = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod palette_set
 #' @aliases palette_set
@@ -79,6 +83,7 @@ setReplaceMethod("melody",
 setMethod("palette_set", 
           signature = c(x = "melody"),
           function(x){ x@palette_set })
+
 #' @exportMethod palette_set<-
 #' @aliases palette_set<-
 #' @param value The value for the slot.
@@ -88,6 +93,7 @@ setReplaceMethod("palette_set",
                  function(x, value){
                    initialize(x, palette_set = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod palette_gradient
 #' @aliases palette_gradient
@@ -97,6 +103,7 @@ setReplaceMethod("palette_set",
 setMethod("palette_gradient", 
           signature = c(x = "melody"),
           function(x){ x@palette_gradient })
+
 #' @exportMethod palette_gradient<-
 #' @aliases palette_gradient<-
 #' @param value The value for the slot.
@@ -106,6 +113,7 @@ setReplaceMethod("palette_gradient",
                  function(x, value){
                    initialize(x, palette_gradient = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod palette_stat
 #' @aliases palette_stat
@@ -115,6 +123,7 @@ setReplaceMethod("palette_gradient",
 setMethod("palette_stat", 
           signature = c(x = "melody"),
           function(x){ x@palette_stat })
+
 #' @exportMethod palette_stat<-
 #' @aliases palette_stat<-
 #' @param value The value for the slot.
@@ -124,6 +133,7 @@ setReplaceMethod("palette_stat",
                  function(x, value){
                    initialize(x, palette_stat = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod palette_col
 #' @aliases palette_col
@@ -133,6 +143,7 @@ setReplaceMethod("palette_stat",
 setMethod("palette_col", 
           signature = c(x = "melody"),
           function(x){ x@palette_col })
+
 #' @exportMethod palette_col<-
 #' @aliases palette_col<-
 #' @param value The value for the slot.
@@ -142,6 +153,7 @@ setReplaceMethod("palette_col",
                  function(x, value){
                    initialize(x, palette_col = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod palette_label
 #' @aliases palette_label
@@ -151,6 +163,7 @@ setReplaceMethod("palette_col",
 setMethod("palette_label", 
           signature = c(x = "melody"),
           function(x){ x@palette_label })
+
 #' @exportMethod palette_label<-
 #' @aliases palette_label<-
 #' @param value The value for the slot.

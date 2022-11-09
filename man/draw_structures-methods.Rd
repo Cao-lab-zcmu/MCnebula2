@@ -5,33 +5,29 @@
 \alias{draw_structures}
 \alias{draw_structures,mcnebula,character-method}
 \alias{show_structure,ANY,character-method}
-\title{...}
+\title{Draw and visualize chemcial structure}
 \usage{
 \S4method{draw_structures}{mcnebula,character}(x, nebula_name)
 
 \S4method{show_structure}{ANY,character}(x, .features_id)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{nebula_name}{...}
+\item{nebula_name}{character(1). Chemical classes in 'nebula_index' data.
+Specified to draw chemical structures of all the 'features' of that.}
 
-\item{.features_id}{...}
-}
-\value{
-...
+\item{.features_id}{character(1). The ID of 'features' to show the
+chemical structure.}
 }
 \description{
-...
+Methods used for drawing and visualizing chemical structures of 'features'
+in Child-Nebulae.
+\code{\link[ChemmineOB:convertToImage]{ChemmineOB::convertToImage()}} is the core function used for drawing chemical
+structures.
 
-...
-
-...
-}
-\details{
-...
-
-...
+\code{show_structure}: visualize the chemical structure of 'feature'
+which has been drawn.
 }
 \examples{
 \dontrun{
@@ -40,4 +36,7 @@ draw_structures(...)
 \dontrun{
 show_structure(...)
 }
+}
+\seealso{
+\code{\link[ChemmineOB:convertToImage]{ChemmineOB::convertToImage()}}.
 }

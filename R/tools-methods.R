@@ -5,14 +5,17 @@
   function(df){
     head( dplyr::arrange(df, desc(csi.score)), n = 1)
   }
+
 .rank_by_default <- 
   function(df){
     head(df, n = 1)
   }
+
 .filter_ppcp_by_threshold <- 
   function(df, pp.threshold = 0.5){
     dplyr::filter(df, pp.value > pp.threshold)
   }
+
 .decrease_edges <-
   function(edges, max_edge_number = 5){
     ## order

@@ -6,7 +6,7 @@
 \alias{set_ppcp_data,missing,missing-method}
 \alias{set_ppcp_data,mcnebula,ANY-method}
 \alias{set_ppcp_data,mcnebula,character-method}
-\title{...}
+\title{Custom specify PPCP data for visualization in nodes}
 \usage{
 \S4method{set_ppcp_data}{missing,missing}()
 
@@ -15,27 +15,29 @@
 \S4method{set_ppcp_data}{mcnebula,character}(x, classes)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{classes}{...}
+\item{classes}{character. The names of chemical classes.
+Use \code{classification(object)} to get optional candidates.}
 }
 \description{
-...
+Run before \code{\link[=annotate_nebula]{annotate_nebula()}} or \code{\link[=draw_nodes]{draw_nodes()}}.
+Custom specify PPCP data for visualization in nodes.
+All chemical classes exists in PPCP data could be specified.
 
 \code{set_ppcp_data()}: get the function for generating
 default parameters for the method
 \code{set_ppcp_data}.
 
-\code{set_ppcp_data(x, ...)}: use the default parameters whatever 'missing'
+\code{set_ppcp_data(x, ...)}:
+use the default parameters whatever 'missing'
 while performing the method \code{set_ppcp_data}.
-
-...
-}
-\details{
-...
 }
 \examples{
 \dontrun{
 set_ppcp_data(...)
 }
+}
+\seealso{
+\code{\link[=annotate_nebula]{annotate_nebula()}}, \code{\link[=draw_nodes]{draw_nodes()}}.
 }

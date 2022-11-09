@@ -39,6 +39,7 @@ setMethod("create_features_annotation",
             colnames(extra_data)[column] <- ".features_id"
             create_features_annotation(x, extra_data)
           })
+
 #' @exportMethod create_features_annotation
 #' @rdname create_features_annotation-methods
 setMethod("create_features_annotation", 
@@ -55,6 +56,7 @@ setMethod("create_features_annotation",
                     by = ".features_id", all.x = T)
             return(x)
           })
+
 #' @exportMethod create_features_annotation
 #'
 #' @aliases create_features_annotation

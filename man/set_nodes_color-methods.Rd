@@ -6,7 +6,7 @@
 \alias{set_nodes_color,mcnebula,character,data.frame,missing-method}
 \alias{set_nodes_color,mcnebula,character,missing,missing-method}
 \alias{set_nodes_color,mcnebula,missing,missing,logical-method}
-\title{...}
+\title{Custom defined nodes color in Nebulae (network)}
 \usage{
 \S4method{set_nodes_color}{mcnebula,character,data.frame,missing}(x, attribute, extra_data)
 
@@ -15,26 +15,24 @@
 \S4method{set_nodes_color}{mcnebula,missing,missing,logical}(x, use_tracer)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{attribute}{...}
+\item{attribute}{character. The attribute specified to colorful the nodes.
+Can be continues attribute or discrete attribute, exist in
+'layout_ggraph' object or data of \code{extra_data}.
+Related with \code{\link[ggplot2:scale_gradient]{ggplot2::scale_fill_gradientn()}} and \code{\link[ggplot2:scale_manual]{ggplot2::scale_fill_manual()}}.
+If the attribute is continues, colors in \code{palette_gradient(object)} would
+be used. If the attribute is discrete, use colors in \code{palette_set(object)}.}
 
-\item{extra_data}{...}
+\item{extra_data}{data.frame. Extra data used for setting nodes color.
+The data.frame must contains column of '.features_id'.}
 
-\item{use_tracer}{...}
-}
-\value{
-...
+\item{use_tracer}{logical. If \code{TRUE}, hightlight the 'top' 'features'
+marked in 'nebula_index' data. See \code{\link[=set_tracer]{set_tracer()}}.}
 }
 \description{
-...
-
-...
-}
-\details{
-...
-
-...
+Custom defined the nodes color for visualizing.
+Run after \code{\link[=activate_nebulae]{activate_nebulae()}}.
 }
 \examples{
 \dontrun{
@@ -42,5 +40,5 @@ set_nodes_color(...)
 }
 }
 \seealso{
-\code{\link[=activate_nebulae]{activate_nebulae()}}, \code{\link[=visualize]{visualize()}}...
+\code{\link[=activate_nebulae]{activate_nebulae()}}, \code{\link[=set_tracer]{set_tracer()}}...
 }

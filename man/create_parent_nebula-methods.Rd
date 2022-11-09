@@ -3,45 +3,43 @@
 \name{create_parent_nebula-methods}
 \alias{create_parent_nebula-methods}
 \alias{create_parent_nebula}
-\alias{create_parent_nebula,mcnebula,missing,missing-method}
-\alias{create_parent_nebula,mcnebula,numeric,missing-method}
+\alias{create_parent_nebula,missing,missing,missing-method}
+\alias{create_parent_nebula,mcnebula,ANY,ANY-method}
 \alias{create_parent_nebula,mcnebula,numeric,logical-method}
-\title{...}
+\title{Gather data to create Parent-Nebula}
 \usage{
-\S4method{create_parent_nebula}{mcnebula,missing,missing}(x)
+\S4method{create_parent_nebula}{missing,missing,missing}()
 
-\S4method{create_parent_nebula}{mcnebula,numeric,missing}(x, edge_cutoff)
+\S4method{create_parent_nebula}{mcnebula,ANY,ANY}(x, edge_cutoff, remove_isolate)
 
 \S4method{create_parent_nebula}{mcnebula,numeric,logical}(x, edge_cutoff, remove_isolate)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{edge_cutoff}{...}
+\item{edge_cutoff}{numeric(1). Value in (0,1). Set a threshold to
+create edges upon similarity value of 'spectral_similarity' data.}
 
-\item{remove_isolate}{...}
-}
-\value{
-...
+\item{remove_isolate}{logical. If \code{TRUE}, remove the isolate 'features'
+(in network, i.e. the nodes without edge)}
 }
 \description{
-...
+Gather 'spectral_similarity' data and 'features_annotation' data
+to create 'igraph' object use function of \code{\link[igraph:graph_from_data_frame]{igraph::graph_from_data_frame()}}.
 
 \code{create_parent_nebula()}: get the default parameters for the method
 \code{create_parent_nebula}.
 
-\code{create_parent_nebula(x, ...)}: use the default parameters whatever 'missing'
+\code{create_parent_nebula(x, ...)}:
+use the default parameters whatever 'missing'
 while performing the method \code{create_parent_nebula}.
-
-...
-}
-\details{
-...
-
-...
 }
 \examples{
 \dontrun{
 create_parent_nebula(...)
 }
+}
+\seealso{
+\code{\link[=compute_spectral_similarity]{compute_spectral_similarity()}}, \code{\link[=create_features_annotation]{create_features_annotation()}},
+\code{\link[igraph:graph_from_data_frame]{igraph::graph_from_data_frame()}}.
 }

@@ -6,7 +6,7 @@
 \alias{backtrack_stardust,mcnebula,missing,missing,missing-method}
 \alias{backtrack_stardust,mcnebula,character,missing,ANY-method}
 \alias{backtrack_stardust,mcnebula,missing,numeric,ANY-method}
-\title{...}
+\title{Recover filtered chemical classses for 'stardust_classes'}
 \usage{
 \S4method{backtrack_stardust}{mcnebula,missing,missing,missing}(x)
 
@@ -15,30 +15,29 @@
 \S4method{backtrack_stardust}{mcnebula,missing,numeric,ANY}(x, rel.index, remove)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{class.name}{...}
+\item{class.name}{character. The chemical classes name.}
 
-\item{remove}{...}
+\item{remove}{logical. If \code{TRUE}, remove the specified chemical
+classes in 'stardust_classes' data. If \code{FALSE}, recover the
+data of specified chemical classes into 'stardust_classes'; the classes
+must in slot \code{backtrack(mcn_dataset(object))}.}
 
-\item{rel.index}{...}
-}
-\value{
-...
+\item{rel.index}{numeric. The index number of chemical classes.
+See columns of 'rel.index' in 'nebula_index' or 'stardust_classes'.}
 }
 \description{
-...
+These methods used for custom modify chemical classes in 'stardust_classes'
+data. Users can use the method to recover classes which filtered out by
+\code{\link[=cross_filter_stardust]{cross_filter_stardust()}} into 'stardust_classes' data.
+In addition, users can use the method to delete chemical classes in
+'stardust_classes' data.
 
-...
+\code{backtrack_stardust(object)}: get the filtered chemical classes after
+using \code{\link[=cross_filter_stardust]{cross_filter_stardust()}}.
 
-...
-
-...
-}
-\details{
-...
-
-...
+Run after \code{\link[=cross_filter_stardust]{cross_filter_stardust()}}.
 }
 \examples{
 \dontrun{
@@ -52,5 +51,5 @@ backtrack_stardust(...)
 }
 }
 \seealso{
-\code{\link{cross_filter_stardust}}
+\code{\link[=cross_filter_stardust]{cross_filter_stardust()}}
 }

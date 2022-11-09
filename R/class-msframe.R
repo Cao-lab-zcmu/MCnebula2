@@ -28,6 +28,7 @@
              representation(entity = "data.frame"),
            prototype = NULL
   )
+
 # ==========================================================================
 # methods
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -39,6 +40,7 @@ setMethod("show",
           function(object){
             cat( "A class of \"msframe\" of", subscript(object), "\n")
           })
+
 ## ------------------------------------- 
 #' @exportMethod msframe
 #' @aliases msframe
@@ -48,6 +50,7 @@ setMethod("show",
 setMethod("msframe", 
           signature = c(x = "ANY"),
           function(x){ x@msframe })
+
 #' @exportMethod msframe<-
 #' @aliases msframe<-
 #' @param value The value for the slot.
@@ -57,6 +60,7 @@ setReplaceMethod("msframe",
                  function(x, value){
                    initialize(x, msframe = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod latest
 #' @aliases latest
@@ -74,6 +78,7 @@ setMethod("latest",
           function(x){
             tibble::as_tibble(entity(x))
           })
+
 ## ------------------------------------- 
 #' @exportMethod entity
 #' @aliases entity
@@ -83,6 +88,7 @@ setMethod("latest",
 setMethod("entity", 
           signature = c(x = "msframe"),
           function(x){ x@entity })
+
 #' @exportMethod entity<-
 #' @aliases entity<-
 #' @param value The value for the slot.
@@ -92,6 +98,7 @@ setReplaceMethod("entity",
                  function(x, value){
                    initialize(x, entity = value)
                  })
+
 ## ---------------------------------------------------------------------- 
 #' @exportMethod format_msframe
 #' @aliases format_msframe
@@ -104,6 +111,7 @@ setMethod("format_msframe",
             entity(x) <- format_msframe(entity(x), fun_format = fun_format)
             return(x)
           })
+
 #' @exportMethod format_msframe
 #' @aliases format_msframe
 #' @rdname msframe-class
@@ -118,6 +126,7 @@ setMethod("format_msframe",
             }
             return(x)
           })
+
 ## ------------------------------------- 
 #' @exportMethod format_msframe
 #' @aliases format_msframe
@@ -134,6 +143,7 @@ setMethod("format_msframe",
               stop( "the `types` is unformat" )
             .format_msframe(x, names, types)
           })
+
 #' @exportMethod format_msframe
 #' @aliases format_msframe
 #' @rdname msframe-class
@@ -145,6 +155,7 @@ setMethod("format_msframe",
             types <- .get_attribute_type_sirius.v4()
             .format_msframe(x, names, types)
           })
+
 #' @exportMethod format_msframe
 #'
 #' @aliases format_msframe
@@ -178,6 +189,7 @@ setMethod("format_msframe",
           function(x, fun_names, fun_types){
             .format_msframe(x, fun_names(), fun_types())
           })
+
 .format_msframe <- 
   function(x, names, types){
     if( any(names(names) == "...sig") ) {
@@ -198,6 +210,7 @@ setMethod("format_msframe",
     names <- names[names(names) %in% colnames(entity(x))]
     .format_msframe_types(x, names, types)
   }
+
 .format_msframe_names <- 
   function(x, names){
     pattern <- paste0("^", names, "$")
@@ -205,6 +218,7 @@ setMethod("format_msframe",
       mapply_rename_col(pattern, names(names), colnames(entity(x)))
     return(x)
   }
+
 .format_msframe_types <- 
   function(x, names, types){
     for (i in names(names)) {
@@ -220,6 +234,7 @@ setMethod("format_msframe",
     }
     return(x)
   }
+
 ## ------------------------------------- 
 #' @exportMethod filter_msframe
 #' @aliases filter_msframe
@@ -231,6 +246,7 @@ setMethod("filter_msframe",
             filter_msframe(x, fun_filter = fun_filter,
                            f = ~ .features_id, ...)
           })
+
 #' @exportMethod filter_msframe
 #'
 #' @aliases filter_msframe

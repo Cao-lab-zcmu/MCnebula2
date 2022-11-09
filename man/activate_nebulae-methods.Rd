@@ -8,7 +8,7 @@
 \alias{activate_nebulae,mcnebula,function,function-method}
 \alias{ggset_activate_parent_nebula}
 \alias{ggset_activate_child_nebulae}
-\title{generate 'ggset' for visualization}
+\title{activate Nebulae for visualization}
 \usage{
 \S4method{activate_nebulae}{missing,missing,missing}()
 
@@ -21,55 +21,39 @@ ggset_activate_parent_nebula(x)
 ggset_activate_child_nebulae(x)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{fun_default_parent}{...}
+\item{fun_default_parent}{function. Passed to create \linkS4class{ggset} object
+for Parent-Nebula. Default is \code{ggset_activate_parent_nebula}.
+Normally not used.}
 
-\item{fun_default_child}{...}
-}
-\value{
-...
-
-OUTPUT_DESCRIPTION
-
-...
+\item{fun_default_child}{function. Passed to create \linkS4class{ggset} object
+for Child-Nebulae. Default is \code{ggset_activate_child_nebulae}.
+Normally not used.}
 }
 \description{
-...
+Based on layouts create by \code{\link[=create_parent_layout]{create_parent_layout()}} or \code{\link[=create_child_layouts]{create_child_layouts()}},
+use functions to activate Nebulae as \linkS4class{ggset} object for \code{\link[=visualize]{visualize()}}
+methods to draw them.
 
 \code{activate_nebulae()}: get the default parameters for the method
 \code{activate_nebulae}.
 
-\code{activate_nebulae(x, ...)}: use the default parameters whatever 'missing'
+\code{activate_nebulae(x, ...)}:
+use the default parameters whatever 'missing'
 while performing the method \code{activate_nebulae}.
 
-...
+\code{ggset_activate_parent_nebula}:
+create \linkS4class{ggset} object of Parent-Nebula.
 
-FUNCTION_DESCRIPTION
-
-...
-}
-\details{
-...
-
-...
-
-DETAILS
-
-...
+\code{ggset_activate_child_nebulae}:
+create lists of \linkS4class{ggset} object of Child-Nebulae.
 }
 \examples{
 \dontrun{
 activate_nebulae(...)
 }
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
 }
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+\seealso{
+\linkS4class{ggset}, \code{\link[=create_parent_layout]{create_parent_layout()}}, \code{\link[=create_child_layouts]{create_child_layouts()}}...
 }

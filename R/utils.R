@@ -15,6 +15,7 @@ setMissing <-
     names(res) <- sig
     return(res)
   }
+
 reCallMethod <- 
   function(funName, args, ...){
     arg.order <- unname(getGeneric(funName)@signature)
@@ -45,16 +46,19 @@ reCallMethod <-
                    ", ...)")
     eval(parse(text = expr))
   }
+
 get_signature <- 
   function(args){
     vapply(args, function(arg) class(arg)[1], FUN.VALUE = "ch")
   }
+
 match_methods <- 
   function(name, classes){
     methods <- showMethods(classes = classes, printTo = FALSE)
     methods <- methods[ grep(paste0("^Function: ", name), methods, perl = T) ]
     vapply(strsplit(methods, " "), `[`, "character", 2)
   }
+
 list_unique_by_names <- 
   function(lst){
     unique <- data.frame(names = names(lst),
@@ -62,6 +66,7 @@ list_unique_by_names <-
     unique <- unique[!duplicated(unique$names), ]
     lst[unique$order]
   }
+
 vec_unique_by_value <- 
   function(vec){
     unique <- data.frame(value = vec,
@@ -69,6 +74,7 @@ vec_unique_by_value <-
     unique <- unique[!duplicated(unique$value), ]
     vec[unique$order]
   }
+
 ## ------------------------------------- 
 slots_mapply <- 
   function(x, fun, ...){
@@ -77,6 +83,7 @@ slots_mapply <-
     res <- mapply(fun, slot = slots, name = names(slots), ...)
     return(res)
   }
+
 ## ------------------------------------- 
 mapply_rename_col <- 
   function(
@@ -95,6 +102,7 @@ mapply_rename_col <-
            })
     return(names)
   }
+
 ## ------------------------------------- 
 .show <- 
   function(object){
@@ -105,21 +113,25 @@ mapply_rename_col <-
               cat("\n\n")
            })
   }
+
 # # ------------------------------------- 
 .message_info <- 
   function(main, sub, arg = NULL, sig = "##"){
     message(sig, " ", main, ": ", sub, " ", arg)
   }
+
 .message_info_formal <- 
   function(main, sub, arg = NULL, sig = "[INFO]"){
     message(sig, " ", main, ": ", sub, " ", arg)
   }
+
 #' @importFrom grid current.viewport
 .message_info_viewport <- 
   function(info = "info"){
     .message_info(info, "current.viewport:",
                   paste0("\n\t", paste0(grid::current.viewport())))
   }
+
 .get_missing_x <- 
   function(x, class, n = 2, envir = parent.frame(n)){
     if (missing(x)) {
@@ -131,6 +143,7 @@ mapply_rename_col <-
     }
     return(x)
   }
+
 ## ------------------------------------- 
 #' @importFrom rlang as_label
 .check_data <- 
@@ -150,6 +163,7 @@ mapply_rename_col <-
              }
            })
   }
+
 .check_names <- 
   function(param, formal, tip1, tip2){
     if (!is.null(names(param))) {
@@ -160,6 +174,7 @@ mapply_rename_col <-
       }
     }
   }
+
 #' @importFrom rlang as_label
 .check_class <- 
   function(object, class = "layout", tip = "grid::grid.layout"){
@@ -169,6 +184,7 @@ mapply_rename_col <-
                   "`", tip, "`." ))
     }
   }
+
 .check_columns <- 
   function(obj, lst, tip){
     if (!is.data.frame(obj))
@@ -178,6 +194,7 @@ mapply_rename_col <-
                stop(paste0("'", tip, "' must contains a column of '", col, "'."))
            })
   }
+
 .check_type <- 
   function(obj, type, tip){
     fun <- match.fun(paste0("is.", type))
@@ -186,18 +203,21 @@ mapply_rename_col <-
               stop(paste0("data columns in '", tip, "' must all be '", type, "'."))
            })
   }
+
 .check_path <- 
   function(path){
     if (!file.exists(path)) {
       dir.create(path, recursive = T)
     }
   }
+
 .check_file <- 
   function(file){
     if (!file.exists(file)) {
       stop("file.exists(file) == F, `file` not exists.")
     }
   }
+
 validate_class_in_list <- 
   function(lst, recepts, tip){
     check <- 
@@ -210,6 +230,7 @@ validate_class_in_list <-
       stop(tip)
     else T
   }
+
 .suggest_bio_package <- 
   function(pkg){
     if (!requireNamespace(pkg, quietly = T))
@@ -218,6 +239,7 @@ validate_class_in_list <-
            '\n\tinstall.packages("BiocManager")',
            '\nBiocManager::install("', pkg, '")\n\n')
   }
+
 ## ------------------------------------- 
 .list_files <- function(path, upper, pattern){
   lst_file <- pbapply::pbmapply(path, upper, pattern, SIMPLIFY = F,
@@ -229,20 +251,24 @@ validate_class_in_list <-
                      })
   data.table::rbindlist(lst_file)
 }
+
 ## ------------------------------------- 
 read_tsv <- function(path){
   file <- data.table::fread(input=path, sep="\t", header=T, quote="", check.names=F)
   return(file)
 }
+
 pbsapply_read_tsv <- function(path){
   data <- pbapply::pbsapply(path, read_tsv, simplify = F)
   return(data)
 }
+
 write_tsv <-
   function(x, filename, col.names = T, row.names = F){
     write.table(x, file = filename, sep = "\t",
                 col.names = col.names, row.names = row.names, quote = F)
   }
+
 ## ------------------------------------- 
 #' @importFrom grid unit
 #' @importFrom ggtext element_textbox
@@ -263,6 +289,7 @@ write_tsv <-
     structure(as.list(environment()),
               class = c("element_textbox", "element_text", "element"))
   }
+
 ## ------------------------------------- 
 .get_legend <- 
   function(p){
@@ -272,10 +299,12 @@ write_tsv <-
     ggplot2:::build_guides(p$scales, p$layers, p$mapping,
                            position, theme, p$guides, p$labels)
   }
+
 .depigment_col <- 
   function(col, n = 10, level = 5){
     colorRampPalette(c("white", col))(n)[level]
   }
+
 ## ------------------------------------- 
 .simulate_quant_set <- 
   function(x){
@@ -287,6 +316,7 @@ write_tsv <-
     sample_metadata(x) <- meta
     return(x)
   }
+
 #' @importFrom tibble as_tibble
 .simulate_quant <- 
   function(.features_id, mean = 50, sd = 20, seed = 555,
@@ -301,6 +331,7 @@ write_tsv <-
     colnames(df) <- unlist(lapply(group, paste0, "_", 1:rep))
     tibble::as_tibble(cbind(quant, df))
   }
+
 group_strings <- 
   function(strings, patterns, target = NA){
     if (is.null(names(patterns)))
@@ -315,6 +346,7 @@ group_strings <-
     }
     tibble::as_tibble(df)
   }
+
 .find_and_sort_strings <- 
   function(strings, patterns){
     lapply(patterns,
@@ -322,6 +354,7 @@ group_strings <-
              strings[grepl(pattern, strings, perl = T)]
            })
   }
+
 .as_dic <- 
   function(vec, names, default,
            fill = T, as.list = T, na.rm = F){
@@ -344,6 +377,7 @@ group_strings <-
     }
     vec
   }
+
 .fresh_param <- 
   function(default, args){
     if (missing(args))
@@ -358,6 +392,7 @@ group_strings <-
                default[[ name ]]
            })
   }
+
 ## ---------------------------------------------------------------------- 
 #' @importFrom grImport2 readPicture
 #' @importFrom grImport2 grobify
@@ -365,10 +400,4 @@ group_strings <-
   function(path){
     grImport2::grobify(grImport2::readPicture(path))
   }
-#' @importFrom ChemmineOB convertToImage
-#' @importFrom rsvg rsvg_svg
-.smiles_to_cairosvg <- 
-  function(smile, path){
-    ChemmineOB::convertToImage("SMI", "SVG", source = smile, toFile = path)
-    rsvg::rsvg_svg(path, path)
-  }
+

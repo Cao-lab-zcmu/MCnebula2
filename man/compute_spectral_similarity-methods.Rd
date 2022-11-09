@@ -8,7 +8,7 @@
 \alias{compute_spectral_similarity,missing,missing,missing,lightSpectrum,lightSpectrum-method}
 \alias{compute_spectral_similarity,missing,missing,missing,data.frame,data.frame-method}
 \alias{compute_spectral_similarity,mcnebula,logical,logical,missing,missing-method}
-\title{...}
+\title{Compute MS2 spectral similarity}
 \usage{
 \S4method{compute_spectral_similarity}{missing,missing,missing,missing,missing}()
 
@@ -21,21 +21,27 @@
 \S4method{compute_spectral_similarity}{mcnebula,logical,logical,missing,missing}(x, within_nebula, recompute)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{within_nebula}{...}
+\item{within_nebula}{logical. If \code{TRUE},
+only 'features' that exist in a Child-Nebula are compared
+for spectral similarity. Data of 'nebula_index' (\code{nebula_index(object)})
+would be used for assigning and combining the 'features' of comparison.}
 
-\item{recompute}{...}
+\item{recompute}{logical. If \code{TRUE}, discard the existing data in the object,
+and recompute the spectral similarity.}
 
-\item{sp1}{...}
+\item{sp1}{data.frame. An additional channel for comparing two spectrum.
+Contains 'mz' and 'intensity' for spectral comparison.}
 
-\item{sp2}{...}
-}
-\value{
-...
+\item{sp2}{data.frame. An additional channel for comparing two spectrum.
+Contains 'mz' and 'intensity' for spectral comparison.}
 }
 \description{
-...
+These are methods stripped from \link[MSnbase:compareSpectra-methods]{MSnbase::compareSpectra}.
+The unnecessary parts were removed, \code{\link[=compute_spectral_similarity]{compute_spectral_similarity()}} only
+calculate the 'dotproduct' for two spectra and get the similarity value.
+It allows faster results for batch comparisons.
 
 \code{compute_spectral_similarity()}: get the default parameters for the method
 \code{compute_spectral_similarity}.
@@ -43,16 +49,12 @@
 \code{compute_spectral_similarity(x, ...)}:
 use the default parameters whatever 'missing'
 while performing the method \code{compute_spectral_similarity}.
-
-...
-}
-\details{
-...
-
-...
 }
 \examples{
 \dontrun{
 compute_spectral_similarity(...)
 }
+}
+\seealso{
+\code{\link[MSnbase:compareSpectra-methods]{MSnbase::compareSpectra()}}.
 }

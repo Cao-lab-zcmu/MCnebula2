@@ -5,14 +5,21 @@
 \alias{initialize_mcnebula}
 \alias{initialize_mcnebula,mcnebula,ANY-method}
 \alias{initialize_mcnebula,melody,ANY-method}
-\title{...}
+\alias{initialize_mcnebula,project_conformation,character-method}
+\alias{initialize_mcnebula,project_api,character-method}
+\title{Initialize mcnebula object}
 \usage{
 \S4method{initialize_mcnebula}{mcnebula,ANY}(x, sirius_version, sirius_project, output_directory)
 
 \S4method{initialize_mcnebula}{melody,ANY}(x)
+
+\S4method{initialize_mcnebula}{project_conformation,character}(x, sirius_version)
+
+\S4method{initialize_mcnebula}{project_api,character}(x, sirius_version)
 }
 \arguments{
-\item{x}{\linkS4class{melody} object.}
+\item{x}{\linkS4class{mcnebula} object, \linkS4class{melody} object,
+\linkS4class{project_conformation} or \linkS4class{project_api} object.}
 
 \item{sirius_version}{character. e.g., "sirius.v4".}
 
@@ -20,24 +27,10 @@
 
 \item{output_directory}{character. The path for output.}
 }
-\value{
-\linkS4class{mcnebula} object.
-
-\linkS4class{melody} object.
-}
 \description{
-...
-
-...
-
-...
-}
-\details{
-...
-
-...
-
-...
+Set SIRIUS project path and its version to initialize \linkS4class{mcnebula} object.
+In addition, the methods can be used for some related object to given
+default value.
 }
 \examples{
 \dontrun{

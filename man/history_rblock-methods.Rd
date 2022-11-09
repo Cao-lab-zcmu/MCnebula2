@@ -7,7 +7,7 @@
 \alias{history_rblock,numeric,ANY,ANY,ANY-method}
 \alias{history_rblock,numeric,missing,missing,numeric-method}
 \alias{history_rblock,missing,character,character,ANY-method}
-\title{...}
+\title{Create 'code_block' object from history codes}
 \usage{
 \S4method{history_rblock}{missing,missing,missing,missing}()
 
@@ -18,32 +18,24 @@
 \S4method{history_rblock}{missing,character,character,ANY}(pattern_start, pattern_end, exclude)
 }
 \arguments{
-\item{nrow}{...}
+\item{nrow}{numeric(1). The number of lines of code to fetch.}
 
-\item{pattern_start}{...}
+\item{pattern_start}{character(1).
+The pattern string used to match the starting line of codes in R history.}
 
-\item{pattern_end}{...}
+\item{pattern_end}{character(1).
+The pattern string used to match the ending line of codes in R history.}
 
-\item{exclude}{...}
-}
-\value{
-...
+\item{exclude}{numeric(1). Used to exclude the last lines of code.}
 }
 \description{
-...
+Get codes from R history, then formatted as \linkS4class{code_block} object.
 
 \code{history_rblock()}: get the default parameters for the method
 \code{history_rblock}.
 
 \code{history_rblock(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{history_rblock}.
-
-...
-}
-\details{
-...
-
-...
 }
 \examples{
 \dontrun{
@@ -51,5 +43,5 @@ history_rblock(...)
 }
 }
 \seealso{
-\code{\link{report-class}}, \code{\link{code_block-class}}...
+\linkS4class{code_block}, \code{\link[=history]{history()}}...
 }

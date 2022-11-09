@@ -33,6 +33,7 @@ setMethod("filter_ppcp",
                  by_reference = T
             )
           })
+
 #' @exportMethod filter_ppcp
 #' @description \code{filter_ppcp(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{filter_ppcp}.
@@ -43,6 +44,7 @@ setMethod("filter_ppcp",
             reCallMethod("filter_ppcp",
                          .fresh_param(filter_ppcp()), ...)
           })
+
 #' @exportMethod filter_ppcp
 #'
 #' @aliases filter_ppcp
@@ -93,6 +95,7 @@ setMethod("filter_ppcp",
             mcn_dataset(x) <- add_dataset(mcn_dataset(x), msframe.lst)
             return(x)
           })
+
 validate_ppcp_annotation <- 
   function(annotation, lst){
     rows <- nrow(annotation)
@@ -104,6 +107,7 @@ validate_ppcp_annotation <-
                stop("the annotation not match the classification dataset")
           })
   }
+
 merge_ppcp_annotation <- 
   function(annotation, msframe.lst){
     annotation <- dplyr::select(annotation, -.features_id, -.candidates_id)

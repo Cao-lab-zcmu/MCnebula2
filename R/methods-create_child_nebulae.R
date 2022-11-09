@@ -4,11 +4,17 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases create_child_nebulae
 #'
-#' @title ...
+#' @title Gather data to create Child-Nebulae
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Similar to [create_parent_nebula()], gather 'spectral_similarity' data and
+#' and 'features_annotation' data; but additionally, use 'nebula_index' data
+#' to group 'features' by chemical classes. Each chemical classes in 'nebula_index'
+#' data would lead to a 'igraph' object.
+#' 
+#' @seealso [compute_spectral_similarity()], [create_features_annotation()],
+#' [create_nebula_index()],
+#' [igraph::graph_from_data_frame()].
 #'
 #' @name create_child_nebulae-methods
 #'
@@ -27,8 +33,10 @@ setMethod("create_child_nebulae",
                  max_edge_number = 5,
                  use_tracer = T)
           })
+
 #' @exportMethod create_child_nebulae
-#' @description \code{create_child_nebulae(x, ...)}: use the default parameters whatever 'missing'
+#' @description \code{create_child_nebulae(x, ...)}:
+#' use the default parameters whatever 'missing'
 #' while performing the method \code{create_child_nebulae}.
 #' @rdname create_child_nebulae-methods
 setMethod("create_child_nebulae", 
@@ -37,25 +45,19 @@ setMethod("create_child_nebulae",
             reCallMethod("create_child_nebulae",
                          .fresh_param(create_child_nebulae()))
           })
+
 #' @exportMethod create_child_nebulae
 #'
 #' @aliases create_child_nebulae
 #'
-#' @title ...
+#' @param x [mcnebula-class] object.
+#' @param edge_cutoff numeric(1). Value in (0,1). Set a threshold to
+#' create edges upon similarity value of 'spectral_similarity' data.
 #'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param edge_cutoff ...
-#' @param max_edge_number ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param max_edge_number numeric(1).
+#' For nodes (features) in each Child-Nebulae (i.e. network), the maximum number of
+#' edges link with. If the number exceeds the limitation, only edges representing higher
+#' spectral similarity would be retained.
 #'
 #' @rdname create_child_nebulae-methods
 #'

@@ -3,14 +3,17 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases fun_modify
 #'
-#' @title ...
+#' @title Modify 'ggset' object
 #'
-#' @description ...
+#' @description
+#' These are multiple functions used for post modification of [ggset-class]
+#' object. These functions provide a convenient, fast, and repeatable way
+#' to make improvements to [ggset-class] object.
 #'
-#' @param ggset ...
-#' @param x ...
-#'
-#' @details ...
+#' @param ggset [ggset-class] object.
+#' @param x [mcnebula-class] object.
+#' 
+#' @seealso [ggset-class]
 #'
 #' @name fun_modify
 NULL
@@ -18,25 +21,39 @@ NULL
 
 #' @export modify_default_child
 #' @aliases modify_default_child
-#' @description \code{modify_default_child}: ...
+#' 
+#' @description \code{modify_default_child}:
+#' Used for [visualize_all()].
+#' \code{modify_rm_legend} + \code{modify_set_labs} + \code{modify_unify_scale_limits}
+#' 
 #' @rdname fun_modify
 modify_default_child <- 
   function(ggset, x){
     x <- .get_missing_x(x, "mcnebula")
     modify_rm_legend(modify_set_labs(modify_unify_scale_limits(ggset)))
   }
+
 #' @export modify_set_labs_and_unify_scale_limits
 #' @aliases modify_set_labs_and_unify_scale_limits
-#' @description \code{modify_set_labs_and_unify_scale_limits}: ...
+#' 
+#' @description \code{modify_set_labs_and_unify_scale_limits}:
+#' \code{modify_set_labs} + \code{modify_unify_scale_limits}
+#' 
 #' @rdname fun_modify
 modify_set_labs_and_unify_scale_limits <- 
   function(ggset, x){
     x <- .get_missing_x(x, "mcnebula")
     modify_set_labs(modify_unify_scale_limits(ggset))
   }
+
 #' @export modify_annotate_child
 #' @aliases modify_annotate_child
-#' @description \code{modify_annotate_child}: ...
+#' 
+#' @description \code{modify_annotate_child}:
+#' \code{modify_set_labs} + ...
+#' (for parameters of \code{panel.grid} and \code{panel.background}
+#' in [ggplot2::theme()]).
+#' 
 #' @rdname fun_modify
 modify_annotate_child <- 
   function(ggset, x){
@@ -46,26 +63,40 @@ modify_annotate_child <-
                  panel.background = element_rect("grey92", color = NA,
                                                  inherit.blank = T))
   }
+
 #' @export modify_rm_legend
 #' @aliases modify_rm_legend
-#' @description \code{modify_rm_legend}: ...
+#' 
+#' @description \code{modify_rm_legend}: remove the legend.
+#' For parameter of \code{legend.position} in [ggplot2::theme()].
+#' 
 #' @rdname fun_modify
 modify_rm_legend <- 
   function(ggset){
     mutate_layer(ggset, "theme", legend.position = "none")
   }
+
 #' @importFrom grid unit
 #' @export modify_set_margin
 #' @aliases modify_set_margin
-#' @description \code{modify_set_margin}: ...
+#' 
+#' @description \code{modify_set_margin}: reduce margin.
+#' For parameter of \code{plot.margin} in [ggplot2::theme()].
+#' 
 #' @rdname fun_modify
 modify_set_margin <- 
   function(ggset, margin = grid::unit(rep(-8, 4), "lines")){
     mutate_layer(ggset, "theme", plot.margin = margin)
   }
+
 #' @export modify_unify_scale_limits
 #' @aliases modify_unify_scale_limits
-#' @description \code{modify_unify_scale_limits}: ...
+#' 
+#' @description \code{modify_unify_scale_limits}:
+#' Uniform mapping 'scale' for all Child-Nebulae.
+#' Related to \code{ggplot2::scale_*} function.
+#' Use \code{MCnebula2:::.LEGEND_mapping()} to get the possibly mapping.
+#' 
 #' @rdname fun_modify
 modify_unify_scale_limits <- 
   function(ggset, x){
@@ -106,9 +137,14 @@ modify_unify_scale_limits <-
     }
     ggset
   }
+
 #' @export modify_set_labs
 #' @aliases modify_set_labs
-#' @description \code{modify_set_labs}: ...
+#' 
+#' @description \code{modify_set_labs}:
+#' According to names in slot \code{export_name} of [mcnebula-class] object
+#' to rename the labs.
+#' 
 #' @rdname fun_modify
 modify_set_labs <- 
   function(ggset, x){
@@ -134,6 +170,7 @@ modify_set_labs <-
     }
     ggset
   }
+
 #' @importFrom stringr str_extract
 .get_mapping2 <-
   function(ggset, only_legend = T){
@@ -148,10 +185,12 @@ modify_set_labs <-
     }
     args
   }
+
 .LEGEND_mapping <- 
   function(){
     c("fill", "color", "colour", "alpha", "size", "edge_width")
   }
+
 .get_mapping <- 
   function(ggset){
     unlist(lapply(unname(layers(ggset)),

@@ -6,7 +6,7 @@
 \alias{binary_comparison,missing,missing,missing,missing,missing-method}
 \alias{binary_comparison,ANY,ANY,ANY,ANY,ANY-method}
 \alias{binary_comparison,ANY,formula,function,ANY,character-method}
-\title{...}
+\title{Binary comparison for 'features' quantification data}
 \usage{
 \S4method{binary_comparison}{missing,missing,missing,missing,missing}()
 
@@ -15,36 +15,34 @@
 \S4method{binary_comparison}{ANY,formula,`function`,ANY,character}(x, formula, fun_norm, top_coef, contrasts)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{...}{...}
+\item{...}{expressions, or character strings which can be parsed to
+expressions, specifying contrasts. See parameter of \code{...} in
+\code{\link[limma:makeContrasts]{limma::makeContrasts()}}.}
 
-\item{formula}{...}
+\item{formula}{formula. Passed to \code{\link[=model.matrix]{model.matrix()}}.}
 
-\item{fun_norm}{...}
+\item{fun_norm}{function. For normalization of 'features' quantification
+data.}
 
-\item{top_coef}{...}
+\item{top_coef}{list, NULL or character(1). Specified the parameter of
+\code{coef} in \code{\link[limma:toptable]{limma::topTable()}}. If \code{"all"}, all coefficient in
+contrast matrix would be used one by one.}
 
-\item{contrasts}{...}
-}
-\value{
-...
+\item{contrasts}{character vector specifying contrasts.
+See parameter \code{contrasts} in \code{\link[limma:makeContrasts]{limma::makeContrasts()}}.}
 }
 \description{
-...
+Use the functions in the 'limma' package for simple binary statistical analysis.
 
-\code{binary_comparison()}: get the default parameters for the method
+\code{binary_comparison()}:
+get the default parameters for the method
 \code{binary_comparison}.
 
-\code{binary_comparison(x, ...)}: use the default parameters whatever 'missing'
+\code{binary_comparison(x, ...)}:
+use the default parameters whatever 'missing'
 while performing the method \code{binary_comparison}.
-
-...
-}
-\details{
-...
-
-...
 }
 \examples{
 \dontrun{

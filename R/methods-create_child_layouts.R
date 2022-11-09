@@ -8,13 +8,30 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases create_child_layouts
 #'
-#' @title ...
+#' @title Create layouts for visualization of Child-Nebulae
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Create visual style of Child-Nebulae.
+#' The 'style' means a variety of layouts for drawing the networks
+#' (i.e. all Child-Nebulae). See details.
+#' 
+#' @details
+#' This method provides a flexible way to draw Child-Nebulae.
+#' Users can create visual style based on default parameters.
+#' For experienced users of 'grid' package,
+#' the related functions such as [grid::grid.layout()], [grid::viewport()]
+#' can be used to create customized visualizations.
+#' The layouts for visualization of Child-Nebulae include:
+#' - nodes position: \code{layout_ggraph}
+#' - size and position of grid panel: \code{grid_layout}
+#' - size and position of each Child-Nebula (inside the panel): \code{viewports}
+#' - size and position of overall Child-Nebulae: \code{panel_viewport}
+#' - size and position of overall legend: \code{legend_viewport}
 #'
 #' @name create_child_layouts-methods
+#'
+#' @seealso [grid::viewport()], [grid::grid.layout()],
+#' [ggraph::create_layout()]...
 #'
 #' @order 1
 NULL
@@ -82,31 +99,34 @@ setMethod("create_child_layouts",
               )
             }
           })
+
 #' @exportMethod create_child_layouts
 #'
 #' @aliases create_child_layouts
 #'
-#' @title ...
-#'
-#' @description ...
-#' @description \code{create_child_layouts(x, ...)}: use the default parameters whatever 'missing'
+#' @description \code{create_child_layouts(x, ...)}:
+#' use the default parameters whatever 'missing'
 #' while performing the method \code{create_child_layouts}.
 #'
-#' @details ...
+#' @param x [mcnebula-class] object.
+#' @param ggraph_layouts character with names or not.
+#' If with names, the names should be chemical classes in 'nebula_index' data.
+#' The names used to specify layout for all or partial Child-Nebulae.
+#' The value, see [ggraph::create_layout()].
 #'
-#' @param x ...
-#' @param ggraph_layouts ...
-#' @param seeds ...
-#' @param grid_layout ...
-#' @param viewports ...
-#' @param panel_viewport ...
-#' @param legend_viewport ...
+#' @param seeds numeric with names or not. The names, see parameter
+#' \code{ggraph_layouts}. The values would passed to [set.seed()]
 #'
-# @inheritParams rdname
+#' @param grid_layout 'layout' object. Create by [grid::grid.layout()].
 #'
-#' @return ...
+#' @param viewports list with names or not.
+#' Each element is a 'viewport' object create by [grid::viewport()]
 #'
-# @seealso ...
+#' @param panel_viewport 'viewport' object.
+#' Describe the size and position for drawing overall Child-Nebulae (panel).
+#'
+#' @param legend_viewport 'viewport' object.
+#' Describe the size and position for drawing legend of Child-Nebulae.
 #'
 #' @rdname create_child_layouts-methods
 #'
@@ -123,6 +143,7 @@ setMethod("create_child_layouts",
             do.call(.create_child_layouts,
                     .fresh_param(create_child_layouts()(x)))
           })
+
 .create_child_layouts <- 
   function(x, ggraph_layouts, seeds,
            grid_layout, viewports,
@@ -160,6 +181,7 @@ setMethod("create_child_layouts",
     legend_viewport(child_nebulae(x)) <- legend_viewport
     return(x)
   }
+
 .propose_graph_layout <- 
   function(graph){
     if (length(graph) >= 300 | length(graph) <= 10)

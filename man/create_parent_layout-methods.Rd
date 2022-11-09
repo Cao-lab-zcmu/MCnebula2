@@ -6,7 +6,7 @@
 \alias{create_parent_layout,missing,missing,missing-method}
 \alias{create_parent_layout,mcnebula,ANY,ANY-method}
 \alias{create_parent_layout,mcnebula,character,numeric-method}
-\title{...}
+\title{Create layout for visualization of Parent-Nebula}
 \usage{
 \S4method{create_parent_layout}{missing,missing,missing}()
 
@@ -15,33 +15,31 @@
 \S4method{create_parent_layout}{mcnebula,character,numeric}(x, ggraph_layout, seed)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{ggraph_layout}{...}
+\item{ggraph_layout}{character(1). Layout name. See \code{\link[ggraph:ggraph]{ggraph::create_layout()}}.}
 
-\item{seed}{...}
-}
-\value{
-...
+\item{seed}{numeric(1). Passed to \code{\link[=set.seed]{set.seed()}}.}
 }
 \description{
-...
+These methods use functions of \code{\link[tidygraph:tbl_graph]{tidygraph::as_tbl_graph()}} and
+\code{\link[ggraph:ggraph]{ggraph::create_layout()}} to create 'layout_ggraph' (data.frame)
+object to standby visualization of Parent-Nebula.
+Run after \code{\link[=create_parent_nebula]{create_parent_nebula()}}.
 
-\code{create_parent_layout()}: get the default parameters for the method
+\code{create_parent_layout()}:
+get the default parameters for the method
 \code{create_parent_layout}.
 
-\code{create_parent_layout(x, ...)}: use the default parameters whatever 'missing'
+\code{create_parent_layout(x, ...)}:
+use the default parameters whatever 'missing'
 while performing the method \code{create_parent_layout}.
-
-...
-}
-\details{
-...
-
-...
 }
 \examples{
 \dontrun{
 create_parent_layout(...)
 }
+}
+\seealso{
+\code{\link[tidygraph:tbl_graph]{tidygraph::as_tbl_graph()}}, \code{\link[ggraph:ggraph]{ggraph::create_layout()}}.
 }

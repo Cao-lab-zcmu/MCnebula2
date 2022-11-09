@@ -3,13 +3,16 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases compute_spectral_similarity
 #'
-#' @title ...
+#' @title Compute MS2 spectral similarity
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description These are methods stripped from [MSnbase::compareSpectra].
+#' The unnecessary parts were removed, [compute_spectral_similarity()] only
+#' calculate the 'dotproduct' for two spectra and get the similarity value.
+#' It allows faster results for batch comparisons.
 #'
 #' @name compute_spectral_similarity-methods
+#' 
+#' @seealso [MSnbase::compareSpectra()].
 #'
 #' @order 1
 NULL
@@ -31,6 +34,7 @@ setMethod("compute_spectral_similarity",
                  recompute = F
             )
           })
+
 #' @exportMethod compute_spectral_similarity
 #' @description \code{compute_spectral_similarity(x, ...)}:
 #' use the default parameters whatever 'missing'
@@ -42,6 +46,7 @@ setMethod("compute_spectral_similarity",
             reCallMethod("compute_spectral_similarity",
                          .fresh_param(compute_spectral_similarity()))
           })
+
 #' @exportMethod compute_spectral_similarity
 #' @rdname compute_spectral_similarity-methods
 setMethod("compute_spectral_similarity", 
@@ -51,6 +56,7 @@ setMethod("compute_spectral_similarity",
           function(sp1, sp2){
             compareSpectra(sp1, sp2)
           })
+
 #' @exportMethod compute_spectral_similarity
 #' @rdname compute_spectral_similarity-methods
 setMethod("compute_spectral_similarity", 
@@ -73,27 +79,24 @@ setMethod("compute_spectral_similarity",
                        intensity = sp2[[ "intensity" ]])
             compareSpectra(sp1, sp2)
           })
+
 #' @exportMethod compute_spectral_similarity
 #'
 #' @aliases compute_spectral_similarity
 #'
-#' @title ...
+#' @param x [mcnebula-class] object.
+#' @param within_nebula logical. If \code{TRUE}, 
+#' only 'features' that exist in a Child-Nebula are compared
+#' for spectral similarity. Data of 'nebula_index' (\code{nebula_index(object)})
+#' would be used for assigning and combining the 'features' of comparison.
 #'
-#' @description ...
+#' @param recompute logical. If \code{TRUE}, discard the existing data in the object,
+#' and recompute the spectral similarity.
 #'
-#' @details ...
-#'
-#' @param x ...
-#' @param within_nebula ...
-#' @param recompute ...
-#' @param sp1 ...
-#' @param sp2 ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param sp1 data.frame. An additional channel for comparing two spectrum.
+#' Contains 'mz' and 'intensity' for spectral comparison.
+#' @param sp2 data.frame. An additional channel for comparing two spectrum.
+#' Contains 'mz' and 'intensity' for spectral comparison.
 #'
 #' @rdname compute_spectral_similarity-methods
 #'

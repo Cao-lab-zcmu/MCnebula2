@@ -12,7 +12,7 @@
 \alias{visualize_all,missing,missing,missing,missing-method}
 \alias{visualize_all,mcnebula,ANY,ANY,ANY-method}
 \alias{visualize_all,mcnebula,logical,function,logical-method}
-\title{...}
+\title{Visualize Nebulae in R graphic device}
 \usage{
 \S4method{visualize}{mcnebula,missing,ANY,missing}(x, fun_modify)
 
@@ -33,22 +33,29 @@
 \S4method{visualize_all}{mcnebula,logical,`function`,logical}(x, newpage, fun_modify, legend_hierarchy)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{fun_modify}{...}
+\item{fun_modify}{function. Used to post modify the \linkS4class{ggset} object before
+visualization. See \link{fun_modify}.}
 
-\item{item}{...}
+\item{item}{character(1) or numeric(1). If \code{character}, the value should be
+a name of chemical class in 'nebula_index' data. Its Nebulae has been activated
+via \code{\link[=activate_nebulae]{activate_nebulae()}}. If \code{numeric}, the value should be the sequence of
+Nebulae... Use \code{visualize(object)} to get the optional value.}
 
-\item{annotate}{...}
+\item{annotate}{logical. If \code{TRUE}, visualize the Nebula with the annotation.
+Only available \code{\link[=annotate_nebula]{annotate_nebula()}} has been run for the Nebula.}
 
-\item{newpage}{...}
+\item{newpage}{logical. If \code{TRUE}, use \code{\link[grid:grid.newpage]{grid::grid.newpage()}} before visualization.}
 
-\item{legend_hierarchy}{...}
+\item{legend_hierarchy}{logical. If \code{TRUE}, visualize the legend of chemical hierarchy.}
 }
 \description{
-...
+Methods used for visualization.
+Show chemical Nebulae (either Parent-Nebula or Child-Nebulae) in R graphic device.
+Run after \code{\link[=activate_nebulae]{activate_nebulae()}}
 
-\code{visualize(x)}: get a 'tbl' about child-nebulae candidates
+\code{visualize(x)}: get a 'tbl' about Child-Nebulae candidates
 for \code{visualize} methods to visualize.
 
 \code{visualize()}: get the default parameters for the method
@@ -57,20 +64,13 @@ for \code{visualize} methods to visualize.
 \code{visualize(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{visualize}.
 
-...
-
 \code{visualize_all()}: get the default parameters for the method
 \code{visualize_all}.
 
 \code{visualize_all(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{visualize_all}.
 
-...
-}
-\details{
-...
-
-...
+\code{visualize_all}: visualize overall Child-Nebulae into R graphic device.
 }
 \examples{
 \dontrun{

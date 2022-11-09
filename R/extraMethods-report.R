@@ -4,12 +4,14 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases include_figure
 #'
-#' @title ...
+#' @title Easily embed figure into document
 #'
-#' @description ...
+#' @description
+#' Creates a pre-defined [code_block_figure-class] object containing the codes of
+#' [knitr::include_graphics()] for formatting display the figure in document.
 #'
-#' @details ...
-#'
+#' @seealso [code_block_figure-class], [report-class], [knitr::include_graphics()]...
+#' 
 #' @name include_figure-methods
 #'
 #' @order 1
@@ -20,19 +22,11 @@ NULL
 #'
 #' @aliases include_figure
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param file ...
-#' @param name ...
-#' @param caption ...
-#'
-#' @return ...
-#'
-#' @seealso \code{\link{report-class}}, \code{\link{code_block-class}}...
+#' @param file character(1). The path of file. See [knitr::include_graphics()] for
+#' the supported image formats.
+#' @param name character(1). For cross-reference in document.
+#' See \url{https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html#cross-ref}.
+#' @param caption character(1). Caption of figure display in document.
 #'
 #' @rdname include_figure-methods
 #'
@@ -56,11 +50,11 @@ setMethod("include_figure",
 
 #' @aliases include_table
 #'
-#' @title ...
+#' @title Easily embed table into document
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Creates a pre-defined [code_block_table-class] object containing the codes of
+#' [knitr::kable()] for formatting display the table in document.
 #'
 #' @name include_table-methods
 #'
@@ -72,19 +66,11 @@ NULL
 #'
 #' @aliases include_table
 #'
-#' @title ...
+#' @param data 'data.frame' object. The data of table to display in document.
+#' @param name character(1). For cross-reference in document.
+#' See \url{https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html#cross-ref}.
 #'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param data ...
-#' @param name ...
-#' @param caption ...
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param caption character(1). Caption of figure display in document.
 #'
 #' @rdname include_table-methods
 #'
@@ -109,11 +95,13 @@ setMethod("include_table",
 
 #' @aliases history_rblock
 #'
-#' @title ...
+#' @title Create 'code_block' object from history codes
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Get codes from R history, then formatted as [code_block-class] object.
+#' 
+#' @seealso
+#' [code_block-class], [history()]...
 #'
 #' @name history_rblock-methods
 #'
@@ -130,6 +118,7 @@ setMethod("history_rblock",
           function(){
             list(exclude = 1)
           })
+
 #' @exportMethod history_rblock
 #' @description \code{history_rblock(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{history_rblock}.
@@ -140,26 +129,19 @@ setMethod("history_rblock",
             reCallMethod("history_rblock",
                          .fresh_param(history_rblock()))
           })
+
 #' @exportMethod history_rblock
 #'
 #' @aliases history_rblock
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param nrow ...
-#' @param pattern_start ...
-#' @param pattern_end ...
-#' @param exclude ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-#' @seealso \code{\link{report-class}}, \code{\link{code_block-class}}...
+#' @param nrow numeric(1). The number of lines of code to fetch.
+#' @param pattern_start character(1).
+#' The pattern string used to match the starting line of codes in R history.
+#' 
+#' @param pattern_end character(1).
+#' The pattern string used to match the ending line of codes in R history.
+#' 
+#' @param exclude numeric(1). Used to exclude the last lines of code.
 #'
 #' @rdname history_rblock-methods
 #'
@@ -176,6 +158,7 @@ setMethod("history_rblock",
             args <- list(echo = T, eval = F)
             new_code_block(codes = his, args = args)
           })
+
 #' @exportMethod history_rblock
 #' @rdname history_rblock-methods
 setMethod("history_rblock", 

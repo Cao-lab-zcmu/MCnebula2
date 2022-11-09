@@ -33,6 +33,7 @@
                             ),
            prototype = NULL
            )
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -44,6 +45,7 @@
 setMethod("statistic_set", 
           signature = c(x = "ANY"),
           function(x){ x@statistic_set })
+
 #' @exportMethod statistic_set<-
 #' @aliases statistic_set<-
 #' @param value The value for the slot.
@@ -53,6 +55,7 @@ setReplaceMethod("statistic_set",
                  function(x, value){
                    initialize(x, statistic_set = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod design_matrix
 #' @aliases design_matrix
@@ -62,6 +65,7 @@ setReplaceMethod("statistic_set",
 setMethod("design_matrix", 
           signature = c(x = "ANY"),
           function(x){ x@design_matrix })
+
 #' @exportMethod design_matrix<-
 #' @aliases design_matrix<-
 #' @param value The value for the slot.
@@ -71,6 +75,7 @@ setReplaceMethod("design_matrix",
                  function(x, value){
                    initialize(x, design_matrix = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod contrast_matrix
 #' @aliases contrast_matrix
@@ -80,6 +85,7 @@ setReplaceMethod("design_matrix",
 setMethod("contrast_matrix", 
           signature = c(x = "ANY"),
           function(x){ x@contrast_matrix })
+
 #' @exportMethod contrast_matrix<-
 #' @aliases contrast_matrix<-
 #' @param value The value for the slot.
@@ -89,6 +95,7 @@ setReplaceMethod("contrast_matrix",
                  function(x, value){
                    initialize(x, contrast_matrix = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod top_table
 #' @aliases top_table
@@ -98,6 +105,7 @@ setReplaceMethod("contrast_matrix",
 setMethod("top_table", 
           signature = c(x = "ANY"),
           function(x){ x@top_table })
+
 #' @exportMethod top_table<-
 #' @aliases top_table<-
 #' @param value The value for the slot.

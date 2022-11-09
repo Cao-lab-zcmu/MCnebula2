@@ -74,6 +74,7 @@
            prototype = prototype(project_version = character(),
                                  project_path = character())
            )
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -85,6 +86,7 @@
 setMethod("project_version", 
           signature = c(x = "ANY"),
           function(x){ x@project_version })
+
 #' @exportMethod project_version<-
 #' @aliases project_version<-
 #' @param value The value for the slot.
@@ -94,6 +96,7 @@ setReplaceMethod("project_version",
                  function(x, value){
                    initialize(x, project_version = value)
                  })
+
 #' @exportMethod project_path
 #' @aliases project_path
 #' @description \code{project_path}, \code{project_path<-}: getter and setter
@@ -102,6 +105,7 @@ setReplaceMethod("project_version",
 setMethod("project_path", 
           signature = c(x = "ANY"),
           function(x){ x@project_path })
+
 #' @exportMethod project_path<-
 #' @aliases project_path<-
 #' @param value The value for the slot.
@@ -111,6 +115,7 @@ setReplaceMethod("project_path",
                  function(x, value){
                    initialize(x, project_path = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod file_name
 #' @aliases file_name
@@ -127,6 +132,7 @@ setMethod("file_name",
           function(x){
             file_name(project_conformation(x))
           })
+
 #' @exportMethod file_api
 #' @aliases file_api
 #' @rdname project-class
@@ -135,6 +141,7 @@ setMethod("file_api",
           function(x){
             file_api(project_conformation(x))
           })
+
 #' @exportMethod attribute_name
 #' @aliases attribute_name
 #' @rdname project-class
@@ -143,6 +150,7 @@ setMethod("attribute_name",
           function(x){
             attribute_name(project_conformation(x))
           })
+
 ## ------------------------------------- 
 #' @exportMethod project_metadata
 #' @aliases project_metadata
@@ -158,6 +166,7 @@ setMethod("metadata",
           function(x){
             metadata(project_metadata(x))
           })
+
 ## ------------------------------------- 
 #' @exportMethod methods_read
 #' @aliases methods_read
@@ -174,6 +183,7 @@ setMethod("methods_read",
           function(x){
             methods_read(project_api(x))
           })
+
 #' @exportMethod methods_format
 #' @aliases methods_format
 #' @rdname project-class
@@ -182,6 +192,7 @@ setMethod("methods_format",
           function(x){
             methods_format(project_api(x))
           })
+
 #' @exportMethod methods_match
 #' @aliases methods_match
 #' @rdname project-class
@@ -190,6 +201,7 @@ setMethod("methods_match",
           function(x){
             methods_match(project_api(x))
           })
+
 #' @exportMethod match.candidates_id
 #' @aliases match.candidates_id
 #' @description \code{match.candidates_id}, \code{match.features_id}:
@@ -206,6 +218,7 @@ setMethod("match.candidates_id",
           function(x){
             methods_match(project_api(x))[[ "match.candidates_id" ]]
           })
+
 #' @exportMethod match.features_id
 #' @aliases match.features_id
 #' @rdname project-class
@@ -214,6 +227,7 @@ setMethod("match.features_id",
           function(x){
             methods_match(project_api(x))[[ "match.features_id" ]]
           })
+
 ## ---------------------------------------------------------------------- 
 #' @exportMethod get_upper_dir_subscript
 #' @aliases get_upper_dir_subscript
@@ -234,5 +248,6 @@ setMethod("get_upper_dir_subscript",
             stringr::str_extract(file_api(project_conformation(x))[[ subscript ]],
                                  paste0("(?<=^|/)[^/]*(?=/", subscript, "|$)"))
           })
+
 ## ---------------------------------------------------------------------- 
 

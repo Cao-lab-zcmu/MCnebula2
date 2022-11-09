@@ -3,20 +3,23 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases binary_comparison
 #'
-#' @title ...
+#' @title Binary comparison for 'features' quantification data
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Use the functions in the 'limma' package for simple binary statistical analysis.
 #'
 #' @name binary_comparison-methods
+#' 
+#' @seealso [stats::model.matrix()], [limma::makeContrasts()], [limma::lmFit()],
+#' [limma::eBayes()], [limma::contrasts.fit()], [limma::topTable()]...
 #'
 #' @order 1
 NULL
 #> NULL
 
 #' @exportMethod binary_comparison
-#' @description \code{binary_comparison()}: get the default parameters for the method
+#' @description \code{binary_comparison()}:
+#' get the default parameters for the method
 #' \code{binary_comparison}.
 #' @rdname binary_comparison-methods
 setMethod("binary_comparison", 
@@ -24,12 +27,16 @@ setMethod("binary_comparison",
                                  x = "missing"),
           function(){
             list(formula = ~ 0 + group,
-                 fun_norm = function(x) scale(x, center = T, scale = F),
+                 fun_norm = function(x) {
+                   scale(log2(x + 1), center = T, scale = F)
+                 },
                  top_coef = "all"
             )
           })
+
 #' @exportMethod binary_comparison
-#' @description \code{binary_comparison(x, ...)}: use the default parameters whatever 'missing'
+#' @description \code{binary_comparison(x, ...)}:
+#' use the default parameters whatever 'missing'
 #' while performing the method \code{binary_comparison}.
 #' @rdname binary_comparison-methods
 setMethod("binary_comparison", 
@@ -44,29 +51,26 @@ setMethod("binary_comparison",
             reCallMethod("binary_comparison",
                          .fresh_param(binary_comparison()))
           })
+
 #' @exportMethod binary_comparison
 #'
 #' @aliases binary_comparison
 #'
-#' @title ...
+#' @param x [mcnebula-class] object.
+#' @param ... expressions, or character strings which can be parsed to
+#' expressions, specifying contrasts. See parameter of \code{...} in
+#' [limma::makeContrasts()].
 #'
-#' @description ...
+#' @param formula formula. Passed to [model.matrix()].
+#' @param fun_norm function. For normalization of 'features' quantification
+#' data.
+#' 
+#' @param top_coef list, NULL or character(1). Specified the parameter of
+#' \code{coef} in [limma::topTable()]. If \code{"all"}, all coefficient in
+#' contrast matrix would be used one by one.
 #'
-#' @details ...
-#'
-#' @param x ...
-#' @param ... ...
-#' @param formula ...
-#' @param fun_norm ...
-#' @param top_coef ...
-#' @param contrasts ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-#' @seealso [stats::model.matrix()], [limma::makeContrasts()], [limma::lmFit()],
-#' [limma::eBayes()], [limma::contrasts.fit()], [limma::topTable()]...
+#' @param contrasts character vector specifying contrasts.
+#' See parameter \code{contrasts} in [limma::makeContrasts()].
 #'
 #' @rdname binary_comparison-methods
 #'

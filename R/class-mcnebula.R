@@ -218,6 +218,7 @@ mcnebula <-
                                  creation_time = date(),
                                  ion_mode = "pos")
            )
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -230,6 +231,7 @@ setMethod("show",
             message( "A project of MCnebula2", ": ",
                     format(object.size(object), units = "MB"))
           })
+
 ## ------------------------------------- 
 #' @exportMethod latest
 #' @aliases latest
@@ -263,6 +265,7 @@ setMethod("latest",
             else
               return(tibble::as_tibble(entity(res)))
           })
+
 ## ------------------------------------- 
 #' @exportMethod latest
 #' @description \code{latest()}: get the default parameters for the method \code{latest}.
@@ -273,6 +276,7 @@ setMethod("latest",
             list(slot = "mcn_dataset",
                  subscript = 1)
           })
+
 #' @exportMethod latest
 #' @description \code{latest(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{latest}.
@@ -282,6 +286,7 @@ setMethod("latest",
           function(x, slot, subscript){
             reCallMethod("latest", .fresh_param(latest()))
           })
+
 ## ------------------------------------- 
 #' @exportMethod creation_time
 #' @aliases creation_time
@@ -291,6 +296,7 @@ setMethod("latest",
 setMethod("creation_time", 
           signature = c(x = "mcnebula"),
           function(x){ x@creation_time })
+
 #' @exportMethod creation_time<-
 #' @aliases creation_time<-
 #' @param value The value for the slot.
@@ -300,6 +306,7 @@ setReplaceMethod("creation_time",
                  function(x, value){
                    initialize(x, creation_time = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod ion_mode
 #' @aliases ion_mode
@@ -309,6 +316,7 @@ setReplaceMethod("creation_time",
 setMethod("ion_mode", 
           signature = c(x = "mcnebula"),
           function(x){ x@ion_mode })
+
 #' @exportMethod ion_mode<-
 #' @aliases ion_mode<-
 #' @param value The value for the slot.
@@ -318,6 +326,7 @@ setReplaceMethod("ion_mode",
                  function(x, value){
                    initialize(x, ion_mode = value)
                  })
+
 # ==========================================================================
 # get infrustructure object
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -335,6 +344,7 @@ setMethod("palette_set",
           function(x){
             palette_set(melody(x))
           })
+
 #' @exportMethod palette_gradient
 #' @aliases palette_gradient
 #' @rdname mcnebula-class
@@ -343,6 +353,7 @@ setMethod("palette_gradient",
           function(x){
             palette_gradient(melody(x))
           })
+
 #' @exportMethod palette_stat
 #' @aliases palette_stat
 #' @rdname mcnebula-class
@@ -351,6 +362,7 @@ setMethod("palette_stat",
           function(x){
             palette_stat(melody(x))
           })
+
 #' @exportMethod palette_col
 #' @aliases palette_col
 #' @rdname mcnebula-class
@@ -359,6 +371,7 @@ setMethod("palette_col",
           function(x){
             palette_col(melody(x))
           })
+
 #' @exportMethod palette_label
 #' @aliases palette_label
 #' @rdname mcnebula-class
@@ -367,6 +380,7 @@ setMethod("palette_label",
           function(x){
             palette_label(melody(x))
           })
+
 ## ------------------------------------- 
 #' @exportMethod reference
 #' @aliases reference
@@ -382,6 +396,7 @@ setMethod("reference",
           function(x){
             reference(mcn_dataset(x))
           })
+
 #' @exportMethod specific_candidate
 #' @aliases specific_candidate
 #' @description \code{specific_candidate}, \code{hierarchy}, \code{stardust_classes},
@@ -400,6 +415,7 @@ setMethod("specific_candidate",
           function(x){
             reference(x)[[ "specific_candidate" ]]
           })
+
 #' @exportMethod hierarchy
 #' @aliases hierarchy
 #' @rdname mcnebula-class
@@ -408,6 +424,7 @@ setMethod("hierarchy",
           function(x){
             reference(x)[[ "hierarchy" ]]
           })
+
 #' @exportMethod stardust_classes
 #' @aliases stardust_classes
 #' @rdname mcnebula-class
@@ -416,6 +433,7 @@ setMethod("stardust_classes",
           function(x){
             reference(x)[[ "stardust_classes" ]]
           })
+
 #' @exportMethod nebula_index
 #' @aliases nebula_index
 #' @rdname mcnebula-class
@@ -424,6 +442,7 @@ setMethod("nebula_index",
           function(x){
             reference(x)[[ "nebula_index" ]]
           })
+
 #' @exportMethod spectral_similarity
 #' @aliases spectral_similarity
 #' @rdname mcnebula-class
@@ -432,6 +451,7 @@ setMethod("spectral_similarity",
           function(x){
             reference(x)[[ "spectral_similarity" ]]
           })
+
 #' @exportMethod spectral_similarity<-
 #' @aliases spectral_similarity<-
 #' @description  \code{spectral_similarity<-}, \code{features_quantification<-},
@@ -454,6 +474,7 @@ setReplaceMethod("spectral_similarity",
                    reference(mcn_dataset(x))$spectral_similarity <- value
                    return(x)
                  })
+
 #' @exportMethod features_annotation
 #' @aliases features_annotation
 #' @rdname mcnebula-class
@@ -462,6 +483,7 @@ setMethod("features_annotation",
           function(x){
             reference(x)[[ "features_annotation" ]]
           })
+
 #' @exportMethod features_quantification
 #' @aliases features_quantification
 #' @rdname mcnebula-class
@@ -470,6 +492,7 @@ setMethod("features_quantification",
           function(x){
             reference(x)[[ "features_quantification" ]]
           })
+
 .features_quantification <- 
   function(x){
     data <- features_quantification(x)
@@ -479,6 +502,7 @@ setMethod("features_quantification",
     rownames(data) <- .features_id
     data
   }
+
 #' @importFrom dplyr select
 #' @exportMethod features_quantification
 #' @aliases features_quantification
@@ -493,6 +517,7 @@ setReplaceMethod("features_quantification",
                    reference(mcn_dataset(x))$features_quantification <- value
                    return(x)
                  })
+
 #' @exportMethod sample_metadata
 #' @aliases sample_metadata
 #' @rdname mcnebula-class
@@ -501,6 +526,7 @@ setMethod("sample_metadata",
           function(x){
             reference(x)[[ "sample_metadata" ]]
           })
+
 #' @exportMethod sample_metadata<-
 #' @aliases sample_metadata<-
 #' @rdname mcnebula-class
@@ -516,6 +542,7 @@ setReplaceMethod("sample_metadata",
                    reference(mcn_dataset(x))$sample_metadata <- value
                    return(x)
                  })
+
 #' @exportMethod classification
 #' @aliases classification
 #' @description  \code{classification}: fast channel to obtain

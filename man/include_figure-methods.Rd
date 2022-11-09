@@ -4,29 +4,22 @@
 \alias{include_figure-methods}
 \alias{include_figure}
 \alias{include_figure,character,character,character-method}
-\title{...}
+\title{Easily embed figure into document}
 \usage{
 \S4method{include_figure}{character,character,character}(file, name, caption)
 }
 \arguments{
-\item{file}{...}
+\item{file}{character(1). The path of file. See \code{\link[knitr:include_graphics]{knitr::include_graphics()}} for
+the supported image formats.}
 
-\item{name}{...}
+\item{name}{character(1). For cross-reference in document.
+See \url{https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html#cross-ref}.}
 
-\item{caption}{...}
-}
-\value{
-...
+\item{caption}{character(1). Caption of figure display in document.}
 }
 \description{
-...
-
-...
-}
-\details{
-...
-
-...
+Creates a pre-defined \linkS4class{code_block_figure} object containing the codes of
+\code{\link[knitr:include_graphics]{knitr::include_graphics()}} for formatting display the figure in document.
 }
 \examples{
 \dontrun{
@@ -34,5 +27,5 @@ include_figure(...)
 }
 }
 \seealso{
-\code{\link{report-class}}, \code{\link{code_block-class}}...
+\linkS4class{code_block_figure}, \linkS4class{report}, \code{\link[knitr:include_graphics]{knitr::include_graphics()}}...
 }

@@ -3,11 +3,12 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases visualize
 #'
-#' @title ...
+#' @title Visualize Nebulae in R graphic device
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Methods used for visualization.
+#' Show chemical Nebulae (either Parent-Nebula or Child-Nebulae) in R graphic device.
+#' Run after [activate_nebulae()]
 #'
 #' @name visualize-methods
 #'
@@ -17,8 +18,9 @@ NULL
 
 #' @importFrom tibble tibble
 setClassUnion("numeric_or_character", c("numeric", "character"))
+
 #' @exportMethod visualize
-#' @description \code{visualize(x)}: get a 'tbl' about child-nebulae candidates
+#' @description \code{visualize(x)}: get a 'tbl' about Child-Nebulae candidates
 #' for \code{visualize} methods to visualize.
 #' @rdname visualize-methods
 setMethod("visualize", 
@@ -36,6 +38,7 @@ setMethod("visualize",
                            class.name = class.name
             )
           })
+
 #' @exportMethod visualize
 #' @description \code{visualize()}: get the default parameters for the method
 #' \code{visualize}.
@@ -45,6 +48,7 @@ setMethod("visualize",
           function(){
             list(fun_modify = modify_set_labs)
           })
+
 #' @exportMethod visualize
 #' @description \code{visualize(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{visualize}.
@@ -54,20 +58,18 @@ setMethod("visualize",
           function(x, item, fun_modify, annotate){
             reCallMethod("visualize", .fresh_param(visualize()))
           })
+
 #' @exportMethod visualize
 #'
 #' @aliases visualize
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param item ...
-#' @param fun_modify ...
-#' @param annotate ...
+#' @param item character(1) or numeric(1). If \code{character}, the value should be
+#' a name of chemical class in 'nebula_index' data. Its Nebulae has been activated
+#' via [activate_nebulae()]. If \code{numeric}, the value should be the sequence of 
+#' Nebulae... Use \code{visualize(object)} to get the optional value.
+#' 
+#' @param annotate logical. If \code{TRUE}, visualize the Nebula with the annotation.
+#' Only available [annotate_nebula()] has been run for the Nebula.
 #'
 #' @rdname visualize-methods
 #'
@@ -93,6 +95,7 @@ setMethod("visualize",
               }
             }
           })
+
 #' @exportMethod visualize
 #' @rdname visualize-methods
 setMethod("visualize", 
@@ -104,6 +107,7 @@ setMethod("visualize",
             .message_info_formal("MCnebula2", "visualize")
             call_command(fun_modify(ggset(child_nebulae(x))[[ item ]]))
           })
+
 #' @exportMethod visualize
 #' @rdname visualize-methods
 setMethod("visualize", 
@@ -124,6 +128,7 @@ setMethod("visualize",
               visualize(x, item)
             }
           })
+
 #' @exportMethod visualize_all
 #' @description \code{visualize_all()}: get the default parameters for the method
 #' \code{visualize_all}.
@@ -137,6 +142,7 @@ setMethod("visualize_all",
                  legend_hierarchy = T
             )
           })
+
 #' @exportMethod visualize_all
 #' @description \code{visualize_all(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{visualize_all}.
@@ -147,6 +153,7 @@ setMethod("visualize_all",
             reCallMethod("visualize_all",
                          .fresh_param(visualize_all()))
           })
+
 #' @importFrom grid grid.newpage
 #' @importFrom grid viewport
 #' @importFrom grid pushViewport
@@ -154,12 +161,13 @@ setMethod("visualize_all",
 #' @importFrom grid grid.draw
 #' @exportMethod visualize_all
 #'
-#' @description ...
+#' @description \code{visualize_all}: visualize overall Child-Nebulae into R graphic device.
 #'
-#' @param x ...
-#' @param newpage ...
-#' @param fun_modify ...
-#' @param legend_hierarchy ...
+#' @param x [mcnebula-class] object.
+#' @param newpage logical. If \code{TRUE}, use [grid::grid.newpage()] before visualization.
+#' @param fun_modify function. Used to post modify the [ggset-class] object before
+#' visualization. See [fun_modify].
+#' @param legend_hierarchy logical. If \code{TRUE}, visualize the legend of chemical hierarchy.
 #'
 #' @rdname visualize-methods
 #'
@@ -193,6 +201,7 @@ setMethod("visualize_all",
             .visualize_legend_nebulae(set, fun_modify)
             .message_info_viewport("END")
           })
+
 .visualize_child_nebulae <- 
   function(set, fun_modify = modify_default_child, x){
     x <- .get_missing_x(x, "mcnebula")
@@ -210,6 +219,7 @@ setMethod("visualize_all",
            })
     return(layer)
   }
+
 .visualize_legend_nebulae <- 
   function(set, fun_modify = modify_default_child, x){
     x <- .get_missing_x(x, "mcnebula")
@@ -224,6 +234,7 @@ setMethod("visualize_all",
     grob <- .get_legend(call_command(fun_modify(ggset(set)[[1]])))
     grid::grid.draw(grob)
   }
+
 .visualize_legend_hierarchy <- 
   function(set, x){
     x <- .get_missing_x(x, "mcnebula")
@@ -239,6 +250,7 @@ setMethod("visualize_all",
                           name = "sub_panel"))
     .message_info_viewport()
   }
+
 .legend_hierarchy <- 
   function(set, x){
     x <- .get_missing_x(x, "mcnebula")

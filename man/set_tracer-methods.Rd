@@ -6,7 +6,7 @@
 \alias{set_tracer,missing,missing,missing,missing-method}
 \alias{set_tracer,mcnebula,ANY,ANY,ANY-method}
 \alias{set_tracer,mcnebula,character,character,character-method}
-\title{...}
+\title{Mark top 'features' in 'nebula_index' data}
 \usage{
 \S4method{set_tracer}{missing,missing,missing,missing}()
 
@@ -15,19 +15,19 @@
 \S4method{set_tracer}{mcnebula,character,character,character}(x, .features_id, colors, rest)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{.features_id}{...}
+\item{.features_id}{character. The ID of 'features' to mark.}
 
-\item{colors}{...}
+\item{colors}{character. Hex color.}
 
-\item{rest}{...}
-}
-\value{
-...
+\item{rest}{character(1). Hex color.}
 }
 \description{
-...
+Custom defined the specific 'features' in 'nebula_index' data.
+Mark these 'features' for subsequent visualization with eye-catching highlighting
+(\code{\link[=set_nodes_color]{set_nodes_color()}}).
+Run after \code{\link[=create_nebula_index]{create_nebula_index()}}.
 
 \code{set_tracer()}: get the function for generating
 default parameters for the method
@@ -35,13 +35,6 @@ default parameters for the method
 
 \code{set_tracer(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{set_tracer}.
-
-...
-}
-\details{
-...
-
-...
 }
 \examples{
 \dontrun{
@@ -49,5 +42,5 @@ set_tracer(...)
 }
 }
 \seealso{
-\code{\link[=create_nebula_index]{create_nebula_index()}}
+\code{\link[=create_nebula_index]{create_nebula_index()}}, \code{\link[=set_nodes_color]{set_nodes_color()}}.
 }

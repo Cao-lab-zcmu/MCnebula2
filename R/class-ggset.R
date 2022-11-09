@@ -26,6 +26,7 @@
            representation = representation(),
            prototype = NULL
            )
+
 # ==========================================================================
 # validity
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -36,6 +37,7 @@ setValidity("ggset",
                             paste0("'", recepts, "'", collapse = ", "))
               validate_class_in_list(layers(object), recepts, tip)
             })
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -72,6 +74,7 @@ setMethod("show_layers",
                    })
             cat("\n")
           })
+
 ## ------------------------------------- 
 #' @exportMethod new_ggset
 #' @aliases new_ggset
@@ -89,6 +92,7 @@ setMethod("new_ggset",
             names(args) <- vapply(args, command_name, "ch")
             new("ggset", layers = args)
           })
+
 #' @exportMethod mutate_layer
 #' @aliases mutate_layer
 #' @description \code{mutate_layer}:
@@ -118,6 +122,7 @@ setMethod("mutate_layer",
                         name = command_name(command)))
             return(x)
           })
+
 ## ------------------------------------- 
 #' @exportMethod mutate_layer
 #' @aliases mutate_layer
@@ -135,6 +140,7 @@ setMethod("mutate_layer",
             }
             return(x)
           })
+
 ## ------------------------------------- 
 #' @exportMethod call_command
 #' @aliases call_command

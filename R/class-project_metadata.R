@@ -32,6 +32,7 @@
                             ),
            prototype = NULL
            )
+
 # ==========================================================================
 # validity
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -42,6 +43,7 @@ setValidity("project_metadata",
               else
                 FALSE
             })
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -53,6 +55,7 @@ setMethod("show",
           function(object){
             .show(object)
           })
+
 ## ------------------------------------- 
 #' @exportMethod project_metadata
 #' @aliases project_metadata
@@ -62,6 +65,7 @@ setMethod("show",
 setMethod("project_metadata", 
           signature = c(x = "ANY"),
           function(x){ x@project_metadata })
+
 #' @exportMethod project_metadata<-
 #' @aliases project_metadata<-
 #' @param value The value for the slot.
@@ -71,6 +75,7 @@ setReplaceMethod("project_metadata",
                  function(x, value){
                    initialize(x, project_metadata = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod latest
 #' @aliases latest
@@ -87,6 +92,7 @@ setMethod("latest",
           function(x){
             tibble::as_tibble(metadata(x)[[1]])
           })
+
 ## ---------------------------------------------------------------------- 
 #' @exportMethod metadata
 #' @aliases metadata
@@ -96,6 +102,7 @@ setMethod("latest",
 setMethod("metadata", 
           signature = c(x = "project_metadata"),
           function(x){ x@metadata })
+
 #' @exportMethod metadata<-
 #' @aliases metadata<-
 #' @param value The value for the slot.
@@ -105,6 +112,7 @@ setReplaceMethod("metadata",
                  function(x, value){
                    initialize(x, metadata = value)
                  })
+
 ## ---------------------------------------------------------------------- 
 #' @exportMethod add_dataset
 #' @aliases add_dataset
@@ -123,6 +131,7 @@ setMethod("add_dataset",
             metadata(x) <- list_unique_by_names(metadata)
             return(x)
           })
+
 #' @exportMethod extract_metadata
 #' @aliases extract_metadata
 #' @description \code{extract_metadata}: use "subscript" to extract metadata from an
@@ -144,6 +153,7 @@ setMethod("extract_metadata",
             names(path.set) <- subscript
             new("project_metadata", metadata = path.set)
           })
+
 #' @exportMethod get_metadata
 #' @aliases get_metadata
 #' @description \code{get_metadata}: for an object with slot of \code{project_metadata},
@@ -175,6 +185,7 @@ setMethod("get_metadata",
             }
             return(x)
           })
+
 #' @exportMethod get_metadata
 #' @rdname project_metadata-class
 setMethod("get_metadata", 

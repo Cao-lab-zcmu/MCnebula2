@@ -4,27 +4,26 @@
 \alias{annotate_nebula-methods}
 \alias{annotate_nebula}
 \alias{annotate_nebula,ANY,character-method}
-\title{...}
+\title{Add multiple annotation data for visualization of Child-Nebula.}
 \usage{
 \S4method{annotate_nebula}{ANY,character}(x, nebula_name)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{nebula_name}{...}
-}
-\value{
-...
+\item{nebula_name}{character(1). Chemical classes in 'nebula_index' data.}
 }
 \description{
-...
-
-...
+Use methods \code{\link[=draw_nodes]{draw_nodes()}} and \code{\link[=draw_structures]{draw_structures()}} to standby visualization
+of Child-Nebula with mutiple annotation: chemical classification,
+'features' quantification, chemical structure...
+Run after \code{\link[=activate_nebulae]{activate_nebulae()}}.
 }
 \details{
-...
-
-...
+Primarily, remove the \code{\link[ggraph:geom_node_point]{ggraph::geom_node_point()}} layer in \linkS4class{ggset} object
+of Child-Nebula. The 'nodes' would be replaced with 'grob' object create by
+\code{\link[=draw_nodes]{draw_nodes()}}. The function of \code{\link[ggimage:geom_subview]{ggimage::geom_subview()}} is used to add
+'grob' object into 'ggplot' object.
 }
 \examples{
 \dontrun{
@@ -32,5 +31,6 @@ annotate_nebula(...)
 }
 }
 \seealso{
-\code{\link{draw_nodes}}, \code{\link{draw_structures}}...
+\code{\link[=activate_nebulae]{activate_nebulae()}}, \code{\link[=draw_nodes]{draw_nodes()}}, \code{\link[=draw_structures]{draw_structures()}},
+\code{\link[=set_ppcp_data]{set_ppcp_data()}}, \code{\link[=set_ration_data]{set_ration_data()}}...
 }

@@ -33,6 +33,7 @@ setMethod("filter_formula",
                  by_reference = F
             )
           })
+
 #' @exportMethod filter_formula
 #' @description \code{filter_formula(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{filter_formula}.
@@ -43,6 +44,7 @@ setMethod("filter_formula",
             reCallMethod("filter_formula",
                          .fresh_param(filter_formula()), ...)
           })
+
 #' @exportMethod filter_formula
 #'
 #' @aliases filter_formula
@@ -95,6 +97,7 @@ setMethod("filter_formula",
             mcn_dataset(x) <- add_dataset(mcn_dataset(x), msframe.lst)
             return(x)
           })
+
 .collate_formula.msframe <- 
   function(x, subscript){
     msframe <- .collate_data.msframe(x, subscript)

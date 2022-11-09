@@ -4,13 +4,16 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases activate_nebulae
 #'
-#' @title generate 'ggset' for visualization
+#' @title activate Nebulae for visualization
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Based on layouts create by [create_parent_layout()] or [create_child_layouts()],
+#' use functions to activate Nebulae as [ggset-class] object for [visualize()]
+#' methods to draw them.
 #'
 #' @name activate_nebulae-methods
+#' 
+#' @seealso [ggset-class], [create_parent_layout()], [create_child_layouts()]...
 #'
 #' @order 1
 NULL
@@ -26,8 +29,10 @@ setMethod("activate_nebulae",
             list(fun_default_parent = ggset_activate_parent_nebula,
                  fun_default_child = ggset_activate_child_nebulae)
           })
+
 #' @exportMethod activate_nebulae
-#' @description \code{activate_nebulae(x, ...)}: use the default parameters whatever 'missing'
+#' @description \code{activate_nebulae(x, ...)}:
+#' use the default parameters whatever 'missing'
 #' while performing the method \code{activate_nebulae}.
 #' @rdname activate_nebulae-methods
 setMethod("activate_nebulae", 
@@ -36,25 +41,19 @@ setMethod("activate_nebulae",
             reCallMethod("activate_nebulae",
                          .fresh_param(activate_nebulae()))
           })
+
 #' @exportMethod activate_nebulae
 #'
 #' @aliases activate_nebulae
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param fun_default_parent ...
-#' @param fun_default_child ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param x [mcnebula-class] object.
+#' @param fun_default_parent function. Passed to create [ggset-class] object
+#' for Parent-Nebula. Default is \code{ggset_activate_parent_nebula}.
+#' Normally not used.
+#' 
+#' @param fun_default_child function. Passed to create [ggset-class] object
+#' for Child-Nebulae. Default is \code{ggset_activate_child_nebulae}.
+#' Normally not used.
 #'
 #' @rdname activate_nebulae-methods
 #'
@@ -84,16 +83,9 @@ setMethod("activate_nebulae",
               stop("nothing need to be activate")
             return(x)
           })
-#' @description FUNCTION_DESCRIPTION
-#' @param x PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+
+#' @description \code{ggset_activate_parent_nebula}:
+#' create [ggset-class] object of Parent-Nebula.
 #' @rdname activate_nebulae-methods
 #' @export 
 #' @importFrom ggraph ggraph
@@ -109,16 +101,9 @@ ggset_activate_parent_nebula <-
               .command_parent_theme()
     )
   }
-#' @description ...
-#' @param x ...
-#' @return ...
-#' @details ...
-#' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+
+#' @description \code{ggset_activate_child_nebulae}:
+#' create lists of [ggset-class] object of Child-Nebulae.
 #' @rdname activate_nebulae-methods
 #' @export 
 #' @importFrom ggraph ggraph
@@ -144,16 +129,19 @@ ggset_activate_child_nebulae <-
     names(ggsets) <- names(set)
     return(ggsets)
   }
+
 .get_node_attribute_range <- function(x, attr){
   .check_data(x, list("features_annotation" = "create_features_annotation"))
   range(features_annotation(x)[[ attr ]])
 }
+
 .get_hierarchy <- 
   function(x){
     hierarchy <- as.list(hierarchy(x)[["hierarchy"]])
     names(hierarchy) <- hierarchy(x)[["class.name"]]
     return(hierarchy)
   }
+
 .get_textbox_fill <-
   function(x, class.name){
     if (missing(class.name)) {
@@ -168,11 +156,11 @@ ggset_activate_child_nebulae <-
 
 #' @aliases set_nodes_color
 #'
-#' @title ...
+#' @title Custom defined nodes color in Nebulae (network)
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Custom defined the nodes color for visualizing.
+#' Run after [activate_nebulae()].
 #'
 #' @name set_nodes_color-methods
 #'
@@ -185,22 +173,21 @@ NULL
 #'
 #' @aliases set_nodes_color
 #'
-#' @title ...
+#' @param x [mcnebula-class] object.
+#' @param attribute character. The attribute specified to colorful the nodes.
+#' Can be continues attribute or discrete attribute, exist in
+#' 'layout_ggraph' object or data of \code{extra_data}.
+#' Related with [ggplot2::scale_fill_gradientn()] and [ggplot2::scale_fill_manual()].
+#' If the attribute is continues, colors in \code{palette_gradient(object)} would
+#' be used. If the attribute is discrete, use colors in \code{palette_set(object)}.
 #'
-#' @description ...
+#' @param extra_data data.frame. Extra data used for setting nodes color.
+#' The data.frame must contains column of '.features_id'.
 #'
-#' @details ...
+#' @param use_tracer logical. If \code{TRUE}, hightlight the 'top' 'features'
+#' marked in 'nebula_index' data. See [set_tracer()].
 #'
-#' @param x ...
-#' @param attribute ...
-#' @param extra_data ...
-#' @param use_tracer ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-#' @seealso [activate_nebulae()], [visualize()]...
+#' @seealso [activate_nebulae()], [set_tracer()]...
 #'
 #' @rdname set_nodes_color-methods
 #'
@@ -256,6 +243,7 @@ setMethod("set_nodes_color",
                      })
             return(x)
           })
+
 #' @exportMethod set_nodes_color
 #' @rdname set_nodes_color-methods
 setMethod("set_nodes_color", 
@@ -292,6 +280,7 @@ setMethod("set_nodes_color",
                      })
             return(x)
           })
+
 #' @exportMethod set_nodes_color
 #' @rdname set_nodes_color-methods
 setMethod("set_nodes_color", 

@@ -27,6 +27,7 @@
     end <- "```"
     c(leader, codes, end)
   }
+
 .args_r_block <-
   function(){
     list(echo = T,
@@ -34,6 +35,7 @@
          message = F
     )
   }
+
 .args_r_block_table <-
   function(){
     list(echo = T,
@@ -41,6 +43,7 @@
          message = F
     )
   }
+
 .args_r_block_figure <-
   function(){
     list(echo = T,
@@ -49,11 +52,13 @@
          fig.cap = "The figure"
     )
   }
+
 nshow <- function(object){
   if (!is.null(object)) {
     show(object)
   }
 }
+
 textSh <- 
   function(..., sep = "", exdent = 4, ending = "\n",
            pre_collapse = F, collapse = "\n",
@@ -75,17 +80,20 @@ textSh <-
     if (!is.null(ending))
       cat(ending)
   }
+
 get_ref <- 
   function(object, type = c("fig", "tab")){
     type <- match.arg(type)
     name <- sub("^r ", "", command_name(object))
     paste0("\\@ref(", type, ":", name, ")")
   }
+
 #' @importFrom stringr str_trunc
 .text_fold <- 
   function(text, width = 200, ellipsis = crayon::silver("...(fold)")){
     stringr::str_trunc(text, width = width, ellipsis = ellipsis)
   }
+
 .part <-
   function(...){
     args <- list(...)
@@ -95,6 +103,7 @@ get_ref <-
                       c(obj, "")
                   }))
   }
+
 get_history <- 
   function(exclude = 0){
     file1 <- tempfile("Rrawhist")
@@ -107,6 +116,7 @@ get_history <-
     }
     rawhist
   }
+
 document_mc_workflow <- 
   function(x){
     if (x == "abstract") {

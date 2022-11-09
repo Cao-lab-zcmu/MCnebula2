@@ -36,6 +36,7 @@
                             ),
            prototype = NULL
            )
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -47,6 +48,7 @@ setMethod("show",
           function(object){
             .show(object)
           })
+
 #' @exportMethod project_api
 #' @aliases project_api
 #' @description \code{project_api}, \code{project_api<-}: getter and setter
@@ -55,6 +57,7 @@ setMethod("show",
 setMethod("project_api", 
           signature = c(x = "ANY"),
           function(x){ x@project_api })
+
 #' @exportMethod project_api<-
 #' @aliases project_api<-
 #' @param value The value for the slot.
@@ -64,6 +67,7 @@ setReplaceMethod("project_api",
                  function(x, value){
                    initialize(x, project_api = value)
                  })
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @exportMethod methods_read
 #' @aliases methods_read
@@ -73,6 +77,7 @@ setReplaceMethod("project_api",
 setMethod("methods_read", 
           signature = c(x = "project_api"),
           function(x){ x@methods_read })
+
 #' @exportMethod methods_read<-
 #' @aliases methods_read<-
 #' @param value The value for the slot.
@@ -82,6 +87,7 @@ setReplaceMethod("methods_read",
                  function(x, value){
                    initialize(x, methods_read = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod methods_format
 #' @aliases methods_format
@@ -91,6 +97,7 @@ setReplaceMethod("methods_read",
 setMethod("methods_format", 
           signature = c(x = "project_api"),
           function(x){ x@methods_format })
+
 #' @exportMethod methods_format<-
 #' @aliases methods_format<-
 #' @param value The value for the slot.
@@ -100,6 +107,7 @@ setReplaceMethod("methods_format",
                  function(x, value){
                    initialize(x, methods_format = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod methods_match
 #' @aliases methods_match
@@ -109,6 +117,7 @@ setReplaceMethod("methods_format",
 setMethod("methods_match", 
           signature = c(x = "project_api"),
           function(x){ x@methods_match })
+
 #' @exportMethod methods_match<-
 #' @aliases methods_match<-
 #' @param value The value for the slot.

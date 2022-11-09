@@ -3,11 +3,29 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases draw_nodes
 #'
-#' @title ...
+#' @title Draw and visualize chemcial structures for Child-Nebulae
 #'
-#' @description ...
+#' @description
+#' Methods used for drawing and visualizing nodes of 'features'
+#' in Child-Nebulae (networks). The methods used to visualize 'features'
+#' with annotations of:
+#' - chemical structures
+#' - chemical classification
+#' - quantification data (peak area)
+#' - ID of 'feature' (.features_id)
+#' 
+#' @details
+#' Those annotated visualizations are drawn in steps and then are put together.
+#' In order to render the text as a graphical path (otherwise, the graphics
+#' would not be compatible with too small fonts and would result in misplaced text),
+#' the 'ggplot' object or 'grob' object is first exported as an SVG file,
+#' which is subsequently read by [grImport2::readPicture()], followed by
+#' [grImport2::grobify()] as 'grob' object, and then combined into
+#' the final 'grob'. In general, this process is time consuming,
+#' especially when there are a lot of 'features' for visualization.
 #'
-#' @details ...
+#' @seealso [grid::grid.draw()], [grid::grob()], [grImport2::readPicture()],
+#' [grImport2::grobify()]...
 #'
 #' @name draw_nodes-methods
 #'
@@ -38,6 +56,7 @@ setMethod("draw_nodes",
               )
             }
           })
+
 #' @exportMethod draw_nodes
 #' @description \code{draw_nodes(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{draw_nodes}.
@@ -49,6 +68,7 @@ setMethod("draw_nodes",
             reCallMethod("draw_nodes",
                          .fresh_param(draw_nodes()(x)))
           })
+
 #' @importFrom svglite svglite
 #' @importFrom grid pushViewport
 #' @importFrom grid viewport
@@ -60,25 +80,31 @@ setMethod("draw_nodes",
 #'
 #' @aliases draw_nodes
 #'
-#' @title ...
+#' @param x [mcnebula-class] object.
+#' @param nebula_name character(1). Chemical classes in 'nebula_index' data.
+#' Specified to draw nodes (of network) of all the 'features' of that.
 #'
-#' @description ...
+#' @param nodes_color character with names or not. The Value is Hex color.
+#' Specified colors for 'features' to draw nodes. If the number of the colors
+#' were not enough, the rest 'features' would be fill with default color.
+#' If [set_tracer()] has been run, the colors specified in 'nebula_index'
+#' would be used preferentially.
 #'
-#' @details ...
+#' @param add_id_text logical. If \code{TRUE}, add ID (.features_id) for
+#' 'features' inside the nodes.
+#' 
+#' @param add_structure logical. If \code{TRUE}, draw chemical structures inside
+#' the nodes. See [draw_structures()].
+#' 
+#' @param add_ppcp logical. If \code{TRUE}, draw radical bar plot inside the nodes
+#' for annotation of PPCP data. See [set_ppcp_data()] for custom modify the annotated
+#' PPCP data. Hex colors in \code{palette_col(object)} would be used for fill the bar
+#' plot (Used by [ggplot2::scale_fill_manual()]).
 #'
-#' @param x ...
-#' @param nebula_name ...
-#' @param nodes_color ...
-#' @param add_id_text ...
-#' @param add_structure ...
-#' @param add_ppcp ...
-#' @param add_ration ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param add_ration logical. If \code{TRUE}, draw ring plot inside the nodes
+#' for annotation of features quantification data. See [set_ration_data()] for custom
+#' modify the annotated quantification data. Hex colors in \code{palette_stat(object)}
+#' would be used for fill be ring plot.
 #'
 #' @rdname draw_nodes-methods
 #'
@@ -153,6 +179,7 @@ setMethod("draw_nodes",
               c(nodes_grob(child_nebulae(x)), nodes_grob)
             return(x)
           })
+
 #' @exportMethod show_node
 #' @description \code{show_node()}: get the default parameters for the method
 #' \code{show_node}.
@@ -167,28 +194,20 @@ setMethod("show_node",
                  grid::viewport(0.4, 0.5, 0.6, 1, just = c("left", "centre"))
             )
           })
+
 #' @exportMethod show_node
 #'
 #' @aliases show_node
 #'
-#' @title ...
-#'
-#' @description ...
+#' @description Visualize the node of 'feature' which has been drawn
+#' by methods [draw_nodes()] (or drawn by methods [annotate_nebula()]).
 #' @description \code{show_node(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{show_node}.
 #'
-#' @details ...
-#'
-#' @param x ...
-#' @param .features_id ...
-#' @param panel_viewport ...
-#' @param legend_viewport ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param x [mcnebula-class] object.
+#' @param .features_id character(1). ID of 'feature' to show node.
+#' @param panel_viewport 'viewport' object. Create by [grid::viewport()].
+#' @param legend_viewport 'viewport' object.
 #'
 #' @rdname draw_nodes-methods
 #'
@@ -203,6 +222,7 @@ setMethod("show_node",
             args$.features_id <- .features_id
             do.call(.show_node, args)
           })
+
 .show_node <-
   function(x, .features_id, panel_viewport, legend_viewport){
     grob <- nodes_grob(child_nebulae(x))[[.features_id]]
@@ -232,16 +252,9 @@ setMethod("show_node",
     }
     .message_info_viewport("END")
   }
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+
+#' @description \code{ggset_activate_nodes}:
+#' create the [ggset-class] object of node of specified 'feature'.
 #' @rdname draw_nodes-methods
 #' @export 
 ggset_activate_nodes <- 
@@ -298,6 +311,7 @@ ggset_activate_nodes <-
     }
     ggsets
   }
+
 #' @importFrom dplyr mutate
 .prepare_data_for_nodes <- 
   function(x, .features_id, add_ppcp = T){
@@ -316,6 +330,7 @@ ggset_activate_nodes <-
     }
     set
   }
+
 .prepare_data_for_ration <- 
   function(x, .features_id, axis.len){
     set <- ration_data(child_nebulae(x))
@@ -332,13 +347,17 @@ ggset_activate_nodes <-
              df
            })
   }
+
 #' @aliases set_ppcp_data
 #'
-#' @title ...
+#' @title Custom specify PPCP data for visualization in nodes
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Run before [annotate_nebula()] or [draw_nodes()].
+#' Custom specify PPCP data for visualization in nodes.
+#' All chemical classes exists in PPCP data could be specified.
+#' 
+#' @seealso [annotate_nebula()], [draw_nodes()].
 #'
 #' @name set_ppcp_data-methods
 #'
@@ -358,10 +377,12 @@ setMethod("set_ppcp_data",
               list(classes = names(tbl_graph(child_nebulae(x))))
             }
           })
+
 #' @importFrom dplyr filter
 #' @importFrom dplyr mutate
 #' @exportMethod set_ppcp_data
-#' @description \code{set_ppcp_data(x, ...)}: use the default parameters whatever 'missing'
+#' @description \code{set_ppcp_data(x, ...)}:
+#' use the default parameters whatever 'missing'
 #' while performing the method \code{set_ppcp_data}.
 #' @rdname set_ppcp_data-methods
 setMethod("set_ppcp_data", 
@@ -370,14 +391,12 @@ setMethod("set_ppcp_data",
             reCallMethod("set_ppcp_data",
                          .fresh_param(set_ppcp_data()(x)))
           })
+
 #' @exportMethod set_ppcp_data
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @param x ...
-#' @param classes ...
+#' @param x [mcnebula-class] object.
+#' @param classes character. The names of chemical classes.
+#' Use \code{classification(object)} to get optional candidates.
 #'
 #' @rdname set_ppcp_data-methods
 #'
@@ -400,13 +419,20 @@ setMethod("set_ppcp_data",
                      })
             return(x)
           })
+
 #' @aliases set_ration_data
 #'
-#' @title ...
+#' @title Custom specify the quantification data for visualization in nodes
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Run before [annotate_nebula()] or [draw_nodes()].
+#' Set whether to use the group average value to annotate the 'features'
+#' quantification in nodes.
+#' Before this methods, user should use \code{features_quantification<-} and
+#' \code{sample_metadata<-} to set quantification data and metadata in
+#' [mcnebula-class] object.
+#' 
+#' @seealso [annotate_nebula()], [draw_nodes()].
 #'
 #' @name set_ration_data-methods
 #'
@@ -428,6 +454,7 @@ setMethod("set_ration_data",
           function(){
             list(mean = T)
           })
+
 #' @exportMethod set_ration_data
 #' @description \code{set_ration_data(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{set_ration_data}.
@@ -438,14 +465,12 @@ setMethod("set_ration_data",
             reCallMethod("set_ration_data",
                          .fresh_param(set_ration_data()))
           })
+
 #' @exportMethod set_ration_data
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @param x ...
-#' @param mean ...
+#' @param x [mcnebula-class] object.
+#' @param mean logical. If \code{TRUE}, calculate mean value for
+#' all group of the samples.
 #'
 #' @rdname set_ration_data-methods
 #'

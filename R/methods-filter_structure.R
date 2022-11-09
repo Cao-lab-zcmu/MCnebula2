@@ -29,6 +29,7 @@ setMethod("filter_structure",
                  by_reference = F
             )
           })
+
 #' @exportMethod filter_structure
 #' @description \code{filter_structure(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{filter_structure}.
@@ -39,6 +40,7 @@ setMethod("filter_structure",
             reCallMethod("filter_structure",
                          .fresh_param(filter_structure()), ...)
           })
+
 #' @exportMethod filter_structure
 #'
 #' @aliases filter_structure

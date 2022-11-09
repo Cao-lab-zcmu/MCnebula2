@@ -27,6 +27,7 @@
            contains = "dataset",
            prototype = NULL
            )
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -38,6 +39,7 @@
 setMethod("project_dataset", 
           signature = c(x = "ANY"),
           function(x){ x@project_dataset })
+
 #' @exportMethod project_dataset<-
 #' @aliases project_dataset<-
 #' @param value The value for the slot.
@@ -47,6 +49,7 @@ setReplaceMethod("project_dataset",
                  function(x, value){
                    initialize(x, project_dataset = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod latest
 #' @aliases latest
@@ -66,6 +69,7 @@ setMethod("latest",
           function(x){
             tibble::as_tibble(entity(dataset(x)[[1]]))
           })
+
 ## ------------------------------------- 
 #' @exportMethod extract_rawset
 #' @aliases extract_rawset
@@ -78,6 +82,7 @@ setMethod("extract_rawset",
                              stop("`subscript` not found in `dataset(project_dataset(x))`")
                            })
           })
+
 #' @exportMethod extract_rawset
 #' @aliases extract_rawset
 #' @description \code{extract_rawset}: For fast extract data in object which containing

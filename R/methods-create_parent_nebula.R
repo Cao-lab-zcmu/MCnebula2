@@ -4,14 +4,17 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases create_parent_nebula
 #'
-#' @title ...
+#' @title Gather data to create Parent-Nebula
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Gather 'spectral_similarity' data and 'features_annotation' data
+#' to create 'igraph' object use function of [igraph::graph_from_data_frame()].
 #'
 #' @name create_parent_nebula-methods
 #'
+#' @seealso [compute_spectral_similarity()], [create_features_annotation()],
+#' [igraph::graph_from_data_frame()].
+#' 
 #' @order 1
 NULL
 #> NULL
@@ -22,43 +25,34 @@ NULL
 #' \code{create_parent_nebula}.
 #' @rdname create_parent_nebula-methods
 setMethod("create_parent_nebula", 
-          signature = setMissing("create_parent_nebula",
-                                 x = "mcnebula"),
-          function(x){
-            create_parent_nebula(x, edge_cutoff = 0.5,
-                                 remove_isolate = T)
+          signature = setMissing("create_parent_nebula"),
+          function(){
+            list(edge_cutoff = 0.5,
+                 remove_isolate = T)
           })
+
 #' @exportMethod create_parent_nebula
-#' @description \code{create_parent_nebula(x, ...)}: use the default parameters whatever 'missing'
+#' @description \code{create_parent_nebula(x, ...)}:
+#' use the default parameters whatever 'missing'
 #' while performing the method \code{create_parent_nebula}.
 #' @rdname create_parent_nebula-methods
 setMethod("create_parent_nebula", 
-          signature = setMissing("create_parent_nebula",
-                                 x = "mcnebula",
-                                 edge_cutoff = "numeric"),
-          function(x, edge_cutoff){
-            create_parent_nebula(x, edge_cutoff = edge_cutoff,
-                                 remove_isolate = T)
+          signature = c(x = "mcnebula"),
+          function(x, edge_cutoff, remove_isolate){
+            reCallMethod("create_parent_nebula",
+                         .fresh_param(create_parent_nebula()))
           })
+
 #' @exportMethod create_parent_nebula
 #'
 #' @aliases create_parent_nebula
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param edge_cutoff ...
-#' @param remove_isolate ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param x [mcnebula-class] object.
+#' @param edge_cutoff numeric(1). Value in (0,1). Set a threshold to
+#' create edges upon similarity value of 'spectral_similarity' data.
+#' 
+#' @param remove_isolate logical. If \code{TRUE}, remove the isolate 'features'
+#' (in network, i.e. the nodes without edge)
 #'
 #' @rdname create_parent_nebula-methods
 #'

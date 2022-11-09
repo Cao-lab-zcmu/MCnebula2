@@ -6,7 +6,7 @@
 \alias{set_ration_data,missing,missing-method}
 \alias{set_ration_data,mcnebula,ANY-method}
 \alias{set_ration_data,mcnebula,logical-method}
-\title{...}
+\title{Custom specify the quantification data for visualization in nodes}
 \usage{
 \S4method{set_ration_data}{missing,missing}()
 
@@ -15,26 +15,30 @@
 \S4method{set_ration_data}{mcnebula,logical}(x, mean)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{mean}{...}
+\item{mean}{logical. If \code{TRUE}, calculate mean value for
+all group of the samples.}
 }
 \description{
-...
+Run before \code{\link[=annotate_nebula]{annotate_nebula()}} or \code{\link[=draw_nodes]{draw_nodes()}}.
+Set whether to use the group average value to annotate the 'features'
+quantification in nodes.
+Before this methods, user should use \code{features_quantification<-} and
+\code{sample_metadata<-} to set quantification data and metadata in
+\linkS4class{mcnebula} object.
 
 \code{set_ration_data()}: get the default parameters for the method
 \code{set_ration_data}.
 
 \code{set_ration_data(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{set_ration_data}.
-
-...
-}
-\details{
-...
 }
 \examples{
 \dontrun{
 set_ration_data(...)
 }
+}
+\seealso{
+\code{\link[=annotate_nebula]{annotate_nebula()}}, \code{\link[=draw_nodes]{draw_nodes()}}.
 }

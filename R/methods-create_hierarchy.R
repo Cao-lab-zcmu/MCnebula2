@@ -3,11 +3,11 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases create_hierarchy
 #'
-#' @title ...
+#' @title Create hierarchy data of chemical classification
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Methods used to create hierarchy data of chemical classification.
+#' Annotate all chemical classes with hierarchy number.
 #'
 #' @name create_hierarchy-methods
 #'
@@ -16,7 +16,8 @@ NULL
 #> NULL
 
 #' @exportMethod create_hierarchy
-#' @description \code{create_hierarchy()}: get the default parameters for the method
+#' @description \code{create_hierarchy()}:
+#' get the default parameters for the method
 #' \code{create_hierarchy}.
 #' @rdname create_hierarchy-methods
 setMethod("create_hierarchy", 
@@ -24,8 +25,10 @@ setMethod("create_hierarchy",
           function(){
             list(fun_organize = .build_hierarchy)
           })
+
 #' @exportMethod create_hierarchy
-#' @description \code{create_hierarchy(x, ...)}: use the default parameters whatever 'missing'
+#' @description \code{create_hierarchy(x, ...)}:
+#' use the default parameters whatever 'missing'
 #' while performing the method \code{create_hierarchy}.
 #' @rdname create_hierarchy-methods
 setMethod("create_hierarchy", 
@@ -34,22 +37,14 @@ setMethod("create_hierarchy",
             reCallMethod("create_hierarchy",
                          .fresh_param(create_hierarchy()))
           })
+
 #' @exportMethod create_hierarchy
 #'
 #' @aliases create_hierarchy
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param fun_organize ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
+#' @param x [mcnebula-class] object.
+#' @param fun_organize function. Normally not used.
+#' Default is \code{MCnebula2:::.build_hierarchy}.
 #'
 #' @rdname create_hierarchy-methods
 #'
@@ -69,6 +64,7 @@ setMethod("create_hierarchy",
               fun_organize(class)
             return(x)
           })
+
 .build_hierarchy <- 
   function(data){
     data <- dplyr::select(data, rel.index, chem.ont.id,

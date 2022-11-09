@@ -3,13 +3,14 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases create_nebula_index
 #'
-#' @title ...
+#' @title Set down the chemical classes for visualization
 #'
-#' @description ...
+#' @description
+#' Arrange the filtered 'stardust_classes' data as 'nebula_index' data.
+#' The chemical classes in 'nebula_index' data would be visualized as Child-Nebulae.
+#' Run after [cross_filter_stardust()].
 #'
-#' @details ...
-#'
-#' @name create_hierarchy-methods
+#' @name create_nebula_index-methods
 #'
 #' @order 1
 NULL
@@ -24,6 +25,7 @@ setMethod("create_nebula_index",
           function(){
             list(force = F)
           })
+
 #' @exportMethod create_nebula_index
 #' @description \code{create_nebula_index(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{create_nebula_index}.
@@ -34,24 +36,15 @@ setMethod("create_nebula_index",
             reCallMethod("create_nebula_index",
                          .fresh_param(create_nebula_index()))
           })
+
 #' @exportMethod create_nebula_index
 #'
 #' @aliases create_nebula_index
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param force ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param x [mcnebula-class] object.
+#' @param force logical. The number of chemical classes in 'stardust_classes' data
+#' would be checked. The maximum is 120. If there were too many classes, return
+#' with error. Set to \code{FALSE}, escape from maximum check.
 #'
 #' @rdname create_nebula_index-methods
 #'
@@ -78,11 +71,13 @@ setMethod("create_nebula_index",
 
 #' @aliases set_tracer
 #'
-#' @title ...
+#' @title Mark top 'features' in 'nebula_index' data
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Custom defined the specific 'features' in 'nebula_index' data.
+#' Mark these 'features' for subsequent visualization with eye-catching highlighting
+#' ([set_nodes_color()]).
+#' Run after [create_nebula_index()].
 #'
 #' @name set_tracer-methods
 #'
@@ -111,6 +106,7 @@ setMethod("set_tracer",
               )
             }
           })
+
 #' @exportMethod set_tracer
 #' @description \code{set_tracer(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{set_tracer}.
@@ -123,26 +119,17 @@ setMethod("set_tracer",
             reCallMethod("set_tracer",
                          .fresh_param(set_tracer()(x, .features_id), args))
           })
+
 #' @exportMethod set_tracer
 #'
 #' @aliases set_tracer
 #'
-#' @title ...
+#' @param x [mcnebula-class] object.
+#' @param .features_id character. The ID of 'features' to mark.
+#' @param colors character. Hex color.
+#' @param rest character(1). Hex color.
 #'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param .features_id ...
-#' @param colors ...
-#' @param rest ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-#' @seealso [create_nebula_index()]
+#' @seealso [create_nebula_index()], [set_nodes_color()].
 #'
 #' @rdname set_tracer-methods
 #'

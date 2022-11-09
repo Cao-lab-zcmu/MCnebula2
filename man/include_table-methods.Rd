@@ -4,29 +4,21 @@
 \alias{include_table-methods}
 \alias{include_table}
 \alias{include_table,data.frame,character,character-method}
-\title{...}
+\title{Easily embed table into document}
 \usage{
 \S4method{include_table}{data.frame,character,character}(data, name, caption)
 }
 \arguments{
-\item{data}{...}
+\item{data}{'data.frame' object. The data of table to display in document.}
 
-\item{name}{...}
+\item{name}{character(1). For cross-reference in document.
+See \url{https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html#cross-ref}.}
 
-\item{caption}{...}
-}
-\value{
-...
+\item{caption}{character(1). Caption of figure display in document.}
 }
 \description{
-...
-
-...
-}
-\details{
-...
-
-...
+Creates a pre-defined \linkS4class{code_block_table} object containing the codes of
+\code{\link[knitr:kable]{knitr::kable()}} for formatting display the table in document.
 }
 \examples{
 \dontrun{

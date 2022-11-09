@@ -3,11 +3,19 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases annotate_nebula
 #'
-#' @title ...
+#' @title Add multiple annotation data for visualization of Child-Nebula.
 #'
-#' @description ...
+#' @description
+#' Use methods [draw_nodes()] and [draw_structures()] to standby visualization
+#' of Child-Nebula with mutiple annotation: chemical classification,
+#' 'features' quantification, chemical structure...
+#' Run after [activate_nebulae()].
 #'
-#' @details ...
+#' @details
+#' Primarily, remove the [ggraph::geom_node_point()] layer in [ggset-class] object
+#' of Child-Nebula. The 'nodes' would be replaced with 'grob' object create by
+#' [draw_nodes()]. The function of [ggimage::geom_subview()] is used to add
+#' 'grob' object into 'ggplot' object.
 #'
 #' @name annotate_nebula-methods
 #'
@@ -21,20 +29,11 @@ NULL
 #'
 #' @aliases annotate_nebula
 #'
-#' @title ...
+#' @param x [mcnebula-class] object.
+#' @param nebula_name character(1). Chemical classes in 'nebula_index' data.
 #'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param nebula_name ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-#' @seealso \code{\link{draw_nodes}}, \code{\link{draw_structures}}...
+#' @seealso [activate_nebulae()], [draw_nodes()], [draw_structures()],
+#' [set_ppcp_data()], [set_ration_data()]...
 #'
 #' @rdname annotate_nebula-methods
 #'

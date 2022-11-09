@@ -3,11 +3,15 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases draw_structures
 #'
-#' @title ...
+#' @title Draw and visualize chemcial structure
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Methods used for drawing and visualizing chemical structures of 'features'
+#' in Child-Nebulae.
+#' [ChemmineOB::convertToImage()] is the core function used for drawing chemical
+#' structures.
+#' 
+#' @seealso [ChemmineOB::convertToImage()].
 #'
 #' @name draw_structures-methods
 #'
@@ -23,18 +27,9 @@ NULL
 #'
 #' @aliases draw_structures
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param nebula_name ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
+#' @param x [mcnebula-class] object.
+#' @param nebula_name character(1). Chemical classes in 'nebula_index' data.
+#' Specified to draw chemical structures of all the 'features' of that.
 #'
 #' @rdname draw_structures-methods
 #'
@@ -60,14 +55,16 @@ setMethod("draw_structures",
             }
             return(x)
           })
+
 #' @importFrom grid grid.draw
 #' @exportMethod show_structure
 #'
-#' @description ...
+#' @description
+#' \code{show_structure}: visualize the chemical structure of 'feature'
+#' which has been drawn.
 #'
-#' @param .features_id ...
-#'
-# @seealso ...
+#' @param .features_id character(1). The ID of 'features' to show the
+#' chemical structure.
 #'
 #' @rdname draw_structures-methods
 #'
@@ -81,6 +78,7 @@ setMethod("show_structure",
             .check_data(child_nebulae(x), list(structures_grob = "draw_structures"))
             grid::grid.draw(structures_grob(child_nebulae(x))[[.features_id]])
           })
+
 #' @importFrom dplyr mutate
 #' @importFrom pbapply pbapply
 .draw_structures <-
@@ -101,6 +99,7 @@ setMethod("show_structure",
       lst <- lapply(lst, .rm_backgroud)
     return(lst)
   }
+
 .rm_backgroud <- 
   function(grob){
     if (!is(grob$children[[1]]$children[[1]], "picRect")) {
@@ -108,4 +107,12 @@ setMethod("show_structure",
     }
     grob$children[[1]]$children[[1]] <- NULL
     return(grob)
+  }
+
+#' @importFrom ChemmineOB convertToImage
+#' @importFrom rsvg rsvg_svg
+.smiles_to_cairosvg <- 
+  function(smile, path){
+    ChemmineOB::convertToImage("SMI", "SVG", source = smile, toFile = path)
+    rsvg::rsvg_svg(path, path)
   }

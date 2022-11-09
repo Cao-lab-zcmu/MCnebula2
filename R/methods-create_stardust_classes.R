@@ -47,6 +47,7 @@ setMethod("create_stardust_classes",
                  position_isomerism = T,
                  inherit_dataset = F)
           })
+
 #' @exportMethod create_stardust_classes
 #' @description \code{create_stardust_classes(x, ...)}:
 #' use the default parameters whatever 'missing'
@@ -59,6 +60,7 @@ setMethod("create_stardust_classes",
             reCallMethod("create_stardust_classes",
                          .fresh_param(create_stardust_classes()))
           })
+
 #' @exportMethod create_stardust_classes
 #'
 #' @aliases create_stardust_classes

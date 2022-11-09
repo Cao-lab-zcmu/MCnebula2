@@ -6,7 +6,7 @@
 #' @aliases parent_nebula
 #'
 #' @description \code{parent_nebula}: Store data for visualization of
-#' parent-nebula.
+#' Parent-Nebula.
 #'
 #' @rdname nebula-class
 #'
@@ -25,15 +25,16 @@
                             ),
            prototype = NULL
   )
+
 #' @exportClass child_nebulae
 #'
 #' @aliases child_nebulae
 #'
 #' @description \code{child_nebulae}: store data for visualization of
-#' child-nebulae.
+#' Child-Nebulae.
 #'
 #' @slot igraph "igraph" object or its list. See [igraph::graph_from_data_frame()].
-#' The slot contains edges and nodes data of child-nebulae or parent-nebula.
+#' The slot contains edges and nodes data of Child-Nebulae or Parent-Nebula.
 #' The "igraph" object can be output use [igraph::write_graph()] as ".graphml" file,
 #' which belong to a network data format that can be operated by other software such as
 #' Cytoscape (\url{https://cytoscape.org/}).
@@ -45,13 +46,13 @@
 #' Create from slot \code{tbl_graph}, passed to [ggraph::ggraph()] for visualization.
 #'
 #' @slot grid_layout "layout" object. See [grid::grid.layout()].
-#' Grid layout for position of each child-nebula to visualize.
+#' Grid layout for position of each Child-Nebula to visualize.
 #'
 #' @slot viewports list with names. Each element must be "viewport" object.
-#' See [grid::viewport()]. Position for each child-nebula to visualize.
+#' See [grid::viewport()]. Position for each Child-Nebula to visualize.
 #'
 #' @slot panel_viewport "viewport" object. See [grid::viewport()]. For visualization,
-#' the position to place overall child-nebulae.
+#' the position to place overall Child-Nebulae.
 #'
 #' @slot legend_viewport "viewport" object. See [grid::viewport()]. For visualization,
 #' the position to place legend.
@@ -78,7 +79,7 @@
 #' annotation data of 'features' which would be visualize in nodes nucleus as
 #' ring plot. Generally, \code{ration_data} is the statistic data for samples.
 #'
-#' @slot ggset_annotate a list of [ggset-class] object. The annotated child-nebulae
+#' @slot ggset_annotate a list of [ggset-class] object. The annotated Child-Nebulae
 #' gathered from slot \code{ggset} and slot \code{nodes_grob}. 
 #' Use [call_command()] to visualize the [ggset-class]. Be care, the object
 #' sometimes is too large that need lot of time to loading for visualization.
@@ -110,11 +111,12 @@
                             ),
            prototype = NULL
   )
+
 #' @exportClass nebula
 #'
 #' @aliases nebula
 #'
-#' @title Visualization component of chemical nebulae/nebula
+#' @title Visualization component of chemical Nebulae/Nebula
 #'
 #' @description This class store multiple components for visualization.
 #'
@@ -139,6 +141,7 @@
                             ),
            prototype = NULL
            )
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -150,6 +153,7 @@ setMethod("show",
           function(object){
             .show_nebulae_data(object)
           })
+
 #' @exportMethod child_nebulae
 #' @aliases child_nebulae
 #' @rdname nebula-class
@@ -158,6 +162,7 @@ setMethod("show",
           function(object){
             .show_nebulae_data(object)
           })
+
 .show_nebulae_data <- 
   function(object){
     slots_mapply(object, function(slot, name){
@@ -177,6 +182,7 @@ setMethod("show",
                        "\n", sep = "")
                       })
   }
+
 ## ------------------------------------- 
 #' @exportMethod parent_nebula
 #' @aliases parent_nebula
@@ -186,6 +192,7 @@ setMethod("show",
 setMethod("parent_nebula", 
           signature = c(x = "ANY"),
           function(x){ x@parent_nebula })
+
 #' @exportMethod parent_nebula<-
 #' @aliases parent_nebula<-
 #' @param value The value for the slot.
@@ -195,6 +202,7 @@ setReplaceMethod("parent_nebula",
                  function(x, value){
                    initialize(x, parent_nebula = value)
                  })
+
 #' @exportMethod child_nebulae
 #' @aliases child_nebulae
 #' @description \code{child_nebulae}, \code{child_nebulae<-}: getter and setter
@@ -203,6 +211,7 @@ setReplaceMethod("parent_nebula",
 setMethod("child_nebulae", 
           signature = c(x = "ANY"),
           function(x){ x@child_nebulae })
+
 #' @exportMethod child_nebulae<-
 #' @aliases child_nebulae<-
 #' @param value The value for the slot.
@@ -212,6 +221,7 @@ setReplaceMethod("child_nebulae",
                  function(x, value){
                    initialize(x, child_nebulae = value)
                  })
+
 ## ---------------------------------------------------------------------- 
 #' @exportMethod igraph
 #' @aliases igraph
@@ -221,6 +231,7 @@ setReplaceMethod("child_nebulae",
 setMethod("igraph", 
           signature = c(x = "ANY"),
           function(x){ x@igraph })
+
 #' @exportMethod igraph<-
 #' @aliases igraph<-
 #' @param value The value for the slot.
@@ -230,6 +241,7 @@ setReplaceMethod("igraph",
                  function(x, value){
                    initialize(x, igraph = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod tbl_graph
 #' @aliases tbl_graph
@@ -239,6 +251,7 @@ setReplaceMethod("igraph",
 setMethod("tbl_graph", 
           signature = c(x = "ANY"),
           function(x){ x@tbl_graph })
+
 #' @exportMethod tbl_graph<-
 #' @aliases tbl_graph<-
 #' @param value The value for the slot.
@@ -248,6 +261,7 @@ setReplaceMethod("tbl_graph",
                  function(x, value){
                    initialize(x, tbl_graph = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod layout_ggraph
 #' @aliases layout_ggraph
@@ -257,6 +271,7 @@ setReplaceMethod("tbl_graph",
 setMethod("layout_ggraph", 
           signature = c(x = "ANY"),
           function(x){ x@layout_ggraph })
+
 #' @exportMethod layout_ggraph<-
 #' @aliases layout_ggraph<-
 #' @param value The value for the slot.
@@ -266,6 +281,7 @@ setReplaceMethod("layout_ggraph",
                  function(x, value){
                    initialize(x, layout_ggraph = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod grid_layout
 #' @aliases grid_layout
@@ -275,6 +291,7 @@ setReplaceMethod("layout_ggraph",
 setMethod("grid_layout", 
           signature = c(x = "ANY"),
           function(x){ x@grid_layout })
+
 #' @exportMethod grid_layout<-
 #' @aliases grid_layout<-
 #' @param value The value for the slot.
@@ -284,6 +301,7 @@ setReplaceMethod("grid_layout",
                  function(x, value){
                    initialize(x, grid_layout = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod viewports
 #' @aliases viewports
@@ -293,6 +311,7 @@ setReplaceMethod("grid_layout",
 setMethod("viewports", 
           signature = c(x = "ANY"),
           function(x){ x@viewports })
+
 #' @exportMethod viewports<-
 #' @aliases viewports<-
 #' @param value The value for the slot.
@@ -302,6 +321,7 @@ setReplaceMethod("viewports",
                  function(x, value){
                    initialize(x, viewports = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod ggset
 #' @aliases ggset
@@ -311,6 +331,7 @@ setReplaceMethod("viewports",
 setMethod("ggset", 
           signature = c(x = "ANY"),
           function(x){ x@ggset })
+
 #' @exportMethod ggset<-
 #' @aliases ggset<-
 #' @param value The value for the slot.
@@ -320,6 +341,7 @@ setReplaceMethod("ggset",
                  function(x, value){
                    initialize(x, ggset = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod panel_viewport
 #' @aliases panel_viewport
@@ -329,6 +351,7 @@ setReplaceMethod("ggset",
 setMethod("panel_viewport", 
           signature = c(x = "ANY"),
           function(x){ x@panel_viewport })
+
 #' @exportMethod panel_viewport<-
 #' @aliases panel_viewport<-
 #' @param value The value for the slot.
@@ -338,6 +361,7 @@ setReplaceMethod("panel_viewport",
                  function(x, value){
                    initialize(x, panel_viewport = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod legend_viewport
 #' @aliases legend_viewport
@@ -347,6 +371,7 @@ setReplaceMethod("panel_viewport",
 setMethod("legend_viewport", 
           signature = c(x = "ANY"),
           function(x){ x@legend_viewport })
+
 #' @exportMethod legend_viewport<-
 #' @aliases legend_viewport<-
 #' @param value The value for the slot.
@@ -356,6 +381,7 @@ setReplaceMethod("legend_viewport",
                  function(x, value){
                    initialize(x, legend_viewport = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod structures_grob
 #' @aliases structures_grob
@@ -365,6 +391,7 @@ setReplaceMethod("legend_viewport",
 setMethod("structures_grob", 
           signature = c(x = "ANY"),
           function(x){ x@structures_grob })
+
 #' @exportMethod structures_grob<-
 #' @aliases structures_grob<-
 #' @param value The value for the slot.
@@ -374,6 +401,7 @@ setReplaceMethod("structures_grob",
                  function(x, value){
                    initialize(x, structures_grob = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod nodes_ggset
 #' @aliases nodes_ggset
@@ -383,6 +411,7 @@ setReplaceMethod("structures_grob",
 setMethod("nodes_ggset", 
           signature = c(x = "ANY"),
           function(x){ x@nodes_ggset })
+
 #' @exportMethod nodes_ggset<-
 #' @aliases nodes_ggset<-
 #' @param value The value for the slot.
@@ -392,6 +421,7 @@ setReplaceMethod("nodes_ggset",
                  function(x, value){
                    initialize(x, nodes_ggset = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod nodes_grob
 #' @aliases nodes_grob
@@ -401,6 +431,7 @@ setReplaceMethod("nodes_ggset",
 setMethod("nodes_grob", 
           signature = c(x = "ANY"),
           function(x){ x@nodes_grob })
+
 #' @exportMethod nodes_grob<-
 #' @aliases nodes_grob<-
 #' @param value The value for the slot.
@@ -410,6 +441,7 @@ setReplaceMethod("nodes_grob",
                  function(x, value){
                    initialize(x, nodes_grob = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod ppcp_data
 #' @aliases ppcp_data
@@ -419,6 +451,7 @@ setReplaceMethod("nodes_grob",
 setMethod("ppcp_data", 
           signature = c(x = "ANY"),
           function(x){ x@ppcp_data })
+
 #' @exportMethod ppcp_data<-
 #' @aliases ppcp_data<-
 #' @param value The value for the slot.
@@ -428,6 +461,7 @@ setReplaceMethod("ppcp_data",
                  function(x, value){
                    initialize(x, ppcp_data = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod ration_data
 #' @aliases ration_data
@@ -437,6 +471,7 @@ setReplaceMethod("ppcp_data",
 setMethod("ration_data", 
           signature = c(x = "ANY"),
           function(x){ x@ration_data })
+
 #' @exportMethod ration_data<-
 #' @aliases ration_data<-
 #' @param value The value for the slot.
@@ -446,6 +481,7 @@ setReplaceMethod("ration_data",
                  function(x, value){
                    initialize(x, ration_data = value)
                  })
+
 ## ------------------------------------- 
 #' @exportMethod ggset_annotate
 #' @aliases ggset_annotate
@@ -455,6 +491,7 @@ setReplaceMethod("ration_data",
 setMethod("ggset_annotate", 
           signature = c(x = "ANY"),
           function(x){ x@ggset_annotate })
+
 #' @exportMethod ggset_annotate<-
 #' @aliases ggset_annotate<-
 #' @param value The value for the slot.

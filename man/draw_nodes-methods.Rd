@@ -10,7 +10,7 @@
 \alias{show_node,ANY,character,ANY,ANY-method}
 \alias{show_node}
 \alias{ggset_activate_nodes}
-\title{...}
+\title{Draw and visualize chemcial structures for Child-Nebulae}
 \usage{
 \S4method{draw_nodes}{missing,missing,missing,missing,missing,missing,missing}()
 
@@ -47,35 +47,49 @@ ggset_activate_nodes(
 )
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{nebula_name}{...}
+\item{nebula_name}{character(1). Chemical classes in 'nebula_index' data.
+Specified to draw nodes (of network) of all the 'features' of that.}
 
-\item{nodes_color}{...}
+\item{nodes_color}{character with names or not. The Value is Hex color.
+Specified colors for 'features' to draw nodes. If the number of the colors
+were not enough, the rest 'features' would be fill with default color.
+If \code{\link[=set_tracer]{set_tracer()}} has been run, the colors specified in 'nebula_index'
+would be used preferentially.}
 
-\item{add_id_text}{...}
+\item{add_id_text}{logical. If \code{TRUE}, add ID (.features_id) for
+'features' inside the nodes.}
 
-\item{add_structure}{...}
+\item{add_structure}{logical. If \code{TRUE}, draw chemical structures inside
+the nodes. See \code{\link[=draw_structures]{draw_structures()}}.}
 
-\item{add_ppcp}{...}
+\item{add_ppcp}{logical. If \code{TRUE}, draw radical bar plot inside the nodes
+for annotation of PPCP data. See \code{\link[=set_ppcp_data]{set_ppcp_data()}} for custom modify the annotated
+PPCP data. Hex colors in \code{palette_col(object)} would be used for fill the bar
+plot (Used by \code{\link[ggplot2:scale_manual]{ggplot2::scale_fill_manual()}}).}
 
-\item{add_ration}{...}
+\item{add_ration}{logical. If \code{TRUE}, draw ring plot inside the nodes
+for annotation of features quantification data. See \code{\link[=set_ration_data]{set_ration_data()}} for custom
+modify the annotated quantification data. Hex colors in \code{palette_stat(object)}
+would be used for fill be ring plot.}
 
-\item{.features_id}{...}
+\item{.features_id}{character(1). ID of 'feature' to show node.}
 
-\item{panel_viewport}{...}
+\item{panel_viewport}{'viewport' object. Create by \code{\link[grid:viewport]{grid::viewport()}}.}
 
-\item{legend_viewport}{...}
-}
-\value{
-...
-
-...
-
-OUTPUT_DESCRIPTION
+\item{legend_viewport}{'viewport' object.}
 }
 \description{
-...
+Methods used for drawing and visualizing nodes of 'features'
+in Child-Nebulae (networks). The methods used to visualize 'features'
+with annotations of:
+\itemize{
+\item chemical structures
+\item chemical classification
+\item quantification data (peak area)
+\item ID of 'feature' (.features_id)
+}
 
 \code{draw_nodes()}: get the function for generating
 default parameters for the method
@@ -84,26 +98,27 @@ default parameters for the method
 \code{draw_nodes(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{draw_nodes}.
 
-...
-
 \code{show_node()}: get the default parameters for the method
 \code{show_node}.
 
-...
+Visualize the node of 'feature' which has been drawn
+by methods \code{\link[=draw_nodes]{draw_nodes()}} (or drawn by methods \code{\link[=annotate_nebula]{annotate_nebula()}}).
 
 \code{show_node(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{show_node}.
 
-FUNCTION_DESCRIPTION
+\code{ggset_activate_nodes}:
+create the \linkS4class{ggset} object of node of specified 'feature'.
 }
 \details{
-...
-
-...
-
-...
-
-DETAILS
+Those annotated visualizations are drawn in steps and then are put together.
+In order to render the text as a graphical path (otherwise, the graphics
+would not be compatible with too small fonts and would result in misplaced text),
+the 'ggplot' object or 'grob' object is first exported as an SVG file,
+which is subsequently read by \code{\link[grImport2:readPicture]{grImport2::readPicture()}}, followed by
+\code{\link[grImport2:grobify]{grImport2::grobify()}} as 'grob' object, and then combined into
+the final 'grob'. In general, this process is time consuming,
+especially when there are a lot of 'features' for visualization.
 }
 \examples{
 \dontrun{
@@ -112,9 +127,8 @@ draw_nodes(...)
 \dontrun{
 show_node(...)
 }
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
 }
+\seealso{
+\code{\link[grid:grid.draw]{grid::grid.draw()}}, \code{\link[grid:grid.grob]{grid::grob()}}, \code{\link[grImport2:readPicture]{grImport2::readPicture()}},
+\code{\link[grImport2:grobify]{grImport2::grobify()}}...
 }

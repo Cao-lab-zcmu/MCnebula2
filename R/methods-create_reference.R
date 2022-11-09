@@ -101,6 +101,7 @@ setMethod("create_reference",
             }
             return(x)
           })
+
 #' @exportMethod create_reference
 #' @rdname create_reference-methods
 setMethod("create_reference", 
@@ -109,6 +110,7 @@ setMethod("create_reference",
           function(x){
             create_reference(x, "structure", fill = T)
           })
+
 #' @exportMethod create_reference
 #' @rdname create_reference-methods
 setMethod("create_reference", 
@@ -122,6 +124,7 @@ setMethod("create_reference",
             )
             create_reference(x, subscript = subscript)
           })
+
 #' @exportMethod create_reference
 #' @rdname create_reference-methods
 setMethod("create_reference", 
@@ -140,6 +143,7 @@ setMethod("create_reference",
             }
             create_reference(x, data = data)
           })
+
 #' @exportMethod create_reference
 #' @rdname create_reference-methods
 setMethod("create_reference", 
@@ -154,6 +158,7 @@ setMethod("create_reference",
               c(".features_id", ".candidates_id")
             create_reference(x, data = data)
           })
+
 #' @exportMethod create_reference
 #' @rdname create_reference-methods
 setMethod("create_reference", 
@@ -167,6 +172,7 @@ setMethod("create_reference",
             colnames(data)[columns] <- c(".features_id", ".candidates_id")
             create_reference(x, data = data)
           })
+
 #' @exportMethod create_reference
 #' @rdname create_reference-methods
 setMethod("create_reference", 

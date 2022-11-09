@@ -4,20 +4,25 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases create_parent_layout
 #'
-#' @title ...
+#' @title Create layout for visualization of Parent-Nebula
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' These methods use functions of [tidygraph::as_tbl_graph()] and
+#' [ggraph::create_layout()] to create 'layout_ggraph' (data.frame)
+#' object to standby visualization of Parent-Nebula.
+#' Run after [create_parent_nebula()].
 #'
 #' @name create_parent_layout-methods
+#' 
+#' @seealso [tidygraph::as_tbl_graph()], [ggraph::create_layout()].
 #'
 #' @order 1
 NULL
 #> NULL
 
 #' @exportMethod create_parent_layout
-#' @description \code{create_parent_layout()}: get the default parameters for the method
+#' @description \code{create_parent_layout()}:
+#' get the default parameters for the method
 #' \code{create_parent_layout}.
 #' @rdname create_parent_layout-methods
 setMethod("create_parent_layout", 
@@ -25,8 +30,10 @@ setMethod("create_parent_layout",
           function(){
             list(ggraph_layout = "kk", seed = 1)
           })
+
 #' @exportMethod create_parent_layout
-#' @description \code{create_parent_layout(x, ...)}: use the default parameters whatever 'missing'
+#' @description \code{create_parent_layout(x, ...)}:
+#' use the default parameters whatever 'missing'
 #' while performing the method \code{create_parent_layout}.
 #' @rdname create_parent_layout-methods
 setMethod("create_parent_layout", 
@@ -35,25 +42,14 @@ setMethod("create_parent_layout",
             reCallMethod("create_parent_layout",
                          .fresh_param(create_parent_layout()))
           })
+
 #' @exportMethod create_parent_layout
 #'
 #' @aliases create_parent_layout
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param ggraph_layout ...
-#' @param seed ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-# @seealso ...
+#' @param x [mcnebula-class] object.
+#' @param ggraph_layout character(1). Layout name. See [ggraph::create_layout()].
+#' @param seed numeric(1). Passed to [set.seed()].
 #'
 #' @rdname create_parent_layout-methods
 #'

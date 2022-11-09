@@ -47,6 +47,7 @@ setMethod("collate_data",
           function(){
             list(fun_collate = .collate_data.msframe)
           })
+
 #' @exportMethod collate_data
 #' @description \code{collate_data(x, ...)}: use the default parameters whatever 'missing'
 #' while performing the method \code{collate_data}.
@@ -57,6 +58,7 @@ setMethod("collate_data",
             reCallMethod("collate_data",
                          .fresh_param(collate_data()), ...)
           })
+
 #' @exportMethod collate_data
 #'
 #' @aliases collate_data
@@ -83,6 +85,7 @@ setMethod("collate_data",
             project_dataset(x) <- add_dataset(project_dataset(x), msframe.lst)
             return(x)
           })
+
 .collate_data.msframe <- 
   function(x, subscript, reference){
     project_metadata <- extract_metadata(x, subscript)
@@ -96,6 +99,7 @@ setMethod("collate_data",
     read_data(x, project_metadata = project_metadata,
               subscript = subscript)
   }
+
 ## ---------------------------------------------------------------------- 
 #' @exportMethod read_data
 #'
@@ -136,6 +140,7 @@ setMethod("read_data",
                                  .candidates_id = .candidates_id
             )
           })
+
 #' @exportMethod read_data
 #' @rdname collate_data-methods
 setMethod("read_data", 

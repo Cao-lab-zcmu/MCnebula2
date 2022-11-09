@@ -6,7 +6,7 @@
 \alias{create_child_nebulae,missing,missing,missing,missing-method}
 \alias{create_child_nebulae,mcnebula,ANY,ANY,ANY-method}
 \alias{create_child_nebulae,mcnebula,numeric,numeric,logical-method}
-\title{...}
+\title{Gather data to create Child-Nebulae}
 \usage{
 \S4method{create_child_nebulae}{missing,missing,missing,missing}()
 
@@ -15,33 +15,36 @@
 \S4method{create_child_nebulae}{mcnebula,numeric,numeric,logical}(x, edge_cutoff, max_edge_number, use_tracer)
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{edge_cutoff}{...}
+\item{edge_cutoff}{numeric(1). Value in (0,1). Set a threshold to
+create edges upon similarity value of 'spectral_similarity' data.}
 
-\item{max_edge_number}{...}
-}
-\value{
-...
+\item{max_edge_number}{numeric(1).
+For nodes (features) in each Child-Nebulae (i.e. network), the maximum number of
+edges link with. If the number exceeds the limitation, only edges representing higher
+spectral similarity would be retained.}
 }
 \description{
-...
+Similar to \code{\link[=create_parent_nebula]{create_parent_nebula()}}, gather 'spectral_similarity' data and
+and 'features_annotation' data; but additionally, use 'nebula_index' data
+to group 'features' by chemical classes. Each chemical classes in 'nebula_index'
+data would lead to a 'igraph' object.
 
 \code{create_child_nebulae()}: get the default parameters for the method
 \code{create_child_nebulae}.
 
-\code{create_child_nebulae(x, ...)}: use the default parameters whatever 'missing'
+\code{create_child_nebulae(x, ...)}:
+use the default parameters whatever 'missing'
 while performing the method \code{create_child_nebulae}.
-
-...
-}
-\details{
-...
-
-...
 }
 \examples{
 \dontrun{
 create_child_nebulae(...)
 }
+}
+\seealso{
+\code{\link[=compute_spectral_similarity]{compute_spectral_similarity()}}, \code{\link[=create_features_annotation]{create_features_annotation()}},
+\code{\link[=create_nebula_index]{create_nebula_index()}},
+\code{\link[igraph:graph_from_data_frame]{igraph::graph_from_data_frame()}}.
 }

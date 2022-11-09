@@ -9,7 +9,7 @@
 \alias{modify_set_margin}
 \alias{modify_unify_scale_limits}
 \alias{modify_set_labs}
-\title{...}
+\title{Modify 'ggset' object}
 \usage{
 modify_default_child(ggset, x)
 
@@ -26,27 +26,42 @@ modify_unify_scale_limits(ggset, x)
 modify_set_labs(ggset, x)
 }
 \arguments{
-\item{ggset}{...}
+\item{ggset}{\linkS4class{ggset} object.}
 
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 }
 \description{
-...
+These are multiple functions used for post modification of \linkS4class{ggset}
+object. These functions provide a convenient, fast, and repeatable way
+to make improvements to \linkS4class{ggset} object.
 
-\code{modify_default_child}: ...
+\code{modify_default_child}:
+Used for \code{\link[=visualize_all]{visualize_all()}}.
+\code{modify_rm_legend} + \code{modify_set_labs} + \code{modify_unify_scale_limits}
 
-\code{modify_set_labs_and_unify_scale_limits}: ...
+\code{modify_set_labs_and_unify_scale_limits}:
+\code{modify_set_labs} + \code{modify_unify_scale_limits}
 
-\code{modify_annotate_child}: ...
+\code{modify_annotate_child}:
+\code{modify_set_labs} + ...
+(for parameters of \code{panel.grid} and \code{panel.background}
+in \code{\link[ggplot2:theme]{ggplot2::theme()}}).
 
-\code{modify_rm_legend}: ...
+\code{modify_rm_legend}: remove the legend.
+For parameter of \code{legend.position} in \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 
-\code{modify_set_margin}: ...
+\code{modify_set_margin}: reduce margin.
+For parameter of \code{plot.margin} in \code{\link[ggplot2:theme]{ggplot2::theme()}}.
 
-\code{modify_unify_scale_limits}: ...
+\code{modify_unify_scale_limits}:
+Uniform mapping 'scale' for all Child-Nebulae.
+Related to \code{ggplot2::scale_*} function.
+Use \code{MCnebula2:::.LEGEND_mapping()} to get the possibly mapping.
 
-\code{modify_set_labs}: ...
+\code{modify_set_labs}:
+According to names in slot \code{export_name} of \linkS4class{mcnebula} object
+to rename the labs.
 }
-\details{
-...
+\seealso{
+\linkS4class{ggset}
 }

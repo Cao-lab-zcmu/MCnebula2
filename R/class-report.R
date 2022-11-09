@@ -38,6 +38,7 @@
              representation(yaml = "character"),
            prototype = prototype(yaml = .yaml_default())
   )
+
 # ==========================================================================
 # validity
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -48,6 +49,7 @@ setValidity("report",
                             paste0("'", recepts, "'", collapse = ", "))
               validate_class_in_list(layers(object), recepts, tip)
             })
+
 # ==========================================================================
 # method
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -81,6 +83,7 @@ setMethod("show_layers",
                      show(layers(x)[[ seq ]])
                    })
           })
+
 ## ------------------------------------- 
 #' @exportMethod yaml
 #' @aliases yaml
@@ -90,6 +93,7 @@ setMethod("show_layers",
 setMethod("yaml", 
           signature = c(x = "ANY"),
           function(x){ x@yaml })
+
 #' @exportMethod yaml<-
 #' @aliases yaml<-
 #' @param value The value for the slot.
@@ -99,6 +103,7 @@ setReplaceMethod("yaml",
                  function(x, value){
                    initialize(x, yaml = value)
                  })
+
 ## ---------------------------------------------------------------------- 
 #' @exportMethod new_report
 #' @aliases new_report
@@ -116,6 +121,7 @@ setMethod("new_report",
           function(..., yaml){
             .report(yaml = yaml, layers = list(...))
           })
+
 #' @exportMethod new_report
 #' @description \code{new_report()}: get the default parameters for the method \code{new_report}.
 #' @description \code{new_report(x, ...)}: use the default parameters whatever 'missing'
@@ -131,6 +137,7 @@ setMethod("new_report",
             else
               reCallMethod("new_report", args, ...)
           })
+
 #' @exportMethod call_command
 #' @aliases call_command
 #' @description \code{call_command}: Format 'report' object as character, which can be output

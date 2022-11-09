@@ -5,7 +5,7 @@
 \alias{create_child_layouts}
 \alias{create_child_layouts,missing,missing,missing,missing,missing,missing,missing-method}
 \alias{create_child_layouts,mcnebula,ANY,ANY,ANY,ANY,ANY,ANY-method}
-\title{...}
+\title{Create layouts for visualization of Child-Nebulae}
 \usage{
 \S4method{create_child_layouts}{missing,missing,missing,missing,missing,missing,missing}()
 
@@ -20,42 +20,61 @@
 )
 }
 \arguments{
-\item{x}{...}
+\item{x}{\linkS4class{mcnebula} object.}
 
-\item{ggraph_layouts}{...}
+\item{ggraph_layouts}{character with names or not.
+If with names, the names should be chemical classes in 'nebula_index' data.
+The names used to specify layout for all or partial Child-Nebulae.
+The value, see \code{\link[ggraph:ggraph]{ggraph::create_layout()}}.}
 
-\item{seeds}{...}
+\item{seeds}{numeric with names or not. The names, see parameter
+\code{ggraph_layouts}. The values would passed to \code{\link[=set.seed]{set.seed()}}}
 
-\item{grid_layout}{...}
+\item{grid_layout}{'layout' object. Create by \code{\link[grid:grid.layout]{grid::grid.layout()}}.}
 
-\item{viewports}{...}
+\item{viewports}{list with names or not.
+Each element is a 'viewport' object create by \code{\link[grid:viewport]{grid::viewport()}}}
 
-\item{panel_viewport}{...}
+\item{panel_viewport}{'viewport' object.
+Describe the size and position for drawing overall Child-Nebulae (panel).}
 
-\item{legend_viewport}{...}
-}
-\value{
-...
+\item{legend_viewport}{'viewport' object.
+Describe the size and position for drawing legend of Child-Nebulae.}
 }
 \description{
-...
+Create visual style of Child-Nebulae.
+The 'style' means a variety of layouts for drawing the networks
+(i.e. all Child-Nebulae). See details.
 
 \code{create_child_layouts()}: get the function for generating
 default parameters for the method
 \code{create_child_layouts}.
 
-...
-
-\code{create_child_layouts(x, ...)}: use the default parameters whatever 'missing'
+\code{create_child_layouts(x, ...)}:
+use the default parameters whatever 'missing'
 while performing the method \code{create_child_layouts}.
 }
 \details{
-...
-
-...
+This method provides a flexible way to draw Child-Nebulae.
+Users can create visual style based on default parameters.
+For experienced users of 'grid' package,
+the related functions such as \code{\link[grid:grid.layout]{grid::grid.layout()}}, \code{\link[grid:viewport]{grid::viewport()}}
+can be used to create customized visualizations.
+The layouts for visualization of Child-Nebulae include:
+\itemize{
+\item nodes position: \code{layout_ggraph}
+\item size and position of grid panel: \code{grid_layout}
+\item size and position of each Child-Nebula (inside the panel): \code{viewports}
+\item size and position of overall Child-Nebulae: \code{panel_viewport}
+\item size and position of overall legend: \code{legend_viewport}
+}
 }
 \examples{
 \dontrun{
 create_child_layouts(...)
 }
+}
+\seealso{
+\code{\link[grid:viewport]{grid::viewport()}}, \code{\link[grid:grid.layout]{grid::grid.layout()}},
+\code{\link[ggraph:ggraph]{ggraph::create_layout()}}...
 }

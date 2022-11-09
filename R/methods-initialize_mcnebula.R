@@ -3,11 +3,12 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases initialize_mcnebula
 #'
-#' @title ...
+#' @title Initialize mcnebula object
 #'
-#' @description ...
-#'
-#' @details ...
+#' @description
+#' Set SIRIUS project path and its version to initialize [mcnebula-class] object.
+#' In addition, the methods can be used for some related object to given
+#' default value.
 #'
 #' @name initialize_mcnebula-methods
 #'
@@ -19,18 +20,11 @@ NULL
 #'
 #' @aliases initialize_mcnebula
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x [mcnebula-class] object.
+#' @param x [mcnebula-class] object, [melody-class] object,
+#' [project_conformation-class] or [project_api-class] object.
 #' @param sirius_version character. e.g., "sirius.v4".
 #' @param sirius_project character. The path of SIRIUS project space.
 #' @param output_directory character. The path for output.
-#'
-#' @return [mcnebula-class] object.
 #'
 #' @rdname initialize_mcnebula-methods
 #'
@@ -78,19 +72,10 @@ setMethod("initialize_mcnebula",
             export_name(x) <- .get_export_name()
             return(x)
           })
+
 #' @exportMethod initialize_mcnebula
 #'
 #' @aliases initialize_mcnebula
-#'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x [melody-class] object.
-#'
-#' @return [melody-class] object.
 #'
 #' @seealso [ggsci::pal_simpsons()], [ggsci::pal_igv()], [ggsci::pal_ucscgb()],
 #' [ggsci::pal_d3()]...
@@ -112,6 +97,9 @@ setMethod("initialize_mcnebula",
             palette_label(x) <- .get_label_color()
             return(x)
           })
+
+#' @exportMethod initialize_mcnebula
+#' @rdname initialize_mcnebula-methods
 setMethod("initialize_mcnebula", 
           signature = c(x = "project_conformation",
                         sirius_version = "character"),
@@ -125,6 +113,9 @@ setMethod("initialize_mcnebula",
             }
             return(x)
           })
+
+#' @exportMethod initialize_mcnebula
+#' @rdname initialize_mcnebula-methods
 setMethod("initialize_mcnebula", 
           signature = c(x = "project_api",
                         sirius_version = "character"),

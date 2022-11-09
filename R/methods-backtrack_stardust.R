@@ -3,11 +3,22 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #' @aliases backtrack_stardust
 #'
-#' @title ...
+#' @title Recover filtered chemical classses for 'stardust_classes'
 #'
-#' @description ...
+#' @description
+#' These methods used for custom modify chemical classes in 'stardust_classes'
+#' data. Users can use the method to recover classes which filtered out by
+#' [cross_filter_stardust()] into 'stardust_classes' data.
+#' In addition, users can use the method to delete chemical classes in
+#' 'stardust_classes' data.
+#' 
+#' @description
+#' \code{backtrack_stardust(object)}: get the filtered chemical classes after
+#' using [cross_filter_stardust()].
 #'
-#' @details ...
+#' Run after [cross_filter_stardust()].
+#'
+#' @seealso [cross_filter_stardust()]
 #'
 #' @name backtrack_stardust-methods
 #'
@@ -19,22 +30,15 @@ NULL
 #'
 #' @aliases backtrack_stardust
 #'
-#' @title ...
-#'
-#' @description ...
-#'
-#' @details ...
-#'
-#' @param x ...
-#' @param class.name ...
-#' @param rel.index ...
-#' @param remove ...
-#'
-# @inheritParams rdname
-#'
-#' @return ...
-#'
-#' @seealso \code{\link{cross_filter_stardust}}
+#' @param x [mcnebula-class] object.
+#' @param class.name character. The chemical classes name.
+#' @param rel.index numeric. The index number of chemical classes.
+#' See columns of 'rel.index' in 'nebula_index' or 'stardust_classes'.
+#' 
+#' @param remove logical. If \code{TRUE}, remove the specified chemical
+#' classes in 'stardust_classes' data. If \code{FALSE}, recover the
+#' data of specified chemical classes into 'stardust_classes'; the classes
+#' must in slot \code{backtrack(mcn_dataset(object))}.
 #'
 #' @rdname backtrack_stardust-methods
 #'
@@ -58,9 +62,8 @@ setMethod("backtrack_stardust",
                         by = "rel.index", all.x = T)
             tibble::as_tibble(df)
           })
+
 #' @exportMethod backtrack_stardust
-#'
-#' @description ...
 #'
 #' @rdname backtrack_stardust-methods
 #'
@@ -81,9 +84,8 @@ setMethod("backtrack_stardust",
                             class.name %in% !!class.name)[[ "rel.index" ]]
             backtrack_stardust(x, rel.index = rel.index, remove = remove)
           })
+
 #' @exportMethod backtrack_stardust
-#'
-#' @description ...
 #'
 #' @rdname backtrack_stardust-methods
 #'
