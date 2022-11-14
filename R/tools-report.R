@@ -81,6 +81,7 @@ textSh <-
       cat(ending)
   }
 
+#' @export get_ref
 get_ref <- 
   function(object, type = c("fig", "tab")){
     type <- match.arg(type)

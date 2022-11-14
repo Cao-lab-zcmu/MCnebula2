@@ -36,7 +36,64 @@ while performing the method \code{set_ration_data}.
 }
 \examples{
 \dontrun{
-set_ration_data(...)
+  test <- mcn_5features
+  
+  ## the previous steps
+  test1 <- filter_structure(test)
+  test1 <- create_reference(test1)
+  test1 <- filter_formula(test1, by_reference = T)
+  test1 <- create_stardust_classes(test1)
+  test1 <- create_features_annotation(test1)
+  test1 <- cross_filter_stardust(test1, 2, 1)
+  test1 <- create_nebula_index(test1)
+  test1 <- compute_spectral_similarity(test1)
+  test1 <- create_child_nebulae(test1, 0.01, 5)
+  test1 <- create_child_layouts(test1)
+  test1 <- activate_nebulae(test1)
+  
+  ## set features quantification data
+  ids <- features_annotation(test1)$.features_id
+  quant. <- data.frame(
+    .features_id = ids,
+    sample_1 = rnorm(length(ids), 1000, 200),
+    sample_2 = rnorm(length(ids), 2000, 500)
+  )
+  quant. <- dplyr::mutate(quant.,
+    sample_3 = sample_1 * 1.5,
+    sample_4 = sample_2 * 5
+  )
+  metadata <- data.frame(
+    sample = paste0("sample_", 1:4),
+    group = rep(c("control", "model"), c(2, 2))
+  )
+  features_quantification(test1) <- quant.
+  sample_metadata(test1) <- metadata
+  
+  ## a more convenient way to obtain simulation data
+  # test1 <- MCnebula2:::.simulate_quant_set(test1)
+  
+  ## optional 'nebula_name'
+  visualize(test1)
+  ## a class for example
+  class <- visualize(test1)$class.name[1]
+  tmp <- export_path(test1)
+  
+  test1 <- set_ration_data(test1, mean = F)
+  test1 <- draw_nodes(test1, class,
+    add_structure = F,
+    add_ppcp = F
+  )
+  
+  ## visualize with ID of 'feature' (.features_id)
+  ## with legend
+  ids <- names(nodes_grob(child_nebulae(test1)))
+  x11(width = 15, height = 5)
+  show_node(test1, ids[1])
+  
+  ## the default parameters
+  set_ration_data()
+  
+  unlink(tmp, T, T)
 }
 }
 \seealso{

@@ -17,10 +17,6 @@
 #'
 #' @rdname msframe-class
 #'
-#' @examples
-#' \dontrun{
-#' new('msframe', ...)
-#' }
 .msframe <- 
   setClass("msframe", 
            contains = "subscript",
@@ -69,10 +65,6 @@ setReplaceMethod("msframe",
 #' @family latests
 #' @seealso [tibble::as_tibble()]
 #' @rdname msframe-class
-#' @examples
-#' \dontrun{
-#' latest(...)
-#' }
 setMethod("latest", 
           signature = c(x = "msframe"),
           function(x){
@@ -177,10 +169,6 @@ setMethod("format_msframe",
 #'
 #' @rdname msframe-class
 #'
-#' @examples
-#' \dontrun{
-#' format_msframe(...)
-#' }
 setMethod("format_msframe", 
           signature = setMissing("format_msframe",
                                  x = "msframe",
@@ -262,10 +250,6 @@ setMethod("filter_msframe",
 #'
 #' @rdname msframe-class
 #'
-#' @examples
-#' \dontrun{
-#' filter_msframe(...)
-#' }
 setMethod("filter_msframe", 
           signature = setMissing("filter_msframe",
                                  x = "msframe", fun_filter = "function",

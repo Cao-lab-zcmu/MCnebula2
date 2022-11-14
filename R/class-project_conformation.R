@@ -30,10 +30,6 @@
 #'
 #' @rdname project_conformation-class
 #'
-#' @examples
-#' \dontrun{
-#' new('project_conformation', ...)
-#' }
 .project_conformation <- 
   setClass("project_conformation", 
            contains = character(),

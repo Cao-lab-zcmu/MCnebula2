@@ -22,10 +22,6 @@
 #'
 #' @rdname project_api-class
 #'
-#' @examples
-#' \dontrun{
-#' new('project_api', ...)
-#' }
 .project_api <- 
   setClass("project_api", 
            contains = character(),

@@ -55,17 +55,6 @@ reference for further analysis or visualization.}
 \item{\code{backtrack}}{list with names. Recovery stations halfway through data processing.}
 }}
 
-\examples{
-\dontrun{
-new('mcn_dataset', ...)
-}
-\dontrun{
-latest(...)
-}
-\dontrun{
-extract_mcnset(...)
-}
-}
 \seealso{
 \linkS4class{dataset}
 

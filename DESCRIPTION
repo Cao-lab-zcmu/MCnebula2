@@ -1,10 +1,10 @@
 Package: MCnebula2
-Title: What the Package Does (One Line, Title Case)
+Title: MCnebula algorithm integrated in S4 system of R.
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+    person("LiChuang", "Huang", , "shaman.yellow@foxmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: MCnebula2 was used for metabonomics data analysis. It is written in the S4 system of object-oriented programming. Its workflow, i.e., MCnebula workflow, is a complete metabolomics data analysis process, including initial data preprocessing (data format conversion, feature detection), compound identification based on MS/MS, statistical analysis, compound structure and chemical class focusing, multi-level data visualization, output report, etc.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -33,7 +33,7 @@ Collate:
     methods-activate_nebulae.R methods-visualize.R
     extraMethods-draw_structures.R extraMethods-draw_nodes.R
     methods-annotate_nebula.R extraMethods-binary_comparison.R
-    extraMethods-report.R
+    extraMethods-report.R data.R
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -60,4 +60,6 @@ Imports:
     svglite,
     tidyr
 Depends: 
-    ggplot2
+    ggplot2,
+    R (>= 2.10)
+LazyData: true

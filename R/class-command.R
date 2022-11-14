@@ -18,10 +18,6 @@
 #'
 #' @rdname command-class
 #'
-#' @examples
-#' \dontrun{
-#' new('command', ...)
-#' }
 .command <- 
   setClass("command", 
            contains = character(),
@@ -66,6 +62,29 @@ setMethod("command_name",
 #' @aliases command_name<-
 #' @param value The value for the slot.
 #' @rdname command-class
+#'
+#' @examples
+#' \dontrun{
+#'   ## example 1
+#'   com <- new_command(plot, x = 1:10)
+#'   com
+#'   call_command(com)
+#'   
+#'   ## example 2
+#'   com <- new_command(data.frame, x = 1:10, y = 1:10, z = 1:10)
+#'   call_command(com)
+#'   
+#'   ## example 3
+#'   data <- data.frame(x = 1:10, y = 1:10)
+#'   com1 <- new_command(ggplot, data)
+#'   com2 <- new_command(geom_point, aes(x = x, y = y))
+#'   call_command(com1) + call_command(com2)
+#'   
+#'   ## slots
+#'   command_name(com)
+#'   command_args(com)
+#'   command_function(com)
+#' }
 setReplaceMethod("command_name", 
                  signature = c(x = "command"),
                  function(x, value){
@@ -118,10 +137,6 @@ setReplaceMethod("command_args",
 #' @param ... parameters (with names or without names) passed to the function.
 #' @param name character(1). Name to slot \code{command_name}.
 #' @rdname command-class
-#' @examples
-#' \dontrun{
-#' new_command(...)
-#' }
 setMethod("new_command", 
           signature = c(fun = "function",
                         name = "character"),
@@ -162,10 +177,6 @@ setMethod("new_command",
 #' with the parameters (slot \code{command_args}).
 #' @family call_commands
 #' @rdname command-class
-#' @examples
-#' \dontrun{
-#' call_command(...)
-#' }
 setMethod("call_command", 
           signature = c(x = "command"),
           function(x){

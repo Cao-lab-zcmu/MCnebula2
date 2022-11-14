@@ -48,10 +48,6 @@ setMethod("create_hierarchy",
 #'
 #' @rdname create_hierarchy-methods
 #'
-#' @examples
-#' \dontrun{
-#' create_hierarchy(...)
-#' }
 setMethod("create_hierarchy", 
           signature = c(x = "mcnebula", fun_organize = "function"),
           function(x, fun_organize){

@@ -53,10 +53,6 @@ setMethod("filter_ppcp",
 #'
 #' @rdname filter_ppcp-methods
 #'
-#' @examples
-#' \dontrun{
-#' filter_ppcp(...)
-#' }
 setMethod("filter_ppcp", 
           signature = setMissing("filter_ppcp",
                                  x = "mcnebula", fun_filter = "function",
@@ -111,6 +107,9 @@ validate_ppcp_annotation <-
 merge_ppcp_annotation <- 
   function(annotation, msframe.lst){
     annotation <- dplyr::select(annotation, -.features_id, -.candidates_id)
+    col <- colnames(annotation)
+    col <- col[!col %in% colnames(entity(msframe.lst[[1]]))]
+    annotation <- dplyr::select(annotation, rel.index, dplyr::all_of(col))
     entity(msframe.lst[[1]]) <- 
       merge(entity(msframe.lst[[1]]), annotation,
             by = "rel.index", all.x = T, sort = F)

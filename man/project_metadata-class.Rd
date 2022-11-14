@@ -95,23 +95,6 @@ Each element of the list is a data.frame.}
 \note{
 The class is not for normal use of the package.
 }
-\examples{
-\dontrun{
-new('project_metadata', ...)
-}
-\dontrun{
-latest(...)
-}
-\dontrun{
-add_dataset(...)
-}
-\dontrun{
-extract_metadata(...)
-}
-\dontrun{
-get_metadata(...)
-}
-}
 \seealso{
 Other projects: 
 \code{\link{project-class}},

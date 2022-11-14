@@ -22,6 +22,11 @@ Creates a pre-defined \linkS4class{code_block_table} object containing the codes
 }
 \examples{
 \dontrun{
-include_table(...)
+  data <- data.frame(x = 1:10, y = 1:10)
+  tab_block <- include_table(
+    data, "table1",
+    "This is caption"
+  )
+  tab_block
 }
 }

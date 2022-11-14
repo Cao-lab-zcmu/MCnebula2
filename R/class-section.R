@@ -25,10 +25,6 @@
 #' @rdname code_block-class
 #' @order 1
 #'
-#' @examples
-#' \dontrun{
-#' new('code_block', ...)
-#' }
 .code_block <- 
   setClass("code_block", 
            contains = c("command"),
@@ -51,10 +47,6 @@
 #'
 #' @rdname code_block-class
 #'
-#' @examples
-#' \dontrun{
-#' new('code_block_table', ...)
-#' }
 .code_block_table <- 
   setClass("code_block_table", 
            contains = c("code_block"),
@@ -72,10 +64,6 @@
 #'
 #' @rdname code_block-class
 #'
-#' @examples
-#' \dontrun{
-#' new('code_block_figure', ...)
-#' }
 .code_block_figure <- 
   setClass("code_block_figure", 
            contains = c("code_block"),
@@ -95,10 +83,6 @@
 #'
 #' @rdname section-class
 #'
-#' @examples
-#' \dontrun{
-#' new('heading', ...)
-#' }
 .heading <- 
   setClass("heading", 
            contains = "character",
@@ -123,10 +107,6 @@
 #' @rdname section-class
 #' @order 1
 #'
-#' @examples
-#' \dontrun{
-#' new('section', ...)
-#' }
 .section <- 
   setClass("section", 
            contains = character(),
@@ -231,6 +211,47 @@ setMethod("code_block",
 #' @aliases code_block<-
 #' @param value The value for the slot.
 #' @rdname code_block-class
+#'
+#' @examples
+#' \dontrun{
+#'   ## general
+#'   codes <- "df <- data.frame(x = 1:10)
+#'     df<-dplyr::mutate(df,y=x*1.5)%>%
+#'     dplyr::filter(x >= 5)
+#'     p <- ggplot(df)+
+#'     geom_point(aes(x=x,y=y))
+#'     p"
+#'   block <- new_code_block("r", codes, list(eval = T, echo = T, message = T))
+#'   ## see results
+#'   block
+#'   call_command(block)
+#'   writeLines(call_command(block))
+#'   
+#'   ## figure
+#'   fig_block <- new_code_block_figure(
+#'     "plot1",
+#'     "this is a caption",
+#'     codes = codes
+#'   )
+#'   ## see results
+#'   fig_block
+#'   writeLines(call_command(fig_block))
+#'   command_args(fig_block)
+#'   cat(get_ref(fig_block), "\n")
+#'   
+#'   ## table
+#'   codes <- "df <- data.frame(x = 1:10) %>% 
+#'     dplyr::mutate(y = x, z = x * y)
+#'     knitr::kable(df, format = 'markdown', caption = 'this is a caption') "
+#'   tab_block <- new_code_block_table("table1", codes = codes)
+#'   ## see results
+#'   tab_block
+#'   cat(get_ref(tab_block), "\n")
+#'   
+#'   ## default parameters
+#'   new_code_block()
+#'   
+#' }
 setReplaceMethod("code_block", 
                  signature = c(x = "ANY"),
                  function(x, value){
@@ -267,10 +288,6 @@ setReplaceMethod("codes",
 #' @param prettey logical. If ture, use [styler::style_text()] to pretty the codes.
 #' @param fun_prettey function. Default is \code{styler::style_text}.
 #' @rdname code_block-class
-#' @examples
-#' \dontrun{
-#' new_code_block(...)
-#' }
 setMethod("new_code_block", 
           signature = c(language = "character", codes = "character",
                         args = "list", prettey = "logical",
@@ -324,10 +341,6 @@ setMethod("new_code_block",
 #' @param ... Other parameters passed to [new_code_block()].
 #'
 #' @rdname code_block-class
-#' @examples
-#' \dontrun{
-#' new_code_block_figure(...)
-#' }
 setMethod("new_code_block_figure", 
           signature = c(name = "character"),
           function(name, caption, ...){
@@ -342,10 +355,6 @@ setMethod("new_code_block_figure",
 #' @description \code{new_code_block_table}: create [code_block_table-class] object.
 #' This methods simplified parameter settings for displaying table in documents.
 #' @rdname code_block-class
-#' @examples
-#' \dontrun{
-#' new_code_block_table(...)
-#' }
 setMethod("new_code_block_table", 
           signature = c(name = "character"),
           function(name, ...){
@@ -360,10 +369,6 @@ setMethod("new_code_block_table",
 #' @description \code{call_command}: Format 'code_block' object as character.
 #' @family call_commands
 #' @rdname code_block-class
-#' @examples
-#' \dontrun{
-#' call_command(...)
-#' }
 setMethod("call_command", 
           signature = c(x = "code_block"),
           function(x){
@@ -387,6 +392,54 @@ setMethod("heading",
 #' @aliases heading<-
 #' @param value The value for the slot.
 #' @rdname section-class
+#'
+#' @examples
+#' \dontrun{
+#'   ## ------------------------------------- 
+#'   ## heading
+#'   new_heading("this is a heading", 2)
+#'   
+#'   ## ------------------------------------- 
+#'   ## section
+#'   ## example 1
+#'   para <- "This is a paragraph stating"
+#'   section <- new_section("this is a heading", 2, para)
+#'   ## see results
+#'   section
+#'   call_command(section)
+#'   writeLines(call_command(section))
+#'   
+#'   ## example 2
+#'   para <- "This is a paragraph stating"
+#'   section <- new_section(NULL, , para, NULL)
+#'   
+#'   ## example 3
+#'   para <- "This is a paragraph stating"
+#'   block <- new_code_block(codes = "df <- data.frame(x = 1:10)")
+#'   section <- new_section("heading", 2, para, block)
+#'   section
+#'   
+#'   ## example 4
+#'   codes <- "df <- data.frame(x = 1:10, y = 1:10)
+#'     p <- ggplot(df) +
+#'       geom_point(aes(x = x, y = y))
+#'     p"
+#'   fig_block <- new_code_block_figure("plot", "this is caption", codes = codes)
+#'   para <- paste0("This is a paragraph describing the picture. ",
+#'                  "See Figure ", get_ref(fig_block), ".")
+#'   section <- new_section("heading", 2, para, fig_block)
+#'   section
+#'   ## output
+#'   tmp <- paste0(tempdir(), "/tmp_output.Rmd")
+#'   writeLines(call_command(section), tmp)
+#'   rmarkdown::render(tmp, output_format = "bookdown::pdf_document2")
+#'   file.exists(sub("Rmd$", "pdf", tmp))
+#'   ## see [report-class] object: 
+#'   ## A complete output report, including multiple 'section'.
+#'   
+#'   ## defalt parameters
+#'   new_section()
+#' }
 setReplaceMethod("heading", 
                  signature = c(x = "ANY"),
                  function(x, value){
@@ -418,10 +471,6 @@ setReplaceMethod("level",
 #' @param heading character(1). For slot \code{.Data}.
 #' @param level numeric(1). For slot \code{level}.
 #' @rdname section-class
-#' @examples
-#' \dontrun{
-#' new_heading(...)
-#' }
 setMethod("new_heading", 
           signature = c(heading = "character",
                         level = "numeric"),
@@ -434,10 +483,6 @@ setMethod("new_heading",
 #' @description \code{call_command}: Format 'heading' object as character.
 #' @family call_commands
 #' @rdname section-class
-#' @examples
-#' \dontrun{
-#' call_command(...)
-#' }
 setMethod("call_command", 
           signature = c(x = "heading"),
           function(x){
@@ -498,10 +543,6 @@ setMethod("new_section",
 #' @param paragraph character. Text for description.
 #' @param code_block [code_block-class] object.
 #' @rdname section-class
-#' @examples
-#' \dontrun{
-#' new_section(...)
-#' }
 setMethod("new_section", 
           signature = c(heading = "character", level = "numeric",
                         paragraph = "character", code_block = "maybe_code_block"),
@@ -524,10 +565,6 @@ setMethod("new_section",
 #' @aliases call_command
 #' @description \code{call_command}: Format 'section' object as character.
 #' @rdname section-class
-#' @examples
-#' \dontrun{
-#' call_command(...)
-#' }
 setMethod("call_command", 
           signature = c(x = "section"),
           function(x){

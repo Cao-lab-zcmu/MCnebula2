@@ -49,10 +49,6 @@ setMethod("filter_structure",
 #'
 #' @rdname filter_structure-methods
 #'
-#' @examples
-#' \dontrun{
-#' filter_structure(...)
-#' }
 setMethod("filter_structure", 
           signature = setMissing("filter_structure",
                                  x = "mcnebula",

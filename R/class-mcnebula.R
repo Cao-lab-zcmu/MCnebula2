@@ -198,11 +198,6 @@ NULL
 #'
 #' @rdname mcnebula-class
 #'
-#' @examples
-#' \dontrun{
-#' new('mcnebula', ...)
-#' mcnebula()
-#' }
 mcnebula <- 
   setClass("mcnebula", 
            contains = c("project", "nebula", "export"),
@@ -245,11 +240,25 @@ setMethod("show",
 #' @family subscripts
 #' @seealso [tibble::as_tibble()]
 #' @rdname mcnebula-class
+#'
 #' @examples
 #' \dontrun{
-#' latest(x)
-#' latest(x, "project_dataset")
-#' latest(x, "mcn_dataset")
+#'   test <- mcnebula()
+#'   class(test)
+#'   
+#'   test <- mcn_5features
+#'   ## slots
+#'   ion_mode(test)
+#'   project_version(test)
+#'   melody(test)
+#'   export_name(test)
+#'   ## ...
+#'   
+#'   ## 'fast channel'
+#'   palette_label(test)
+#'   palette_stat(test)
+#'   sample_metadata(test)
+#'   ## ...
 #' }
 setMethod("latest", 
           signature = c(x = "mcnebula", slot = "character",

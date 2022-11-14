@@ -49,8 +49,3 @@ See details about classification prediction for compounds:
 \url{http://www.nature.com/articles/s41587-020-0740-8}.
 See other details in \code{\link[=filter_formula]{filter_formula()}}.
 }
-\examples{
-\dontrun{
-filter_ppcp(...)
-}
-}

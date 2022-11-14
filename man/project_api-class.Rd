@@ -76,11 +76,6 @@ The list with the names: "read" + "subscript". e.g., "read.f3_fingerid".}
 \note{
 The class is not for normal use of the package.
 }
-\examples{
-\dontrun{
-new('project_api', ...)
-}
-}
 \seealso{
 Other projects: 
 \code{\link{project-class}},

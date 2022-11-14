@@ -56,10 +56,6 @@
 #'
 #' @rdname project-class
 #'
-#' @examples
-#' \dontrun{
-#' new('project', ...)
-#' }
 .project <- 
   setClass("project", 
            contains = character(),
@@ -235,11 +231,6 @@ setMethod("match.features_id",
 #' @param x Maybe object of class inherit [project-class].
 #' @param subscript the "subscript" name of file. See [subscript-class].
 #' @rdname project-class
-#' @examples
-#' \dontrun{
-#' object <- initialize_mcnebula(mcnebula())
-#' get_upper_dir_subscript(object, ".f3_fingerid")
-#' }
 setMethod("get_upper_dir_subscript", 
           signature = setMissing("get_upper_dir_subscript",
                                  x = "ANY",

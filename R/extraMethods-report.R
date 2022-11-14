@@ -32,7 +32,15 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' include_figure(...)
+#'   tmp <- paste0(tempdir(), "/test.pdf")
+#'   pdf(tmp)
+#'   plot(1:10)
+#'   dev.off()
+#'   
+#'   fig_block <- include_figure(
+#'     tmp, "plot", "This is caption"
+#'   )
+#'   fig_block
 #' }
 setMethod("include_figure", 
           signature = c(file = "character",
@@ -76,7 +84,12 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' include_table(...)
+#'   data <- data.frame(x = 1:10, y = 1:10)
+#'   tab_block <- include_table(
+#'     data, "table1",
+#'     "This is caption"
+#'   )
+#'   tab_block
 #' }
 setMethod("include_table", 
           signature = c(data = "data.frame",
@@ -147,7 +160,12 @@ setMethod("history_rblock",
 #'
 #' @examples
 #' \dontrun{
-#' history_rblock(...)
+#'   test1 <- 1
+#'   test2 <- 2
+#'   test3 <- 3
+#'   
+#'   block <- history_rblock(, "^test1", "^test3")
+#'   block
 #' }
 setMethod("history_rblock", 
           signature = setMissing("history_rblock",

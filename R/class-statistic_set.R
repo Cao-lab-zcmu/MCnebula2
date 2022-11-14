@@ -18,10 +18,6 @@
 #'
 #' @rdname statistic_set-class
 #'
-#' @examples
-#' \dontrun{
-#' new('statistic_set', ...)
-#' }
 .statistic_set <- 
   setClass("statistic_set", 
            contains = character(),

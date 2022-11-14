@@ -25,10 +25,6 @@
 #'
 #' @rdname melody-class
 #'
-#' @examples
-#' \dontrun{
-#' new('melody', ...)
-#' }
 .melody <- 
   setClass("melody", 
            contains = character(),

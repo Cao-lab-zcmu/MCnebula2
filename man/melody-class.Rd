@@ -100,11 +100,6 @@ for the \code{palette_label} slot of the object.
 \item{\code{palette_label}}{character with names or not. Hex color.}
 }}
 
-\examples{
-\dontrun{
-new('melody', ...)
-}
-}
 \seealso{
 \code{\link[ggsci:pal_simpsons]{ggsci::pal_simpsons()}}, \code{\link[ggsci:pal_igv]{ggsci::pal_igv()}}, \code{\link[ggsci:pal_ucscgb]{ggsci::pal_ucscgb()}},
 \code{\link[ggsci:pal_d3]{ggsci::pal_d3()}}...

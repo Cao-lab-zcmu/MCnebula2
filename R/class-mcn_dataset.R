@@ -21,10 +21,6 @@
 #'
 #' @rdname mcn_dataset-class
 #'
-#' @examples
-#' \dontrun{
-#' new('mcn_dataset', ...)
-#' }
 .mcn_dataset <- 
   setClass("mcn_dataset", 
            contains = c("dataset", "reference", "backtrack"),
@@ -63,10 +59,6 @@ setReplaceMethod("mcn_dataset",
 #' @family datasets
 #' @family latests
 #' @rdname mcn_dataset-class
-#' @examples
-#' \dontrun{
-#' latest(...)
-#' }
 setMethod("latest", 
           signature = c(x = "mcn_dataset"),
           function(x){
@@ -80,10 +72,6 @@ setMethod("latest",
 #' \code{mcn_dataset} slot. Normally not used.
 #' @param subscript See [subscript-class]
 #' @rdname mcn_dataset-class
-#' @examples
-#' \dontrun{
-#' extract_mcnset(...)
-#' }
 setMethod("extract_mcnset", 
           signature = c(x = "ANY", subscript = "character"),
           function(x, subscript){

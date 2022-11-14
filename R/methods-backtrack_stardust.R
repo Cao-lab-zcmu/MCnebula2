@@ -42,10 +42,6 @@ NULL
 #'
 #' @rdname backtrack_stardust-methods
 #'
-#' @examples
-#' \dontrun{
-#' backtrack_stardust(...)
-#' }
 setMethod("backtrack_stardust", 
           signature = setMissing("backtrack_stardust",
                                  x = "mcnebula"),
@@ -67,10 +63,6 @@ setMethod("backtrack_stardust",
 #'
 #' @rdname backtrack_stardust-methods
 #'
-#' @examples
-#' \dontrun{
-#' backtrack_stardust(...)
-#' }
 setMethod("backtrack_stardust", 
           signature = setMissing("backtrack_stardust",
                                  x = "mcnebula",
@@ -89,10 +81,6 @@ setMethod("backtrack_stardust",
 #'
 #' @rdname backtrack_stardust-methods
 #'
-#' @examples
-#' \dontrun{
-#' backtrack_stardust(...)
-#' }
 setMethod("backtrack_stardust", 
           signature = setMissing("backtrack_stardust",
                                  x = "mcnebula",

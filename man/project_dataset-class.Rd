@@ -62,17 +62,6 @@ format as 'tbl'. Equals:
 \item{\code{dataset}}{list. See \linkS4class{dataset}.}
 }}
 
-\examples{
-\dontrun{
-new('project_dataset', ...)
-}
-\dontrun{
-latest(object)
-}
-\dontrun{
-extract_rawset(object, ".f3_fingerid")
-}
-}
 \seealso{
 \code{\link[tibble:as_tibble]{tibble::as_tibble()}}
 

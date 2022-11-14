@@ -107,20 +107,6 @@ for the \code{entity} slot of the object.
 \note{
 The class is not for normal use of the package.
 }
-\examples{
-\dontrun{
-new('msframe', ...)
-}
-\dontrun{
-latest(...)
-}
-\dontrun{
-format_msframe(...)
-}
-\dontrun{
-filter_msframe(...)
-}
-}
 \seealso{
 \code{\link[tibble:as_tibble]{tibble::as_tibble()}}
 

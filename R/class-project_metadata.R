@@ -20,10 +20,6 @@
 #'
 #' @rdname project_metadata-class
 #'
-#' @examples
-#' \dontrun{
-#' new('project_metadata', ...)
-#' }
 .project_metadata <- 
   setClass("project_metadata", 
            contains = character(),
@@ -83,10 +79,6 @@ setReplaceMethod("project_metadata",
 #' format as "tbl".
 #' @family latests
 #' @rdname project_metadata-class
-#' @examples
-#' \dontrun{
-#' latest(...)
-#' }
 setMethod("latest", 
           signature = c(x = "project_metadata"),
           function(x){
@@ -119,10 +111,6 @@ setReplaceMethod("metadata",
 #' @description \code{add_dataset}: add the list into slot \code{metadata}.
 #' @param list a list (with names) of metadata (data.frame) with names.
 #' @rdname project_metadata-class
-#' @examples
-#' \dontrun{
-#' add_dataset(...)
-#' }
 setMethod("add_dataset", 
           signature = c(x = "project_metadata",
                         list = "list"),
@@ -139,10 +127,6 @@ setMethod("add_dataset",
 #' and then return it as a new \code{project_metadata}.
 #' @param subscript see [subscript-class].
 #' @rdname project_metadata-class
-#' @examples
-#' \dontrun{
-#' extract_metadata(...)
-#' }
 setMethod("extract_metadata", 
           signature = c(x = "ANY", subscript = "character"),
           function(x, subscript){
@@ -167,10 +151,6 @@ setMethod("extract_metadata",
 #' @param path character. The path of the project directory (generally, SIRIUS project).
 #' If 'missing', the slot \code{project_path} inside the object will be used.
 #' @rdname project_metadata-class
-#' @examples
-#' \dontrun{
-#' get_metadata(...)
-#' }
 setMethod("get_metadata", 
           signature = c(x = "ANY", subscript = "character"),
           function(x, subscript){

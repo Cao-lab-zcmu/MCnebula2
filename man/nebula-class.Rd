@@ -264,17 +264,6 @@ Use \code{\link[=call_command]{call_command()}} to visualize the \linkS4class{gg
 sometimes is too large that need lot of time to loading for visualization.}
 }}
 
-\examples{
-\dontrun{
-new('nebula', ...)
-}
-\dontrun{
-new('parent_nebula', ...)
-}
-\dontrun{
-new('child_nebulae', ...)
-}
-}
 \seealso{
 Other nebulae: 
 \code{\link{mcnebula-class}}

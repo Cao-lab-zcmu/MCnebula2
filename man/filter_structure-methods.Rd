@@ -46,8 +46,3 @@ while performing the method \code{filter_structure}.
 \details{
 See details in \code{\link[=filter_formula]{filter_formula()}}.
 }
-\examples{
-\dontrun{
-filter_structure(...)
-}
-}

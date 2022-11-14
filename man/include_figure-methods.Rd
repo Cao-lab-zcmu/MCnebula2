@@ -23,7 +23,15 @@ Creates a pre-defined \linkS4class{code_block_figure} object containing the code
 }
 \examples{
 \dontrun{
-include_figure(...)
+  tmp <- paste0(tempdir(), "/test.pdf")
+  pdf(tmp)
+  plot(1:10)
+  dev.off()
+  
+  fig_block <- include_figure(
+    tmp, "plot", "This is caption"
+  )
+  fig_block
 }
 }
 \seealso{

@@ -175,7 +175,7 @@ modify_set_labs <-
 .get_mapping2 <-
   function(ggset, only_legend = T){
     args <- .get_mapping(ggset)
-    pattern <- "[a-z|A-Z|.|_]{1,}"
+    pattern <- "[a-z|A-Z|.|_|0-9]{1,}"
     args[] <-
       stringr::str_extract(args,
                            paste0("(?<=\\()", pattern, "(?=\\),)",

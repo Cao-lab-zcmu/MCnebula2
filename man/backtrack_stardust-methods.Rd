@@ -39,17 +39,6 @@ using \code{\link[=cross_filter_stardust]{cross_filter_stardust()}}.
 
 Run after \code{\link[=cross_filter_stardust]{cross_filter_stardust()}}.
 }
-\examples{
-\dontrun{
-backtrack_stardust(...)
-}
-\dontrun{
-backtrack_stardust(...)
-}
-\dontrun{
-backtrack_stardust(...)
-}
-}
 \seealso{
 \code{\link[=cross_filter_stardust]{cross_filter_stardust()}}
 }

@@ -10,10 +10,6 @@
 #'
 #' @rdname nebula-class
 #'
-#' @examples
-#' \dontrun{
-#' new('parent_nebula', ...)
-#' }
 .parent_nebula <- 
   setClass("parent_nebula", 
            contains = character(),
@@ -86,10 +82,6 @@
 #'
 #' @rdname nebula-class
 #'
-#' @examples
-#' \dontrun{
-#' new('child_nebulae', ...)
-#' }
 .child_nebulae <- 
   setClass("child_nebulae", 
            contains = character(),
@@ -128,10 +120,6 @@
 #' @rdname nebula-class
 #' @order 1
 #'
-#' @examples
-#' \dontrun{
-#' new('nebula', ...)
-#' }
 .nebula <- 
   setClass("nebula", 
            contains = character(),

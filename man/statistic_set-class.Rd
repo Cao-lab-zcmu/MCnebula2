@@ -70,8 +70,3 @@ and other functions.}
 \item{\code{top_table}}{list with names. Each element of list should be "data.frame" or "tbl".}
 }}
 
-\examples{
-\dontrun{
-new('statistic_set', ...)
-}
-}

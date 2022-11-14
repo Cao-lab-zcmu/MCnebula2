@@ -63,17 +63,6 @@ for the \code{layers} slot of the object.
 \item{\code{layers}}{list with names.}
 }}
 
-\examples{
-\dontrun{
-add_layers(...)
-}
-\dontrun{
-delete_layers(...)
-}
-\dontrun{
-move_layers(...)
-}
-}
 \seealso{
 Other layerSets: 
 \code{\link{ggset-class}},

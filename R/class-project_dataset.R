@@ -18,10 +18,6 @@
 #'
 #' @rdname project_dataset-class
 #'
-#' @examples
-#' \dontrun{
-#' new('project_dataset', ...)
-#' }
 .project_dataset <- 
   setClass("project_dataset", 
            contains = "dataset",
@@ -60,10 +56,6 @@ setReplaceMethod("project_dataset",
 #' @family latests
 #' @seealso [tibble::as_tibble()]
 #' @rdname project_dataset-class
-#' @examples
-#' \dontrun{
-#' latest(object)
-#' }
 setMethod("latest", 
           signature = c(x = "project_dataset"),
           function(x){
@@ -95,10 +87,6 @@ setMethod("extract_rawset",
 #' it will be used to collate data. This parameter is not for normal use.
 #' @param ... parameters passed to 'fun_collate'.
 #' @rdname project_dataset-class
-#' @examples
-#' \dontrun{
-#' extract_rawset(object, ".f3_fingerid")
-#' }
 setMethod("extract_rawset", 
           signature = c(x = "ANY",
                         subscript = "character",

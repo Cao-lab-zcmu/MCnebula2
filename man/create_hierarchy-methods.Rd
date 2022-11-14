@@ -32,8 +32,3 @@ get the default parameters for the method
 use the default parameters whatever 'missing'
 while performing the method \code{create_hierarchy}.
 }
-\examples{
-\dontrun{
-create_hierarchy(...)
-}
-}

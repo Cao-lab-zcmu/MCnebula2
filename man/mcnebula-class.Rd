@@ -207,13 +207,22 @@ of \code{project_dataset} slot of the object. Equals:
 
 \examples{
 \dontrun{
-new('mcnebula', ...)
-mcnebula()
-}
-\dontrun{
-latest(x)
-latest(x, "project_dataset")
-latest(x, "mcn_dataset")
+  test <- mcnebula()
+  class(test)
+  
+  test <- mcn_5features
+  ## slots
+  ion_mode(test)
+  project_version(test)
+  melody(test)
+  export_name(test)
+  ## ...
+  
+  ## 'fast channel'
+  palette_label(test)
+  palette_stat(test)
+  sample_metadata(test)
+  ## ...
 }
 }
 \seealso{

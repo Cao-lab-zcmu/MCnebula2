@@ -174,15 +174,6 @@ slot of \linkS4class{project_dataset} object stores the extracted data.
 \item{\code{project_dataset}}{\linkS4class{project_dataset} object.}
 }}
 
-\examples{
-\dontrun{
-new('project', ...)
-}
-\dontrun{
-object <- initialize_mcnebula(mcnebula())
-get_upper_dir_subscript(object, ".f3_fingerid")
-}
-}
 \seealso{
 Other projects: 
 \code{\link{project_api-class}},

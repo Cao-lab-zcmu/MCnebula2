@@ -81,11 +81,6 @@ Record the attribute name for each "subscript" (imply column names).}
 \note{
 The class is not for normal use of the package.
 }
-\examples{
-\dontrun{
-new('project_conformation', ...)
-}
-}
 \seealso{
 Other projects: 
 \code{\link{project-class}},

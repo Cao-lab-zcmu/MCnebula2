@@ -269,7 +269,12 @@ setReplaceMethod("export_name",
 #' @rdname VIRTUAL_export-class
 setMethod("export_path", 
           signature = c(x = "ANY"),
-          function(x){ x@export_path })
+          function(x){
+            path <- x@export_path
+            if (!file.exists(path))
+              dir.create(path)
+            path
+          })
 
 #' @exportMethod export_path<-
 #' @aliases export_path<-
@@ -317,10 +322,6 @@ setMethod("show",
 #' @param x object contains slot \code{layers}.
 #' @param ... extra "layer".
 #' @rdname VIRTUAL_layerSet-class
-#' @examples
-#' \dontrun{
-#' add_layers(...)
-#' }
 setMethod("add_layers", 
           signature = c(x = "layerSet"),
           function(x, ...){
@@ -335,10 +336,6 @@ setMethod("add_layers",
 #' @description \code{delete_layers}: delete "layer" in slot \code{layers}.
 #' @param layers numeric. The specified "layer" in slot \code{layers}.
 #' @rdname VIRTUAL_layerSet-class
-#' @examples
-#' \dontrun{
-#' delete_layers(...)
-#' }
 setMethod("delete_layers", 
           signature = c(x = "layerSet", layers = "numeric"),
           function(x, layers){
@@ -352,10 +349,6 @@ setMethod("delete_layers",
 #' @param from sequence (sequence in list) of "layer" move from.
 #' @param to sequence (sequence in list) of "layer" move to.
 #' @rdname VIRTUAL_layerSet-class
-#' @examples
-#' \dontrun{
-#' move_layers(...)
-#' }
 setMethod("move_layers", 
           signature = c(x = "layerSet", from = "numeric", to = "numeric"),
           function(x, from, to){
