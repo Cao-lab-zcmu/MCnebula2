@@ -1,14 +1,14 @@
 ---
-date: "2022-01-18T20:17:32+01:00"
+title: "Consectetur"
 description: ""
+lead: ""
+date: 2022-01-18T20:17:32+01:00
+lastmod: 2022-01-18T20:17:32+01:00
 draft: false
 images: []
-lastmod: "2022-01-18T20:17:32+01:00"
-lead: ""
 menu:
   docs:
-    parent: amet
-title: Consectetur
-toc: true
+    parent: "amet"
 weight: 730
+toc: true
 ---

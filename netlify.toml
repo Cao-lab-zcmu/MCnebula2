@@ -1,17 +1,42 @@
 [build]
-command = 'hugo'
-publish = 'public'
+  publish = "public"
+  functions = "functions"
 
 [build.environment]
-HUGO_VERSION = '0.105.0'
-
-[context]
-[context.branch-deploy]
-command = 'hugo -F -b $DEPLOY_PRIME_URL'
-
-[context.deploy-preview]
-command = 'hugo -F -b $DEPLOY_PRIME_URL'
+  NODE_VERSION = "16.16.0"
+  NPM_VERSION = "8.11.0"
 
 [context.production]
-[context.production.environment]
-HUGO_ENV = 'production'
+  command = "npm run build"
+
+[context.deploy-preview]
+  command = "npm run build -- -b $DEPLOY_PRIME_URL"
+
+[context.branch-deploy]
+  command = "npm run build -- -b $DEPLOY_PRIME_URL"
+
+[context.next]
+  command = "npm run build"
+
+[context.next.environment]
+  HUGO_ENV = "next"
+
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+
+	[plugins.inputs]
+    baseUrl = "https://doks.netlify.app/"
+    sitemapPath = "/sitemap.xml"
+    ignorePeriod = 0
+    providers = [
+      "google",
+      "yandex"
+    ]
+
+[dev]
+  framework = "#custom"
+  command = "npm run start"
+  targetPort = 1313
+  port = 8888
+  publish = "public"
+  autoLaunch = false

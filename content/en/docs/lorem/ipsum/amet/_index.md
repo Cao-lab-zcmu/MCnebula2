@@ -1,15 +1,15 @@
 ---
-date: "2022-01-18T20:07:56+01:00"
+title: "Amet"
 description: ""
+lead: ""
+date: 2022-01-18T20:07:56+01:00
+lastmod: 2022-01-18T20:07:56+01:00
 draft: false
 images: []
-lastmod: "2022-01-18T20:07:56+01:00"
-lead: ""
 menu:
   docs:
-    identifier: amet
-    parent: ipsum
-title: Amet
-toc: true
+    parent: "ipsum"
+    identifier: "amet"
 weight: 999
+toc: true
 ---
