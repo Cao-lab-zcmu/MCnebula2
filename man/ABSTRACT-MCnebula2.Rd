@@ -173,4 +173,14 @@ The core methods for ABC selection algorithm are:
 \item \code{\link[=cross_filter_stardust]{cross_filter_stardust()}}
 \item \code{\link[=create_nebula_index]{create_nebula_index()}}
 }
+
+Whether it is all filtered by the algorithm provided by MCnebula2's function
+or custom filtered for some chemical classes, we now have a data called 'nebula_index'.
+This data records a number of chemical classes and the 'features' attributed to them.
+The subsequent analysis process or visualization will be based on it.
+Each chemical class is considered as a 'nebula' and its classified 'features'
+are the components of these 'nebulae'. In the visualization, these 'nebulae' will
+be visualized as networks. Formally, we call these 'nebulae' formed on the basis
+of 'nebula_index' data as Child-Nebulae. In comparison, when we put all the
+'features' together to form a large network, then this 'nebula' is called Parent-Nebulae.
 }
