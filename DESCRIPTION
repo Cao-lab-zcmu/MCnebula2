@@ -1,14 +1,36 @@
 Package: MCnebula2
 Title: MCnebula algorithm integrated in S4 system of R.
-Version: 0.0.0.9000
-Authors@R: 
-    person("LiChuang", "Huang", , "shaman.yellow@foxmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: MCnebula2 was used for metabonomics data analysis. It is written in the S4 system of object-oriented programming. Its workflow, i.e., MCnebula workflow, is a complete metabolomics data analysis process, including initial data preprocessing (data format conversion, feature detection), compound identification based on MS/MS, statistical analysis, compound structure and chemical class focusing, multi-level data visualization, output report, etc.
+Version: 0.0.9000
+Authors@R: c(
+    person(given = "LiChuang", family = "Huang",
+    email = "shaman.yellow@foxmail.com",
+    role = c("aut"),
+    comment = c(ORCID = "0000-0002-5445-1988")),
+    person(given = "Gang", family = "Cao",
+    role = c("cre"))
+    )
+Description: MCnebula2 was used for metabonomics data analysis.
+  It is written in the S4 system of object-oriented programming. Its workflow, i.e.,
+  MCnebula workflow, is a complete metabolomics data analysis process,
+  including initial data preprocessing (data format conversion, feature detection),
+  compound identification based on MS/MS, statistical analysis,
+  compound structure and chemical class focusing, multi-level data visualization,
+  output report, etc.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
+Depends: 
+    ggplot2,
+    R (>= 2.10)
+Imports: 
+    BiocStyle, bookdown, ChemmineOB, crayon, data.table,
+    dplyr, ggimage, ggraph, ggsci, ggtext, grid, gridExtra,
+    grImport2, igraph, knitr, methods, pbapply, rlang, rmarkdown,
+    rsvg, stringr, styler, svglite, tibble, tidyr
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Collate:
     utils.R project.sirius.v4.R tools-colors.R tools-methods.R
     tools-default_visualize.R tools-modify_ggset.R tools-export.R
@@ -34,36 +56,5 @@ Collate:
     extraMethods-draw_structures.R extraMethods-draw_nodes.R
     methods-annotate_nebula.R extraMethods-binary_comparison.R
     extraMethods-report.R data.R
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
-Imports: 
-    BiocStyle,
-    bookdown,
-    ChemmineOB,
-    crayon,
-    data.table,
-    dplyr,
-    ggimage,
-    ggraph,
-    ggsci,
-    ggtext,
-    grid,
-    gridExtra,
-    grImport2,
-    igraph,
-    knitr,
-    methods,
-    pbapply,
-    rlang,
-    rmarkdown,
-    rsvg,
-    stringr,
-    styler,
-    svglite,
-    tibble,
-    tidyr
-Depends: 
-    ggplot2,
-    R (>= 2.10)
 LazyData: true
+Author: LiChuang Huang <shaman.yellow@foxmail.com> [aut] (<https://orcid.org/0000-0002-5445-1988>)
