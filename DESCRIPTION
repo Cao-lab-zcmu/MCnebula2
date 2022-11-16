@@ -58,3 +58,4 @@ Collate:
     extraMethods-report.R data.R
 LazyData: true
 Author: LiChuang Huang <shaman.yellow@foxmail.com> [aut] (<https://orcid.org/0000-0002-5445-1988>)
+Maintainer: LiChuang Huang <shaman.yellow@foxmail.com> [aut] (<https://orcid.org/0000-0002-5445-1988>)
