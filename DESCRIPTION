@@ -24,11 +24,32 @@ Depends:
     ggplot2,
     R (>= 2.10)
 Imports: 
-    BiocStyle, bookdown, ChemmineOB, crayon, data.table,
-    dplyr, ggimage, ggraph, ggsci, ggtext, grid, gridExtra,
-    grImport2, igraph, knitr, methods, pbapply, rlang, rmarkdown,
-    rsvg, stringr, styler, svglite, tibble, tidyr
+    bookdown,
+    ChemmineOB,
+    crayon,
+    data.table,
+    dplyr,
+    ggimage,
+    ggraph,
+    ggsci,
+    ggtext,
+    grid,
+    gridExtra,
+    grImport2,
+    igraph,
+    knitr,
+    methods,
+    pbapply,
+    rlang,
+    rmarkdown,
+    rsvg,
+    stringr,
+    styler,
+    svglite,
+    tibble,
+    tidyr
 Suggests: 
+    BiocStyle,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Collate:
