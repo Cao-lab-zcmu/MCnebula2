@@ -1,3 +1,6 @@
+
 test_that("compareSpectra works", {
-            expect_equal(2 * 2, 4)
+            df <- data.frame(x = 1:10, y = 1:10)
+            value <- compute_spectral_similarity(sp1 = df, sp2 = df)
+            expect_equal(value, 1)
 })
