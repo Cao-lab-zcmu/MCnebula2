@@ -36,7 +36,7 @@ object. These functions provide a convenient, fast, and repeatable way
 to make improvements to \linkS4class{ggset} object.
 
 \code{modify_default_child}:
-Used for \code{\link[=visualize_all]{visualize_all()}}.
+Used for \code{visualize_all()}.
 \code{modify_rm_legend} + \code{modify_set_labs} + \code{modify_unify_scale_limits}
 
 \code{modify_set_labs_and_unify_scale_limits}:

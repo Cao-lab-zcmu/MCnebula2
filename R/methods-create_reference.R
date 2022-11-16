@@ -61,7 +61,7 @@ NULL
 #' @param columns character(2) or numeric(2). Specify the key columns in the parameter
 #' of data. Normally not used.
 #' @param fill logical. If \code{TRUE}, run post modification.
-#' Run [filter_formula(object)], and use its results to fill the data
+#' Run \code{filter_formula(object)}, and use its results to fill the data
 #' \code{specific_candidate} for 'features' without specified top candidate.
 #' Only useful when the data \code{specific_candidate} were
 #' based on scores of chemical structure or classes, as for some 'features'

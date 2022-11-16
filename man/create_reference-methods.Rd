@@ -44,7 +44,7 @@ Normally not used.}
 of data. Normally not used.}
 
 \item{fill}{logical. If \code{TRUE}, run post modification.
-Run \link{filter_formula(object)}, and use its results to fill the data
+Run \code{filter_formula(object)}, and use its results to fill the data
 \code{specific_candidate} for 'features' without specified top candidate.
 Only useful when the data \code{specific_candidate} were
 based on scores of chemical structure or classes, as for some 'features'

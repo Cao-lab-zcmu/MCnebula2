@@ -40,6 +40,7 @@ Config/testthat/edition: 3
 Imports: 
     BiocStyle,
     bookdown,
+    ChemmineOB,
     crayon,
     data.table,
     dplyr,
@@ -52,12 +53,15 @@ Imports:
     grImport2,
     igraph,
     knitr,
+    methods,
     pbapply,
     rlang,
     rmarkdown,
+    rsvg,
     stringr,
     styler,
     svglite,
+    tibble,
     tidyr
 Depends: 
     ggplot2,

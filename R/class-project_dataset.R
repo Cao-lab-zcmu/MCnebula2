@@ -82,7 +82,7 @@ setMethod("extract_rawset",
 #' @param x an object contain \code{project_dataset} slot.
 #' @param subscript character. Specified the data in \code{dataset} slot
 #' in \code{project_dataset} slot.
-#' See \code{\link{VIRTUAL_subscript-class}}.
+#' See [VIRTUAL_subscript-class].
 #' @param fun_collate function. If the specified data not exists in \code{dataset} slot,
 #' it will be used to collate data. This parameter is not for normal use.
 #' @param ... parameters passed to 'fun_collate'.

@@ -1,6 +1,9 @@
 # ==========================================================================
 # additional function
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @importFrom stats dist hclust model.matrix reorder rnorm
+#' @importFrom utils combn head methods object.size savehistory str tail
+#' @importFrom utils write.table
 setMissing <- 
   function(generic, ..., .SIG = "missing"){
     args <- list(...)

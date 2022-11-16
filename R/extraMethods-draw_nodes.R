@@ -69,6 +69,7 @@ setMethod("draw_nodes",
                          .fresh_param(draw_nodes()(x)))
           })
 
+#' @importFrom grDevices colorRampPalette dev.off
 #' @importFrom svglite svglite
 #' @importFrom grid pushViewport
 #' @importFrom grid viewport

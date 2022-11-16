@@ -23,7 +23,7 @@ NULL
 #' @aliases modify_default_child
 #' 
 #' @description \code{modify_default_child}:
-#' Used for [visualize_all()].
+#' Used for \code{visualize_all()}.
 #' \code{modify_rm_legend} + \code{modify_set_labs} + \code{modify_unify_scale_limits}
 #' 
 #' @rdname fun_modify

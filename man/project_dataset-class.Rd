@@ -32,7 +32,7 @@
 
 \item{subscript}{character. Specified the data in \code{dataset} slot
 in \code{project_dataset} slot.
-See \code{\link{VIRTUAL_subscript-class}}.}
+See \linkS4class{VIRTUAL_subscript}.}
 
 \item{fun_collate}{function. If the specified data not exists in \code{dataset} slot,
 it will be used to collate data. This parameter is not for normal use.}

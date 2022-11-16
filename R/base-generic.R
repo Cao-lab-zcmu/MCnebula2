@@ -1,6 +1,8 @@
 # ==========================================================================
 # Generic for base method (get or replace data in slots) of class
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#' @importFrom methods as formalArgs getGeneric getMethodsForDispatch
+#' @importFrom methods initialize is new selectMethod show showMethods
 ## class-melody
 setGeneric("melody", 
            function(x) standardGeneric("melody"))
