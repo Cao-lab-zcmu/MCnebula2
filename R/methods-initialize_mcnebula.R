@@ -82,7 +82,7 @@ setMethod("initialize_mcnebula",
             else
               project_path(x) <- sirius_project
             if (missing(output_directory)) {
-              if (length(export_path(x)) == 0) {
+              if (length(x@export_path) == 0) {
                 export_path(x) <- paste0(sirius_project, "/mcnebula_results")
               }
             } else {
