@@ -39,7 +39,7 @@
 
 .command_parent_theme <- function(){
   new_command(match.fun(theme),
-              text = element_text(family = "Times", face = "bold"),
+              text = element_text(family = .font, face = "bold"),
               axis.ticks = element_blank(),
               axis.text = element_blank(),
               axis.title = element_blank(),
@@ -109,7 +109,7 @@
 .command_node_theme <- 
   function(){
     new_command(match.fun(theme),
-                text = element_text(family = "Times", face = "bold"),
+                text = element_text(family = .font, face = "bold"),
                 name = "theme")
   }
 
@@ -144,6 +144,6 @@
 .grob_node_text <- 
   function(label, color = "black"){
     grid::textGrob(label, y = 0.12,
-                   gp = grid::gpar(fontfamily = "Times",
+                   gp = grid::gpar(fontfamily = .font,
                                    fontsize = 20, col = color))
   }

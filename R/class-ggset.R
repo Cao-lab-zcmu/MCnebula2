@@ -84,7 +84,7 @@ setMethod("show_layers",
 #'   layer1 <- new_command(ggplot, data)
 #'   layer2 <- new_command(geom_point, aes(x = x, y = y))
 #'   layer3 <- new_command(labs, x = "x label", y = "y label")
-#'   layer4 <- new_command(theme, text = element_text(family = "Times"))
+#'   layer4 <- new_command(theme, text = element_text(family = .font))
 #'   
 #'   ## gather
 #'   ggset <- new_ggset(layer1, layer2, layer3, layer4)
