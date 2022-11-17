@@ -2,9 +2,9 @@
 
 ## Homepage
 title = "MCnebula2"
-titleSeparator = "-"
-titleAddition = "..."
-description = "..."
+titleSeparator = " | "
+titleAddition = "analysis of LC-MS/MS metabolomics"
+description = "MCnebula workflow, for metabolic dataset analysis, involving: feature detection, compound identification based on MS/MS (in silico), statistical analysis, compound structure and chemical class focusing, multi-dimensional visualization, output report, etc."
 
 ## Documentation
 # docsVersion = "0.3"
