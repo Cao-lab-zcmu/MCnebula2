@@ -16,6 +16,7 @@
 NULL
 #> NULL
 
+#' @importFrom methods getFunction
 #' @exportMethod initialize_mcnebula
 #'
 #' @aliases initialize_mcnebula
@@ -88,7 +89,8 @@ setMethod("initialize_mcnebula",
             } else {
               export_path(x) <- output_directory
             }
-            match.fun(paste0(".validate_", sirius_version))(sirius_project)
+            getFunction(paste0(".validate_", sirius_version),
+                        where = parent.env(environment()))(sirius_project)
             item <- methods(initialize_mcnebula)
             item <- stringr::str_extract(item, "(?<=,).*(?=-method)")
             item <- gsub(",.*$", "", item)

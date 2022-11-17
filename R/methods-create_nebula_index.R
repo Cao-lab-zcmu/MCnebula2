@@ -113,9 +113,8 @@ setMethod("set_tracer",
               if (length(.features_id) > length(palette_set(x)))
                 stop("too much specified features; ",
                      "use 'palette_set<-' to set more colors")
-              colors <-
-                MCnebula2:::.as_dic(palette_set(x), .features_id,
-                                    as.list = F, na.rm = T)
+              colors <- .as_dic(palette_set(x), .features_id,
+                                as.list = F, na.rm = T)
               list(.features_id = .features_id,
                    colors = unname(colors),
                    rest = "#D9D9D9"

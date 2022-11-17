@@ -179,16 +179,16 @@ FUN_get_id_sirius.v4 <-
 .get_methods_read_sirius.v4 <- 
   function(){
     set <- c(
-             read.canopus = MCnebula2::read_tsv,
-             read.canopus_summary = MCnebula2::read_tsv,
-             read.compound_identifications = MCnebula2::read_tsv,
-             read.formula_identifications = MCnebula2::read_tsv,
-             read.f2_ms = MCnebula2::pbsapply_read_tsv,
-             read.f2_formula = MCnebula2::pbsapply_read_tsv,
-             read.f2_info = MCnebula2::pbsapply_read_info,
-             read.f3_fingerid = MCnebula2::pbsapply_read_tsv,
-             read.f3_scores = MCnebula2::pbsapply_read_tsv,
-             read.f3_spectra = MCnebula2::pbsapply_read_tsv,
+             read.canopus = read_tsv,
+             read.canopus_summary = read_tsv,
+             read.compound_identifications = read_tsv,
+             read.formula_identifications = read_tsv,
+             read.f2_ms = pbsapply_read_tsv,
+             read.f2_formula = pbsapply_read_tsv,
+             read.f2_info = pbsapply_read_info,
+             read.f3_fingerid = pbsapply_read_tsv,
+             read.f3_scores = pbsapply_read_tsv,
+             read.f3_spectra = pbsapply_read_tsv,
              read.f3_canopus = .pbsapply_read_fpt
     )
   }
@@ -217,7 +217,7 @@ pbsapply_read_info <- function(path){
 .get_methods_match_sirius.v4 <- 
   function(){
     set <- c(
-             match.features_id = MCnebula2::FUN_get_id_sirius.v4,
+             match.features_id = FUN_get_id_sirius.v4,
              match.candidates_id = function(x) stringr::str_extract(x, "[^/]*(?=\\.[a-z]*$)"),
              generate_candidates_id = function(df) {
                if (is.null(df$mol.formula) | is.null(df$adduct))
