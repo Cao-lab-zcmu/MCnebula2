@@ -15,6 +15,8 @@
 \S4method{backtrack}{ANY}(x) <- value
 }
 \arguments{
+\item{x}{object inherit class \code{backtrack}.}
+
 \item{value}{The value for the slot.}
 }
 \description{

@@ -59,6 +59,11 @@ setMethod("create_child_nebulae",
 #' edges link with. If the number exceeds the limitation, only edges representing higher
 #' spectral similarity would be retained.
 #'
+#' @param use_tracer logical.
+#' If \code{TRUE}, 'tracer' in 'nebula_index' data would be used to filter out
+#' Child-Nebulae: a Child-Nebula without any 'feature' being marked as 'tracer',
+#' this Child-Nebula would be filtered out. See [create_nebula_index()].
+#' 
 #' @rdname create_child_nebulae-methods
 #'
 #' @examples

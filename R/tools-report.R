@@ -82,6 +82,10 @@ textSh <-
   }
 
 #' @export get_ref
+#' @description \code{get_ref}: get the string for cross-reference.
+#' @rdname code_block-class
+#' @param object [code_block_figure-class] or [code_block_table-class] object.
+#' @param type character. "fig" or "tab".
 get_ref <- 
   function(object, type = c("fig", "tab")){
     type <- match.arg(type)

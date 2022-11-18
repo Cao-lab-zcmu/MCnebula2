@@ -24,6 +24,11 @@ create edges upon similarity value of 'spectral_similarity' data.}
 For nodes (features) in each Child-Nebulae (i.e. network), the maximum number of
 edges link with. If the number exceeds the limitation, only edges representing higher
 spectral similarity would be retained.}
+
+\item{use_tracer}{logical.
+If \code{TRUE}, 'tracer' in 'nebula_index' data would be used to filter out
+Child-Nebulae: a Child-Nebula without any 'feature' being marked as 'tracer',
+this Child-Nebula would be filtered out. See \code{\link[=create_nebula_index]{create_nebula_index()}}.}
 }
 \description{
 Similar to \code{\link[=create_parent_nebula]{create_parent_nebula()}}, gather 'spectral_similarity' data and

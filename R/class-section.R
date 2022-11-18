@@ -128,6 +128,7 @@ setClassUnion("maybe_code_block", c("code_block", "NULL"))
 #' @importFrom crayon silver
 #' @exportMethod show
 #' @aliases show
+#' @param object [code_block-class] object.
 #' @rdname code_block-class
 setMethod("show", 
           signature = c(object = "code_block"),

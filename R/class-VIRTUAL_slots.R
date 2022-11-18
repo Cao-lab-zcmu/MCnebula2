@@ -199,6 +199,7 @@ setMethod("reference", "ANY",
 #' @exportMethod reference<-
 #' @aliases reference<-
 #' @param value The value for the slot.
+#' @param x object inherit class \code{reference}.
 #' @rdname VIRTUAL_reference-class
 setReplaceMethod("reference", "ANY",
                  function(x, value){
@@ -210,6 +211,7 @@ setReplaceMethod("reference", "ANY",
 #' @aliases backtrack
 #' @description \code{backtrack}, \code{backtrack<-}: getter and setter
 #' for the \code{backtrack} slot of the object.
+#' @param x object inherit class \code{backtrack}.
 #' @rdname VIRTUAL_backtrack-class
 setMethod("backtrack", "ANY",
           function(x){ x@backtrack })
@@ -236,6 +238,7 @@ setMethod("subscript", "ANY",
 #' @exportMethod subscript<-
 #' @aliases subscript<-
 #' @param value The value for the slot.
+#' @param x object inherit class \code{subscript}.
 #' @rdname VIRTUAL_subscript-class
 setReplaceMethod("subscript", "ANY",
                  function(x, value){
@@ -255,6 +258,7 @@ setMethod("export_name",
 #' @exportMethod export_name<-
 #' @aliases export_name<-
 #' @param value The value for the slot.
+#' @param x object inherit class \code{export}.
 #' @rdname VIRTUAL_export-class
 setReplaceMethod("export_name", 
                  signature = c(x = "ANY"),
@@ -299,6 +303,7 @@ setMethod("layers",
 #' @exportMethod layers<-
 #' @aliases layers<-
 #' @param value The value for the slot.
+#' @param x object inherit class \code{layerSet}.
 #' @rdname VIRTUAL_layerSet-class
 setReplaceMethod("layers", 
                  signature = c(x = "layerSet"),

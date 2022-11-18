@@ -15,6 +15,8 @@
 \S4method{subscript}{ANY}(x) <- value
 }
 \arguments{
+\item{x}{object inherit class \code{subscript}.}
+
 \item{value}{The value for the slot.}
 }
 \description{

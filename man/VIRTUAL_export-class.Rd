@@ -24,6 +24,8 @@
 \S4method{export_path}{ANY}(x) <- value
 }
 \arguments{
+\item{x}{object inherit class \code{export}.}
+
 \item{value}{The value for the slot.}
 }
 \description{
