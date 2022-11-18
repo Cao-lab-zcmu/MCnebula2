@@ -31,6 +31,7 @@
              .dir_scores = "^scores$",
              .dir_spectra = "^spectra$",
              .f2_ms = "spectrum.ms",
+             .f2_msms = "spectrum.ms",
              .f2_info = "compound.info",
              .f2_formula = "formula_candidates.tsv",
              .f3_canopus = "\\.fpt$",
@@ -62,6 +63,7 @@ FUN_get_id_sirius.v4 <-
              .dir_scores = ".id/.dir_scores",
              .dir_spectra = ".id/.dir_spectra",
              .f2_ms = ".id/.f2_ms",
+             .f2_msms = ".id/.f2_msms",
              .f2_info = ".id/.f2_info",
              .f2_formula = ".id/.f2_formula",
              .f3_canopus = ".id/.dir_canopus/.f3_canopus",
@@ -184,6 +186,7 @@ FUN_get_id_sirius.v4 <-
              read.compound_identifications = read_tsv,
              read.formula_identifications = read_tsv,
              read.f2_ms = pbsapply_read_tsv,
+             read.f2_msms = pbsapply_read_msms,
              read.f2_formula = pbsapply_read_tsv,
              read.f2_info = pbsapply_read_info,
              read.f3_fingerid = pbsapply_read_tsv,
@@ -192,6 +195,19 @@ FUN_get_id_sirius.v4 <-
              read.f3_canopus = .pbsapply_read_fpt
     )
   }
+
+pbsapply_read_msms <- function(path){
+  pbapply::pbsapply(path, simplify = F,
+                    function(path){
+                      lines <- readLines(path)
+                      start <- grep("^>ms2peaks", lines) + 1
+                      lines <- lines[start:length(lines)]
+                      data <- data.table::fread(text = lines)
+                      colnames(data) <- c("mz", "int.")
+                      data
+                    }
+  )
+}
 
 pbsapply_read_info <- function(path){
   pbapply::pbsapply(path, simplify = F,

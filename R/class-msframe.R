@@ -182,15 +182,17 @@ setMethod("format_msframe",
   function(x, names, types){
     if( any(names(names) == "...sig") ) {
       rs <- which( names == subscript(x) & names(names) == "...sig")
-      rs <- rs + 1
-      re <- length(names)
-      for( i in rs:length(names) ){
-        if( names(names)[i] == "...sig" ) {
-          re <- i - 1
-          break
+      if (length(rs) != 0) {
+        rs <- rs + 1
+        re <- length(names)
+        for( i in rs:length(names) ){
+          if( names(names)[i] == "...sig" ) {
+            re <- i - 1
+            break
+          }
         }
+        names <- c(names[rs:re], names)
       }
-      names <- c(names[rs:re], names)
       names <- vec_unique_by_value(names)
       names <- names[names(names) != "...sig"]
     }

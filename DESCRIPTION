@@ -24,6 +24,7 @@ Depends:
     ggplot2,
     R (>= 2.10)
 Imports: 
+    BiocStyle,
     bookdown,
     ChemmineOB,
     crayon,
@@ -49,7 +50,6 @@ Imports:
     tibble,
     tidyr
 Suggests: 
-    BiocStyle,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Collate:

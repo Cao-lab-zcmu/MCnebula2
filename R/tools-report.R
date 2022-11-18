@@ -139,3 +139,11 @@ document_mc_workflow <-
     }
     obj
   }
+
+#' @importFrom bookdown pdf_document2
+#' @importFrom BiocStyle pdf_document
+#' @importFrom BiocStyle html_document
+default_pdf <- bookdown::pdf_document2
+bioc_pdf <- BiocStyle::pdf_document
+bioc_html <- BiocStyle::html_document
+
