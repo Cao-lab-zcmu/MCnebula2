@@ -183,7 +183,7 @@ setMethod("add_dataset",
           signature = c(x = "ANY", list = "list"),
           function(x, list){
             dataset <- c(list, dataset(x))
-            dataset(x) <- list_unique_by_names(dataset)
+            dataset(x) <- vecter_unique_by_names(dataset)
             return(x)
           })
 

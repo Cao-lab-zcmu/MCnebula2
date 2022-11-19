@@ -62,7 +62,7 @@ match_methods <-
     vapply(strsplit(methods, " "), `[`, "character", 2)
   }
 
-list_unique_by_names <- 
+vecter_unique_by_names <- 
   function(lst){
     unique <- data.frame(names = names(lst),
                          order = 1:length(lst))

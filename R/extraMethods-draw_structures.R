@@ -30,6 +30,9 @@ NULL
 #' @param x [mcnebula-class] object.
 #' @param nebula_name character(1). Chemical classes in 'nebula_index' data.
 #' Specified to draw chemical structures of all the 'features' of that.
+#' @param .features_id character(1). The ID of 'features'.
+#' @param data data.frame. A 'data.frame' contains columns of '.features_id' and
+#' 'smiles'.
 #'
 #' @rdname draw_structures-methods
 #'
@@ -68,20 +71,45 @@ NULL
 #'   unlink(tmp, T, T)
 #' }
 setMethod("draw_structures", 
-          signature = c(x = "mcnebula", nebula_name = "character"),
+          signature = setMissing("draw_structures",
+                                 x = "mcnebula",
+                                 nebula_name = "character"),
           function(x, nebula_name){
             .check_data(child_nebulae(x), list(tbl_graph = "create_child_layouts"))
             tidy <- tbl_graph(child_nebulae(x))[[nebula_name]]
             if (is.null(tidy))
               stop( "`nebula_name` not found in `tbl_graph(child_nebulae(x))`" )
             df <- dplyr::select(tibble::as_tibble(tidy), .features_id = name, smiles)
+            draw_structures(x, data = df)
+          })
+
+#' @exportMethod draw_structures
+#' @rdname draw_structures-methods
+setMethod("draw_structures", 
+          signature = setMissing("draw_structures",
+                                 x = "mcnebula",
+                                 .features_id = "character"),
+          function(x, .features_id){
+            .check_data(x, list(features_annotation = "create_features_annotation"))
+            df <- dplyr::select(features_annotation(x), .features_id, smiles)
+            df <- dplyr::filter(df, .features_id %in% !!.features_id)
+            draw_structures(x, data = df)
+          })
+
+#' @exportMethod draw_structures
+#' @rdname draw_structures-methods
+setMethod("draw_structures", 
+          signature = setMissing("draw_structures",
+                                 x = "mcnebula",
+                                 data = "data.frame"),
+          function(x, data){
             sets <- structures_grob(child_nebulae(x))
             if (!is.null(sets)) {
-              df <- dplyr::filter(df, !.features_id %in% names(sets))
+              data <- dplyr::filter(data, !.features_id %in% names(sets))
             }
-            if (!nrow(df) == 0) {
+            if (!nrow(data) == 0) {
               structures_grob(child_nebulae(x)) <- 
-                c(sets, .draw_structures(df, paste0(export_path(x), "/tmp/structure"), T))
+                c(sets, .draw_structures(data, paste0(export_path(x), "/tmp/structure"), T))
             }
             return(x)
           })
@@ -92,9 +120,6 @@ setMethod("draw_structures",
 #' @description
 #' \code{show_structure}: visualize the chemical structure of 'feature'
 #' which has been drawn.
-#'
-#' @param .features_id character(1). The ID of 'features' to show the
-#' chemical structure.
 #'
 #' @rdname draw_structures-methods
 #'

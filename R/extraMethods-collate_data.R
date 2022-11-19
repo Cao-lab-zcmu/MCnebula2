@@ -137,7 +137,7 @@ setMethod("collate_data",
   }
 
 ## ---------------------------------------------------------------------- 
-#' @exportMethod read_data
+# @exportMethod read_data
 #'
 #' @description \code{read_data}: basic methods used to extract and format
 #' data from raw project directory.
@@ -150,6 +150,7 @@ setMethod("collate_data",
 #' @param fun_format function. Used to format the data.
 #'
 #' @rdname collate_data-methods
+#' @noRd
 #'
 setMethod("read_data", 
           signature = setMissing("read_data",
@@ -173,8 +174,9 @@ setMethod("read_data",
             )
           })
 
-#' @exportMethod read_data
+# @exportMethod read_data
 #' @rdname collate_data-methods
+#' @noRd
 setMethod("read_data", 
           signature = setMissing("read_data",
                        subscript = "character", path = "character",

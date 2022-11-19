@@ -138,19 +138,39 @@ modify_unify_scale_limits <-
     ggset
   }
 
+#' @export modify_set_labs_xy
+#' @aliases modify_set_labs_xy
+#'
+#' @description \code{modify_set_labs_xy}:
+#' According to names in slot \code{export_name} of [mcnebula-class] object
+#' to rename the labs of x and y axis.
+#' 
+#' @rdname fun_modify
+modify_set_labs_xy <- 
+  function(ggset, x){
+    x <- .get_missing_x(x, "mcnebula")
+    .modify_set_labs(ggset, x, c("x", "y"))
+  }
+
 #' @export modify_set_labs
 #' @aliases modify_set_labs
 #' 
 #' @description \code{modify_set_labs}:
 #' According to names in slot \code{export_name} of [mcnebula-class] object
-#' to rename the labs.
+#' to rename the labs of legends.
 #' 
 #' @rdname fun_modify
 modify_set_labs <- 
   function(ggset, x){
     x <- .get_missing_x(x, "mcnebula")
+    .modify_set_labs(ggset, x)
+  }
+
+.modify_set_labs <- 
+  function(ggset, x, ...) {
     export_name <- as.list(export_name(x))
-    args <- vapply(.get_mapping2(ggset), FUN.VALUE = "ch",
+    mapping <- vecter_unique_by_names(.get_mapping2(ggset, ...))
+    args <- vapply(mapping, FUN.VALUE = "ch",
                    function(attr) {
                      if (is.null(export_name[[ attr ]]))
                        attr
@@ -173,17 +193,14 @@ modify_set_labs <-
 
 #' @importFrom stringr str_extract
 .get_mapping2 <-
-  function(ggset, only_legend = T){
+  function(ggset, maps = .LEGEND_mapping()){
     args <- .get_mapping(ggset)
     pattern <- "[a-z|A-Z|.|_|0-9]{1,}"
     args[] <-
       stringr::str_extract(args,
                            paste0("(?<=\\()", pattern, "(?=\\),)",
                                   "|^", pattern, "$"))
-    if (only_legend) {
-      args <- args[names(args) %in% .LEGEND_mapping()]
-    }
-    args
+    args[names(args) %in% maps]
   }
 
 .LEGEND_mapping <- 

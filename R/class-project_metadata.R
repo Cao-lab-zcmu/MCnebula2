@@ -116,7 +116,7 @@ setMethod("add_dataset",
                         list = "list"),
           function(x, list){
             metadata <- c(list, metadata(x))
-            metadata(x) <- list_unique_by_names(metadata)
+            metadata(x) <- vecter_unique_by_names(metadata)
             return(x)
           })
 

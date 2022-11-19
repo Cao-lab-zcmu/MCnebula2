@@ -3,11 +3,17 @@
 \name{draw_structures-methods}
 \alias{draw_structures-methods}
 \alias{draw_structures}
-\alias{draw_structures,mcnebula,character-method}
+\alias{draw_structures,mcnebula,character,missing,missing-method}
+\alias{draw_structures,mcnebula,missing,character,missing-method}
+\alias{draw_structures,mcnebula,missing,missing,data.frame-method}
 \alias{show_structure,ANY,character-method}
 \title{Draw and visualize chemcial structure}
 \usage{
-\S4method{draw_structures}{mcnebula,character}(x, nebula_name)
+\S4method{draw_structures}{mcnebula,character,missing,missing}(x, nebula_name)
+
+\S4method{draw_structures}{mcnebula,missing,character,missing}(x, .features_id)
+
+\S4method{draw_structures}{mcnebula,missing,missing,data.frame}(x, data)
 
 \S4method{show_structure}{ANY,character}(x, .features_id)
 }
@@ -17,8 +23,10 @@
 \item{nebula_name}{character(1). Chemical classes in 'nebula_index' data.
 Specified to draw chemical structures of all the 'features' of that.}
 
-\item{.features_id}{character(1). The ID of 'features' to show the
-chemical structure.}
+\item{.features_id}{character(1). The ID of 'features'.}
+
+\item{data}{data.frame. A 'data.frame' contains columns of '.features_id' and
+'smiles'.}
 }
 \description{
 Methods used for drawing and visualizing chemical structures of 'features'

@@ -20,8 +20,10 @@ setGeneric("read_data",
                     path, .features_id, .candidates_id,
                     fun_read, fun_format) standardGeneric("read_data"))
 setGeneric("draw_structures", 
-           signature = c(ANY = "x", "character" = "nebula_name"),
-           function(x, nebula_name)
+           signature = c(ANY = "x", "character" = "nebula_name",
+                         "character" = ".features_id",
+                         "data.frame" = "data"),
+           function(x, nebula_name, .features_id, data)
              standardGeneric("draw_structures"))
 setGeneric("show_structure", 
            signature = c("ANY" = "x", "character" = ".features_id"),

@@ -8,6 +8,7 @@
 \alias{modify_rm_legend}
 \alias{modify_set_margin}
 \alias{modify_unify_scale_limits}
+\alias{modify_set_labs_xy}
 \alias{modify_set_labs}
 \title{Modify 'ggset' object}
 \usage{
@@ -22,6 +23,8 @@ modify_rm_legend(ggset)
 modify_set_margin(ggset, margin = grid::unit(rep(-8, 4), "lines"))
 
 modify_unify_scale_limits(ggset, x)
+
+modify_set_labs_xy(ggset, x)
 
 modify_set_labs(ggset, x)
 }
@@ -58,9 +61,13 @@ Uniform mapping 'scale' for all Child-Nebulae.
 Related to \code{ggplot2::scale_*} function.
 Use \code{MCnebula2:::.LEGEND_mapping()} to get the possibly mapping.
 
+\code{modify_set_labs_xy}:
+According to names in slot \code{export_name} of \linkS4class{mcnebula} object
+to rename the labs of x and y axis.
+
 \code{modify_set_labs}:
 According to names in slot \code{export_name} of \linkS4class{mcnebula} object
-to rename the labs.
+to rename the labs of legends.
 }
 \seealso{
 \linkS4class{ggset}

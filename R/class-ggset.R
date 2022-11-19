@@ -141,7 +141,7 @@ setMethod("mutate_layer",
             command <- layers(x)[[ layer ]]
             old <- command_args(command)
             if (length(old) > 0) {
-              args <- list_unique_by_names(c(args, old))
+              args <- vecter_unique_by_names(c(args, old))
             }
             layers(x)[[ layer ]] <- 
               do.call(new_command,
