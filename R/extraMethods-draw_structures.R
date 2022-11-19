@@ -133,7 +133,7 @@ setMethod("show_structure",
 #' @importFrom dplyr mutate
 #' @importFrom pbapply pbapply
 .draw_structures <-
-  function(df, path, rm_backgroud = F){
+  function(df, path, rm_background = F){
     .check_columns(df, c(".features_id", "smiles"), "data.frame")
     .check_path(path)
     df <- dplyr::mutate(df, path = paste0(!!path, "/", .features_id, ".svg"))
@@ -146,17 +146,16 @@ setMethod("show_structure",
                               .cairosvg_to_grob(vec[["path"]])
                             })
     names(lst) <- df$.features_id
-    if (rm_backgroud) 
-      lst <- lapply(lst, .rm_backgroud)
+    if (rm_background) 
+      lst <- lapply(lst, .rm_background)
     return(lst)
   }
 
-.rm_backgroud <- 
+.rm_background <- 
   function(grob){
-    if (!is(grob$children[[1]]$children[[1]], "picRect")) {
-      stop("'picRect' not matched.")
+    if (is(grob$children[[1]]$children[[1]], "picRect")) {
+      grob$children[[1]]$children[[1]] <- NULL
     }
-    grob$children[[1]]$children[[1]] <- NULL
     return(grob)
   }
 
