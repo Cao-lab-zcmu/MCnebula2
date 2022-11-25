@@ -107,12 +107,12 @@ setMethod("create_features_annotation",
                                                      .features_id, .candidates_id)
                             if (any( duplicated(check[[ ".features_id" ]]) )) {
                               name <- gsub("^.*_", "", sub)
-                              stop( paste0("the filtered \"", sub, "\" set in `x` must match ",
-                                           "with the id columns ",
-                                           "(.features_id, .candidates_id) ",
-                                           "in `specific_candidate(x)`, ",
-                                           "use `filter_", name,
-                                           "(x, by_reference = T)` previously."))
+                              stop( "the filtered \"", sub, "\" set in `x` must match ",
+                                   "with the id columns ",
+                                   "(.features_id, .candidates_id) ",
+                                   "in `specific_candidate(x)`, ",
+                                   "use `filter_", name,
+                                   "(x, by_reference = T)` previously.")
                             } else {
                               set <- merge(dplyr::select(ref, .features_id),
                                            dplyr::select(set, -.candidates_id),
@@ -120,7 +120,7 @@ setMethod("create_features_annotation",
                               return(set)
                             }
                                  })
-            res <- merge(lst[[1]], lst[[2]], by = ".features_id", all = T)
+            res <- checkColMerge(lst[[1]], lst[[2]], by = ".features_id", all = T)
             res <- merge(ref, res, by = ".features_id", all.x = T)
             ## add ionMass and retention time for features
             x <- collate_data(x, subscript = ".f2_info")

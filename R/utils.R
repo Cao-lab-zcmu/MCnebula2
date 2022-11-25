@@ -404,3 +404,17 @@ group_strings <-
     grImport2::grobify(grImport2::readPicture(path))
   }
 
+checkColMerge <- function(x, y, ...){
+  args <- list(...)
+  by <- args$by
+  col <- lapply(list(x, y),
+                function(df){
+                  colnames(df)[ !colnames(df) %in% by ]
+                })
+  discard <- col[[2]][col[[2]] %in% col[[1]]]
+  y <- y[, !colnames(y) %in% discard]
+  if (!is.data.frame(y))
+    return(x)
+  args <- c(list(x = x, y = y), args)
+  do.call(merge, args)
+}
