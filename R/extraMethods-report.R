@@ -194,3 +194,46 @@ setMethod("history_rblock",
             new_code_block(codes = his[start:end], args = args)
           })
 
+#' @export rblock
+#' @aliases rblock
+#' @title Eval the code as well create 'code_block' object
+#' 
+#' @description \code{rblock}: Run or not run the code with formatting as [code_block-class]
+#' object.
+#' @param code The code to run or document. Braces (‘{}’) must be used.
+#' @param eval logical. Whether to eval the code.
+#' @param envir environment. The ‘environment’ in which the code is to be evaluated.
+#' @rdname rblock
+#'
+#' @examples
+#' \dontrun{
+#'   rblock({
+#'     test1 <- 1
+#'     test2 <- 2
+#'     test3 <- 3
+#'   })
+#'   
+#'   rblock({
+#'     test <- mcn_5features
+#'     ## this annotation line would be ignored
+#'     test1 <- filter_structure(test)
+#'     test1 <- create_reference(test1)
+#'     test1 <- filter_formula(test1, by_reference=T)
+#'     test1 <- create_stardust_classes(test1)
+#'   })
+#' }
+rblock <- function(code, eval = T, envir = parent.frame()){
+  code <- substitute(code)
+  if (!rlang::is_call(code, "{")) {
+    info <- paste0(c("The `code` argument must be a braced expression,",
+                     "use this such as:",
+                     styler::style_text("rblock({\ntest <- 1\ntest <- 2\n})")),
+                   collapse = "\n")
+    stop(info)
+  }
+  if (eval) {
+    eval(code, envir = envir)
+  }
+  code <- vapply(2:length(code), function(n) rlang::as_label(code[[n]]), "")
+  new_code_block(codes = code, args = list(echo = T, eval = F))
+}

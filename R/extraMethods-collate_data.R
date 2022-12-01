@@ -138,7 +138,6 @@ setMethod("collate_data",
 
 ## ---------------------------------------------------------------------- 
 # @exportMethod read_data
-#'
 #' @description \code{read_data}: basic methods used to extract and format
 #' data from raw project directory.
 #'
