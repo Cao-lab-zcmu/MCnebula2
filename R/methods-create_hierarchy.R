@@ -81,3 +81,52 @@ setMethod("create_hierarchy",
     data$.id <- data$.id - 1
     dplyr::rename(dplyr::as_tibble(data), hierarchy = .id)
   }
+
+#' @export get_parent_classes
+#' @aliases get_parent_classes
+#' @description \code{get_parent_classes}: For chemical classes to get
+#' its parent chemical classes.
+#' @param classes character. Names of chemical classes.
+#' @param hierarchy_cutoff. numeric(1). The highest hierarchy of parent chemical classes
+#' that needs to be searched.
+#' @param re_class_no_parent logical(1). If \code{TRUE}, once a chemical class find with
+#' no parent, the chemical class itself would be returned.
+#' @rdname create_hierarchy-methods
+get_parent_classes <- 
+  function(classes,
+           mcnebula,
+           hierarchy_cutoff = 3,
+           re_class_no_parent = F
+           ){
+    .check_data(mcnebula, list(hierarchy = "create_hierarchy"))
+    db <- dplyr::filter(hierarchy(mcnebula), hierarchy >= hierarchy_cutoff)
+    ## as 'dictionary'
+    name2id <- .as_dic(db$chem.ont.id, db$class.name, fill = F)
+    id2parent <- .as_dic(db$parent.chem.ont.id, db$chem.ont.id, fill = F)
+    id2name <- .as_dic(db$class.name, db$chem.ont.id, fill = F)
+    sapply(classes, simplify = F,
+           function(class){
+             set <- c()
+             parent <- 0
+             id <- name2id[[class]]
+             test <- try(id2parent[[id]], silent = T)
+             if (inherits(test, "try-error"))
+               if(re_class_no_parent)
+                 return(class)
+               else
+                 return()
+             while(!is.null(parent)){
+               if(parent != 0){
+                 set <- c(set, id2name[[parent]])
+                 id <- parent
+               }
+               parent <- id2parent[[id]]
+             }
+             if(length(set) == 0){
+               if(re_class_no_parent)
+                 return(class)
+             }
+             return(set)
+           })
+  }
+

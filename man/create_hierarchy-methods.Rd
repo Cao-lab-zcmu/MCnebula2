@@ -6,6 +6,7 @@
 \alias{create_hierarchy,missing,missing-method}
 \alias{create_hierarchy,mcnebula,ANY-method}
 \alias{create_hierarchy,mcnebula,function-method}
+\alias{get_parent_classes}
 \title{Create hierarchy data of chemical classification}
 \usage{
 \S4method{create_hierarchy}{missing,missing}()
@@ -13,12 +14,27 @@
 \S4method{create_hierarchy}{mcnebula,ANY}(x, fun_organize)
 
 \S4method{create_hierarchy}{mcnebula,`function`}(x, fun_organize)
+
+get_parent_classes(
+  classes,
+  mcnebula,
+  hierarchy_cutoff = 3,
+  re_class_no_parent = F
+)
 }
 \arguments{
 \item{x}{\linkS4class{mcnebula} object.}
 
 \item{fun_organize}{function. Normally not used.
 Default is \code{MCnebula2:::.build_hierarchy}.}
+
+\item{classes}{character. Names of chemical classes.}
+
+\item{re_class_no_parent}{logical(1). If \code{TRUE}, once a chemical class find with
+no parent, the chemical class itself would be returned.}
+
+\item{hierarchy_cutoff.}{numeric(1). The highest hierarchy of parent chemical classes
+that needs to be searched.}
 }
 \description{
 Methods used to create hierarchy data of chemical classification.
@@ -31,4 +47,7 @@ get the default parameters for the method
 \code{create_hierarchy(x, ...)}:
 use the default parameters whatever 'missing'
 while performing the method \code{create_hierarchy}.
+
+\code{get_parent_classes}: For chemical classes to get
+its parent chemical classes.
 }
