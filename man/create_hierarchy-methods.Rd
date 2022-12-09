@@ -15,12 +15,7 @@
 
 \S4method{create_hierarchy}{mcnebula,`function`}(x, fun_organize)
 
-get_parent_classes(
-  classes,
-  mcnebula,
-  hierarchy_cutoff = 3,
-  re_class_no_parent = F
-)
+get_parent_classes(classes, x, hierarchy_cutoff = 3, re_class_no_parent = F)
 }
 \arguments{
 \item{x}{\linkS4class{mcnebula} object.}

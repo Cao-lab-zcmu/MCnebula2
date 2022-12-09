@@ -93,13 +93,12 @@ setMethod("create_hierarchy",
 #' no parent, the chemical class itself would be returned.
 #' @rdname create_hierarchy-methods
 get_parent_classes <- 
-  function(classes,
-           mcnebula,
+  function(classes, x,
            hierarchy_cutoff = 3,
            re_class_no_parent = F
            ){
-    .check_data(mcnebula, list(hierarchy = "create_hierarchy"))
-    db <- dplyr::filter(hierarchy(mcnebula), hierarchy >= hierarchy_cutoff)
+    .check_data(x, list(hierarchy = "create_hierarchy"))
+    db <- dplyr::filter(hierarchy(x), hierarchy >= hierarchy_cutoff)
     ## as 'dictionary'
     name2id <- .as_dic(db$chem.ont.id, db$class.name, fill = F)
     id2parent <- .as_dic(db$parent.chem.ont.id, db$chem.ont.id, fill = F)
