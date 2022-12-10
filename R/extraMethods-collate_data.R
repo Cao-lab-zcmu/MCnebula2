@@ -202,3 +202,24 @@ setMethod("read_data",
             fun_format(msframe)
           })
 
+#' @export collate_used
+#' @aliases collate_used
+#' @description \code{collate_used}: Use [filter_structure()] and [create_reference()]
+#' to build 'specific_candidate' data, then collate all used data of MCnebula workflow
+#' from Project directory, for subsequent data processing.
+#' @rdname collate_data-methods
+collate_used <- function(x) {
+  x <- filter_structure(x)
+  x <- create_reference(x)
+  sub1 <- c(".f2_formula",  ".canopus", ".f2_info", ".f2_msms")
+  sub2 <- c(".f3_canopus", ".f3_spectra")
+  for (i in sub1) {
+    x <- collate_data(x, i)
+    message()
+  }
+  for (i in sub2) {
+    x <- collate_data(x, i, reference = specific_candidate(x))
+    message()
+  }
+  return(x)
+}
