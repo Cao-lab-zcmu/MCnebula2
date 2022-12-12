@@ -6,6 +6,7 @@
 \alias{collate_data,missing,missing,missing-method}
 \alias{collate_data,ANY,ANY,ANY-method}
 \alias{collate_data,ANY,character,function-method}
+\alias{collate_used}
 \title{Extract and format data from raw project directory}
 \usage{
 \S4method{collate_data}{missing,missing,missing}()
@@ -13,6 +14,8 @@
 \S4method{collate_data}{ANY,ANY,ANY}(x, subscript, fun_collate, ...)
 
 \S4method{collate_data}{ANY,character,`function`}(x, subscript, fun_collate, ...)
+
+collate_used(x)
 }
 \arguments{
 \item{x}{\linkS4class{project} object or other class object inheriting it.}
@@ -36,6 +39,10 @@ followed by gathering and formating the data, then stores these data in the slot
 
 \code{collate_data(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{collate_data}.
+
+\code{collate_used}: Use \code{\link[=filter_structure]{filter_structure()}} and \code{\link[=create_reference]{create_reference()}}
+to build 'specific_candidate' data, then collate all used data of MCnebula workflow
+from Project directory, for subsequent data processing.
 }
 \details{
 This methods requires the name and path of the file in the raw project directory,
