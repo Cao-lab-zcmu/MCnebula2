@@ -96,7 +96,7 @@ setMethod("include_table",
                         name = "character",
                         caption = "character"),
           function(data, name, caption){
-            var <- rlang::as_label(substitute(data))
+            var <- deparse(substitute(data))
             codes <- paste0("knitr::kable(", var, ", ",
                             "format = 'markdown', ",
                             "caption = '", caption, "')")
@@ -234,6 +234,6 @@ rblock <- function(code, eval = T, envir = parent.frame()){
   if (eval) {
     eval(code, envir = envir)
   }
-  code <- vapply(2:length(code), function(n) rlang::as_label(code[[n]]), "")
+  code <- vapply(2:length(code), function(n) deparse(code[[n]]), "")
   new_code_block(codes = code, args = list(echo = T, eval = F))
 }
