@@ -234,6 +234,6 @@ rblock <- function(code, eval = T, envir = parent.frame()){
   if (eval) {
     eval(code, envir = envir)
   }
-  code <- vapply(2:length(code), function(n) deparse(code[[n]]), "")
+  code <- unlist(lapply(2:length(code), function(n) deparse(code[[n]])))
   new_code_block(codes = code, args = list(echo = T, eval = F))
 }
