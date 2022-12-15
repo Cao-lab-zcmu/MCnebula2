@@ -186,7 +186,7 @@ tol_merge <-
            main_col = "mz",
            sub_col = "mz",
            tol = 0.002,
-           round_factor = 1
+           bin_size = 1
            ){
     if (main_col == sub_col) {
       new_name <- paste0(sub_col, ".sub")
@@ -197,11 +197,11 @@ tol_merge <-
     backup <- main
     ## to reduce computation, round numeric for limitation
     ## main
-    main$...id <- round(main[[ main_col ]], round_factor)
+    main$...id <- round(main[[ main_col ]], bin_size)
     ## sub
     sub.x <- sub.y <- sub
-    sub.x$...id <- round(sub.x[[ sub_col ]], round_factor)
-    sub.y$...id <- sub.x$...id + ( 1 * 10^-round_factor )
+    sub.x$...id <- round(sub.x[[ sub_col ]], bin_size)
+    sub.y$...id <- sub.x$...id + ( 1 * 10^-bin_size )
     sub <- rbind(sub.x, sub.y)
     ## expand merge
     df <- merge(main, sub, by = "...id", all.x = T, allow.cartesian = T)
