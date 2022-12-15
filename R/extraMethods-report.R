@@ -203,6 +203,7 @@ setMethod("history_rblock",
 #' @param code The code to run or document. Braces (‘{}’) must be used.
 #' @param eval logical. Whether to eval the code.
 #' @param envir environment. The ‘environment’ in which the code is to be evaluated.
+#' @param ... Other parameters passed to [new_code_block()].
 #' @rdname rblock
 #'
 #' @examples
@@ -222,7 +223,7 @@ setMethod("history_rblock",
 #'     test1 <- create_stardust_classes(test1)
 #'   })
 #' }
-rblock <- function(code, eval = T, envir = parent.frame()){
+rblock <- function(code, eval = T, envir = parent.frame(), ...){
   code <- substitute(code)
   if (!rlang::is_call(code, "{")) {
     info <- paste0(c("The `code` argument must be a braced expression,",
@@ -235,5 +236,11 @@ rblock <- function(code, eval = T, envir = parent.frame()){
     eval(code, envir = envir)
   }
   code <- unlist(lapply(2:length(code), function(n) deparse(code[[n]])))
-  new_code_block(codes = code, args = list(echo = T, eval = F))
+  args <- list(...)
+  block.args <- list(echo = T, eval = F)
+  if (!is.null(args$args)) {
+    block.args <- .fresh_param(block.args, args$args)
+    args$args <- NULL
+  }
+  do.call(new_code_block, c(list(codes = code, args = block.args), args))
 }
