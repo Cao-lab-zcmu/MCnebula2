@@ -48,7 +48,7 @@ while performing the method \code{create_parent_layout}.
   test1 <- cross_filter_stardust(test1, 2, 1)
   test1 <- create_nebula_index(test1)
   test1 <- compute_spectral_similarity(test1)
-  test1 <- create_parent_nebula(test1, 0.01, T)
+  test1 <- create_parent_nebula(test1, 0.01)
   
   ## default parameters
   create_parent_layout()

@@ -47,8 +47,8 @@ Run after \code{\link[=activate_nebulae]{activate_nebulae()}}.
   test1 <- cross_filter_stardust(test1, 2, 1)
   test1 <- create_nebula_index(test1)
   test1 <- compute_spectral_similarity(test1)
-  test1 <- create_parent_nebula(test1, 0.01, T)
-  test1 <- create_child_nebulae(test1, 0.01, 5)
+  test1 <- create_parent_nebula(test1, 0.01)
+  test1 <- create_child_nebulae(test1, 0.01)
   test1 <- create_parent_layout(test1)
   test1 <- create_child_layouts(test1)
   test1 <- activate_nebulae(test1)
@@ -78,7 +78,7 @@ Run after \code{\link[=activate_nebulae]{activate_nebulae()}}.
   ## set colors for 'tracer'
   test1 <- set_tracer(test1, ids[1:2])
   ## re-build Child-Nebulae
-  test1 <- create_child_nebulae(test1, 0.01, 5)
+  test1 <- create_child_nebulae(test1, 0.01)
   test1 <- create_child_layouts(test1)
   test1 <- activate_nebulae(test1)
   ## set color

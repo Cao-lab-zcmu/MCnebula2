@@ -62,8 +62,8 @@ create lists of \linkS4class{ggset} object of Child-Nebulae.
   test1 <- cross_filter_stardust(test1, 2, 1)
   test1 <- create_nebula_index(test1)
   test1 <- compute_spectral_similarity(test1)
-  test1 <- create_parent_nebula(test1, 0.01, T)
-  test1 <- create_child_nebulae(test1, 0.01, 5)
+  test1 <- create_parent_nebula(test1, 0.01)
+  test1 <- create_child_nebulae(test1, 0.01)
   test1 <- create_parent_layout(test1)
   test1 <- create_child_layouts(test1)
   

@@ -27,7 +27,7 @@ test_that("basic workflow works", {
             print(class(spectral_similarity(test1)$similarity))
             expect_type(spectral_similarity(test1)$similarity, "double")
 
-            test1 <- create_parent_nebula(test1, 0.01, T)
+            test1 <- create_parent_nebula(test1, 0.01)
             expect_s3_class(igraph(parent_nebula(test1)), "igraph")
 
             test1 <- create_child_nebulae(test1, 0.01, 5)

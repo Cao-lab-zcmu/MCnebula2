@@ -3,22 +3,27 @@
 \name{create_parent_nebula-methods}
 \alias{create_parent_nebula-methods}
 \alias{create_parent_nebula}
-\alias{create_parent_nebula,missing,missing,missing-method}
-\alias{create_parent_nebula,mcnebula,ANY,ANY-method}
-\alias{create_parent_nebula,mcnebula,numeric,logical-method}
+\alias{create_parent_nebula,missing,missing,missing,missing-method}
+\alias{create_parent_nebula,mcnebula,ANY,ANY,ANY-method}
+\alias{create_parent_nebula,mcnebula,numeric,numeric,logical-method}
 \title{Gather data to create Parent-Nebula}
 \usage{
-\S4method{create_parent_nebula}{missing,missing,missing}()
+\S4method{create_parent_nebula}{missing,missing,missing,missing}()
 
-\S4method{create_parent_nebula}{mcnebula,ANY,ANY}(x, edge_cutoff, remove_isolate)
+\S4method{create_parent_nebula}{mcnebula,ANY,ANY,ANY}(x, edge_cutoff, max_edge_number, remove_isolate)
 
-\S4method{create_parent_nebula}{mcnebula,numeric,logical}(x, edge_cutoff, remove_isolate)
+\S4method{create_parent_nebula}{mcnebula,numeric,numeric,logical}(x, edge_cutoff, max_edge_number, remove_isolate)
 }
 \arguments{
 \item{x}{\linkS4class{mcnebula} object.}
 
 \item{edge_cutoff}{numeric(1). Value in (0,1). Set a threshold to
 create edges upon similarity value of 'spectral_similarity' data.}
+
+\item{max_edge_number}{numeric(1).
+For nodes (features) in each Parent-Nebulae (i.e. network), the maximum number of
+edges link with. If the number exceeds the limitation, only edges representing higher
+spectral similarity would be retained.}
 
 \item{remove_isolate}{logical. If \code{TRUE}, remove the isolate 'features'
 (in network, i.e. the nodes without edge)}
@@ -51,7 +56,7 @@ while performing the method \code{create_parent_nebula}.
   ## default parameters
   create_parent_nebula()
   
-  test1 <- create_parent_nebula(test1, 0.01, T)
+  test1 <- create_parent_nebula(test1, 0.01)
   ## see results
   igraph(parent_nebula(test1))
   ## write output for 'Cytoscape' or other network software

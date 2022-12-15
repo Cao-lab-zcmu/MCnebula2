@@ -82,7 +82,7 @@ The layouts for visualization of Child-Nebulae include:
   test1 <- cross_filter_stardust(test1, 2, 1)
   test1 <- create_nebula_index(test1)
   test1 <- compute_spectral_similarity(test1)
-  test1 <- create_child_nebulae(test1, 0.01, 5)
+  test1 <- create_child_nebulae(test1, 0.01)
   
   ## function to generate default parameters
   create_child_layouts()

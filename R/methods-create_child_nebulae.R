@@ -83,7 +83,7 @@ setMethod("create_child_nebulae",
 #'   ## default parameters
 #'   create_child_nebulae()
 #'   
-#'   test1 <- create_child_nebulae(test1, 0.01, 5)
+#'   test1 <- create_child_nebulae(test1, 0.01)
 #'   ## see results
 #'   igraph(child_nebulae(test1))
 #'   ## write output for 'Cytoscape' or other network software
