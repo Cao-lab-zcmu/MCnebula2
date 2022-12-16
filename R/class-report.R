@@ -40,7 +40,7 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 setValidity("report", 
             function(object){
-              recepts <- c("section", "heading", "code_block")
+              recepts <- c("section", "heading", "code_block", "character")
               tip <- paste0("'layer' in 'report' must either be: ",
                             paste0("'", recepts, "'", collapse = ", "))
               validate_class_in_list(layers(object), recepts, tip)
@@ -72,7 +72,12 @@ setMethod("show_layers",
             lapply(1:length(layers(x)),
                    function(seq) {
                      cat(crayon::silver("+++ layer", seq, "+++\n"))
-                     show(layers(x)[[ seq ]])
+                     layer <- layers(x)[[ seq ]]
+                     if (is.character(layer) & !is(layer, "heading"))
+                       textSh(layer, pre_collapse = T, pre_trunc = T,
+                              pre_wrap = T)
+                     else
+                       show(layer)
                    })
           })
 
@@ -202,3 +207,7 @@ setMethod("call_command",
             layers <- unlist(lapply(layers(x), call_command))
             c(yaml, "", layers)
           })
+
+setMethod("call_command", 
+          signature = c(x = "character"),
+          function(x){ x })

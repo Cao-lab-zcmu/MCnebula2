@@ -4,7 +4,7 @@
 \alias{rblock}
 \title{Eval the code as well create 'code_block' object}
 \usage{
-rblock(code, eval = T, envir = parent.frame())
+rblock(code, eval = T, envir = parent.frame(), ...)
 }
 \arguments{
 \item{code}{The code to run or document. Braces (‘{}’) must be used.}
@@ -12,6 +12,8 @@ rblock(code, eval = T, envir = parent.frame())
 \item{eval}{logical. Whether to eval the code.}
 
 \item{envir}{environment. The ‘environment’ in which the code is to be evaluated.}
+
+\item{...}{Other parameters passed to \code{\link[=new_code_block]{new_code_block()}}.}
 }
 \description{
 \code{rblock}: Run or not run the code with formatting as \linkS4class{code_block}
