@@ -21,7 +21,7 @@
 }
 
 .command_parent_fill <- function(pal){
-  new_command(scale_fill_gradientn, colours = pal)
+  new_command(scale_fill_gradientn, colours = pal, na.value = "white")
 }
 
 .command_parent_fill2 <- function(pal){

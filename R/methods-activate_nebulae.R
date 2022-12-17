@@ -280,6 +280,7 @@ setMethod("set_nodes_color",
                                  extra_data = "data.frame"),
           function(x, attribute, extra_data){
             .check_data(child_nebulae(x), list(ggset = "activate_nebulae"))
+            .check_data(x, list(features_annotation = "create_features_annotation"))
             if (length(attribute) != 1) {
               stop( "`attribute` must be a character `length(attribute) == 1`." )
             }
@@ -287,6 +288,10 @@ setMethod("set_nodes_color",
               stop("extra_data must contains columns of '.features_id' and the ",
                    "specified `attribute`.")
             }
+            ## add `extra_data` into data 'features_annotation' as attributes
+            features_annotation <- features_annotation(x)
+            attr(features_annotation, "extra_data") <- extra_data
+            reference(mcn_dataset(x))$features_annotation <- features_annotation
             if (is.numeric(extra_data[[ attribute ]])) {
               command_scale <- .command_parent_fill(palette_gradient(x))
             } else {

@@ -11,6 +11,7 @@
              tani.score = "Tanimoto similarity",
              rel.index = "Relative index",
              rel.int. = "Relative intensity",
+             tracer = "Tracer",
              group = "Group"
     )
   }

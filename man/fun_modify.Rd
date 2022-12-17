@@ -3,6 +3,7 @@
 \name{fun_modify}
 \alias{fun_modify}
 \alias{modify_default_child}
+\alias{modify_stat_child}
 \alias{modify_set_labs_and_unify_scale_limits}
 \alias{modify_annotate_child}
 \alias{modify_rm_legend}
@@ -14,6 +15,8 @@
 \usage{
 modify_default_child(ggset, x)
 
+modify_stat_child(ggset, x)
+
 modify_set_labs_and_unify_scale_limits(ggset, x)
 
 modify_annotate_child(ggset, x)
@@ -22,7 +25,7 @@ modify_rm_legend(ggset)
 
 modify_set_margin(ggset, margin = grid::unit(rep(-8, 4), "lines"))
 
-modify_unify_scale_limits(ggset, x)
+modify_unify_scale_limits(ggset, x, aes_name = NA)
 
 modify_set_labs_xy(ggset, x)
 
@@ -32,6 +35,9 @@ modify_set_labs(ggset, x)
 \item{ggset}{\linkS4class{ggset} object.}
 
 \item{x}{\linkS4class{mcnebula} object.}
+
+\item{aes_name}{character. Specify which 'aes' to unify scale,
+e.g., c("fill", "size", "edge_width").}
 }
 \description{
 These are multiple functions used for post modification of \linkS4class{ggset}
@@ -41,6 +47,14 @@ to make improvements to \linkS4class{ggset} object.
 \code{modify_default_child}:
 Used for \code{visualize_all()}.
 \code{modify_rm_legend} + \code{modify_set_labs} + \code{modify_unify_scale_limits}
+
+\code{modify_stat_child}:
+Repalce \code{\link[=scale_fill_gradientn]{scale_fill_gradientn()}} with \code{\link[=scale_fill_gradient2]{scale_fill_gradient2()}} in 'layers';
+unify the "aes" scale except for "fill";
+perfrom \code{\link[=modify_set_labs]{modify_set_labs()}};
+only keep the legend for 'fill', and adjust its width;
+move the position of the legend to the bottom;
+remove the title of the legend.
 
 \code{modify_set_labs_and_unify_scale_limits}:
 \code{modify_set_labs} + \code{modify_unify_scale_limits}

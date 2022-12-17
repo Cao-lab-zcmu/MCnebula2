@@ -33,6 +33,68 @@ modify_default_child <-
     modify_rm_legend(modify_set_labs(modify_unify_scale_limits(ggset)))
   }
 
+#' @export modify_stat_child
+#' @aliases modify_stat_child
+#' 
+#' @description \code{modify_stat_child}:
+#' Repalce [scale_fill_gradientn()] with [scale_fill_gradient2()] in 'layers';
+#' unify the "aes" scale except for "fill";
+#' perfrom [modify_set_labs()];
+#' only keep the legend for 'fill', and adjust its width;
+#' move the position of the legend to the bottom;
+#' remove the title of the legend.
+#' 
+#' @rdname fun_modify
+modify_stat_child <- 
+  function(ggset, x) {
+    x <- .get_missing_x(x, "mcnebula")
+    ## replace
+    seq <- grep("scale_fill_gradientn", names(layers(ggset)))
+    if (is.integer(seq) & length(seq) > 0)
+      ggset <- delete_layers(ggset, seq)
+    args <- list(low = "blue", mid = "grey90", high = "red", na.value = "white")
+    pal <- palette_gradient(x)
+    pal <- pal[names(pal) %in% names(args)]
+    args <- .fresh_param(args, as.list(pal))
+    breaks <- function(x) round(seq(floor(min(x)), ceiling(max(x)), length.out = 7), 1)
+    command <- do.call(new_command, c(fun = scale_fill_gradient2,
+                                      breaks = breaks, args,
+                                      name = "scale_fill_gradient2"))
+    ggset <- add_layers(ggset, command)
+    ## unify and set labs
+    aes_name <- names(.get_mapping2(ggset))
+    ggset <- modify_unify_scale_limits(ggset, aes_name = aes_name[aes_name != "fill"])
+    ggset <- modify_set_labs(ggset)
+    ## ...
+    args <- sapply(aes_name, simplify = F,
+                   function(name) {
+                     if (name == "fill")
+                       guide_colorbar(title = NULL, barheight = grid::unit(.5, "line"))
+                     else F
+                   })
+    if (any(grepl("^guides", names(layers(ggset)))))
+      ggset <- do.call(mutate_layer, c(list(x = ggset, layer = "guides"), args))
+    else {
+      command <- do.call(new_command,
+                         c(fun = match.fun("guides"), args, name = "guides"))
+      ggset <- add_layers(ggset, command)
+    }
+    ggset <- mutate_layer(ggset, "theme", legend.position = "bottom")
+    attr(ggset, "modify") <- "rev.modify_stat_child"
+    ggset
+  }
+
+rev.modify_stat_child <- 
+  function(ggset){
+    args <- sapply(names(.get_mapping2(ggset)), simplify = F,
+                   function(name) {
+                     if (name == "fill") F else NULL
+                   })
+    ggset <- do.call(mutate_layer, c(list(x = ggset, layer = "guides"), args))
+    ggset <- mutate_layer(ggset, "theme", legend.position = "right")
+    ggset
+  }
+
 #' @export modify_set_labs_and_unify_scale_limits
 #' @aliases modify_set_labs_and_unify_scale_limits
 #' 
@@ -96,16 +158,21 @@ modify_set_margin <-
 #' Uniform mapping 'scale' for all Child-Nebulae.
 #' Related to \code{ggplot2::scale_*} function.
 #' Use \code{MCnebula2:::.LEGEND_mapping()} to get the possibly mapping.
+#'
+#' @param aes_name character. Specify which 'aes' to unify scale,
+#' e.g., c("fill", "size", "edge_width").
 #' 
 #' @rdname fun_modify
 modify_unify_scale_limits <- 
-  function(ggset, x){
+  function(ggset, x, aes_name = NA){
     x <- .get_missing_x(x, "mcnebula")
     .check_data(x, list(features_annotation = "create_features_annotation",
                         spectral_similarity = "compute_spectral_similarity"))
     layers_name <- names(layers(ggset))
     args <- as.list(.get_mapping2(ggset))
-    for (i in .LEGEND_mapping()) {
+    if (is.logical(aes_name))
+      aes_name <- .LEGEND_mapping()
+    for (i in aes_name) {
       if (is.null(args[[ i ]])) {
         next
       }
@@ -114,12 +181,18 @@ modify_unify_scale_limits <-
         fun <- paste0("scale_", i)
       } else {
         attr <- features_annotation(x)[[ args[[i]] ]]
+        if (is.null(attr)) {
+          attr <- attr(features_annotation(x), "extra_data")[[ args[[i]] ]]
+          if (is.null(attr))
+            stop(paste0("Not found attribute '", args[[i]],
+                        "' in `features_annotation(x)`."))
+        }
         fun <- paste0("scale_", i, "_continuous")
       }
       if (!is.numeric(attr)) {
         next
       }
-      range <- range(attr)
+      range <- range(attr, na.rm = T)
       seq <- grep(paste0("^scale_", i, "|^ggplot2::scale_", i), layers_name)
       if (length(seq) == 1) {
         ggset <- mutate_layer(ggset, seq, limits = range)

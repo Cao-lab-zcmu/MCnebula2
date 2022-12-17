@@ -256,7 +256,11 @@ setMethod("visualize_all",
                        "\n\tIn default, legend scales have been unified ",
                        "for all child-nebulae."
                        ))
-    grob <- .get_legend(call_command(fun_modify(ggset(set)[[1]])))
+    ggset <- fun_modify(ggset(set)[[1]])
+    if (!is.null(attr(ggset, "modify"))) {
+      ggset <- match.fun(attr(ggset, "modify"))(ggset)
+    }
+    grob <- .get_legend(call_command(ggset))
     grid::grid.draw(grob)
   }
 

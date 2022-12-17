@@ -25,7 +25,7 @@
       leader <- paste0("```{", command_name, "}")
     }
     end <- "```"
-    c(leader, codes, end)
+    c(leader, codes, end, "")
   }
 
 .args_r_block <-

@@ -210,4 +210,9 @@ setMethod("call_command",
 
 setMethod("call_command", 
           signature = c(x = "character"),
-          function(x){ x })
+          function(x){ 
+            if (tail(x, n = 1) != "")
+              c(x, "")
+            else
+              x
+          })

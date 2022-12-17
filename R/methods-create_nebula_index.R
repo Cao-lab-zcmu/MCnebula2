@@ -177,7 +177,10 @@ setMethod("set_tracer",
               stop("length(.features_id) != length(colors))")
             tracer_color <- data.frame(.features_id = .features_id,
                                        tracer_color = colors)
-            nebula_index <- merge(nebula_index(x), tracer_color,
+            nebula_index <- nebula_index(x)
+            nebula_index$tracer <- NULL
+            nebula_index$tracer_color <- NULL
+            nebula_index <- merge(nebula_index, tracer_color,
                                   by = ".features_id", all.x = T)
             nebula_index <-
               dplyr::mutate(nebula_index,
