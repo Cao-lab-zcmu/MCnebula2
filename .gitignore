@@ -28,6 +28,9 @@ vignettes/*.pdf
 *.pdf
 .Rd2pdf*
 
+# Rprofile
+.Rprofile
+
 # hugo
 .hugo*
 
