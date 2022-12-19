@@ -18,3 +18,8 @@ would be clean up to reduced memory usage.
 This is best used after running the \code{\link[=create_nebula_index]{create_nebula_index()}},
 if your machine doesn't have much Random Access Memory (RAM).
 }
+\note{
+If this function has conducted, the PPCP dataset would not be
+available for downstream methods, such as \code{\link[=set_ppcp_data]{set_ppcp_data()}},
+\code{\link[=annotate_nebula]{annotate_nebula()}}...
+}

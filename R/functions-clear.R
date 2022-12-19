@@ -19,6 +19,9 @@ NULL
 #' would be clean up to reduced memory usage.
 #' This is best used after running the [create_nebula_index()],
 #' if your machine doesn't have much Random Access Memory (RAM).
+#' @note If this function has conducted, the PPCP dataset would not be
+#' available for downstream methods, such as [set_ppcp_data()],
+#' [annotate_nebula()]...
 #' @rdname clear
 clear_dataset <- function(x) {
   clear <- c(".f2_formula", ".f3_fingerid", ".f3_canopus")
