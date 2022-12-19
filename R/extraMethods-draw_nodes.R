@@ -45,6 +45,7 @@ setMethod("draw_nodes",
             function(x) {
               if (!is.null(nebula_index(x)[[ "tracer_color" ]])) {
                 nodes_color <- nebula_index(x)[[ "tracer_color" ]]
+                names(nodes_color) <- nebula_index(x)[[ ".features_id" ]]
               } else {
                 nodes_color <- "#FFF9F2"
               }

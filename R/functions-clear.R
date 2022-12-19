@@ -17,7 +17,7 @@ NULL
 #' chemical structure, chemical classes)
 #' in \code{project_dataset(x)}, and data in \code{backtrack(mcn_dataset(mcn)}
 #' would be clean up to reduced memory usage.
-#' This is best used after running the [create_nebula_index()],
+#' This may be best used after running the [create_nebula_index()],
 #' if your machine doesn't have much Random Access Memory (RAM).
 #' @note If this function has conducted, the PPCP dataset would not be
 #' available for downstream methods, such as [set_ppcp_data()],
@@ -29,6 +29,17 @@ clear_dataset <- function(x) {
     dataset(project_dataset(x))[[ i ]] <- NULL
   }
   backtrack(mcn_dataset(x)) <- list()
+  return(x)
+}
+
+#' @export clear_nodes
+#' @aliases clear_nodes
+#' @description \code{clear_nodes}: Clear data ('grobs' and 'ggset') of 'nodes'
+#' in slot \code{child_nebulae}.
+#' @rdname clear
+clear_nodes <- function(x) {
+  nodes_ggset(child_nebulae(x)) <- list()
+  nodes_grob(child_nebulae(x)) <- list()
   return(x)
 }
 

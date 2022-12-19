@@ -128,6 +128,8 @@ ggset_activate_parent_nebula <-
               .command_parent_node(),
               .command_parent_edge_width(),
               .command_parent_fill(palette_gradient(x)),
+              .command_scale_x(layout_ggraph(parent_nebula(x))),
+              .command_scale_y(layout_ggraph(parent_nebula(x))),
               new_command(match.fun(theme_grey), name = "theme_grey"),
               .command_parent_theme()
     )
@@ -153,6 +155,8 @@ ggset_activate_child_nebulae <-
                          .command_parent_edge_width(),
                          .command_parent_fill(palette_gradient(x)),
                          .command_child_title(name),
+                         .command_scale_x(set[[ name ]]),
+                         .command_scale_y(set[[ name ]]),
                          new_command(match.fun(theme_grey), name = "theme_grey"),
                          .command_child_theme(fill)
                )
