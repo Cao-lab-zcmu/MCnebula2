@@ -7,6 +7,8 @@
 \alias{modify_set_labs_and_unify_scale_limits}
 \alias{modify_annotate_child}
 \alias{modify_rm_legend}
+\alias{modify_tracer_node}
+\alias{modify_color_edge}
 \alias{modify_set_margin}
 \alias{modify_unify_scale_limits}
 \alias{modify_set_labs_xy}
@@ -23,6 +25,10 @@ modify_annotate_child(ggset, x)
 
 modify_rm_legend(ggset)
 
+modify_tracer_node(ggset)
+
+modify_color_edge(ggset, color)
+
 modify_set_margin(ggset, margin = grid::unit(rep(-8, 4), "lines"))
 
 modify_unify_scale_limits(ggset, x, aes_name = NA)
@@ -36,6 +42,8 @@ modify_set_labs(ggset, x)
 
 \item{x}{\linkS4class{mcnebula} object.}
 
+\item{color}{character(1).}
+
 \item{aes_name}{character. Specify which 'aes' to unify scale,
 e.g., c("fill", "size", "edge_width").}
 }
@@ -46,7 +54,9 @@ to make improvements to \linkS4class{ggset} object.
 
 \code{modify_default_child}:
 Used for \code{visualize_all()}.
-\code{modify_rm_legend} + \code{modify_set_labs} + \code{modify_unify_scale_limits}
+\code{modify_rm_legend} + \code{modify_set_labs} + \code{modify_unify_scale_limits}.
+In addition, if the 'use_tracer' is TRUE (see \code{\link[=set_nodes_color]{set_nodes_color()}}),
+\code{modify_tracer_node} and \code{modify_color_edge} would be performed.
 
 \code{modify_stat_child}:
 Repalce \code{\link[=scale_fill_gradientn]{scale_fill_gradientn()}} with \code{\link[=scale_fill_gradient2]{scale_fill_gradient2()}} in 'layers';
@@ -66,6 +76,12 @@ in \code{\link[ggplot2:theme]{ggplot2::theme()}}).
 
 \code{modify_rm_legend}: remove the legend.
 For parameter of \code{legend.position} in \code{\link[ggplot2:theme]{ggplot2::theme()}}.
+
+\code{modify_tracer_node}: Set the stroke for nodes in
+Nebulae (network) as 0, and the color as 'transparent';
+Override the node color (border color) in legend.
+
+\code{modify_color_edge}: Set color for edge.
 
 \code{modify_set_margin}: reduce margin.
 For parameter of \code{plot.margin} in \code{\link[ggplot2:theme]{ggplot2::theme()}}.

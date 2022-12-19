@@ -24,12 +24,17 @@ NULL
 #' 
 #' @description \code{modify_default_child}:
 #' Used for \code{visualize_all()}.
-#' \code{modify_rm_legend} + \code{modify_set_labs} + \code{modify_unify_scale_limits}
+#' \code{modify_rm_legend} + \code{modify_set_labs} + \code{modify_unify_scale_limits}.
+#' In addition, if the 'use_tracer' is TRUE (see [set_nodes_color()]),
+#' \code{modify_tracer_node} and \code{modify_color_edge} would be performed.
 #' 
 #' @rdname fun_modify
 modify_default_child <- 
   function(ggset, x){
     x <- .get_missing_x(x, "mcnebula")
+    maps <- .get_mapping2(ggset)
+    if (maps[[ "fill" ]] == "tracer")
+      ggset <- modify_color_edge(modify_tracer_node(ggset), "lightblue")
     modify_rm_legend(modify_set_labs(modify_unify_scale_limits(ggset)))
   }
 
@@ -72,7 +77,7 @@ modify_stat_child <-
                        guide_colorbar(title = NULL, barheight = grid::unit(.5, "line"))
                      else F
                    })
-    if (any(grepl("^guides", names(layers(ggset)))))
+    if (any(grepl("^guides|ggplot2::guides", names(layers(ggset)))))
       ggset <- do.call(mutate_layer, c(list(x = ggset, layer = "guides"), args))
     else {
       command <- do.call(new_command,
@@ -136,6 +141,40 @@ modify_annotate_child <-
 modify_rm_legend <- 
   function(ggset){
     mutate_layer(ggset, "theme", legend.position = "none")
+  }
+
+#' @export modify_tracer_node
+#' @aliases modify_tracer_node
+#' @description \code{modify_tracer_node}: Set the stroke for nodes in
+#' Nebulae (network) as 0, and the color as 'transparent';
+#' Override the node color (border color) in legend.
+#' @rdname fun_modify
+modify_tracer_node <- 
+  function(ggset){
+    seq <- grep("geom_node_point", names(layers(ggset)))
+    ggset <- mutate_layer(ggset, seq, stroke = 0, color = "transparent")
+    ## override the nodes boder color in legend 
+    seq <- grep("^guides|ggplot2::guides", names(layers(ggset)))
+    size_legend <- guide_legend(override.aes = list(stroke = .3, color = "black"))
+    fill_legend <- guide_legend(override.aes = list(size = 4))
+    if (length(seq) > 0)
+      ggset <- mutate_layer(ggset, seq, size = size_legend, fill = fill_legend)
+    else {
+      command <- new_command(match.fun("guides"), size = size_legend,
+                             fill = fill_legend, name = "guides")
+      ggset <- add_layers(ggset, command)
+    }
+  }
+
+#' @export modify_color_edge
+#' @aliases modify_color_edge
+#' @description \code{modify_color_edge}: Set color for edge.
+#' @param color character(1).
+#' @rdname fun_modify
+modify_color_edge <- 
+  function(ggset, color){
+    seq <- grep("geom_edge_", names(layers(ggset)))
+    mutate_layer(ggset, seq, color = color)
   }
 
 #' @importFrom grid unit
