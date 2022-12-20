@@ -12,6 +12,12 @@
              rel.index = "Relative index",
              rel.int. = "Relative intensity",
              tracer = "Tracer",
-             group = "Group"
+             group = "Group",
+             .features_id = "ID",
+             mol.formula = "Formula",
+             inchikey2d = "InChIKey planar",
+             error.mass = "Mass error (ppm)",
+             synonym = "Synonym",
+             adduct = "Adduct"
     )
   }
