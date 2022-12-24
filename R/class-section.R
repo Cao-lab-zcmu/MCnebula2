@@ -567,7 +567,7 @@ setMethod("new_section",
 #' @description \code{new_section2}: Identical to \code{new_section(NULL, , ...)}
 #' @rdname section-class
 new_section2 <- function(paragraph, code_block) {
-  new_section(NULL, , paragraph, code_block)
+  new_section(NULL, 2, paragraph, code_block)
 }
 
 #' @exportMethod call_command
