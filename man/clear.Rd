@@ -3,9 +3,12 @@
 \name{clear}
 \alias{clear}
 \alias{clear_dataset}
+\alias{clear_nodes}
 \title{Clean up data in the mcnebula object that is no longer in use}
 \usage{
 clear_dataset(x)
+
+clear_nodes(x)
 }
 \arguments{
 \item{x}{\linkS4class{mcnebula} object.}
@@ -15,8 +18,11 @@ clear_dataset(x)
 chemical structure, chemical classes)
 in \code{project_dataset(x)}, and data in \code{backtrack(mcn_dataset(mcn)}
 would be clean up to reduced memory usage.
-This is best used after running the \code{\link[=create_nebula_index]{create_nebula_index()}},
+This may be best used after running the \code{\link[=create_nebula_index]{create_nebula_index()}},
 if your machine doesn't have much Random Access Memory (RAM).
+
+\code{clear_nodes}: Clear data ('grobs' and 'ggset') of 'nodes'
+in slot \code{child_nebulae}.
 }
 \note{
 If this function has conducted, the PPCP dataset would not be

@@ -563,6 +563,13 @@ setMethod("new_section",
             .section(heading = NULL, paragraph = paragraph, code_block = code_block)
           })
 
+#' @export new_section2
+#' @description \code{new_section2}: Identical to \code{new_section(NULL, , ...)}
+#' @rdname section-class
+new_section2 <- function(paragraph, code_block) {
+  new_section(NULL, , paragraph, code_block)
+}
+
 #' @exportMethod call_command
 #' @aliases call_command
 #' @description \code{call_command}: Format 'section' object as character.

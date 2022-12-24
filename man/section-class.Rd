@@ -28,6 +28,7 @@
 \alias{new_section,character,numeric,character,maybe_code_block-method}
 \alias{new_section}
 \alias{new_section,NULL,numeric,character,maybe_code_block-method}
+\alias{new_section2}
 \alias{call_command,section-method}
 \alias{call_command,NULL-method}
 \title{Basic cells in the report}
@@ -55,6 +56,8 @@
 \S4method{new_section}{character,numeric,character,maybe_code_block}(heading, level, paragraph, code_block)
 
 \S4method{new_section}{`NULL`,numeric,character,maybe_code_block}(heading, level, paragraph, code_block)
+
+new_section2(paragraph, code_block)
 
 \S4method{call_command}{section}(x)
 
@@ -97,6 +100,8 @@ the method \code{new_section}.
 while performing the method \code{new_section}.
 
 \code{new_section}: create \linkS4class{section} object.
+
+\code{new_section2}: Identical to \code{new_section(NULL, , ...)}
 
 \code{call_command}: Format 'section' object as character.
 }
