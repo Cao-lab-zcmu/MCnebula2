@@ -227,15 +227,21 @@ setMethod("call_command",
 #' @export search_heading
 #' @aliases search_heading
 #' @description \code{search_heading}: Regex match for [heading-class] object
+#' @param pattern character(1). For Regex match. Allowed Perl expression.
+#' @param level numeric.
 #' in slot \code{layers}.
 #' @rdname report-class
 search_heading <- 
-  function(x, pattern) {
+  function(x, pattern, level = NULL) {
     log <- vapply(layers(x), FUN.VALUE = logical(1),
                   function(s) {
-                    if (is(s, "heading"))
+                    if (is(s, "heading")) {
+                      if (!is.null(level)) {
+                        if (!any(level(s) == level))
+                          return(F)
+                      }
                       grepl(pattern, s, perl = T)
-                    else F
+                    } else F
                   })
     (1:length(layers(x)))[ log ]
   }
