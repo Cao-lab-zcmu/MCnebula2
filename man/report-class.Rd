@@ -34,7 +34,8 @@
 \item{value}{The value for the slot.}
 
 \item{...}{An arbitrary number of \linkS4class{heading},
-\linkS4class{section} or \linkS4class{code_block} in sequence.}
+\linkS4class{section} or \linkS4class{code_block} in sequence.
+Specially, \code{NULL} can be passed herein, but would be ignored.}
 
 \item{yaml}{character. Passed to .Rmd for setting format of documentation.}
 }

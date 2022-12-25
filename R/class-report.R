@@ -81,7 +81,6 @@ setMethod("show_layers",
                    })
           })
 
-## ------------------------------------- 
 #' @exportMethod yaml
 #' @aliases yaml
 #' @description \code{yaml}, \code{yaml<-}: getter and setter
@@ -162,18 +161,20 @@ setReplaceMethod("yaml",
                    initialize(x, yaml = value)
                  })
 
-## ---------------------------------------------------------------------- 
 #' @exportMethod new_report
 #' @aliases new_report
 #' @description \code{new_report}: Create a [report-class] object.
 #' @param ... An arbitrary number of [heading-class],
 #' [section-class] or [code_block-class] in sequence.
+#' Specially, \code{NULL} can be passed herein, but would be ignored.
 #' @param yaml character. Passed to .Rmd for setting format of documentation.
 #' @rdname report-class
 setMethod("new_report", 
           signature = c(yaml = "character"),
           function(..., yaml){
-            .report(yaml = yaml, layers = list(...))
+            layers <- list(...)
+            layers <- layers[!vapply(layers, is.null, logical(1))]
+            .report(yaml = yaml, layers = layers)
           })
 
 #' @exportMethod new_report
