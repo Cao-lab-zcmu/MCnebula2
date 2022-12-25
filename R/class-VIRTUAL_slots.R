@@ -331,7 +331,6 @@ setMethod("add_layers",
           signature = c(x = "layerSet"),
           function(x, ...){
             args <- list(...)
-            names(args) <- vapply(args, command_name, "ch")
             layers(x) <- c(layers(x), args)
             return(x)
           })
@@ -358,5 +357,20 @@ setMethod("move_layers",
           signature = c(x = "layerSet", from = "numeric", to = "numeric"),
           function(x, from, to){
             layers(x)[c(from, to)] <- layers(x)[c(to, from)]
+            return(x)
+          })
+
+#' @exportMethod insert_layers
+#' @aliases insert_layers
+#' @description \code{insert_layers}: Insert "layers" into the specified
+#' position (sequence) of slot \code{layers}.
+#' @rdname VIRTUAL_layerSet-class
+setMethod("insert_layers", 
+          signature = c(x = "layerSet", to = "numeric"),
+          function(x, to, ...){
+            before <- length(layers(x))
+            x <- add_layers(x, ...)
+            now <- length(layers(x))
+            x <- move_layers(x, to:before, (before + 1):now)
             return(x)
           })

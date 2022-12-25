@@ -12,6 +12,8 @@
 \alias{mutate_layer,ggset,numeric-method}
 \alias{mutate_layer}
 \alias{mutate_layer,ggset,character-method}
+\alias{add_layers,ggset-method}
+\alias{add_layers}
 \alias{call_command,ggset-method}
 \alias{call_command}
 \title{Management for 'ggplot' visualzation}
@@ -24,12 +26,14 @@
 
 \S4method{mutate_layer}{ggset,character}(x, layer, ...)
 
+\S4method{add_layers}{ggset}(x, ...)
+
 \S4method{call_command}{ggset}(x)
 }
 \arguments{
-\item{x}{\linkS4class{ggset} object}
+\item{x}{object contains slot \code{layers}.}
 
-\item{...}{parameters passed to the layer.}
+\item{...}{extra \linkS4class{command} objects.}
 
 \item{layer}{numeric(1) or character(1). If "character", the name must be unique
 in slot \code{layers}.}
@@ -46,6 +50,8 @@ with a pretty and readable form.
 
 \code{mutate_layer}:
 Pass new parameters or modify pre-existing parameters to the packed function.
+
+\code{add_layers}: add extra \linkS4class{command} objects into slot \code{layers}.
 
 \code{call_command}: plot as 'ggplot' object.
 }

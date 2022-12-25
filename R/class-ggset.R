@@ -71,7 +71,6 @@ setMethod("show_layers",
             cat("\n")
           })
 
-## ------------------------------------- 
 #' @exportMethod new_ggset
 #' @aliases new_ggset
 #' @description \code{new_ggset}: Simplified creation of [ggset-class] object.
@@ -150,7 +149,6 @@ setMethod("mutate_layer",
             return(x)
           })
 
-## ------------------------------------- 
 #' @exportMethod mutate_layer
 #' @aliases mutate_layer
 #' @rdname ggset-class
@@ -168,7 +166,21 @@ setMethod("mutate_layer",
             return(x)
           })
 
-## ------------------------------------- 
+#' @exportMethod add_layers
+#' @aliases add_layers
+#' @description \code{add_layers}: add extra [command-class] objects into slot \code{layers}.
+#' @param x object contains slot \code{layers}.
+#' @param ... extra [command-class] objects.
+#' @rdname ggset-class
+setMethod("add_layers", 
+          signature = c(x = "ggset"),
+          function(x, ...){
+            args <- list(...)
+            names(args) <- vapply(args, command_name, "ch")
+            layers(x) <- c(layers(x), args)
+            return(x)
+          })
+
 #' @exportMethod call_command
 #' @aliases call_command
 #' @description \code{call_command}: plot as 'ggplot' object.

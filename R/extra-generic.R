@@ -174,6 +174,9 @@ setGeneric("move_layers",
            signature = c(ANY = "x", "numeric" = "from", "numeric" = "to"),
            function(x, from, to)
              standardGeneric("move_layers"))
+setGeneric("insert_layers", 
+           signature = c(ANY = "x", "numeric" = "to"),
+           function(x, to, ...) standardGeneric("insert_layers"))
 setGeneric("mutate_layer", 
            signature = c(ANY = "x", "ANY" = "layer"),
            function(x, layer, ...)

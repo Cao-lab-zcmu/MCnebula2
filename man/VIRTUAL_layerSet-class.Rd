@@ -17,6 +17,8 @@
 \alias{delete_layers}
 \alias{move_layers,layerSet,numeric,numeric-method}
 \alias{move_layers}
+\alias{insert_layers,layerSet,numeric-method}
+\alias{insert_layers}
 \title{Share slots and methods for classes inherite from VIRTUAL_layerSet}
 \usage{
 \S4method{layers}{layerSet}(x)
@@ -30,6 +32,8 @@
 \S4method{delete_layers}{layerSet,numeric}(x, layers)
 
 \S4method{move_layers}{layerSet,numeric,numeric}(x, from, to)
+
+\S4method{insert_layers}{layerSet,numeric}(x, to, ...)
 }
 \arguments{
 \item{x}{object contains slot \code{layers}.}
@@ -56,6 +60,9 @@ for the \code{layers} slot of the object.
 \code{delete_layers}: delete "layer" in slot \code{layers}.
 
 \code{move_layers}: change the order of "layer" in slot \code{layers}.
+
+\code{insert_layers}: Insert "layers" into the specified
+position (sequence) of slot \code{layers}.
 }
 \section{Slots}{
 
