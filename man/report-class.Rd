@@ -16,6 +16,7 @@
 \alias{new_report,missing-method}
 \alias{call_command,report-method}
 \alias{call_command}
+\alias{search_heading}
 \title{Creating a formatted report}
 \usage{
 \S4method{show_layers}{report}(x)
@@ -29,8 +30,12 @@
 \S4method{new_report}{missing}(..., yaml)
 
 \S4method{call_command}{report}(x)
+
+search_heading(x, pattern)
 }
 \arguments{
+\item{x}{\linkS4class{report} object.}
+
 \item{value}{The value for the slot.}
 
 \item{...}{An arbitrary number of \linkS4class{heading},
@@ -65,6 +70,9 @@ while performing the method \code{new_report}.
 \code{call_command}: Format 'report' object as character, which can be output
 by \code{writeLines()} function as '.Rmd' file and than use \code{rmarkdown::render} output
 as pdf, html, or other format files.
+
+\code{search_heading}: Regex match for \linkS4class{heading} object
+in slot \code{layers}.
 }
 \section{Slots}{
 

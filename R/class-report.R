@@ -17,6 +17,8 @@
 #' Reports can be exported as ".Rmd" text files, and subsequently,
 #' users can call [rmarkdown::render()] for output formatted documents.
 #'
+#' @param x [report-class] object.
+#' 
 #' @family layerSets
 #'
 #' @slot yaml character. Metadata passed to .Rmd for setting format of documentation.
@@ -217,3 +219,24 @@ setMethod("call_command",
             else
               x
           })
+
+# ==========================================================================
+# function
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+#' @export search_heading
+#' @aliases search_heading
+#' @description \code{search_heading}: Regex match for [heading-class] object
+#' in slot \code{layers}.
+#' @rdname report-class
+search_heading <- 
+  function(x, pattern) {
+    log <- vapply(layers(x), FUN.VALUE = logical(1),
+                  function(s) {
+                    if (is(s, "heading"))
+                      grepl(pattern, s, perl = T)
+                    else F
+                  })
+    (1:length(layers(x)))[ log ]
+  }
+
