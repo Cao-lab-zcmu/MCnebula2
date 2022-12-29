@@ -23,3 +23,15 @@
 #' - <https://mona.fiehnlab.ucdavis.edu/downloads>.
 #' - <https://bio.informatik.uni-jena.de/software/sirius/>
 "mcn_5features"
+
+#' Example text for report description.
+#' 
+#' Lazy data used to supplement the presentation of the report.
+#' It doesn't make the description of the report outstanding, but it at least
+#' makes it decent (maybe).
+#' 
+#' @format ## `reportDoc`
+#' A list object.
+#'
+"reportDoc"
+

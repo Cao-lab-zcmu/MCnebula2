@@ -31,7 +31,7 @@
 
 \S4method{call_command}{report}(x)
 
-search_heading(x, pattern)
+search_heading(x, pattern, level = NULL)
 }
 \arguments{
 \item{x}{\linkS4class{report} object.}
@@ -43,6 +43,11 @@ search_heading(x, pattern)
 Specially, \code{NULL} can be passed herein, but would be ignored.}
 
 \item{yaml}{character. Passed to .Rmd for setting format of documentation.}
+
+\item{pattern}{character(1). For Regex match. Allowed Perl expression.}
+
+\item{level}{numeric.
+in slot \code{layers}.}
 }
 \description{
 The report module can create output report quickly for
@@ -72,7 +77,6 @@ by \code{writeLines()} function as '.Rmd' file and than use \code{rmarkdown::ren
 as pdf, html, or other format files.
 
 \code{search_heading}: Regex match for \linkS4class{heading} object
-in slot \code{layers}.
 }
 \section{Slots}{
 

@@ -122,24 +122,6 @@ get_history <-
     rawhist
   }
 
-document_mc_workflow <- 
-  function(x){
-    if (x == "abstract") {
-      obj <- new_section("Abstract", 1,
-                         MCnebula2_documents$abstract, NULL)
-    }
-    if (x == "introduction") {
-      obj <- new_section("Introduction", 1,
-                         MCnebula2_documents$introduction, NULL)
-    }
-    if (x == "setup") {
-      codes <- "library(MCnebula2)"
-      obj <- new_section("Set-up", 1, MCnebula2_documents$setup,
-                         new_code_block(codes = codes))
-    }
-    obj
-  }
-
 #' @importFrom bookdown pdf_document2
 #' @importFrom BiocStyle pdf_document
 #' @importFrom BiocStyle html_document
