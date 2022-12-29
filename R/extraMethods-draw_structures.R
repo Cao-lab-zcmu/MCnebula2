@@ -138,6 +138,8 @@ setMethod("show_structure",
     .check_path(path)
     df <- dplyr::mutate(df, path = paste0(!!path, "/", .features_id, ".svg"))
     df <- dplyr::filter(df, !is.na(smiles))
+    if (nrow(df) == 0)
+      return(NULL)
     .message_info("draw_structures", "smiles -> svg -> grob")
     grImport2:::setPrefix("")
     lst <- pbapply::pbapply(dplyr::select(df, smiles, path), 1,

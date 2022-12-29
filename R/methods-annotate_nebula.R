@@ -101,6 +101,7 @@ setMethod("annotate_nebula",
             data <- layout_ggraph(child_nebulae(x))[[nebula_name]]
             data <- dplyr::select(data, x, y,
                                   .features_id = name, size = tani.score)
+            data <- dplyr::mutate(data, size = ifelse(is.na(size), .2, size))
             .features_id <- data$.features_id
             x <- draw_structures(x, nebula_name)
             x <- draw_nodes(x, nebula_name)
