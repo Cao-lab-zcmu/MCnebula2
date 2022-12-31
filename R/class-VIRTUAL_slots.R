@@ -178,7 +178,6 @@ setReplaceMethod("dataset", "ANY",
                    initialize(x, dataset = value)
                  })
 
-## ------------------------------------- 
 setMethod("add_dataset", 
           signature = c(x = "ANY", list = "list"),
           function(x, list){
@@ -187,7 +186,6 @@ setMethod("add_dataset",
             return(x)
           })
 
-## ------------------------------------- 
 #' @exportMethod reference
 #' @aliases reference
 #' @description \code{reference}, \code{reference<-}: getter and setter
@@ -206,7 +204,6 @@ setReplaceMethod("reference", "ANY",
                    initialize(x, reference = value)
                  })
 
-## ------------------------------------- 
 #' @exportMethod backtrack
 #' @aliases backtrack
 #' @description \code{backtrack}, \code{backtrack<-}: getter and setter
@@ -226,7 +223,6 @@ setReplaceMethod("backtrack",
                    initialize(x, backtrack = value)
                  })
 
-## ------------------------------------- 
 #' @exportMethod subscript
 #' @aliases subscript
 #' @description \code{subscript}, \code{subscript<-}: getter and setter
@@ -245,7 +241,6 @@ setReplaceMethod("subscript", "ANY",
                    initialize(x, subscript = value)
                  })
 
-## ------------------------------------- 
 #' @exportMethod export_name
 #' @aliases export_name
 #' @description \code{export_name}, \code{export_name<-}: getter and setter
@@ -290,7 +285,6 @@ setReplaceMethod("export_path",
                    initialize(x, export_path = value)
                  })
 
-## ---------------------------------------------------------------------- 
 #' @exportMethod layers
 #' @aliases layers
 #' @description \code{layers}, \code{layers<-}: getter and setter
@@ -311,7 +305,6 @@ setReplaceMethod("layers",
                    initialize(x, layers = value)
                  })
 
-## ------------------------------------- 
 #' @exportMethod show
 #' @aliases show
 #' @rdname VIRTUAL_layerSet-class

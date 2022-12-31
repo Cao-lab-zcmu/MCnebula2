@@ -55,14 +55,14 @@ setGeneric("set_nodes_color",
 setGeneric("set_tracer", 
            function(x, .features_id, colors, rest)
              standardGeneric("set_tracer"))
-## ------------------------------------- 
+ 
 setGeneric("binary_comparison", 
            signature = c(ANY = "x", "formula" = "formula",
                          "function" = "fun_norm", "ANY" = "top_coef",
                          "ANY" = "contrasts"),
            function(x, ..., formula, fun_norm, top_coef, contrasts)
              standardGeneric("binary_comparison"))
-## ------------------------------------- 
+ 
 setGeneric("get_metadata", 
            signature = c(ANY = "x",
                          "character" = "subscript",
@@ -75,7 +75,7 @@ setGeneric("get_metadata",
 setGeneric("extract_metadata", 
            signature = c(ANY = "x", "character" = "subscript"),
            function(x, subscript) standardGeneric("extract_metadata"))
-## ---------------------------------------------------------------------- 
+ 
 setGeneric("add_dataset", 
            signature = c("ANY" = "x", "list" = "list"),
            function(x, list) standardGeneric("add_dataset"))
@@ -86,7 +86,7 @@ setGeneric("extract_rawset",
 setGeneric("extract_mcnset", 
            signature = c("ANY" = "x", character = "subscript"),
            function(x, subscript) standardGeneric("extract_mcnset"))
-## ---------------------------------------------------------------------- 
+ 
 setGeneric("get_upper_dir_subscript", 
            signature = c(ANY = "x",
                          character = "subscript",
@@ -94,10 +94,10 @@ setGeneric("get_upper_dir_subscript",
                          ),
            function(x, subscript, project_conformation)
              standardGeneric("get_upper_dir_subscript"))
-## ---------------------------------------------------------------------- 
+ 
 setGeneric("latest", 
            function(x, slot, subscript) standardGeneric("latest"))
-## ---------------------------------------------------------------------- 
+ 
 ## rename the colnames and check the values type (character or interger, etc.)
 setGeneric("format_msframe", 
            signature = c("ANY" = "x",
@@ -123,7 +123,7 @@ setGeneric("new_command",
              standardGeneric("new_command"))
 setGeneric("call_command", 
            function(x) standardGeneric("call_command"))
-## ---------------------------------------------------------------------- 
+ 
 setGeneric("new_code_block", 
            signature = c(character = "language", "character" = "codes",
                          "list" = "args", "logical" = "prettey",
@@ -147,7 +147,7 @@ setGeneric("include_figure",
 setGeneric("history_rblock", 
            function(nrow, pattern_start, pattern_end, exclude)
              standardGeneric("history_rblock"))
-## ------------------------------------- 
+ 
 setGeneric("new_heading", 
            function(heading, level)
              standardGeneric("new_heading"))
@@ -159,7 +159,7 @@ setGeneric("new_section",
 setGeneric("new_report", 
            function(..., yaml)
              standardGeneric("new_report"))
-## ---------------------------------------------------------------------- 
+ 
 setGeneric("new_ggset",
            function(...) standardGeneric("new_ggset"))
 setGeneric("show_layers", 
@@ -181,4 +181,9 @@ setGeneric("mutate_layer",
            signature = c(ANY = "x", "ANY" = "layer"),
            function(x, layer, ...)
              standardGeneric("mutate_layer"))
-## ------------------------------------- 
+ 
+setGeneric("workflow", 
+  function(sections, mode, envir, sirius_version, sirius_project, ion_mode, ...)
+    standardGeneric("workflow"))
+
+

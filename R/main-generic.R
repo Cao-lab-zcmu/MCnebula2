@@ -9,7 +9,7 @@ setGeneric("initialize_mcnebula",
                          ),
            function(x, sirius_version, sirius_project, output_directory)
              standardGeneric("initialize_mcnebula"))
-## ------------------------------------- 
+ 
 setGeneric("filter_formula", 
            signature = c(mcnebula = "x",
                          "function" = "fun_filter",
@@ -58,7 +58,7 @@ setGeneric("create_stardust_classes",
            function(x, pp.threshold, hierarchy_priority,
                     position_isomerism, inherit_dataset)
              standardGeneric("create_stardust_classes"))
-## ------------------------------------- 
+ 
 setGeneric("cross_filter_stardust",
            signature = c(mcnebula = "x"),
            function(x, min_number, max_ratio,
@@ -85,12 +85,12 @@ setGeneric("backtrack_stardust",
                          "numeric" = "rel.index", "logical" = "remove"),
            function(x, class.name, rel.index, remove)
              standardGeneric("backtrack_stardust"))
-## ------------------------------------- 
+ 
 setGeneric("create_nebula_index", 
            signature = c(mcnebula = "x", "logical" = "force"),
            function(x, force)
              standardGeneric("create_nebula_index"))
-## ------------------------------------- 
+ 
 setGeneric("compute_spectral_similarity", 
            signature = c(mcnebula = "x",
                          "logical" = "within_nebula",
@@ -99,7 +99,7 @@ setGeneric("compute_spectral_similarity",
                          "ANY" = "sp2"),
            function(x, within_nebula, recompute, sp1, sp2)
              standardGeneric("compute_spectral_similarity"))
-## ------------------------------------- 
+ 
 setGeneric("create_parent_nebula", 
            signature = c(mcnebula = "x",
                          "numeric" = "edge_cutoff",
@@ -114,7 +114,7 @@ setGeneric("create_child_nebulae",
                          "logical" = "use_tracer"),
            function(x, edge_cutoff, max_edge_number, use_tracer)
              standardGeneric("create_child_nebulae"))
-## ------------------------------------- 
+ 
 setGeneric("create_parent_layout", 
            signature = c(mcnebula = "x", "character" = "ggraph_layout",
                          "numeric" = "seed"),
@@ -128,14 +128,14 @@ setGeneric("create_child_layouts",
            function(x, ggraph_layouts, seeds, grid_layout,
                     viewports, panel_viewport, legend_viewport)
              standardGeneric("create_child_layouts"))
-## ------------------------------------- 
+ 
 setGeneric("activate_nebulae", 
            signature = c(mcnebula = "x",
                          "function" = "fun_default_parent",
                          "function" = "fun_default_child"),
            function(x, fun_default_parent, fun_default_child)
              standardGeneric("activate_nebulae"))
-## ------------------------------------- 
+ 
 setGeneric("visualize", 
            function(x, item, fun_modify, annotate)
              standardGeneric("visualize"))
@@ -145,7 +145,7 @@ setGeneric("visualize_all",
                          "ANY" = "legend_hierarchy"),
            function(x, newpage, fun_modify, legend_hierarchy)
              standardGeneric("visualize_all"))
-## ------------------------------------- 
+ 
 setGeneric("annotate_nebula", 
            function(x, nebula_name)
              standardGeneric("annotate_nebula"))

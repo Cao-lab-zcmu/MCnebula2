@@ -90,6 +90,51 @@ See \url{https://bookdown.org/yihui/rmarkdown/compile.html} for details.}
 
 \examples{
 \dontrun{
+  s1 <- new_heading("Title 1", 1)
+  
+  s1.5 <- new_section2(
+    c("..."), NULL
+  )
+  
+  s2 <- new_section2(
+    c("This is sentence 1.",
+      "This is sentence 2.",
+      "This is sentence 3."),
+    rblock({
+      df <- data.frame(x = 1:10, y = 1:10)
+      df <- dplyr::mutate(df,
+        group = rep(paste0("p", 1:3), c(3, 3, 4))
+      )
+    })
+  )
+  
+  s3 <- new_heading("Title 2", 1)
+  
+  s4 <- new_section2(
+    c("This is a paragraph..."),
+    rblock({
+      p <- ggplot(df) +
+        geom_point(aes(x = x, y = y, fill = group))
+      ggsave(f <- paste0(tempdir(), "/test.pdf"), p)
+    })
+  )
+  
+  s5 <- include_figure(f, "name", "Caption: ...")
+  
+  s6 <- rblock({
+    print(1:100)
+  }, args = list(echo = F, eval = F))
+  
+  s7 <- c("... paragraph ...")
+  
+  sections <- gather_sections()
+  report <- do.call(new_report, sections)
+  render_report(report, paste0(tempdir(), "/report.Rmd"), T)
+  
+  ####################
+  ##### Another example
+  ####################
+  
   h1 <- new_heading("heading, level 1", 1)
   
   sec1 <- new_section(
@@ -144,7 +189,7 @@ See \url{https://bookdown.org/yihui/rmarkdown/compile.html} for details.}
   
   ## output
   tmp <- paste0(tempdir(), "/tmp_output.Rmd")
-  writeLines(call_command(report), tmp)
+  render_report(report, tmp)
   rmarkdown::render(tmp)
   file.exists(sub("Rmd$", "pdf", tmp))
 }

@@ -81,18 +81,6 @@ textSh <-
       cat(ending)
   }
 
-#' @export get_ref
-#' @description \code{get_ref}: get the string for cross-reference.
-#' @rdname code_block-class
-#' @param object [code_block_figure-class] or [code_block_table-class] object.
-#' @param type character. "fig" or "tab".
-get_ref <- 
-  function(object, type = c("fig", "tab")){
-    type <- match.arg(type)
-    name <- sub("^r ", "", command_name(object))
-    paste0("\\@ref(", type, ":", name, ")")
-  }
-
 #' @importFrom stringr str_trunc
 .text_fold <- 
   function(text, width = 200, ellipsis = crayon::silver("...(fold)")){

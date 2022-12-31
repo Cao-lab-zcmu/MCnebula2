@@ -76,8 +76,9 @@ Collate:
     methods-activate_nebulae.R methods-visualize.R
     extraMethods-draw_structures.R extraMethods-draw_nodes.R
     methods-annotate_nebula.R extraMethods-binary_comparison.R
-    extraMethods-report.R data.R functions-plot_msms_mirrors.R
-    functions-clear.R
+    extraMethods-report.R extraMethods-workflow.R
+    data.R functions-plot_msms_mirrors.R functions-clear.R
+    functions-report.R
     zzz.R
 LazyData: true
 Author: LiChuang Huang <shaman.yellow@foxmail.com> [aut] (<https://orcid.org/0000-0002-5445-1988>)
