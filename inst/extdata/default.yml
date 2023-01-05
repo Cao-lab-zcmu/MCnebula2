@@ -4,7 +4,7 @@ csl: '`r system.file("extdata", "vancouver.csl", package = "MCnebula2")`'
 reference-section-title: "Reference"
 link-citations: true
 output:
-  default_pdf:
+  bookdown::pdf_document2:
     keep_tex: true
     toc: true
     toc_depth: 3
