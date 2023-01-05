@@ -75,7 +75,7 @@ modify_stat_child <-
                    function(name) {
                      if (name == "fill")
                        guide_colorbar(title = NULL, barheight = grid::unit(.5, "line"))
-                     else F
+                     else "none"
                    })
     if (any(grepl("^guides|ggplot2::guides", names(layers(ggset)))))
       ggset <- do.call(mutate_layer, c(list(x = ggset, layer = "guides"), args))
@@ -93,7 +93,7 @@ rev.modify_stat_child <-
   function(ggset){
     args <- sapply(names(.get_mapping2(ggset)), simplify = F,
                    function(name) {
-                     if (name == "fill") F else NULL
+                     if (name == "fill") "none" else NULL
                    })
     ggset <- do.call(mutate_layer, c(list(x = ggset, layer = "guides"), args))
     ggset <- mutate_layer(ggset, "theme", legend.position = "right")

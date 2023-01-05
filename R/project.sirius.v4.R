@@ -236,9 +236,9 @@ pbsapply_read_info <- function(path){
              match.features_id = FUN_get_id_sirius.v4,
              match.candidates_id = function(x) stringr::str_extract(x, "[^/]*(?=\\.[a-z]*$)"),
              generate_candidates_id = function(df) {
-               if (is.null(df$mol.formula) | is.null(df$adduct))
+               if (is.null(df$pre.formula) | is.null(df$adduct))
                  stop( "columns not found in `df`" )
-               paste0(df$mol.formula, "_", gsub(" ", "", df$adduct))
+               paste0(df$pre.formula, "_", gsub(" ", "", df$adduct))
              }
     )
   }
