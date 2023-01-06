@@ -33,6 +33,7 @@ NULL
 #' @param .features_id character(1). The ID of 'features'.
 #' @param data data.frame. A 'data.frame' contains columns of '.features_id' and
 #' 'smiles'.
+#' @param ... ...
 #'
 #' @rdname draw_structures-methods
 #'
@@ -74,13 +75,13 @@ setMethod("draw_structures",
           signature = setMissing("draw_structures",
                                  x = "mcnebula",
                                  nebula_name = "character"),
-          function(x, nebula_name){
+          function(x, nebula_name, ...){
             .check_data(child_nebulae(x), list(tbl_graph = "create_child_layouts"))
             tidy <- tbl_graph(child_nebulae(x))[[nebula_name]]
             if (is.null(tidy))
               stop( "`nebula_name` not found in `tbl_graph(child_nebulae(x))`" )
             df <- dplyr::select(tibble::as_tibble(tidy), .features_id = name, smiles)
-            draw_structures(x, data = df)
+            draw_structures(x, data = df, ...)
           })
 
 #' @exportMethod draw_structures
@@ -89,11 +90,11 @@ setMethod("draw_structures",
           signature = setMissing("draw_structures",
                                  x = "mcnebula",
                                  .features_id = "character"),
-          function(x, .features_id){
+          function(x, .features_id, ...){
             .check_data(x, list(features_annotation = "create_features_annotation"))
             df <- dplyr::select(features_annotation(x), .features_id, smiles)
             df <- dplyr::filter(df, .features_id %in% !!.features_id)
-            draw_structures(x, data = df)
+            draw_structures(x, data = df, ...)
           })
 
 #' @exportMethod draw_structures
@@ -102,14 +103,15 @@ setMethod("draw_structures",
           signature = setMissing("draw_structures",
                                  x = "mcnebula",
                                  data = "data.frame"),
-          function(x, data){
+          function(x, data, ...){
             sets <- structures_grob(child_nebulae(x))
             if (!is.null(sets)) {
               data <- dplyr::filter(data, !.features_id %in% names(sets))
             }
             if (!nrow(data) == 0) {
               structures_grob(child_nebulae(x)) <- 
-                c(sets, .draw_structures(data, paste0(export_path(x), "/tmp/structure"), T))
+                c(sets, .draw_structures(data, paste0(export_path(x),
+                      "/tmp/structure"), T, ...))
             }
             return(x)
           })
@@ -133,7 +135,7 @@ setMethod("show_structure",
 #' @importFrom dplyr mutate
 #' @importFrom pbapply pbapply
 .draw_structures <-
-  function(df, path, rm_background = F){
+  function(df, path, rm_background = F, fun_draw = .smiles_to_cairosvg){
     .check_columns(df, c(".features_id", "smiles"), "data.frame")
     .check_path(path)
     df <- dplyr::mutate(df, path = paste0(!!path, "/", .features_id, ".svg"))
@@ -144,7 +146,7 @@ setMethod("show_structure",
     grImport2:::setPrefix("")
     lst <- pbapply::pbapply(dplyr::select(df, smiles, path), 1,
                             function(vec){
-                              .smiles_to_cairosvg(vec[["smiles"]], vec[["path"]])
+                              fun_draw(vec[["smiles"]], vec[["path"]])
                               .cairosvg_to_grob(vec[["path"]])
                             })
     names(lst) <- df$.features_id
