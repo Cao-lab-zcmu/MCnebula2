@@ -9,11 +9,11 @@
 \alias{show_structure,ANY,character-method}
 \title{Draw and visualize chemcial structure}
 \usage{
-\S4method{draw_structures}{mcnebula,character,missing,missing}(x, nebula_name)
+\S4method{draw_structures}{mcnebula,character,missing,missing}(x, nebula_name, .features_id, data, ...)
 
-\S4method{draw_structures}{mcnebula,missing,character,missing}(x, .features_id)
+\S4method{draw_structures}{mcnebula,missing,character,missing}(x, nebula_name, .features_id, data, ...)
 
-\S4method{draw_structures}{mcnebula,missing,missing,data.frame}(x, data)
+\S4method{draw_structures}{mcnebula,missing,missing,data.frame}(x, nebula_name, .features_id, data, ...)
 
 \S4method{show_structure}{ANY,character}(x, .features_id)
 }
@@ -27,6 +27,8 @@ Specified to draw chemical structures of all the 'features' of that.}
 
 \item{data}{data.frame. A 'data.frame' contains columns of '.features_id' and
 'smiles'.}
+
+\item{...}{...}
 }
 \description{
 Methods used for drawing and visualizing chemical structures of 'features'
