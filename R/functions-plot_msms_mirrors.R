@@ -170,7 +170,9 @@ plot_msms_mirrors <-
                 text = element_text(family = .font),
                 strip.text = element_text(size = 12),
                 panel.grid = element_line(color = "grey85"),
-                plot.background = element_rect(fill = "white", size = 0)
+                plot.background = element_rect(
+                  fill = "white", color = "transparent", size = 0
+                )
     )
   }
 
