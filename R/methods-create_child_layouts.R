@@ -167,6 +167,7 @@ setMethod("create_child_layouts",
                     .fresh_param(create_child_layouts()(x)))
           })
 
+#' @importFrom tidygraph activate
 .create_child_layouts <- 
   function(x, ggraph_layouts, seeds,
            grid_layout, viewports,
@@ -185,7 +186,19 @@ setMethod("create_child_layouts",
     viewports <- .as_dic(viewports, names(set), fill = F)
     .check_class(panel_viewport, "viewport", "grid::viewport")
     .check_class(legend_viewport, "viewport", "grid::viewport")
-    tbl_graph(child_nebulae(x)) <- lapply(set, tidygraph::as_tbl_graph)
+    tbl_graph(child_nebulae(x)) <- lapply(set,
+      function(igraph) {
+        tbl <- tidygraph::as_tbl_graph(igraph)
+        edges <- tibble::as_tibble(tidygraph::activate(tbl, "edges"))
+        if (nrow(edges) == 0) {
+          tbl <- dplyr::mutate(
+            tidygraph::activate(tbl, "edges"), similarity = double(0),
+            mass_difference = double(0), rt.min_difference = double(0)
+          )
+        }
+        return(tbl)
+      }
+    )
     layout_ggraph(child_nebulae(x)) <-
       lapply(names(tbl_graph(child_nebulae(x))),
              function(name){
