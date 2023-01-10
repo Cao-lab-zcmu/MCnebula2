@@ -418,3 +418,13 @@ checkColMerge <- function(x, y, ...){
   args <- c(list(x = x, y = y), args)
   do.call(merge, args)
 }
+
+zoRange <- function(x, factor) {
+  x <- range(x)
+  ex <- abs(x[2] - x[1]) * (factor - 1)
+  x[1] <- x[1] - ex
+  x[2] <- x[2] + ex
+  return(x)
+}
+
+

@@ -38,11 +38,11 @@
 }
 
 .command_scale_x <- function(data, factor = 1.05){
-  new_command(scale_x_continuous, limits = range(data$x) * factor)
+  new_command(scale_x_continuous, limits = zoRange(data$x, factor))
 }
 
 .command_scale_y <- function(data, factor = 1.05){
-  new_command(scale_y_continuous, limits = range(data$y) * factor)
+  new_command(scale_y_continuous, limits = zoRange(data$y, factor))
 }
 
 .command_parent_theme <- function(){
