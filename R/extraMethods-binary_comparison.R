@@ -118,6 +118,10 @@ setMethod("binary_comparison",
               limma::makeContrasts(contrasts = contrasts, levels = design)
             contrast_matrix(statistic_set(x)) <- contrast
             ## format data
+            features_quantification(x) <- dplyr::select(
+              features_quantification(x), .data$.features_id,
+              dplyr::all_of(sample_metadata(x)$sample)
+            )
             data <- fun_norm(.features_quantification(x))
             col <- colnames(data)
             col <- col %in% sample_metadata(x)$sample
