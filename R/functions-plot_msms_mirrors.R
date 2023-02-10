@@ -41,10 +41,11 @@ plot_msms_mirrors <-
     ## raw peak
     raw_msms <- latest(x, "project_dataset", ".f2_msms")
     raw_msms <- dplyr::filter(raw_msms, .features_id %in% !!.features_id)
-    raw_msms <- dplyr::mutate(raw_msms, rel.int. = int. / max(int.) * 100)
-    raw_msms <- dplyr::select(raw_msms, .features_id,
-                              raw_mz = mz, raw_rel.int. = rel.int.)
-    raw_msms <- split(raw_msms, ~ .features_id)
+    raw_msms <- lapply(split(raw_msms, ~.features_id),
+      dplyr::mutate, rel.int. = int. / max(int.) * 100
+    )
+    raw_msms <- lapply(raw_msms, dplyr::select,
+      .features_id, raw_mz = mz, raw_rel.int. = rel.int.)
 
     ## non-noise peak
     sig_msms <- latest(x, "project_dataset", ".f3_spectra")
