@@ -19,7 +19,8 @@
 #' @param fun_modify function. Used to post modify the [ggset-class] object before
 #' visualization. See [fun_modify].
 #' @param structure_vp 'viewport' object. Created by [grid::viewport()]. The 'viewport'
-#' to draw chemical structures in sub-panel.
+#' to draw chemical structures in sub-panel. Can be `NULL`, this would return a 'ggplot'
+#' object without chemical structure visualization.
 #'
 #' @seealso [facet_wrap()], [grid::grid.force], [grid::grid.grep()]...
 #' 
@@ -100,6 +101,9 @@ plot_msms_mirrors <-
                 .command_msms_facet()
       )
     p <- call_command(fun_modify(ggset))
+
+    if (is.null(structure_vp))
+      return(p)
     
     print(p, newpage = T)
     df.vp <- get_facet.wrap.vp(.features_id)
