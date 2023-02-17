@@ -20,7 +20,8 @@ plot_msms_mirrors(
 visualization. See \link{fun_modify}.}
 
 \item{structure_vp}{'viewport' object. Created by \code{\link[grid:viewport]{grid::viewport()}}. The 'viewport'
-to draw chemical structures in sub-panel.}
+to draw chemical structures in sub-panel. Can be \code{NULL}, this would return a 'ggplot'
+object without chemical structure visualization.}
 }
 \description{
 Draw MS/MS spectra as mirror bar plots using 'ggplot2' with \code{\link[=facet_wrap]{facet_wrap()}}.

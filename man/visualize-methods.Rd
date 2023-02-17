@@ -12,6 +12,7 @@
 \alias{visualize_all,missing,missing,missing,missing-method}
 \alias{visualize_all,mcnebula,ANY,ANY,ANY-method}
 \alias{visualize_all,mcnebula,logical,function,logical-method}
+\alias{visualize_ids}
 \title{Visualize Nebulae in R graphic device}
 \usage{
 \S4method{visualize}{mcnebula,missing,ANY,missing}(x, fun_modify)
@@ -31,6 +32,8 @@
 \S4method{visualize_all}{mcnebula,ANY,ANY,ANY}(x, newpage, fun_modify, legend_hierarchy)
 
 \S4method{visualize_all}{mcnebula,logical,`function`,logical}(x, newpage, fun_modify, legend_hierarchy)
+
+visualize_ids(x, item)
 }
 \arguments{
 \item{x}{\linkS4class{mcnebula} object.}
@@ -71,6 +74,8 @@ while performing the method \code{visualize}.
 while performing the method \code{visualize_all}.
 
 \code{visualize_all}: visualize overall Child-Nebulae into R graphic device.
+
+\code{visualize_ids}: Plot a label map about the location of the 'features'.
 }
 \examples{
 \dontrun{

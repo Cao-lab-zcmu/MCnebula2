@@ -296,3 +296,15 @@ setMethod("visualize_all",
     .grob_legend_hierarchy_plot(color, call_command(theme))
   }
 
+#' @export visualize_ids
+#' @aliases visualize_ids
+#' @description \code{visualize_ids}: Plot a label map about the location of the 'features'.
+#' @rdname visualize-methods
+visualize_ids <- function(x, item) {
+  data <- ggset(child_nebulae(x))[[ item ]]
+  data <- command_args(layers(data)[[1]])$graph
+  data <- dplyr::select(data, .features_id = name, x, y)
+  ggplot(data) +
+    geom_text(aes(x = x, y = y, label = .features_id), family = .font) +
+    theme(text = element_text(family = .font))
+}
