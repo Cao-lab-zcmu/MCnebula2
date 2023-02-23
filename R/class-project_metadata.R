@@ -160,6 +160,7 @@ setMethod("get_metadata",
                 get_metadata(subscript = subscript,
                              project_metadata = project_metadata(x),
                              project_conformation = project_conformation(x),
+                             project_version = project_version(x),
                              path = project_path(x)
                 )
             }
@@ -173,16 +174,17 @@ setMethod("get_metadata",
                                  subscript = "character",
                                  project_metadata = "project_metadata",
                                  project_conformation = "project_conformation",
+                                 project_version = "character",
                                  path = "character"),
-          function(subscript, project_metadata, project_conformation, path){
+          function(subscript, project_metadata,
+            project_conformation, project_version, path)
+          {
             file_name <- file_name(project_conformation)
             file_api <- file_api(project_conformation)
             if (!subscript %in% names(file_api) )
               stop( "`subscript` not descriped in `names(file_api(project_conformation))`" )
-            ## ------------------------------------- 
             api <- file_api[[ subscript ]]
             api <- strsplit(api, split = "/")[[1]]
-            ## ------------------------------------- 
             for (i in 1:length(api)) {
               sub <- api[i]
               if ( any(sub == names(metadata(project_metadata))) )
@@ -195,7 +197,8 @@ setMethod("get_metadata",
               if ( grepl("^FUN_", target) )
                 target <- match.fun(target)()
               if ( i == 1 ) {
-                df <- data.frame(files = list.files(path = path, pattern = target))
+                fun <- match.fun(paste0("list_files_top.", project_version))
+                df <- fun(path, target)
               } else {
                 ## get the metadata of upper directory
                 df <- metadata(project_metadata)[[ api[i - 1] ]]
@@ -203,7 +206,8 @@ setMethod("get_metadata",
                 ## ------------------------------------- 
                 .message_info("project_metadata", "get_metadata",
                           paste0(target, "(", sub, ")"))
-                df <- .list_files(path, upper, target)
+                fun <- match.fun(paste0("list_files.", project_version))
+                df <- fun(path, upper, target, api[i - 1])
               }
               lst <- list( df )
               names(lst) <- sub

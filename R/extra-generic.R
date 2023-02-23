@@ -68,9 +68,11 @@ setGeneric("get_metadata",
                          "character" = "subscript",
                          project_metadata = "project_metadata",
                          project_conformation = "project_conformation",
+                         "character" = "project_version",
                          "character" = "path"
                          ),
-           function(x, subscript, project_metadata, project_conformation, path)
+           function(x, subscript, project_metadata, project_conformation,
+             project_version, path)
              standardGeneric("get_metadata"))
 setGeneric("extract_metadata", 
            signature = c(ANY = "x", "character" = "subscript"),

@@ -53,7 +53,7 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Collate:
-    utils.R project.sirius.v4.R tools-colors.R tools-methods.R
+    utils.R project.sirius.v4.R project.sirius.v5.R tools-colors.R tools-methods.R
     tools-default_visualize.R tools-modify_ggset.R tools-export.R
     tools-MSnbase-MODIFIED_compareSpectra.R tools-yaml.R tools-report.R
     base-generic.R extra-generic.R main-generic.R

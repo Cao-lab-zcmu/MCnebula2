@@ -243,19 +243,6 @@ validate_class_in_list <-
            '\nBiocManager::install("', pkg, '")\n\n')
   }
 
-## ------------------------------------- 
-.list_files <- function(path, upper, pattern){
-  lst_file <- pbapply::pbmapply(path, upper, pattern, SIMPLIFY = F,
-                     FUN = function(path, upper, pattern){
-                       files <- list.files(paste0(path, "/", upper), pattern)
-                       if ( length(files) == 0)
-                         return( data.frame() )
-                       data.frame(upper = upper, files = files)
-                     })
-  data.table::rbindlist(lst_file)
-}
-
-## ------------------------------------- 
 read_tsv <- function(path){
   file <- data.table::fread(input=path, sep="\t", header=T, quote="", check.names=F)
   return(file)

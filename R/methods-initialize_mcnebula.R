@@ -23,7 +23,7 @@ NULL
 #'
 #' @param x [mcnebula-class] object, [melody-class] object,
 #' [project_conformation-class] or [project_api-class] object.
-#' @param sirius_version character. e.g., "sirius.v4".
+#' @param sirius_version character. e.g., "sirius.v4", "sirius.v5"
 #' @param sirius_project character. The path of SIRIUS project space.
 #' @param output_directory character. The path for output.
 #'
