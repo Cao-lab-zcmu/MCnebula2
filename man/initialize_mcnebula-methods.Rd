@@ -21,7 +21,7 @@
 \item{x}{\linkS4class{mcnebula} object, \linkS4class{melody} object,
 \linkS4class{project_conformation} or \linkS4class{project_api} object.}
 
-\item{sirius_version}{character. e.g., "sirius.v4".}
+\item{sirius_version}{character. e.g., "sirius.v4", "sirius.v5"}
 
 \item{sirius_project}{character. The path of SIRIUS project space.}
 

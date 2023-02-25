@@ -20,9 +20,9 @@
 \alias{add_dataset}
 \alias{extract_metadata,ANY,character-method}
 \alias{extract_metadata}
-\alias{get_metadata,ANY,character,ANY,ANY,ANY-method}
+\alias{get_metadata,ANY,character,ANY,ANY,ANY,ANY-method}
 \alias{get_metadata}
-\alias{get_metadata,missing,character,project_metadata,project_conformation,character-method}
+\alias{get_metadata,missing,character,project_metadata,project_conformation,character,character-method}
 \title{Metadata of files}
 \usage{
 \S4method{show}{project_metadata}(object)
@@ -41,9 +41,15 @@
 
 \S4method{extract_metadata}{ANY,character}(x, subscript)
 
-\S4method{get_metadata}{ANY,character,ANY,ANY,ANY}(x, subscript)
+\S4method{get_metadata}{ANY,character,ANY,ANY,ANY,ANY}(x, subscript)
 
-\S4method{get_metadata}{missing,character,project_metadata,project_conformation,character}(subscript, project_metadata, project_conformation, path)
+\S4method{get_metadata}{missing,character,project_metadata,project_conformation,character,character}(
+  subscript,
+  project_metadata,
+  project_conformation,
+  project_version,
+  path
+)
 }
 \arguments{
 \item{value}{The value for the slot.}

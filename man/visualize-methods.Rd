@@ -9,6 +9,7 @@
 \alias{visualize,mcnebula,character,function,missing-method}
 \alias{visualize,mcnebula,numeric,function,missing-method}
 \alias{visualize,mcnebula,numeric_or_character,function,logical-method}
+\alias{get_ggset}
 \alias{visualize_all,missing,missing,missing,missing-method}
 \alias{visualize_all,mcnebula,ANY,ANY,ANY-method}
 \alias{visualize_all,mcnebula,logical,function,logical-method}
@@ -26,6 +27,8 @@
 \S4method{visualize}{mcnebula,numeric,`function`,missing}(x, item, fun_modify)
 
 \S4method{visualize}{mcnebula,numeric_or_character,`function`,logical}(x, item, fun_modify, annotate)
+
+get_ggset(x, item, fun_modify, annotate = F)
 
 \S4method{visualize_all}{missing,missing,missing,missing}()
 
@@ -66,6 +69,9 @@ for \code{visualize} methods to visualize.
 
 \code{visualize(x, ...)}: use the default parameters whatever 'missing'
 while performing the method \code{visualize}.
+
+\code{get_ggset}: similar to \code{visualize(...)}, but get
+\linkS4class{ggset} object.
 
 \code{visualize_all()}: get the default parameters for the method
 \code{visualize_all}.

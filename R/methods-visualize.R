@@ -158,6 +158,18 @@ setMethod("visualize",
             }
           })
 
+#' @export get_ggset
+#' @description \code{get_ggset}: similar to \code{visualize(...)}, but get
+#' [ggset-class] object.
+#' @rdname visualize-methods
+get_ggset <- function(x, item, fun_modify, annotate = F) {
+  if (!annotate) {
+    fun_modify(ggset(child_nebulae(x))[[ item ]])
+  } else {
+    fun_modify(ggset_annotate(child_nebulae(x))[[ item ]])
+  }
+}
+
 #' @exportMethod visualize_all
 #' @description \code{visualize_all()}: get the default parameters for the method
 #' \code{visualize_all}.
