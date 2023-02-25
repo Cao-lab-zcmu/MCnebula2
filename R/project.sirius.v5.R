@@ -3,7 +3,27 @@
 # for how to read or format these data.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-.validate_sirius.v5 <- .validate_sirius.v4
+.validate_sirius.v5 <- 
+  function(path){
+    sig <- paste0(path, "/.format")
+    content <- "%source_%name"
+    if (file.exists(sig)) {
+      if (!identical(readLines(sig, warn = F, n = 1), content)) {
+        stop("the content of file \"", sig,
+          "\" is not identical to \"", content, "\"")
+      }
+    }else{
+      stop("file \"", sig, "\" not exists")
+    }
+    sig <- paste0(path, "/.compression")
+    if (file.exists(sig)) {
+      lines <- readLines(sig, warn = F)
+      if (lines[1] != "compressionLevels\t1" |
+        lines[2] != "compressionMethod\tDEFLATED")
+        stop("file \"", sig, "\": Inappropriate compression method.")
+    }
+  }
+
 
 .get_file_name_sirius.v5 <- 
   function(){
