@@ -216,9 +216,13 @@ pbsapply_read_msms <- function(path){
     function(path){
       lines <- readLines(path)
       start <- grep("^>ms2peaks", lines) + 1
-      lines <- lines[start:length(lines)]
-      data <- data.table::fread(text = lines)
-      colnames(data) <- c("mz", "int.")
+      if (length(start) != 0) {
+        lines <- lines[start:length(lines)]
+        data <- data.table::fread(text = lines)
+        colnames(data) <- c("mz", "int.")
+      } else {
+        data <- data.frame(mz = double(0), int. = double(0))
+      }
       data
     }
   )
