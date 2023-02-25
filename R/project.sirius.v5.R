@@ -228,7 +228,7 @@ pblapply_read_tsv_fromZip <- function(path, fun = read_tsv) {
       utils::unzip(zips[n], exdir = exdir[n])
       files <- paste0(exdir[n], "/", lst_files[[ n ]])
       lst <- lapply(files, fun)
-      # unlink(exdir[n], T)
+      unlink(exdir[n], T)
       return(lst)
     })
   lst <- unlist(lst, F)
