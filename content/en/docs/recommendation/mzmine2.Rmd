@@ -1,7 +1,9 @@
 ---
+contributors:
+- LiChuang Huang
 title: "Mzmine2"
-date: "2022 Nov 17 17:18:51 | Thu"
-lastmod: "2022 Nov 17 17:18:51 | Thu"
+date: "2023 Mar 22 21:31:05 | Wed"
+lastmod: "2023 Mar 22 21:31:05 | Wed"
 draft: false
 images: []
 menu:
