@@ -45,4 +45,4 @@ vignettes/*.pdf
 .Renviron
 
 # site
-public/*
+# public/*
