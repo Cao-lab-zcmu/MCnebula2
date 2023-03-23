@@ -2,8 +2,8 @@
 contributors:
 - LiChuang Huang
 title: "Basic workflow"
-date: "2023 Mar 22 21:29:10 | Wed"
-lastmod: "2023 Mar 22 21:29:10 | Wed"
+date: "2023 Mar 23 15:35:03 | Thu"
+lastmod: "2023 Mar 23 15:35:03 | Thu"
 draft: false
 images: []
 menu:

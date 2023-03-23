@@ -3,7 +3,7 @@
 ## Homepage
 title = "MCnebula2"
 titleSeparator = " | "
-titleAddition = "analysis of LC-MS/MS metabolomics"
+titleAddition = "R package for analysis of non-targeted LC-MS/MS"
 description = "Critical chemical classes to classify and boost identification by visualization for untargeted LC-MS/MS data analysis"
 
 ## Documentation
@@ -65,7 +65,7 @@ defaultImage = "default-image.png" # put in `./assets/images/`
 fillImage = "1270x740 Center" # normalize image size
 
 # Footer
-footer = "Powered by <a class=\"text-muted\" href=\"https://www.netlify.com/\">Netlify</a>, <a class=\"text-muted\" href=\"https://gohugo.io/\">Hugo</a>, and <a class=\"text-muted\" href=\"https://getdoks.org/\">Doks</a>"
+footer = "About us: <a class=\"text-muted\" href=\"https://yxy.zcmu.edu.cn\">School of Pharmacy</a> in <a class=\"text-muted\" href=\"https://www.zcmu.edu.cn/\">ZheJiang Chinese Medical University</a>"
 
 # Feed
 # copyRight = "Copyright (c) 2020-2021 Henk Verlinde"
