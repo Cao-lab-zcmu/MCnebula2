@@ -58,6 +58,18 @@
   parent = "get-started"
 
 [[main]]
+  name = "Contact"
+  weight = 100
+  identifier = "contact"
+  url = "/contact/"
+
+[[main]]
+  name = "About"
+  weight = 120
+  identifier = "about"
+  url = "/about/"
+
+[[main]]
   name = "Tutorial"
   weight = 50
   identifier = "tutorial"
