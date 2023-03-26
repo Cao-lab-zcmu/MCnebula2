@@ -15,7 +15,30 @@ toc: true
 
 
 
-## Convert mass data
+The following described:
+
+<figure>
+<center><img src="/docs/prologue/procedure_quick_start.svg"></center>
+<center><figcaption>Main steps of MCnebula workflow</figcaption></center>
+</figure>
+
+## Samples
+
+It may be a sample of any mixture of small molecule compounds, such as animal
+metabolites, plant metabolites, drug samples, etc.
+
+## LC-MS/MS
+
+For the workflow, SIRIUS has many restrictive
+[**Prerequisites**](https://boecker-lab.github.io/docs.sirius.github.io/prerequisites/)
+that prevent its generalization to the analysis of any mass spectrometry data.
+Fortunately, your data as least will not be rejected by one vote as long as
+they meet the following two characteristics:
+
+- High mass accuracy data
+- Data-Dependent Acquisition (DDA) Mode.
+
+## Convert raw data
 
 GNPS Server provides detailed instructions and services regarding data
 conversion.
@@ -42,7 +65,15 @@ provides a way in R to perform MSconvert with docker.
 <center><figcaption>Pre-processing of LC-MS/MS</figcaption></center>
 </figure>
 
-### With MZmine
+Feature Detection is a kind of algorithm for detecting peaks from EIC plots,
+and most mass spectrometry processing tools have a similar function. Users can
+implement this process with any tool, but to access the MCnebula workflow, .mgf
+(long list file containing MS/MS information) and .csv files (Feature
+quantification table) are required for output. The following are some examples
+of the four implementations of Feature Detection with output of .mgf files and
+.csv:
+
+### (Option 1) With MZmine
 
 [MZmine](http://mzmine.github.io/) is a flexible deployment software for
 processing LC-MS data, providing a range of algorithms that can be freely
@@ -65,10 +96,10 @@ version of MZmine3 has resolved this issue.
 <center><figcaption>The GUI of MZmine2 (2.53)</figcaption></center>
 </figure>
 
-Download MZmine with version 2.53.
+**Download MZmine with version 2.53**.
 [Click here](https://github.com/mzmine/mzmine2/releases/tag/v2.53)
 
-The Guidance in GNPS provides a step by step description about MZmine for
+The **Guidance in GNPS** provides a step by step description about MZmine for
 feature detection.
 [Click here](https://ccms-ucsd.github.io/GNPSDocumentation/featurebasedmolecularnetworking-with-mzmine2/)
 
@@ -93,15 +124,22 @@ to modify the input specified files and the output file names.
 - [Waters Qtof](https://github.com/Cao-lab-zcmu/MZmine2_bachModeXML/blob/master/waters.xml)
 - [Thermo Orbitrap](https://github.com/Cao-lab-zcmu/MZmine2_bachModeXML/blob/master/thermo.xml)
 
-### With XCMS
+### (Option 2) With XCMS
 
 Preparing...
 
-### With OpenMS
+### (Option 3) With OpenMS
 
 Preparing...
 
-## Prediction with SIRIUS
+### (Option ...) Any tools
+
+You can use any tool to export a list containing MS/MS information and .csv.
+However, please **Note that** please convert the list of MS/MS information into a
+format that matches the
+[SIRIUS input](https://boecker-lab.github.io/docs.sirius.github.io/io/#input).
+
+## Run SIRIUS
 
 [SIRIUS](https://bio.informatik.uni-jena.de/software/sirius/) is a java-based
 software framework for the analysis of LC-MS/MS data of
@@ -178,3 +216,17 @@ containing thousands of Features. When it is over, write a summary.
 <center><img src="/docs/prologue/summary_sirius.png"></center>
 <center><figcaption>Write Summary while Jobs finished</figcaption></center>
 </figure>
+
+## MCnebula2
+
+Now, let's get started with the R package MCnebula2!
+
+
+```r
+## The `path` is where your SIRIUS project saved.
+path <- "."
+mcn <- mcnebula()
+mcn <- initialize_mcnebula(mcn, "sirius.v5", path)
+```
+
+&lt;&lt;&lt; [Workflow](/docs/workflow/)&gt;&gt;&gt;

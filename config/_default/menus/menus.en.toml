@@ -53,8 +53,8 @@
 [[main]]
   name = "Quick Start"
   weight = 40
-  identifier = "quick-start"
-  url = "/docs/prologue/quick-start/"
+  identifier = "quick_start"
+  url = "/docs/prologue/quick_start/"
   parent = "get-started"
 
 [[main]]
