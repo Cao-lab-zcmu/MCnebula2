@@ -65,7 +65,7 @@ defaultImage = "default-image.png" # put in `./assets/images/`
 fillImage = "1270x740 Center" # normalize image size
 
 # Footer
-footer = "About us: <a class=\"text-muted\" href=\"https://yxy.zcmu.edu.cn\">School of Pharmacy</a> in <a class=\"text-muted\" href=\"https://www.zcmu.edu.cn/\">ZheJiang Chinese Medical University</a>"
+footer = "About us: Cao-lab in <a class=\"text-muted\" href=\"https://yxy.zcmu.edu.cn\">School of Pharmacy</a> in <a class=\"text-muted\" href=\"https://www.zcmu.edu.cn/\">ZheJiang Chinese Medical University</a>"
 
 # Feed
 # copyRight = "Copyright (c) 2020-2021 Henk Verlinde"

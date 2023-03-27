@@ -12,3 +12,5 @@ menu:
 weight: 152
 toc: true
 ---
+
+[Demo analysis](/docs/workflow/report_biocstyle.html)

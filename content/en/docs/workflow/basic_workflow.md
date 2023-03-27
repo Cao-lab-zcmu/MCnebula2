@@ -204,7 +204,10 @@ visualize(mcn, "parent")
 
 
 ```r
-## Visualize the Child-Nebulae
+## Visualize the specific item (number or classes name)
+visualize(mcn, 1)
+## Visualize all into one plot
+visualize_all(mcn)
 ```
 
 ## (Option) Workflow Mode
