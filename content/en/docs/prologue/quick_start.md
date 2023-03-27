@@ -229,4 +229,4 @@ mcn <- mcnebula()
 mcn <- initialize_mcnebula(mcn, "sirius.v5", path)
 ```
 
-&lt;&lt;&lt; [Workflow](/docs/workflow/)&gt;&gt;&gt;
+&lt;&lt;&lt; [Workflow](/docs/workflow/) &gt;&gt;&gt;
