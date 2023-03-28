@@ -80,7 +80,7 @@ if (!requireNamespace("remotes", quietly = TRUE))
 remotes::install_github("Cao-lab-zcmu/MCnebula2")
 ```
 
-## Install exMCnebula2 from github (optional)
+## (Option) Install exMCnebula2 from github 
 
 We provide additional tools with `exMCnebula2` that may be irrelevant for
 the experienced cheminformatician.
@@ -99,6 +99,13 @@ Then install it:
 
 ```r
 remotes::install_github("Cao-lab-zcmu/exMCnebula2", "light")
+```
+
+If you want to repeat the analysis in [workflow](/docs/workflow/), please
+install that via (this would also download the inst data):
+
+```r
+remotes::install_github("Cao-lab-zcmu/exMCnebula2")
 ```
 
 

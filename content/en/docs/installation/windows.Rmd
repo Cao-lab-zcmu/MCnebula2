@@ -44,7 +44,7 @@ if (!requireNamespace("remotes", quietly = TRUE))
 remotes::install_github("Cao-lab-zcmu/MCnebula2")
 ```
 
-## Install exMCnebula2 from github (optional)
+## (Option) Install exMCnebula2 from github 
 
 Please refer to The instructions of Linux.
 <a href="/docs/installation/linux/#install-exmcnebula2-from-github-optional">Click here</a>
