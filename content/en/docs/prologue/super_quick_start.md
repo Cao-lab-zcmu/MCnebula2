@@ -187,12 +187,12 @@ Compare two groups: Model vs Control.
 
 ```r
 mcn <- binary_comparison(mcn, model - control)
-top_data <- top_table(statistic_set(mcn))
+top_data <- top_table(statistic_set(mcn))[[ 1 ]]
 top_data
 ```
 
+
 ```
-## $`model - control`
 ## # A tibble: 30 × 7
 ##    .features_id  logFC AveExpr     t  P.Value adj.P.Val      B
 ##    <chr>         <dbl>   <dbl> <dbl>    <dbl>     <dbl>  <dbl>
@@ -211,4 +211,30 @@ top_data
 
 ### Tracing top features in Child-Nebulae
 
+Show Child-Nebulae as tracing mode to find where the top Features
+were classified.
 
+
+```r
+## Here we just set top 5 to trace
+tops <- top_data$.features_id[1:5]
+mcn2 <- set_tracer(mcn, tops)
+
+mcn2 <- create_child_nebulae(mcn2)
+mcn2 <- create_child_layouts(mcn2)
+mcn2 <- activate_nebulae(mcn2)
+mcn2 <- set_nodes_color(mcn2, use_tracer = T)
+
+svg("tracer_child_nebulae.svg")
+visualize_all(mcn2)
+dev.off()
+```
+
+<figure>
+<center><img src="/docs/prologue/tracer_child_nebulae.svg"></center>
+<center><figcaption>Demonstration of Child-Nebulae of Tracing mode</figcaption></center>
+</figure>
+
+## Others
+
+More demonstration can be found in [workflow](/docs/workflow/)

@@ -18,6 +18,7 @@ knitr::opts_chunk$set(eval = F)
 devtools::load_all("~/utils.tool/")
 library(MCnebula2)
 load("./demo.rdata")
+load("./demo2.rdata")
 ```
 
 To quickly demonstrate the application of the 'MCnebula2' R package, we will
@@ -132,8 +133,13 @@ features_quantification(mcn)
 
 Compare two groups: Model vs Control.
 
-```{r, eval = T, message = F}
+```{r, eval = F, message = F}
 mcn <- binary_comparison(mcn, model - control)
+top_data <- top_table(statistic_set(mcn))[[ 1 ]]
+top_data
+```
+
+```{r, eval = T, echo = F}
 top_data <- top_table(statistic_set(mcn))[[ 1 ]]
 top_data
 ```
@@ -143,7 +149,7 @@ top_data
 Show Child-Nebulae as tracing mode to find where the top Features
 were classified.
 
-```{r, eval = T, message = F}
+```{r, eval = F, message = F, warning = F}
 ## Here we just set top 5 to trace
 tops <- top_data$.features_id[1:5]
 mcn2 <- set_tracer(mcn, tops)
@@ -158,4 +164,11 @@ visualize_all(mcn2)
 dev.off()
 ```
 
+```{r eval = T, echo = F, results = "asis"}
+inclu.fig.ht(, "/docs/prologue/tracer_child_nebulae.svg",
+  "Demonstration of Child-Nebulae of Tracing mode")
+```
 
+## Others
+
+More demonstration can be found in [workflow](/docs/workflow/)
