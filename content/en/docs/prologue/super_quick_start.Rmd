@@ -1,0 +1,161 @@
+---
+contributors:
+- LiChuang Huang
+title: "Super quick start"
+date: "2023 Mar 28 13:41:37 | Tue"
+lastmod: "2023 Mar 28 13:41:37 | Tue"
+draft: false
+images: []
+menu:
+  docs:
+    parent: "prologue"
+weight: 40
+toc: true
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(eval = F)
+devtools::load_all("~/utils.tool/")
+library(MCnebula2)
+load("./demo.rdata")
+```
+
+To quickly demonstrate the application of the 'MCnebula2' R package, we will
+then use a data extracted from a finished SIRIUS project (using the
+`collate_used` function) to demonstrate its use. The following demonstration can
+be repeated in R as long as the user has installed the MCnebula2 R package (and
+possibly some small R package, such as `RCurl`).
+
+## Set-up
+
+```{r}
+library(MCnebula2)
+if (!requireNamespace("RCurl")) {
+  install.packages("RCurl")
+}
+```
+
+## Download and load the demo data
+
+**Note:** The following object (`toActiv30`) just contain 30 Features.
+However, the real untargeted LC-MS/MS dataset could hardly be such a small
+amount of Features. We collected this dataset only to demonstrate the
+application of the MCnebula2 R package, please do not apply the parameters
+involved below in real data analysis (for application of the parameters, please
+refer to workflow: [Metabolic workflow](/docs/workflow/metabolic_workflow/);
+[Chemcal workflow](/docs/workflow/chemical_workflow/); or use `help()` with
+your confused functions or methods).
+
+```{r}
+rda <- paste0(tmp <- tempdir(), "/toActiv30.rdata")
+bin <- RCurl::getURLContent("https://raw.githubusercontent.com/Cao-lab-zcmu/utils_tool/master/inst/extdata/toActiv30.rdata")
+writeBin(bin, rda)
+
+load(rda)
+mcn <- toActiv30
+```
+
+## Filter candidates and integrate data
+
+All basic workflow was run as following.
+Again, the parameters used in following was just with the purpose of
+demonstration, do not applied these in real analysis.
+
+```{r}
+mcn <- filter_structure(mcn)
+mcn <- create_reference(mcn)
+mcn <- filter_formula(mcn, by_reference = T)
+
+mcn <- create_stardust_classes(mcn)
+mcn <- create_features_annotation(mcn)
+mcn <- cross_filter_stardust(mcn, 5, .7)
+
+mcn <- filter_structure(mcn)
+mcn <- create_reference(mcn)
+mcn <- filter_formula(mcn, by_reference = T)
+
+mcn <- create_stardust_classes(mcn)
+mcn <- create_features_annotation(mcn)
+mcn <- cross_filter_stardust(mcn, 5, .7)
+```
+
+## Visualize Parent-Nebula and Child-Nebula
+
+Drawing these Nebula and saved as .svg.
+
+### Parent-Nebula
+
+For Parent-Nebula:
+
+```{r}
+p <- visualize(mcn, 'parent')
+ggsave("parent_nebula.svg", p, height = 4)
+```
+
+```{r eval = T, echo = F, results = "asis"}
+inclu.fig.ht(, "/docs/prologue/parent_nebula.svg",
+  "Demonstration of Parent-Nebula (Only 30 Features)")
+```
+
+### Child-Nebulae
+
+For Child-Nebulae:
+
+```{r}
+svg("child_nebulae.svg", 9, 9)
+visualize_all(mcn)
+dev.off()
+```
+
+```{r eval = T, echo = F, results = "asis"}
+inclu.fig.ht(, "/docs/prologue/child_nebulae.svg", "Demonstration of Child-Nebula")
+```
+
+## Quantification analysis
+
+These was no quantification data in object `mcn`.
+So we need to simulate a quantification dataset into that.
+A predefined function could done this well:
+
+```{r}
+mcn <- MCnebula2:::.simulate_quant_set(mcn)
+```
+
+Let's check what we have simulated:
+
+```{r, eval = T}
+sample_metadata(mcn)
+features_quantification(mcn)
+```
+
+### Statistic analysis
+
+Compare two groups: Model vs Control.
+
+```{r, eval = T, message = F}
+mcn <- binary_comparison(mcn, model - control)
+top_data <- top_table(statistic_set(mcn))[[ 1 ]]
+top_data
+```
+
+### Tracing top features in Child-Nebulae
+
+Show Child-Nebulae as tracing mode to find where the top Features
+were classified.
+
+```{r, eval = T, message = F}
+## Here we just set top 5 to trace
+tops <- top_data$.features_id[1:5]
+mcn2 <- set_tracer(mcn, tops)
+
+mcn2 <- create_child_nebulae(mcn2)
+mcn2 <- create_child_layouts(mcn2)
+mcn2 <- activate_nebulae(mcn2)
+mcn2 <- set_nodes_color(mcn2, use_tracer = T)
+
+svg("tracer_child_nebulae.svg")
+visualize_all(mcn2)
+dev.off()
+```
+
+

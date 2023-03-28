@@ -12,3 +12,9 @@ menu:
 weight: 110
 toc: true
 ---
+
+The usage of any user-level function or method can be obtained by typing `help`
+in command line of R.
+
+Comming soon...
+
