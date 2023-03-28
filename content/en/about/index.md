@@ -13,6 +13,15 @@ weight: 2100
 toc: true
 ---
 
+
+
+## Members in Cao-lab
+
+<figure>
+<center><img src="/about/members_cao_lab.jpg"></center>
+<center><figcaption>Family of Cao-lab (2022)</figcaption></center>
+</figure>
+
 ## Full name
 
 Zhejiang Traditional Chinese Medicine Processing Engineering Center

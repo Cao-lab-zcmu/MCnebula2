@@ -13,6 +13,17 @@ weight: 2100
 toc: true
 ---
 
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F)
+devtools::load_all("~/utils.tool")
+```
+
+## Members in Cao-lab
+
+```{r eval = T, echo = F, results = "asis"}
+inclu.fig.ht(, "/about/members_cao_lab.jpg", "Family of Cao-lab (2022)")
+```
+
 ## Full name
 
 Zhejiang Traditional Chinese Medicine Processing Engineering Center
