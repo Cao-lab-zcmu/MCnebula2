@@ -62,10 +62,9 @@ provides a way in R to perform MSconvert with docker.
 
 ## Feature detection
 
-<figure>
-<center><img src="/docs/prologue/feature_detection.svg" width="100%"></center>
-<center><figcaption>Pre-processing of LC-MS/MS</figcaption></center>
-</figure>
+```{r eval = T, echo = F, results = "asis"}
+inclu.fig.ht(, "/docs/prologue/feature_detection.svg", "Pre-processing of LC-MS/MS")
+```
 
 Feature Detection is a kind of algorithm for detecting peaks from EIC plots,
 and most mass spectrometry processing tools have a similar function. Users can
