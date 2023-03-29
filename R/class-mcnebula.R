@@ -523,8 +523,8 @@ setMethod("features_quantification",
   }
 
 #' @importFrom dplyr select
-#' @exportMethod features_quantification
-#' @aliases features_quantification
+#' @exportMethod features_quantification<-
+#' @aliases features_quantification<-
 #' @rdname mcnebula-class
 setReplaceMethod("features_quantification", 
                  signature = c(x = "mcnebula"),
