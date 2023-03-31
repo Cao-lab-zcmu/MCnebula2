@@ -47,6 +47,7 @@
 \alias{features_quantification,mcnebula-method}
 \alias{features_quantification}
 \alias{features_quantification<-,mcnebula-method}
+\alias{features_quantification<-}
 \alias{sample_metadata,mcnebula-method}
 \alias{sample_metadata}
 \alias{sample_metadata<-,mcnebula-method}

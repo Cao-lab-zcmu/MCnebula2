@@ -10,4 +10,19 @@
   # }
 # }
 
-.font <- if (.Platform$OS.type == 'unix') "Times" else "Times New Roman"
+# .font <- if (.Platform$OS.type == 'unix') "Times" else "Times New Roman"
+
+#' @export setFont
+#' @title Set font for visualization of MCnebula2
+#' @description \bold{Note that} your R harbours the font you set.
+#' @param font character(1). Such as 'Times'. If you output the
+#' visualization for pdf, use \code{grDevices::pdfFonts()} to checkout
+#' the available fonts; else, you might need help with package \code{extrafont}.
+#' @rdname setFont
+.font <- "Times"
+setFont <- function(font = "Times") {
+  assign(".font", font, env = topenv(environment()))
+  options(mcnebulaFont = font)
+}
+setFont("Times")
+
