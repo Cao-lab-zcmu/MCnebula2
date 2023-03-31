@@ -1,5 +1,8 @@
 # MCnebula2
 
+**News:** A comprehensive introduction to the MCnebula workflow and R package
+'MCnebula2': <https://mcnebula.netlify.app/>.
+
 MCnebula algorithm integrated in S4 system of R.
 Use `help(MCnebula2)` to see more details (after installation).
 
