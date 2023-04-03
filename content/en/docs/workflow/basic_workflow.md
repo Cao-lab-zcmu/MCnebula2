@@ -33,7 +33,7 @@ mcn <- initialize_mcnebula(mcn, "sirius.v5", path)
 ion_mode(mcn) <- "pos"
 ```
 
-## Filter candicates
+## Filter candidates
 
 ### Filter molecular formula and chemical structure
 
@@ -130,7 +130,7 @@ visualization will be based on it.
 mcn <- create_nebula_index(mcn)
 ```
 
-- Tips (after about):
+- Tips (after above):
     1. Use `nebula_index(mcn)` to get the data ...
 
 ## Create Nebulae
