@@ -171,7 +171,7 @@ setMethod("show",
                       })
   }
 
-## ------------------------------------- 
+
 #' @exportMethod parent_nebula
 #' @aliases parent_nebula
 #' @description \code{parent_nebula}, \code{parent_nebula<-}: getter and setter
@@ -210,7 +210,7 @@ setReplaceMethod("child_nebulae",
                    initialize(x, child_nebulae = value)
                  })
 
-## ---------------------------------------------------------------------- 
+
 #' @exportMethod igraph
 #' @aliases igraph
 #' @description \code{igraph}, \code{igraph<-}: getter and setter
@@ -230,7 +230,7 @@ setReplaceMethod("igraph",
                    initialize(x, igraph = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod tbl_graph
 #' @aliases tbl_graph
 #' @description \code{tbl_graph}, \code{tbl_graph<-}: getter and setter
@@ -250,7 +250,7 @@ setReplaceMethod("tbl_graph",
                    initialize(x, tbl_graph = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod layout_ggraph
 #' @aliases layout_ggraph
 #' @description \code{layout_ggraph}, \code{layout_ggraph<-}: getter and setter
@@ -270,7 +270,7 @@ setReplaceMethod("layout_ggraph",
                    initialize(x, layout_ggraph = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod grid_layout
 #' @aliases grid_layout
 #' @description \code{grid_layout}, \code{grid_layout<-}: getter and setter
@@ -290,7 +290,7 @@ setReplaceMethod("grid_layout",
                    initialize(x, grid_layout = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod viewports
 #' @aliases viewports
 #' @description \code{viewports}, \code{viewports<-}: getter and setter
@@ -310,7 +310,7 @@ setReplaceMethod("viewports",
                    initialize(x, viewports = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod ggset
 #' @aliases ggset
 #' @description \code{ggset}, \code{ggset<-}: getter and setter
@@ -330,7 +330,7 @@ setReplaceMethod("ggset",
                    initialize(x, ggset = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod panel_viewport
 #' @aliases panel_viewport
 #' @description \code{panel_viewport}, \code{panel_viewport<-}: getter and setter
@@ -350,7 +350,7 @@ setReplaceMethod("panel_viewport",
                    initialize(x, panel_viewport = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod legend_viewport
 #' @aliases legend_viewport
 #' @description \code{legend_viewport}, \code{legend_viewport<-}: getter and setter
@@ -370,7 +370,7 @@ setReplaceMethod("legend_viewport",
                    initialize(x, legend_viewport = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod structures_grob
 #' @aliases structures_grob
 #' @description \code{structures_grob}, \code{structures_grob<-}: getter and setter
@@ -390,7 +390,7 @@ setReplaceMethod("structures_grob",
                    initialize(x, structures_grob = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod nodes_ggset
 #' @aliases nodes_ggset
 #' @description \code{nodes_ggset}, \code{nodes_ggset<-}: getter and setter
@@ -410,7 +410,7 @@ setReplaceMethod("nodes_ggset",
                    initialize(x, nodes_ggset = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod nodes_grob
 #' @aliases nodes_grob
 #' @description \code{nodes_grob}, \code{nodes_grob<-}: getter and setter
@@ -430,7 +430,7 @@ setReplaceMethod("nodes_grob",
                    initialize(x, nodes_grob = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod ppcp_data
 #' @aliases ppcp_data
 #' @description \code{ppcp_data}, \code{ppcp_data<-}: getter and setter
@@ -450,7 +450,7 @@ setReplaceMethod("ppcp_data",
                    initialize(x, ppcp_data = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod ration_data
 #' @aliases ration_data
 #' @description \code{ration_data}, \code{ration_data<-}: getter and setter
@@ -470,7 +470,7 @@ setReplaceMethod("ration_data",
                    initialize(x, ration_data = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod ggset_annotate
 #' @aliases ggset_annotate
 #' @description \code{ggset_annotate}, \code{ggset_annotate<-}: getter and setter

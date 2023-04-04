@@ -8,7 +8,7 @@ setGeneric("melody",
            function(x) standardGeneric("melody"))
 setGeneric("melody<-", 
            function(x, value) standardGeneric("melody<-"))
-## ------------------------------------- 
+
 setGeneric("palette_set", 
            function(x) standardGeneric("palette_set"))
 setGeneric("palette_set<-", 
@@ -29,7 +29,7 @@ setGeneric("palette_label",
            function(x) standardGeneric("palette_label"))
 setGeneric("palette_label<-", 
            function(x, value) standardGeneric("palette_label<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-nebula
 setGeneric("parent_nebula", 
            function(x) standardGeneric("parent_nebula"))
@@ -39,7 +39,7 @@ setGeneric("child_nebulae",
            function(x) standardGeneric("child_nebulae"))
 setGeneric("child_nebulae<-", 
            function(x, value) standardGeneric("child_nebulae<-"))
-## ------------------------------------- 
+
 setGeneric("igraph", 
            function(x) standardGeneric("igraph"))
 setGeneric("igraph<-", 
@@ -92,7 +92,7 @@ setGeneric("ggset_annotate",
            function(x) standardGeneric("ggset_annotate"))
 setGeneric("ggset_annotate<-", 
            function(x, value) standardGeneric("ggset_annotate<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-mcnebula
 setGeneric("creation_time", 
            function(x) standardGeneric("creation_time"))
@@ -130,7 +130,7 @@ setGeneric("spectral_similarity",
            function(x) standardGeneric("spectral_similarity"))
 setGeneric("spectral_similarity<-", 
            function(x, value) standardGeneric("spectral_similarity<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-project
 setGeneric("project_version", 
            function(x) standardGeneric("project_version"))
@@ -145,7 +145,7 @@ setGeneric("project_conformation",
            function(x) standardGeneric("project_conformation"))
 setGeneric("project_conformation<-", 
            function(x, value) standardGeneric("project_conformation<-"))
-## ------------------------------------- 
+
 setGeneric("file_name", 
            function(x) standardGeneric("file_name"))
 setGeneric("file_name<-", 
@@ -158,24 +158,24 @@ setGeneric("attribute_name",
            function(x) standardGeneric("attribute_name"))
 setGeneric("attribute_name<-", 
            function(x, value) standardGeneric("attribute_name<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-project_metadata
 setGeneric("project_metadata", 
            function(x) standardGeneric("project_metadata"))
 setGeneric("project_metadata<-", 
            function(x, value) standardGeneric("project_metadata<-"))
-## ------------------------------------- 
+
 setGeneric("metadata", 
            function(x) standardGeneric("metadata"))
 setGeneric("metadata<-", 
            function(x, value) standardGeneric("metadata<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-project_api
 setGeneric("project_api", 
            function(x) standardGeneric("project_api"))
 setGeneric("project_api<-", 
            function(x, value) standardGeneric("project_api<-"))
-## ------------------------------------- 
+
 setGeneric("methods_read", 
            function(x) standardGeneric("methods_read"))
 setGeneric("methods_read<-", 
@@ -188,7 +188,7 @@ setGeneric("methods_match",
            function(x) standardGeneric("methods_match"))
 setGeneric("methods_match<-", 
            function(x, value) standardGeneric("methods_match<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-project_dataset
 ## class-mcn_dataset
 setGeneric("project_dataset", 
@@ -199,26 +199,26 @@ setGeneric("mcn_dataset",
            function(x) standardGeneric("mcn_dataset"))
 setGeneric("mcn_dataset<-", 
            function(x, value) standardGeneric("mcn_dataset<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-msframe
 setGeneric("msframe", 
            function(x) standardGeneric("msframe"))
 setGeneric("msframe<-", 
            function(x, value) standardGeneric("msframe<-"))
-## ------------------------------------- 
+
 setGeneric("entity", 
            signature = c(msframe = "x"),
            function(x) standardGeneric("entity"))
 setGeneric("entity<-", 
            signature = c(msframe = "x"),
            function(x, value) standardGeneric("entity<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-command
 setGeneric("command", 
            function(x) standardGeneric("command"))
 setGeneric("command<-", 
            function(x, value) standardGeneric("command<-"))
-## ------------------------------------- 
+
 setGeneric("command_name", 
            function(x) standardGeneric("command_name"))
 setGeneric("command_name<-", 
@@ -231,29 +231,29 @@ setGeneric("command_args",
            function(x) standardGeneric("command_args"))
 setGeneric("command_args<-", 
            function(x, value) standardGeneric("command_args<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-code_block
 setGeneric("code_block", 
            function(x) standardGeneric("code_block"))
 setGeneric("code_block<-", 
            function(x, value) standardGeneric("code_block<-"))
-## ------------------------------------- 
+
 setGeneric("codes", 
            function(x) standardGeneric("codes"))
 setGeneric("codes<-", 
            function(x, value) standardGeneric("codes<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-ggset
 setGeneric("ggset", 
            function(x) standardGeneric("ggset"))
 setGeneric("ggset<-", 
            function(x, value) standardGeneric("ggset<-"))
-## ------------------------------------- 
+
 setGeneric("layers", 
            function(x) standardGeneric("layers"))
 setGeneric("layers<-", 
            function(x, value) standardGeneric("layers<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-section
 setGeneric("section", 
            function(x) standardGeneric("section"))
@@ -263,7 +263,7 @@ setGeneric("heading",
            function(x) standardGeneric("heading"))
 setGeneric("heading<-", 
            function(x, value) standardGeneric("heading<-"))
-## ------------------------------------- 
+
 setGeneric("level", 
            function(x) standardGeneric("level"))
 setGeneric("level<-", 
@@ -272,28 +272,28 @@ setGeneric("paragraph",
            function(x) standardGeneric("paragraph"))
 setGeneric("paragraph<-", 
            function(x, value) standardGeneric("paragraph<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-VIRTUAL
 setGeneric("subscript", 
            function(x) standardGeneric("subscript"))
 setGeneric("subscript<-", 
            function(x, value) standardGeneric("subscript<-"))
-## ------------------------------------- 
+
 setGeneric("dataset", 
            function(x) standardGeneric("dataset"))
 setGeneric("dataset<-", 
            function(x, value) standardGeneric("dataset<-"))
-## ------------------------------------- 
+
 setGeneric("reference", 
            function(x) standardGeneric("reference"))
 setGeneric("reference<-", 
            function(x, value) standardGeneric("reference<-"))
-## ------------------------------------- 
+
 setGeneric("backtrack", 
            function(x) standardGeneric("backtrack"))
 setGeneric("backtrack<-", 
            function(x, value) standardGeneric("backtrack<-"))
-## ------------------------------------- 
+
 setGeneric("export_name", 
            function(x) standardGeneric("export_name"))
 setGeneric("export_name<-", 
@@ -302,13 +302,13 @@ setGeneric("export_path",
            function(x) standardGeneric("export_path"))
 setGeneric("export_path<-", 
            function(x, value) standardGeneric("export_path<-"))
-## ---------------------------------------------------------------------- 
+
 ## class-statistic_set
 setGeneric("statistic_set", 
            function(x) standardGeneric("statistic_set"))
 setGeneric("statistic_set<-", 
            function(x, value) standardGeneric("statistic_set<-"))
-## ------------------------------------- 
+
 setGeneric("design_matrix", 
            function(x) standardGeneric("design_matrix"))
 setGeneric("design_matrix<-", 
@@ -321,7 +321,7 @@ setGeneric("top_table",
            function(x) standardGeneric("top_table"))
 setGeneric("top_table<-", 
            function(x, value) standardGeneric("top_table<-"))
-## ------------------------------------- 
+
 ## class-report
 setGeneric("yaml", 
            function(x) standardGeneric("yaml"))

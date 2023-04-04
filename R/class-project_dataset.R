@@ -46,7 +46,7 @@ setReplaceMethod("project_dataset",
                    initialize(x, project_dataset = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod latest
 #' @aliases latest
 #' @description \code{latest}: get the first data in \code{dataset} slot ('list') and
@@ -62,7 +62,7 @@ setMethod("latest",
             tibble::as_tibble(entity(dataset(x)[[1]]))
           })
 
-## ------------------------------------- 
+
 #' @exportMethod extract_rawset
 #' @aliases extract_rawset
 #' @rdname project_dataset-class

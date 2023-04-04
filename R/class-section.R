@@ -238,8 +238,8 @@ setMethod("show",
             nshow(code_block(object))
           })
 
-## ---------------------------------------------------------------------- 
-## ---------------------------------------------------------------------- 
+
+
 #' @exportMethod code_block
 #' @aliases code_block
 #' @description \code{code_block}, \code{code_block<-}: getter and setter
@@ -260,7 +260,7 @@ setReplaceMethod("code_block",
                    initialize(x, code_block = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod codes
 #' @aliases codes
 #' @description \code{codes}, \code{codes<-}: getter and setter
@@ -280,7 +280,7 @@ setReplaceMethod("codes",
                    initialize(x, codes = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod new_code_block
 #' @aliases new_code_block
 #' @description \code{new_code_block}: create a [code_block-class] object.
@@ -304,7 +304,7 @@ setMethod("new_code_block",
                         command_args = args)
           })
 
-## ------------------------------------- 
+
 #' @exportMethod new_code_block
 #' @description \code{new_code_block()}: get the default parameters
 #' for the method \code{new_code_block}.
@@ -331,7 +331,7 @@ setMethod("new_code_block",
             reCallMethod("new_code_block", .fresh_param(new_code_block()))
           })
 
-## ------------------------------------- 
+
 #' @exportMethod new_code_block_figure
 #' @aliases new_code_block_figure
 #' @description \code{new_code_block_figure}: create [code_block_figure-class] object.
@@ -365,7 +365,7 @@ setMethod("new_code_block_table",
             as(do.call(new_code_block, args), "code_block_table")
           })
 
-## ------------------------------------- 
+
 #' @exportMethod call_command
 #' @aliases call_command
 #' @description \code{call_command}: Format 'code_block' object as character.
@@ -379,8 +379,8 @@ setMethod("call_command",
                       command_args(x), codes = codes(x)))
           })
 
-## ---------------------------------------------------------------------- 
-## ---------------------------------------------------------------------- 
+
+
 #' @exportMethod heading
 #' @aliases heading
 #' @description \code{heading}, \code{heading<-}: getter and setter
@@ -492,8 +492,8 @@ setMethod("call_command",
                    " ", x)
           })
 
-## ---------------------------------------------------------------------- 
-## ---------------------------------------------------------------------- 
+
+
 #' @exportMethod paragraph
 #' @aliases paragraph
 #' @description \code{paragraph}, \code{paragraph<-}: getter and setter
@@ -583,8 +583,8 @@ setMethod("call_command",
             )
           })
 
-## ---------------------------------------------------------------------- 
-## ---------------------------------------------------------------------- 
+
+
 #' @exportMethod call_command
 #' @aliases call_command
 #' @rdname section-class

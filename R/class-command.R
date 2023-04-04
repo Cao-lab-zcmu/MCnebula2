@@ -129,7 +129,7 @@ setReplaceMethod("command_args",
                    initialize(x, command_args = value)
                  })
 
-## ---------------------------------------------------------------------- 
+
 #' @exportMethod new_command
 #' @aliases new_command
 #' @description \code{new_command}: create an object of [command-class].

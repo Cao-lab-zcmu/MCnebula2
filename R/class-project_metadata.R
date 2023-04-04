@@ -52,7 +52,7 @@ setMethod("show",
             .show(object)
           })
 
-## ------------------------------------- 
+
 #' @exportMethod project_metadata
 #' @aliases project_metadata
 #' @description \code{project_metadata}, \code{project_metadata<-}: getter and setter
@@ -72,7 +72,7 @@ setReplaceMethod("project_metadata",
                    initialize(x, project_metadata = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod latest
 #' @aliases latest
 #' @description \code{latest}: get the first data in \code{metadata} slot and
@@ -85,7 +85,7 @@ setMethod("latest",
             tibble::as_tibble(metadata(x)[[1]])
           })
 
-## ---------------------------------------------------------------------- 
+
 #' @exportMethod metadata
 #' @aliases metadata
 #' @description \code{metadata}, \code{metadata<-}: getter and setter
@@ -105,7 +105,7 @@ setReplaceMethod("metadata",
                    initialize(x, metadata = value)
                  })
 
-## ---------------------------------------------------------------------- 
+
 #' @exportMethod add_dataset
 #' @aliases add_dataset
 #' @description \code{add_dataset}: add the list into slot \code{metadata}.
@@ -203,7 +203,7 @@ setMethod("get_metadata",
                 ## get the metadata of upper directory
                 df <- metadata(project_metadata)[[ api[i - 1] ]]
                 upper <- paste0(apply(df, 1, paste0, collapse = "/"))
-                ## ------------------------------------- 
+
                 .message_info("project_metadata", "get_metadata",
                           paste0(target, "(", sub, ")"))
                 fun <- match.fun(paste0("list_files.", project_version))

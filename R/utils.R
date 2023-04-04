@@ -78,7 +78,7 @@ vec_unique_by_value <-
     vec[unique$order]
   }
 
-## ------------------------------------- 
+
 slots_mapply <- 
   function(x, fun, ...){
     slots <- attributes(x)
@@ -87,7 +87,7 @@ slots_mapply <-
     return(res)
   }
 
-## ------------------------------------- 
+
 mapply_rename_col <- 
   function(
            mutate_set,
@@ -106,7 +106,7 @@ mapply_rename_col <-
     return(names)
   }
 
-## ------------------------------------- 
+
 .show <- 
   function(object){
     cat(class(object), "\n")
@@ -147,7 +147,7 @@ mapply_rename_col <-
     return(x)
   }
 
-## ------------------------------------- 
+
 #' @importFrom rlang as_label
 .check_data <- 
   function(object, lst, tip = "(...)"){
@@ -259,7 +259,7 @@ write_tsv <-
                 col.names = col.names, row.names = row.names, quote = F)
   }
 
-## ------------------------------------- 
+
 #' @importFrom grid unit
 #' @importFrom ggtext element_textbox
 .element_textbox <- 
@@ -280,7 +280,7 @@ write_tsv <-
               class = c("element_textbox", "element_text", "element"))
   }
 
-## ------------------------------------- 
+
 .get_legend <- 
   function(p){
     p <- ggplot2:::ggplot_build.ggplot(p)$plot
@@ -295,7 +295,7 @@ write_tsv <-
     colorRampPalette(c("white", col))(n)[level]
   }
 
-## ------------------------------------- 
+
 .simulate_quant_set <- 
   function(x){
     quant <- .simulate_quant(features_annotation(x)$.features_id)
@@ -383,7 +383,7 @@ group_strings <-
            })
   }
 
-## ---------------------------------------------------------------------- 
+
 #' @importFrom grImport2 readPicture
 #' @importFrom grImport2 grobify
 .cairosvg_to_grob <- 

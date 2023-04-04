@@ -237,7 +237,7 @@ setMethod("show",
                     format(object.size(object), units = "MB"))
           })
 
-## ------------------------------------- 
+
 #' @exportMethod latest
 #' @aliases latest
 #' @description \code{latest(x, slot, subscript)}: get the data in slot
@@ -285,7 +285,7 @@ setMethod("latest",
               return(tibble::as_tibble(entity(res)))
           })
 
-## ------------------------------------- 
+
 #' @exportMethod latest
 #' @description \code{latest()}: get the default parameters for the method \code{latest}.
 #' @rdname mcnebula-class
@@ -306,7 +306,7 @@ setMethod("latest",
             reCallMethod("latest", .fresh_param(latest()))
           })
 
-## ------------------------------------- 
+
 #' @exportMethod creation_time
 #' @aliases creation_time
 #' @description \code{creation_time}, \code{creation_time<-}: getter and setter
@@ -326,7 +326,7 @@ setReplaceMethod("creation_time",
                    initialize(x, creation_time = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod ion_mode
 #' @aliases ion_mode
 #' @description \code{ion_mode}, \code{ion_mode<-}: getter and setter
@@ -400,7 +400,7 @@ setMethod("palette_label",
             palette_label(melody(x))
           })
 
-## ------------------------------------- 
+
 #' @exportMethod reference
 #' @aliases reference
 #' @description  \code{reference}: fast channel to obtain

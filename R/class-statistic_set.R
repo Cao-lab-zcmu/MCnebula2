@@ -52,7 +52,7 @@ setReplaceMethod("statistic_set",
                    initialize(x, statistic_set = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod design_matrix
 #' @aliases design_matrix
 #' @description \code{design_matrix}, \code{design_matrix<-}: getter and setter
@@ -72,7 +72,7 @@ setReplaceMethod("design_matrix",
                    initialize(x, design_matrix = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod contrast_matrix
 #' @aliases contrast_matrix
 #' @description \code{contrast_matrix}, \code{contrast_matrix<-}: getter and setter
@@ -92,7 +92,7 @@ setReplaceMethod("contrast_matrix",
                    initialize(x, contrast_matrix = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod top_table
 #' @aliases top_table
 #' @description \code{top_table}, \code{top_table<-}: getter and setter

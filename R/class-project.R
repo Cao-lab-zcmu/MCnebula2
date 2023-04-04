@@ -112,7 +112,7 @@ setReplaceMethod("project_path",
                    initialize(x, project_path = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod file_name
 #' @aliases file_name
 #' @description  \code{file_name}, \code{file_api}, \code{attribute_name}:
@@ -147,7 +147,7 @@ setMethod("attribute_name",
             attribute_name(project_conformation(x))
           })
 
-## ------------------------------------- 
+
 #' @exportMethod project_metadata
 #' @aliases project_metadata
 #' @description \code{metadata}: fast channel to obtain
@@ -163,7 +163,7 @@ setMethod("metadata",
             metadata(project_metadata(x))
           })
 
-## ------------------------------------- 
+
 #' @exportMethod methods_read
 #' @aliases methods_read
 #' @description \code{methods_read}, \code{methods_format}, \code{methods_match}:
@@ -224,7 +224,7 @@ setMethod("match.features_id",
             methods_match(project_api(x))[[ "match.features_id" ]]
           })
 
-## ---------------------------------------------------------------------- 
+
 #' @exportMethod get_upper_dir_subscript
 #' @aliases get_upper_dir_subscript
 #' @description \code{get_upper_dir_subscript}: Get the "subscript" name of the folder.
@@ -240,5 +240,5 @@ setMethod("get_upper_dir_subscript",
                                  paste0("(?<=^|/)[^/]*(?=/", subscript, "|$)"))
           })
 
-## ---------------------------------------------------------------------- 
+
 
