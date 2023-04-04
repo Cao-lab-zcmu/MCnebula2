@@ -19,10 +19,10 @@
 #' visualization for pdf, use \code{grDevices::pdfFonts()} to checkout
 #' the available fonts; else, you might need help with package \code{extrafont}.
 #' @rdname setFont
-.font <- "Times"
 setFont <- function(font = "Times") {
   assign(".font", font, env = topenv(environment()))
   options(mcnebulaFont = font)
 }
+.font <- "Times"
 setFont("Times")
 
