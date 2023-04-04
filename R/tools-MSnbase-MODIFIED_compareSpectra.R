@@ -7,7 +7,7 @@ setGeneric("compareSpectra", function(x, y, ...)
     standardGeneric("compareSpectra"))
 setGeneric("mz", function(object, ...) standardGeneric("mz"))
 setGeneric("intensity", function(object, ...) standardGeneric("intensity"))
-## ---------------------------------------------------------------------- 
+
 ## from MSnbase and modified
 setClass("lightSpectrum",
          representation =

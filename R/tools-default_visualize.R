@@ -136,7 +136,7 @@
                 subview = subview)
   }
 
-## ---------------------------------------------------------------------- 
+
 .grob_legend_hierarchy_plot <- 
   function(color, theme){
     df <- data.frame(h = names(color), color = color, y = 1:length(color))

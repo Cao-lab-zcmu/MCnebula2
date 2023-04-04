@@ -49,7 +49,7 @@ setReplaceMethod("mcn_dataset",
                    initialize(x, mcn_dataset = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod latest
 #' @aliases latest
 #' @description \code{latest}: get the first data in \code{dataset} slot and
@@ -65,7 +65,7 @@ setMethod("latest",
             tibble::as_tibble(entity(dataset(x)[[1]]))
           })
 
-## ------------------------------------- 
+
 #' @exportMethod extract_mcnset
 #' @aliases extract_mcnset
 #' @description \code{extract_mcnset}: For fast extract data in object which containing
@@ -84,5 +84,5 @@ setMethod("extract_mcnset",
             return(lst)
           })
 
-## ------------------------------------- 
+
 

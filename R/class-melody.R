@@ -50,7 +50,7 @@ setMethod("show",
             .show(object)
           })
 
-## ------------------------------------- 
+
 #' @exportMethod melody
 #' @aliases melody
 #' @description \code{melody}, \code{melody<-}: getter and setter
@@ -70,7 +70,7 @@ setReplaceMethod("melody",
                    initialize(x, melody = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod palette_set
 #' @aliases palette_set
 #' @description \code{palette_set}, \code{palette_set<-}: getter and setter
@@ -90,7 +90,7 @@ setReplaceMethod("palette_set",
                    initialize(x, palette_set = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod palette_gradient
 #' @aliases palette_gradient
 #' @description \code{palette_gradient}, \code{palette_gradient<-}: getter and setter
@@ -110,7 +110,7 @@ setReplaceMethod("palette_gradient",
                    initialize(x, palette_gradient = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod palette_stat
 #' @aliases palette_stat
 #' @description \code{palette_stat}, \code{palette_stat<-}: getter and setter
@@ -130,7 +130,7 @@ setReplaceMethod("palette_stat",
                    initialize(x, palette_stat = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod palette_col
 #' @aliases palette_col
 #' @description \code{palette_col}, \code{palette_col<-}: getter and setter
@@ -150,7 +150,7 @@ setReplaceMethod("palette_col",
                    initialize(x, palette_col = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod palette_label
 #' @aliases palette_label
 #' @description \code{palette_label}, \code{palette_label<-}: getter and setter

@@ -84,7 +84,7 @@ setReplaceMethod("methods_read",
                    initialize(x, methods_read = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod methods_format
 #' @aliases methods_format
 #' @description \code{methods_format}, \code{methods_format<-}: getter and setter
@@ -104,7 +104,7 @@ setReplaceMethod("methods_format",
                    initialize(x, methods_format = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod methods_match
 #' @aliases methods_match
 #' @description \code{methods_match}, \code{methods_match<-}: getter and setter

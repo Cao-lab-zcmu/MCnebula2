@@ -71,7 +71,7 @@ setMethod("create_hierarchy",
     n <- 1
     list[[n]] <- root
     df <- data[data$parent.chem.ont.id %in% root$chem.ont.id, ]
-    ## ---------------------------------------------------------------------- 
+
     while(nrow(df) > 0){
       n <- n + 1
       list[[n]] <- df
