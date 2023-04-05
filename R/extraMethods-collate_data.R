@@ -124,6 +124,7 @@ setMethod("collate_data",
 
 .collate_data.msframe <- 
   function(x, subscript, reference){
+    project_metadata <- extract_metadata(x, subscript)
     if (!missing(reference)) {
       df <- metadata(project_metadata)[[ subscript ]]
       df <- dplyr::mutate(df, .features_id = match.features_id(x)(upper),
@@ -131,7 +132,6 @@ setMethod("collate_data",
       df <- merge(reference, df, by = c(".features_id", ".candidates_id"))
       metadata(project_metadata)[[ subscript ]] <- df
     }
-    project_metadata <- extract_metadata(x, subscript)
     read_data(x, project_metadata = project_metadata,
               subscript = subscript)
   }
