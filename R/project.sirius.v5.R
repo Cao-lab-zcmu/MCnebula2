@@ -219,6 +219,7 @@ pblapply_read_tsv_fromZip <- function(path, fun = read_tsv) {
   zips <- gsub("/[^/]*$", "", path)
   files <- stringr::str_extract(path, "[^/]*$")
   lst_files <- split(files, zips)
+  zips <- unique(zips)
   lst_files <- lapply(zips, function(name) lst_files[[ name ]])
   zip_upper <- gsub("/[^/]*$", "", zips)
   zip_name <- stringr::str_extract(zips, "[^/]*$")
