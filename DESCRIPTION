@@ -56,7 +56,6 @@ Collate:
     utils.R project.sirius.v4.R project.sirius.v5.R tools-colors.R tools-methods.R
     tools-default_visualize.R tools-modify_ggset.R tools-export.R
     tools-MSnbase-MODIFIED_compareSpectra.R
-    tools-xcms-feature_detection.R
     tools-yaml.R tools-report.R
     base-generic.R extra-generic.R main-generic.R
     class-VIRTUAL_slots.R class-melody.R
@@ -81,6 +80,7 @@ Collate:
     extraMethods-report.R extraMethods-workflow.R
     data.R functions-plot_msms_mirrors.R functions-clear.R
     functions-report.R
+    tools-xcms-feature_detection.R
     zzz.R
 LazyData: true
 Author: LiChuang Huang <shaman.yellow@foxmail.com> [aut] (<https://orcid.org/0000-0002-5445-1988>)
