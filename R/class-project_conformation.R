@@ -74,7 +74,7 @@ setMethod("show",
             .show(object)
           })
 
-## ------------------------------------- 
+
 #' @exportMethod project_conformation
 #' @aliases project_conformation
 #' @description \code{project_conformation}, \code{project_conformation<-}: getter and setter
@@ -94,7 +94,7 @@ setReplaceMethod("project_conformation",
                    initialize(x, project_conformation = value)
                  })
 
-## ---------------------------------------------------------------------- 
+
 #' @exportMethod file_name
 #' @aliases file_name
 #' @description \code{file_name}, \code{file_name<-}: getter and setter
@@ -114,7 +114,7 @@ setReplaceMethod("file_name",
                    initialize(x, file_name = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod file_api
 #' @aliases file_api
 #' @description \code{file_api}, \code{file_api<-}: getter and setter
@@ -134,7 +134,7 @@ setReplaceMethod("file_api",
                    initialize(x, file_api = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod attribute_name
 #' @aliases attribute_name
 #' @description \code{attribute_name}, \code{attribute_name<-}: getter and setter
@@ -154,5 +154,5 @@ setReplaceMethod("attribute_name",
                    initialize(x, attribute_name = value)
                  })
 
-## ------------------------------------- 
+
 

@@ -37,7 +37,7 @@ setMethod("show",
             cat( "A class of \"msframe\" of", subscript(object), "\n")
           })
 
-## ------------------------------------- 
+
 #' @exportMethod msframe
 #' @aliases msframe
 #' @description \code{msframe}, \code{msframe<-}: getter and setter
@@ -57,7 +57,7 @@ setReplaceMethod("msframe",
                    initialize(x, msframe = value)
                  })
 
-## ------------------------------------- 
+
 #' @exportMethod latest
 #' @aliases latest
 #' @description \code{latest}: get data inside \code{entity(object)} and format as
@@ -71,7 +71,7 @@ setMethod("latest",
             tibble::as_tibble(entity(x))
           })
 
-## ------------------------------------- 
+
 #' @exportMethod entity
 #' @aliases entity
 #' @description \code{entity}, \code{entity<-}: getter and setter
@@ -91,7 +91,7 @@ setReplaceMethod("entity",
                    initialize(x, entity = value)
                  })
 
-## ---------------------------------------------------------------------- 
+
 #' @exportMethod format_msframe
 #' @aliases format_msframe
 #' @rdname msframe-class
@@ -119,7 +119,7 @@ setMethod("format_msframe",
             return(x)
           })
 
-## ------------------------------------- 
+
 #' @exportMethod format_msframe
 #' @aliases format_msframe
 #' @rdname msframe-class
@@ -225,7 +225,7 @@ setMethod("format_msframe",
     return(x)
   }
 
-## ------------------------------------- 
+
 #' @exportMethod filter_msframe
 #' @aliases filter_msframe
 #' @rdname msframe-class

@@ -46,7 +46,7 @@
 \alias{features_annotation}
 \alias{features_quantification,mcnebula-method}
 \alias{features_quantification}
-\alias{features_quantification<-,mcnebula-method}
+\alias{features_quantification<-,mcnebula,ANY-method}
 \alias{features_quantification<-}
 \alias{sample_metadata,mcnebula-method}
 \alias{sample_metadata}
@@ -100,7 +100,7 @@
 
 \S4method{features_quantification}{mcnebula}(x)
 
-\S4method{features_quantification}{mcnebula}(x) <- value
+\S4method{features_quantification}{mcnebula,ANY}(x) <- value
 
 \S4method{sample_metadata}{mcnebula}(x)
 
