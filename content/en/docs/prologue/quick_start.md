@@ -61,7 +61,7 @@ provides a way in R to perform MSconvert with docker.
 ## Feature detection
 
 <figure>
-<center><img src="/docs/prologue/feature_detection.svg" width="100%"></center>
+<center><img src="/docs/prologue/feature_detection.svg"></center>
 <center><figcaption>Pre-processing of LC-MS/MS</figcaption></center>
 </figure>
 
@@ -126,7 +126,114 @@ to modify the input specified files and the output file names.
 
 ### (Option 2) With XCMS
 
-Preparing...
+Now, the R package MCnebula2 has a built-in module for Feature Detection, which uses
+pre-defined steps and parameters to quickly execute Feature Detection and get data (MS/MS
+lists and quantization tables) applicable to the MCnebula workflow.
+This module mainly contains a class called 'mcmass' and the method 'run_lcms'.
+The pre-defined steps are encapsulated in an exemplary script based on the
+processing steps of FBMN:
+<https://github.com/DorresteinLaboratory/XCMS3_FeatureBasedMN>.
+Users need to change the input parameters and even add processing steps
+according to their data characteristics and research needs.
+
+#### Install XCMS
+
+If you do not already have `xcms` installed:
+
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("xcms")
+```
+
+#### Build metadata for files
+
+Hereinafter, `file` is the path where the mass spectrometry data you want to
+process is located, `sample` is the alias you want to set for these data files,
+and `group` is the group set-up for the files in study.
+
+
+```r
+metadata <- data.frame(
+  file = c("EU-Pro1.mzML", "EU-Pro2.mzML", "EU-Raw1.mzML", "EU-Raw2.mzML"),
+  sample = c("pro-eu1", "pro-eu2", "raw-eu1", "raw-eu2"),
+  group = c("Pro", "pro", "raw", "raw")
+)
+```
+
+#### Run LC-MS processing
+
+Optional, you can set up parallel processing with `BiocParallel`.
+
+
+```r
+set_biocParallel(4)
+```
+
+Create the `mcmass` object.
+
+
+```r
+mcm <- new_mcmass(
+  metadata, snthresh = 5,
+  noise = 50000,
+  peakwidth = c(3, 30),
+  ppm = 20,
+  minFraction = 0.1
+)
+```
+
+Checkout the steps:
+
+
+```r
+detectFlow(mcm)
+```
+
+```
+## layers of 5 
+##   +++ layer 1 +++
+##   MSnbase::readMSData
+##     Args:
+##       files: character
+##       centroided.: logical
+##       mode: character
+##       pdata: NAnnotatedDataFrame
+## 
+##   +++ layer 2 +++
+##   xcms::findChromPeaks
+##     Args:
+##       object: toBeEval
+##       param: CentWaveParam
+## 
+##   +++ layer 3 +++
+##   xcms::adjustRtime
+##     Args:
+##       object: toBeEval
+##       param: ObiwarpParam
+## 
+##   +++ layer 4 +++
+##   xcms::groupChromPeaks
+##     Args:
+##       object: toBeEval
+##       param: PeakDensityParam
+## 
+##   +++ layer 5 +++
+##   xcms::fillChromPeaks
+##     Args:
+##       object: toBeEval
+##       param: ChromPeakAreaParam
+```
+
+Run processing and output .mgf:
+
+
+```r
+mcm <- run_lcms(mcm)
+anno <- run_export(mcm, saveMgf = "msms.mgf")
+data.table::fwrite(features_quantification(mcm), "features.csv")
+```
 
 ### (Option 3) With OpenMS
 
@@ -182,7 +289,7 @@ MSLEVEL=1
 END IONS
 
 BEGIN IONS
-FEATURE_ID=gnps1
+FEATURE_ID=1
 PEPMASS=532.30509842717
 CHARGE=+1
 RTINSECONDS=
