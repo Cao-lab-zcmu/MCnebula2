@@ -374,12 +374,15 @@ freshToBe <- function(lst, envir) {
 #' and \code{ms2_spectra} in [mcmass-class] object.
 #' @param keep_onlyWithMs2 logical(1). If \code{TRUE}, the data
 #' \code{features_quantification} only keep features which possess MS2.
+#' @param saveMgf NULL or character(1). Use \code{MSnbase::writeMgfData} to
+#' output the slot \code{ms2_spectra} of [mcmass-class] as .mgf file.
 #' @param mzd passed to \code{MSnbase::combineSpectra}
 #' @param minProp passed to \code{MSnbase::combineSpectra}
 #' @param ppm passed to \code{MSnbase::combineSpectra}
 #' @param ... passed to \code{MSnbase::combineSpectra}
 #' @rdname run_lcms-methods
-run_export <- function(x, keep_onlyWithMs2 = T, mzd = 0, minProp = .3, ppm = 20, ...)
+run_export <- function(x, keep_onlyWithMs2 = T,
+  saveMgf = NULL, mzd = 0, minProp = .3, ppm = 20, ...)
 {
   ## mass level 2
   ms2 <- xcms::featureSpectra(pro_data(x), return.type = "MSpectra")
@@ -389,6 +392,9 @@ run_export <- function(x, keep_onlyWithMs2 = T, mzd = 0, minProp = .3, ppm = 20,
     ms2, fcol = "feature_id", method = MSnbase::consensusSpectrum,
     mzd = 0, minProp = 0.3, ppm = 20, ...
   )
+  if (!is.null(saveMgf)) {
+    MSnbase::writeMgfData(ms2_spectra(x), saveMgf)
+  }
   ## mass level 1
   features_defination(x) <- xcms::featureDefinitions(pro_data(x))
   quant <- xcms::featureValues(pro_data(x), value = "into")
@@ -494,6 +500,27 @@ new_mcmass <- function(sample_metadata,
     ppm = ppm, minFraction = minFraction
   )
   return(mcm)
+}
+
+#' @export set_biocParallel
+#' @aliases set_biocParallel
+#' @description \code{set_biocParallel}: Set global parrallel processing for
+#' package \code{xcms} or relative packages. See \code{BiocParallel::register}.
+#' @param workers integer(1). See \code{BiocParallel::MulticoreParam} or
+#' \code{BiocParallel::SnowParam} for help
+#' @param ... Other Parameters passed to \code{BiocParallel::MulticoreParam} or
+#' \code{BiocParallel::SnowParam}.
+#' @rdname run_lcms-methods
+set_biocParallel <- function(workers, ...) {
+  if (.Platform$OS.type == "unix") {
+    BiocParallel::register(
+      BiocParallel::bpstart(
+        BiocParallel::MulticoreParam(workers, ...)))
+  } else {
+    BiocParallel::register(
+      BiocParallel::bpstart(
+        BiocParallel::SnowParam(workers, ...)))
+  }
 }
 
 # ==========================================================================

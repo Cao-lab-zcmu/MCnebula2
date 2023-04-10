@@ -4,11 +4,22 @@
 \alias{run_lcms,mcmass-method}
 \alias{run_lcms}
 \alias{run_export}
+\alias{set_biocParallel}
 \title{Perform Feature Detection with steps in 'detectFlow'}
 \usage{
 \S4method{run_lcms}{mcmass}(x)
 
-run_export(x, keep_onlyWithMs2 = T, mzd = 0, minProp = 0.3, ppm = 20, ...)
+run_export(
+  x,
+  keep_onlyWithMs2 = T,
+  saveMgf = NULL,
+  mzd = 0,
+  minProp = 0.3,
+  ppm = 20,
+  ...
+)
+
+set_biocParallel(workers, ...)
 }
 \arguments{
 \item{x}{\linkS4class{mcmass} object.}
@@ -16,13 +27,20 @@ run_export(x, keep_onlyWithMs2 = T, mzd = 0, minProp = 0.3, ppm = 20, ...)
 \item{keep_onlyWithMs2}{logical(1). If \code{TRUE}, the data
 \code{features_quantification} only keep features which possess MS2.}
 
+\item{saveMgf}{NULL or character(1). Use \code{MSnbase::writeMgfData} to
+output the slot \code{ms2_spectra} of \linkS4class{mcmass} as .mgf file.}
+
 \item{mzd}{passed to \code{MSnbase::combineSpectra}}
 
 \item{minProp}{passed to \code{MSnbase::combineSpectra}}
 
 \item{ppm}{passed to \code{MSnbase::combineSpectra}}
 
-\item{...}{passed to \code{MSnbase::combineSpectra}}
+\item{...}{Other Parameters passed to \code{BiocParallel::MulticoreParam} or
+\code{BiocParallel::SnowParam}.}
+
+\item{workers}{integer(1). See \code{BiocParallel::MulticoreParam} or
+\code{BiocParallel::SnowParam} for help}
 }
 \description{
 This would use package mainly 'xcms' to perform
@@ -30,6 +48,9 @@ Feature Detection.
 
 \code{run_export}: get \code{features_quantification}
 and \code{ms2_spectra} in \linkS4class{mcmass} object.
+
+\code{set_biocParallel}: Set global parrallel processing for
+package \code{xcms} or relative packages. See \code{BiocParallel::register}.
 }
 \examples{
 \dontrun{
