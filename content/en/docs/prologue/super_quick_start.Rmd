@@ -71,13 +71,14 @@ mcn <- create_stardust_classes(mcn)
 mcn <- create_features_annotation(mcn)
 mcn <- cross_filter_stardust(mcn, 5, .7)
 
-mcn <- filter_structure(mcn)
-mcn <- create_reference(mcn)
-mcn <- filter_formula(mcn, by_reference = T)
+mcn <- create_nebula_index(mcn)
+mcn <- compute_spectral_similarity(mcn)
+mcn <- create_parent_nebula(mcn, 0.01, 5, T)
+mcn <- create_child_nebulae(mcn, 0.01, 5)
 
-mcn <- create_stardust_classes(mcn)
-mcn <- create_features_annotation(mcn)
-mcn <- cross_filter_stardust(mcn, 5, .7)
+mcn <- create_parent_layout(mcn)
+mcn <- create_child_layouts(mcn)
+mcn <- activate_nebulae(mcn)
 ```
 
 ## Visualize Parent-Nebula and Child-Nebula
