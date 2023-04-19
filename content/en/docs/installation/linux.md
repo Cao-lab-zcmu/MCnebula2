@@ -88,7 +88,7 @@ The installation of `MetaboAnalystR` may not be so straight forward, please refe
 (<https://github.com/xia-lab/MetaboAnalystR>)
 
 ```r
-BiocManager::install(c("FELLA", "xcms"))
+BiocManager::install(c("FELLA", "xcms", "ggtree"))
 ## For tools query chemical classification via ClassyFire API
 remotes::install_github('aberHRML/classyfireR')
 ## For tools convert CID to KEGG ID
