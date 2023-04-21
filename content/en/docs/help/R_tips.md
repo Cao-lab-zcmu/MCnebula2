@@ -12,3 +12,7 @@ menu:
 weight: 5000
 toc: true
 ---
+
+Maybe useful:
+
+[R tips](/docs/help/Rtips2.html)
