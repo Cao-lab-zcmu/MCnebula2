@@ -47,23 +47,22 @@ mcn <- create_reference(mcn)
 mcn <- filter_formula(mcn, by_reference = T)
 ```
 
-- Tips:
-    1. Use `dplyr::*` in `filter_structure` to customize the filtering,
-    such as: `filter_structure(mcn, dplyr::filter, tani.score >= .5)`. This
-    is similar in `filter_formula` or `filter_ppcp`.
-
-- Tips (after above): 
-    1. Use `latest(mcn, subscript = ".f3_fingerid")` to get the filtered
-    candidates of the chemical structure (Top candidate for each feature)
-    2. Use `latest(mcn, "project_dataset", subscript = ".f3_fingerid")` to
-    get all candidates of all features
-    3. Use `reference(mcn)$specific_candidate` to get the selected
-    `specific_candidate`
-    4. Use `latest(mcn, subscript = ".f2_formula")` to get the filtered
-    candidates of the molecular formula (Top candidate for each feature)
-    5. Use `latest(mcn, "project_dataset", subscript = ".f2_formula")` to
-    get all candidates of all features
-
+> - Tips:
+>     1. Use `dplyr::*` in `filter_structure` to customize the filtering,
+>     such as: `filter_structure(mcn, dplyr::filter, tani.score >= .5)`. This
+>     is similar in `filter_formula` or `filter_ppcp`.
+> 
+> - Tips (after above): 
+>     1. Use `latest(mcn, subscript = ".f3_fingerid")` to get the filtered
+>     candidates of the chemical structure (Top candidate for each feature)
+>     2. Use `latest(mcn, "project_dataset", subscript = ".f3_fingerid")` to
+>     get all candidates of all features
+>     3. Use `reference(mcn)$specific_candidate` to get the selected
+>     `specific_candidate`
+>     4. Use `latest(mcn, subscript = ".f2_formula")` to get the filtered
+>     candidates of the molecular formula (Top candidate for each feature)
+>     5. Use `latest(mcn, "project_dataset", subscript = ".f2_formula")` to
+>     get all candidates of all features
 
 ### Filter chemical classification
 
@@ -80,10 +79,10 @@ mcn <- cross_filter_stardust(
 )
 ```
 
-- Tips (after above):
-    1. Use `stardust_classes(mcn)` to get the data about 'stardust_classes'
-    2. Use `features_annotation(mcn)` to get the data about ...
-    3. Use `cross_filter_stardust()` to get the default parameters about this methods.
+> - Tips (after above):
+>     1. Use `stardust_classes(mcn)` to get the data about 'stardust_classes'
+>     2. Use `features_annotation(mcn)` to get the data about ...
+>     3. Use `cross_filter_stardust()` to get the default parameters about this methods.
 
 ### (Option) Manually check the filtered chemical classes
 
@@ -114,8 +113,8 @@ dis <- classes[dis][-1]
 mcn <- backtrack_stardust(mcn, dis, remove = T)
 ```
 
-- Tips:
-    1. Use `backtrack_stardust(mcn, dis)` without `remove` to recover these classes.
+> - Tips:
+>     1. Use `backtrack_stardust(mcn, dis)` without `remove` to recover these classes.
 
 ## Create Nebula-Index
 
@@ -130,8 +129,8 @@ visualization will be based on it.
 mcn <- create_nebula_index(mcn)
 ```
 
-- Tips (after above):
-    1. Use `nebula_index(mcn)` to get the data ...
+> - Tips (after above):
+>     1. Use `nebula_index(mcn)` to get the data ...
 
 ## Create Nebulae
 
@@ -154,12 +153,12 @@ mcn <- create_parent_nebula(mcn)
 mcn <- create_parent_layout(mcn)
 ```
 
-- Tips (after above): 
-    1. Use function of `igraph::write_graph` to output .graphml (e.g., use for Cytoscape),
-    such as: `igraph::write_graph(igraph(parent_nebula(mcn)), "test.graphml", "graphml")`
-    2. Use `parent_nebula(mcn)` to get the data ...
-    3. Use `igraph(parent_nebula(mcn))` to get the data ...
-    4. ...
+> - Tips (after above): 
+>     1. Use function of `igraph::write_graph` to output .graphml (e.g., use for Cytoscape),
+>     such as: `igraph::write_graph(igraph(parent_nebula(mcn)), "test.graphml", "graphml")`
+>     2. Use `parent_nebula(mcn)` to get the data ...
+>     3. Use `igraph(parent_nebula(mcn))` to get the data ...
+>     4. ...
 
 ### Create Child-Nebulae
 
@@ -171,9 +170,9 @@ mcn <- create_child_nebulae(mcn)
 mcn <- create_child_layouts(mcn)
 ```
 
-- Tips (after above): 
-    1. See `help(create_child_nebulae)` for example about how to export
-    '.graphml' of all Child-Nebulae.
+> - Tips (after above): 
+>     1. See `help(create_child_nebulae)` for example about how to export
+>     '.graphml' of all Child-Nebulae.
 
 ### Activate the Nebulae for visualization
 
@@ -185,11 +184,11 @@ to visualize the Nebulae.
 mcn <- activate_nebulae(mcn)
 ```
 
-- Tips (after above): 
-    1. Use function of `get_ggset` to get the 'ggset' of Nebulae. Such as:
-    `get_ggset(mcn, 'parent', modify_set_labs)`.
-    2. Use method of `call_command` to visualize 'ggset', such as:
-    `call_command(get_ggset(mcn, 'parent', modify_set_labs))`.
+> - Tips (after above): 
+>     1. Use function of `get_ggset` to get the 'ggset' of Nebulae. Such as:
+>     `get_ggset(mcn, 'parent', modify_set_labs)`.
+>     2. Use method of `call_command` to visualize 'ggset', such as:
+>     `call_command(get_ggset(mcn, 'parent', modify_set_labs))`.
 
 ## Visualize Nebulae
 
@@ -221,7 +220,7 @@ the output code to fit your data or your needs.
 workflow(mode = "print")
 ```
 
-- Tips: Using `sink()` to catch the text output in the command lines, such as:
+> - Tips: Using `sink()` to catch the text output in the command lines, such as:
 
 
 ```r
