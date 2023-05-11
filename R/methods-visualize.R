@@ -272,6 +272,17 @@ setMethod("visualize_all",
     if (!is.null(attr(ggset, "modify"))) {
       ggset <- match.fun(attr(ggset, "modify"))(ggset)
     }
+    if (any(n <- grepl("scale_fill_manual", names(layers(ggset))))) {
+      pal <- command_args(layers(ggset)[n][[1]])$values
+      if (!is.null(pal)) {
+        data <- data.frame(tracer = names(pal))
+        layer <- new_command(ggplot2::geom_point,
+          data = data, mapping = aes(x = 0L, y = 0L, fill = tracer),
+          shape = 21, stroke = 0
+        )
+        ggset <- add_layers(ggset, layer)
+      }
+    }
     grob <- .get_legend(call_command(ggset))
     grid::grid.draw(grob)
   }
