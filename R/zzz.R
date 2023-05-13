@@ -20,9 +20,9 @@
 #' the available fonts; else, you might need help with package \code{extrafont}.
 #' @rdname setFont
 setFont <- function(font = "Times") {
-  assign(".font", font, env = topenv(environment()))
+  unlockBinding(".font", topenv())
+  assign(".font", font, env = topenv())
   options(mcnebulaFont = font)
 }
 .font <- "Times"
-setFont("Times")
 
