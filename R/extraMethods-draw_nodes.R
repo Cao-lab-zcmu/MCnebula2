@@ -346,14 +346,23 @@ ggset_activate_nodes <-
                function(id) {
                  if (is.null(set[[id]]))
                    return(ggsets[[id]])
-                 ggset <- add_layers(ggsets[[id]],
-                                     .command_node_ration(set[[id]]),
-                                     new_command(labs, fill = "Classes / Groups"))
+                 ggset <- add_layers(
+                   ggsets[[id]],
+                   .command_node_ration(set[[id]]),
+                   new_command(labs, fill = "Groups / Classes"),
+                   ## this as a separator
+                   new_command(geom_point, mapping = aes(x = seq, y = 0, fill = " "),
+                     data = data.frame(seq = 1L), stroke = 0, size = 0, shape = 21
+                   )
+                 )
                  scale <- command_args(layers(ggset)$scale_fill_manual)
                  command_args(layers(ggset)$scale_fill_manual)$values <- 
                    c(pal.ex, c(" " = "white"), scale$values)
                  command_args(layers(ggset)$scale_fill_manual)$labels <- 
-                   c(scale$labels, labels.ex)
+                   c(labels.ex, c(" " = " "), scale$labels)
+                 ## control sequence
+                 command_args(layers(ggset)$scale_fill_manual)$breaks <- 
+                   names(c(pal.ex, c(" " = "white"), scale$values))
                  ggset
                })
     }
