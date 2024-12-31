@@ -280,16 +280,32 @@ write_tsv <-
               class = c("element_textbox", "element_text", "element"))
   }
 
+.build_guides <- function (plot) {
+  guides <- plot$guides
+  if (length(guides) == 0) {
+    return(NULL)
+  }
+  
+  guides <- lapply(guides, function(g) {
+    g$build()
+  })
+  
+  guides <- do.call(c, guides)
+  
+  plot$guides <- guides
+  return(plot)
+}
+
 
 .get_legend <- 
   function(p){
-    obj <- cowplot::get_plot_component(p, "guide-box", T)
-    obj[vapply(obj, function(x) is(x, "gtable"), logical(1))][[1]]
-    # p <- ggplot2:::ggplot_build.ggplot(p)$plot
-    # theme <- ggplot2:::plot_theme(p)
-    # position <- theme$legend.position
-    # ggplot2:::build_guides(p$scales, p$layers, p$mapping,
-    #                        position, theme, p$guides, p$labels)
+    # obj <- cowplot::get_plot_component(p, "guide-box", T)
+    # obj[vapply(obj, function(x) is(x, "gtable"), logical(1))][[1]]
+    p <- ggplot2:::ggplot_build.ggplot(p)$plot
+    theme <- ggplot2:::plot_theme(p)
+    position <- theme$legend.position
+    .build_guides(p$scales, p$layers, p$mapping,
+                           position, theme, p$guides, p$labels)
   }
 
 .depigment_col <- 
