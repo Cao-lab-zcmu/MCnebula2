@@ -280,46 +280,6 @@ write_tsv <-
               class = c("element_textbox", "element_text", "element"))
   }
 
-.build_guides <- function (scales, layers, default_mapping, position, theme, guides, 
-                           labels) 
-{
-  theme$legend.key.width <- theme$legend.key.width %||% theme$legend.key.size
-  theme$legend.key.height <- theme$legend.key.height %||% theme$legend.key.size
-  position <- legend_position(position)
-  if (position == "inside") {
-    theme$legend.box <- theme$legend.box %||% "vertical"
-    theme$legend.direction <- theme$legend.direction %||% 
-      "vertical"
-    theme$legend.box.just <- theme$legend.box.just %||% c("center", 
-                                                          "center")
-  }
-  else if (position == "vertical") {
-    theme$legend.box <- theme$legend.box %||% "vertical"
-    theme$legend.direction <- theme$legend.direction %||% 
-      "vertical"
-    theme$legend.box.just <- theme$legend.box.just %||% c("left", 
-                                                          "top")
-  }
-  else if (position == "horizontal") {
-    theme$legend.box <- theme$legend.box %||% "horizontal"
-    theme$legend.direction <- theme$legend.direction %||% 
-      "horizontal"
-    theme$legend.box.just <- theme$legend.box.just %||% c("center", 
-                                                          "top")
-  }
-  gdefs <- guides_train(scales = scales$non_position_scales(), 
-                        theme = theme, guides = guides, labels = labels)
-  if (length(gdefs) == 0) 
-    return(zeroGrob())
-  gdefs <- guides_merge(gdefs)
-  gdefs <- guides_geom(gdefs, layers, default_mapping)
-  if (length(gdefs) == 0) 
-    return(zeroGrob())
-  ggrobs <- guides_gengrob(gdefs, theme)
-  grobs <- guides_build(ggrobs, theme)
-  grobs
-}
-
 
 .get_legend <- 
   function(p){
@@ -328,7 +288,7 @@ write_tsv <-
     p <- ggplot2:::ggplot_build.ggplot(p)$plot
     theme <- ggplot2:::plot_theme(p)
     position <- theme$legend.position
-    .build_guides(p$scales, p$layers, p$mapping,
+    build_guides(p$scales, p$layers, p$mapping,
                            position, theme, p$guides, p$labels)
   }
 
