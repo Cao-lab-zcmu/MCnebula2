@@ -1,6 +1,7 @@
 # ==========================================================================
 # algorithmic functions used in methods-*.R files
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 .rank_by_csi.score <- 
   function(df){
     head( dplyr::arrange(df, desc(csi.score)), n = 1)
