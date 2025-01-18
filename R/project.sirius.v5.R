@@ -192,6 +192,7 @@ list_files.sirius.v5 <- function(path, upper, pattern, info){
   function(){
     set <- c(
       read.canopus = read_tsv,
+      read.canopus_neg = read_tsv,
       read.canopus_summary = read_tsv,
       read.compound_identifications = read_tsv,
       read.formula_identifications = read_tsv,

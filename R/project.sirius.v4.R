@@ -182,6 +182,7 @@ FUN_get_id_sirius.v4 <-
   function(){
     set <- c(
       read.canopus = read_tsv,
+      read.canopus_neg = read_tsv,
       read.canopus_summary = read_tsv,
       read.compound_identifications = read_tsv,
       read.formula_identifications = read_tsv,
