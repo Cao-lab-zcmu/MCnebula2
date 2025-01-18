@@ -282,9 +282,23 @@ write_tsv <-
 
 
 .get_legend <- function(p){
-  p$theme$legend.position <- NULL
-  obj <- cowplot::get_plot_component(p, "guide-box", TRUE)
-  obj[vapply(obj, function(x) is(x, "gtable"), logical(1))][[1]]
+  if (identical(p$theme$legend.position, "none")) {
+    p$theme$legend.position <- NULL
+  }
+  gtable <- ggplot2::ggplot_gtable(ggplot2::ggplot_build(p))
+  grobs <- gtable$grobs
+  isThat <- vapply(grobs, 
+    function(x) {
+      identical(x$name, "guide-box") && is(x, "gtable")
+    }, logical(1))
+  which <- which(isThat)
+  if (!length(which)) {
+    stop('!length(which), no "guide-box" matched.')
+  }
+  if (length(which) > 1) {
+    stop('length(which) > 1, too many "guide-box" matched.')
+  }
+  grobs[[ which ]]
 }
 
 .depigment_col <- 
