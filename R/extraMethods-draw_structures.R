@@ -9,7 +9,8 @@
 #' Methods used for drawing and visualizing chemical structures of 'features'
 #' in Child-Nebulae.
 #' [ChemmineOB::convertToImage()] is the core function used for drawing chemical
-#' structures.
+#' structures.If it is a Mac arm system, please make sure open-babel 
+#' is installed in the system.
 #' 
 #' @seealso [ChemmineOB::convertToImage()].
 #'
@@ -167,6 +168,10 @@ setMethod("show_structure",
 #' @importFrom rsvg rsvg_svg
 .smiles_to_cairosvg <- 
   function(smile, path){
-    ChemmineOB::convertToImage("SMI", "SVG", source = smile, toFile = path)
+    if (requireNamespace("ChemmineOB", quietly = TRUE)) {
+      ChemmineOB::convertToImage("SMI", "SVG", source = smile, toFile = path)
+    } else {
+      system(paste0("obabel -:", smile, " -O ", path))
+    }
     rsvg::rsvg_svg(path, path)
   }
