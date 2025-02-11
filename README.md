@@ -24,6 +24,10 @@ if (!requireNamespace("BiocManager", quietly = TRUE)) {
 }
 BiocManager::install(c("BiocStyle", "ChemmineOB"))
 ```
-If you are using Apple silicon, make sure open-babel is available.
+If you are using Mac ARM64, please install open-babel first.
+
+```zsh
+brew install open-babel
+```
 
 

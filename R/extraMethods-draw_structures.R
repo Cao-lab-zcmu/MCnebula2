@@ -9,8 +9,8 @@
 #' Methods used for drawing and visualizing chemical structures of 'features'
 #' in Child-Nebulae.
 #' [ChemmineOB::convertToImage()] is the core function used for drawing chemical
-#' structures.If it is a Mac arm system, please make sure open-babel 
-#' is installed in the system.
+#' structures.Since 'ChemmineOB' has not been tested on Mac ARM64, this system 
+#' needs to use obabel directly.
 #' 
 #' @seealso [ChemmineOB::convertToImage()].
 #'
@@ -170,8 +170,8 @@ setMethod("show_structure",
   function(smile, path){
     if (requireNamespace("ChemmineOB", quietly = TRUE)) {
       ChemmineOB::convertToImage("SMI", "SVG", source = smile, toFile = path)
-    } else {
-      system(paste0("obabel -:", smile, " -O ", path))
-    }
+    } else if (Sys.info()["sysname"] == "Darwin" && Sys.which("obabel") != "") {
+        system(paste0("obabel -:", smile, " -O ", path))
+    } else stop("Neither ChemmineOb nor open-babel(on Mac ARM64) is available.")
     rsvg::rsvg_svg(path, path)
   }
