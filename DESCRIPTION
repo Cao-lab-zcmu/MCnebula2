@@ -26,7 +26,6 @@ Depends:
 Imports: 
     BiocStyle,
     bookdown,
-    ChemmineOB,
     crayon,
     data.table,
     dplyr,
