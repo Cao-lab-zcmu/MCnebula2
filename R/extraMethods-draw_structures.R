@@ -171,7 +171,7 @@ setMethod("show_structure",
     if (requireNamespace("ChemmineOB", quietly = TRUE)) {
       ChemmineOB::convertToImage("SMI", "SVG", source = smile, toFile = path)
     } else if (Sys.info()["sysname"] == "Darwin" && Sys.which("obabel") != "") {
-        system(paste0("obabel -:", smile, " -O ", path))
+        system(paste0("obabel -:", "'", smile, "'", " -O ", path))
     } else stop("Neither ChemmineOb nor open-babel(on Mac ARM64) is available.")
     rsvg::rsvg_svg(path, path)
   }
