@@ -397,9 +397,12 @@ group_strings <-
 
 #' @importFrom grImport2 readPicture
 #' @importFrom grImport2 grobify
-.cairosvg_to_grob <- 
-  function(path){
-    grImport2::grobify(grImport2::readPicture(path))
+.cairosvg_to_grob <- function(path){
+    grImport2::pictureGrob(
+      grImport2::readPicture(path),
+      width = unit(1, "npc"),
+      height = unit(1, "npc")
+    )
   }
 
 checkColMerge <- function(x, y, ...){
