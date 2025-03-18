@@ -13,7 +13,7 @@
 
 \S4method{create_hierarchy}{mcnebula,ANY}(x, fun_organize)
 
-\S4method{create_hierarchy}{mcnebula,`function`}(x, fun_organize)
+\S4method{create_hierarchy}{mcnebula,function}(x, fun_organize)
 
 get_parent_classes(classes, x, hierarchy_cutoff = 3, re_class_no_parent = F)
 }

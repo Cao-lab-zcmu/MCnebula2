@@ -14,7 +14,7 @@
 
 \S4method{activate_nebulae}{mcnebula,ANY,ANY}(x, fun_default_parent, fun_default_child)
 
-\S4method{activate_nebulae}{mcnebula,`function`,`function`}(x, fun_default_parent, fun_default_child)
+\S4method{activate_nebulae}{mcnebula,function,function}(x, fun_default_parent, fun_default_child)
 
 ggset_activate_parent_nebula(x)
 

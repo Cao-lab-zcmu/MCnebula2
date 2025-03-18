@@ -22,11 +22,11 @@
 
 \S4method{visualize}{mcnebula,ANY,ANY,ANY}(x, item, fun_modify, annotate)
 
-\S4method{visualize}{mcnebula,character,`function`,missing}(x, item, fun_modify)
+\S4method{visualize}{mcnebula,character,function,missing}(x, item, fun_modify)
 
-\S4method{visualize}{mcnebula,numeric,`function`,missing}(x, item, fun_modify)
+\S4method{visualize}{mcnebula,numeric,function,missing}(x, item, fun_modify)
 
-\S4method{visualize}{mcnebula,numeric_or_character,`function`,logical}(x, item, fun_modify, annotate)
+\S4method{visualize}{mcnebula,numeric_or_character,function,logical}(x, item, fun_modify, annotate)
 
 get_ggset(x, item, fun_modify, annotate = F)
 
@@ -34,7 +34,7 @@ get_ggset(x, item, fun_modify, annotate = F)
 
 \S4method{visualize_all}{mcnebula,ANY,ANY,ANY}(x, newpage, fun_modify, legend_hierarchy)
 
-\S4method{visualize_all}{mcnebula,logical,`function`,logical}(x, newpage, fun_modify, legend_hierarchy)
+\S4method{visualize_all}{mcnebula,logical,function,logical}(x, newpage, fun_modify, legend_hierarchy)
 
 visualize_ids(x, item)
 }

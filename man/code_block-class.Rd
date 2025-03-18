@@ -55,7 +55,7 @@
 
 \S4method{codes}{code_block}(x) <- value
 
-\S4method{new_code_block}{character,character,list,logical,`function`}(language, codes, args, prettey, fun_prettey)
+\S4method{new_code_block}{character,character,list,logical,function}(language, codes, args, prettey, fun_prettey)
 
 \S4method{new_code_block}{missing,missing,missing,missing,missing}()
 

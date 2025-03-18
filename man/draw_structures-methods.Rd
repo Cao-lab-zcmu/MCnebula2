@@ -34,7 +34,8 @@ Specified to draw chemical structures of all the 'features' of that.}
 Methods used for drawing and visualizing chemical structures of 'features'
 in Child-Nebulae.
 \code{\link[ChemmineOB:convertToImage]{ChemmineOB::convertToImage()}} is the core function used for drawing chemical
-structures.
+structures.Since 'ChemmineOB' has not been tested on Mac ARM64, this system
+needs to use obabel directly.
 
 \code{show_structure}: visualize the chemical structure of 'feature'
 which has been drawn.

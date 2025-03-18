@@ -55,13 +55,13 @@
 
 \S4method{new_section}{character,numeric,character,maybe_code_block}(heading, level, paragraph, code_block)
 
-\S4method{new_section}{`NULL`,numeric,character,maybe_code_block}(heading, level, paragraph, code_block)
+\S4method{new_section}{NULL,numeric,character,maybe_code_block}(heading, level, paragraph, code_block)
 
 new_section2(paragraph, code_block)
 
 \S4method{call_command}{section}(x)
 
-\S4method{call_command}{`NULL`}(x)
+\S4method{call_command}{NULL}(x)
 }
 \arguments{
 \item{value}{The value for the slot.}

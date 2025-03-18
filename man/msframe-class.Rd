@@ -39,19 +39,19 @@
 
 \S4method{entity}{msframe}(x) <- value
 
-\S4method{format_msframe}{msframe,missing,missing,missing,missing,`function`}(x, fun_format)
+\S4method{format_msframe}{msframe,missing,missing,missing,missing,function}(x, fun_format)
 
-\S4method{format_msframe}{data.frame,missing,missing,missing,missing,`function`}(x, fun_format)
+\S4method{format_msframe}{data.frame,missing,missing,missing,missing,function}(x, fun_format)
 
 \S4method{format_msframe}{msframe,character,missing,character,missing,missing}(x, names, types)
 
 \S4method{format_msframe}{msframe,missing,missing,missing,missing,missing}(x)
 
-\S4method{format_msframe}{msframe,missing,`function`,missing,`function`,missing}(x, fun_names, fun_types)
+\S4method{format_msframe}{msframe,missing,function,missing,function,missing}(x, fun_names, fun_types)
 
-\S4method{filter_msframe}{msframe,`function`,missing}(x, fun_filter, f, ...)
+\S4method{filter_msframe}{msframe,function,missing}(x, fun_filter, f, ...)
 
-\S4method{filter_msframe}{msframe,`function`,formula}(x, fun_filter, f, ...)
+\S4method{filter_msframe}{msframe,function,formula}(x, fun_filter, f, ...)
 }
 \arguments{
 \item{x}{\linkS4class{msframe} object.}

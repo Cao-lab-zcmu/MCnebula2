@@ -40,9 +40,9 @@
 
 \S4method{command_args}{command}(x) <- value
 
-\S4method{new_command}{`function`,character}(fun, ..., name)
+\S4method{new_command}{function,character}(fun, ..., name)
 
-\S4method{new_command}{`function`,missing}(fun, ..., name)
+\S4method{new_command}{function,missing}(fun, ..., name)
 
 \S4method{call_command}{command}(x)
 }

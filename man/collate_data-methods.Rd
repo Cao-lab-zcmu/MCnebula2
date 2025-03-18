@@ -13,7 +13,7 @@
 
 \S4method{collate_data}{ANY,ANY,ANY}(x, subscript, fun_collate, ...)
 
-\S4method{collate_data}{ANY,character,`function`}(x, subscript, fun_collate, ...)
+\S4method{collate_data}{ANY,character,function}(x, subscript, fun_collate, ...)
 
 collate_used(x)
 }

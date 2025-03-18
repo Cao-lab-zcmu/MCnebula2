@@ -23,7 +23,7 @@
 
 \S4method{extract_rawset}{ANY,character,ANY}(x, subscript)
 
-\S4method{extract_rawset}{ANY,character,`function`}(x, subscript, fun_collate, ...)
+\S4method{extract_rawset}{ANY,character,function}(x, subscript, fun_collate, ...)
 }
 \arguments{
 \item{x}{an object contain \code{project_dataset} slot.}

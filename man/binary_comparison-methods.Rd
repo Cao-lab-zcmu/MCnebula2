@@ -12,7 +12,7 @@
 
 \S4method{binary_comparison}{ANY,ANY,ANY,ANY,ANY}(x, ..., formula, fun_norm, top_coef, contrasts)
 
-\S4method{binary_comparison}{ANY,formula,`function`,ANY,character}(x, formula, fun_norm, top_coef, contrasts)
+\S4method{binary_comparison}{ANY,formula,function,ANY,character}(x, formula, fun_norm, top_coef, contrasts)
 }
 \arguments{
 \item{x}{\linkS4class{mcnebula} object.}

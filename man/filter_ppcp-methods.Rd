@@ -12,7 +12,7 @@
 
 \S4method{filter_ppcp}{mcnebula,ANY,ANY}(x, fun_filter, ..., by_reference)
 
-\S4method{filter_ppcp}{mcnebula,`function`,logical}(x, fun_filter, ..., by_reference)
+\S4method{filter_ppcp}{mcnebula,function,logical}(x, fun_filter, ..., by_reference)
 }
 \arguments{
 \item{x}{\linkS4class{mcnebula} object.}

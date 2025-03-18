@@ -396,7 +396,7 @@ group_strings <-
 
 
 #' @importFrom grImport2 readPicture
-#' @importFrom grImport2 grobify
+#' @importFrom grImport2 pictureGrob
 .cairosvg_to_grob <- function(path){
     grImport2::pictureGrob(
       grImport2::readPicture(path),
