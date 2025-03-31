@@ -164,7 +164,7 @@ setMethod("show_structure",
     return(grob)
   }
 
-#' @importFrom ChemmineOB convertToImage
+# @importFrom ChemmineOB convertToImage
 #' @importFrom rsvg rsvg_svg
 .smiles_to_cairosvg <- 
   function(smile, path){
