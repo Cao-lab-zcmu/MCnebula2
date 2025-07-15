@@ -442,7 +442,7 @@ default_detectFlow <- function(x,
     new_command(MSnbase::readMSData,
       files = sample_metadata(x)$file,
       centroided. = TRUE, mode = "onDisk",
-      pdata = new("NAnnotatedDataFrame", sample_metadata(x))
+      pdata = new("AnnotatedDataFrame", sample_metadata(x))
       ),
     new_command(xcms::findChromPeaks, object = toBeEval("raw_data(x)"),
       param = xcms::CentWaveParam(snthresh = snthresh,
