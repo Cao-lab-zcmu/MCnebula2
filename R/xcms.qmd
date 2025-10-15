@@ -1,0 +1,326 @@
+---
+title: "XCMS-Based Workflow for Natural Product Analysis: Data Extraction, Alignment, Feature Characterization, Grouping, and Compound Identification"
+author: "Lu J.F."
+date: "`r Sys.Date()`"
+format: 
+  pdf: 
+    toc: true
+    toc-depth: 2
+    toc-title: Contents
+    number-sections: true
+    number-depth: 2
+    geometry: 
+      - top=30mm
+      - left=20mm
+      - heightrounded
+    mainfont: "Times New Roman"
+    colorlinks: true
+    execute:
+      eval: false
+      echo: true
+      output: true
+      warning: false
+    keep-tex: true
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
+# Abstract
+
+This application brief describes the workflow for processing data acquired in auto MS/MS mode on the Agilent 6500 series LC-Q-TOF using XCMS and a series of other R-based open-source packages. In this work, XCMS and MsFeatures were employed for chromatographic peak extraction, peak refinement, retention time alignment, feature generation, and feature grouping. Secondary spectra were extracted and aggregated. Using MsBackendMsp and MetaboAnnotation, third-party spectral libraries were imported, and compound identification was performed based on MS/MS spectral matching, demonstrating a complete workflow for reference. The final processed data can be exported as CSV files for statistical analysis in MPP, or converted into other specific formats for analysis using third-party software.
+
+
+# Introduction
+
+The rapid advancement of liquid chromatography–mass spectrometry (LC/MS) has established it as a standard tool for natural product analysis and identification. Unlike conventional MS + targeted MS/MS, auto MS/MS simultaneously acquires MS1 and MS2 spectra, enhancing data collection efficiency. Processing the resulting large datasets requires robust computational tools. XCMS [1–3], an R-based open-source software available via Bioconductor, offers efficient feature extraction with minimal computational demand and has been widely applied to LC-MS and GC-MS data. Since XCMS primarily handles feature extraction, additional R packages are integrated to complete the workflow. In this study, extracts from a plant collected from four distinct regions (details confidential) were analyzed using auto MS/MS, followed by a comprehensive workflow including chromatographic peak extraction and refinement, retention time alignment, feature generation and grouping, spectral extraction and aggregation, compound identification, and quantitative data generation, providing a reproducible pipeline for LC-MS/MS-based metabolomics research.
+
+# Result
+
+Load the reuqired packages.
+
+```{r}
+library(MSnbase)
+library(xcms)
+library(MsExperiment)
+library(Spectra)
+library(MsFeatures)
+library(RColorBrewer)
+```
+
+Perform parallel computing.
+
+```{r}
+parallel::detectCores(logical = FALSE)
+BiocParallel::register(bpstart(SnowParam(5)))
+```
+
+
+```{r}
+Mfiles <- list.files(
+  "data_mzml/neg",
+  pattern = "M\\d{0,2}_NEG\\.mzML$", full.names = T,
+  ignore.case = F
+)
+
+BLKfiles <- list.files(
+  "data_mzml/neg",
+  pattern = "Sham\\d{1,2}_NEG", full.names = T
+)
+
+QCfiles <- list.files(
+  "data_mzml/neg",
+  pattern = "QC\\d{1,2}_NEG", full.names = T
+)
+
+metadata <- data.frame(
+  file = c(Mfiles, BLKfiles, QCfiles),
+  sample = c(
+    paste0("M", seq_along(Mfiles)),
+    paste0("BLK", seq_along(BLKfiles)),
+    paste0("QC", seq_along(QCfiles))
+  ),
+  group = c(rep("M", length(Mfiles)), rep("BLK", length(BLKfiles)), rep("QC", length(QCfiles)))
+)
+```
+
+```{r}
+raw_data <- readMSData(
+  files = metadata$file,
+  centroided. = TRUE, mode = "onDisk",
+  pdata = new("AnnotatedDataFrame", metadata)
+)
+fData(raw_data)
+```
+
+```{r, eval = FALSE}
+group_colors <- brewer.pal(3, "Spectral")
+names(group_colors) <- c("M", "BLK", "QC")
+
+raw_data |>
+  filterRt(rt = c(60, 120)) |>
+  filterMz(mz = c(191.01, 191.03)) |>
+  chromatogram(aggregationFun = "max") |>
+  plot(col = group_colors[metadata$group], lwd = 2)
+
+raw_data |>
+  filterRt(rt = c(75, 95)) |>
+  filterMz(mz = c(191.01, 191.02)) |>
+  plot(type = "XIC")
+```
+
+```{r}
+cwp <- CentWaveParam(
+  snthresh = 5, noise = 1000,
+  peakwidth = c(3, 60), ppm = 20, fitgauss = T
+)
+
+pro_data <- findChromPeaks(
+  raw_data, param = cwp
+)
+```
+
+```{r, eval=FALSE}
+pro_data |>
+  filterMsLevel(1L) |>
+  chromatogram(rt = c(500, 1000),
+               aggregationFun = "sum",
+               include = "none") |>
+  plot(col = group_colors[metadata$group])
+```
+
+```{r}
+mpp <- MergeNeighboringPeaksParam(expandRt = 4, minProp = 0.75)
+app_data <- refineChromPeaks(pro_data, mpp)
+```
+
+```{r}
+metadata$sample_type <- ifelse(metadata$group == "QC", "QC", "study")
+
+pdp_subs <- PeakDensityParam(
+  sampleGroups = metadata$sample_type,
+  minFraction = 0.5
+)
+
+app_data <- groupChromPeaks(app_data, param = pdp_subs)
+
+pgd_subs <- PeakGroupsParam(minFraction = 0.7,
+                            subset = which(metadata$sample_type == "QC"),
+                            subsetAdjust = "average", span = 0.4)
+
+app_data <- adjustRtime(
+  app_data, param = pgd_subs
+)
+```
+
+```{r,eval=FALSE}
+app_data |> 
+  filterRt(rt = c(75, 95)) |>  
+  filterMz(mz = c(191.01, 191.02)) |>  
+  chromatogram(aggregationFun = "max") |>  
+  plotChromPeakDensity(col = group_colors,
+                       param = pdp,
+                       peakBg = group_colors,
+                       peakCol = group_colors,
+                       peakPch = 16)
+```
+
+```{r}
+pdp <- PeakDensityParam(
+  sampleGroups = metadata$group,
+  bw = 2, minFraction = .3, ppm = 20
+)
+
+app_data <- groupChromPeaks(
+  app_data, param = pdp
+)
+```
+
+
+```{r,eval=FALSE}
+app_data |> 
+  filterMsLevel(1L) |>
+  chromatogram(rt = c(500, 1000),
+               aggregationFun = "sum",
+               include = "none") |> 
+  plot(col = group_colors[metadata$group])
+```
+
+```{r}
+app_data <- fillChromPeaks(app_data, param = ChromPeakAreaParam())
+
+app_data <- groupFeatures(app_data, param = SimilarRtimeParam(5))
+
+app_data <- groupFeatures(app_data,
+                          param = AbundanceSimilarityParam(threshold = 0.7,
+                                                           transform = log2))
+app_data <- groupFeatures(app_data,
+                          EicSimilarityParam(threshold = 0.7, n = 3))
+```
+
+
+```{r,eval=FALSE}
+res_xcms <- quantify(app_data)
+str(res_xcms)
+res_agg <- aggregateFeatures(res_xcms,
+                             i = rownames(res_xcms),
+                             fcol = "feature_group",
+                             name = "agg_data")
+```
+
+```{r,eval=FALSE}
+app_spectra_feature <- featureSpectra(app_data,
+                                      ppm = 20,
+                                      expandRt = 50, expandMz = .03,
+                                      return.type = "MSpectra")
+
+app_spectra_feature <- MSnbase::clean(app_spectra_feature, all = TRUE)
+
+combined_app_spectra_feature <- MSnbase::combineSpectra(
+  app_spectra_feature, fcol = "feature_id", method = MSnbase::consensusSpectrum,
+  mzd = 0.03, ppm = 20
+)
+MSnbase::writeMgfData(combined_app_spectra_feature, "data_xcms2/mslevel_all.mgf")
+reformat_mgf_custom("data_xcms2/mslevel_all.mgf", "data_xcms2/refmt_all_neg.mgf", force_charge = "negative")
+```
+
+
+
+```{r}
+app_spectra_feature <- featureSpectra(app_data,
+                                      msLevel = 2L, ppm = 50,
+                                      expandRt = 50, expandMz = .03,
+                                      return.type = "MSpectra")
+
+app_spectra_feature <- MSnbase::clean(app_spectra_feature, all = TRUE)
+
+combined_app_spectra_feature <- MSnbase::combineSpectra(
+  app_spectra_feature, fcol = "feature_id", method = MSnbase::consensusSpectrum,
+  mzd = 0.03, ppm = 20
+)
+MSnbase::writeMgfData(combined_app_spectra_feature, "data_xcms/xcms_neg_msnbase.mgf")
+save.image(file = "data_xcms/msnbase_neg.RData")
+
+```
+
+```{r}
+infile <- "data_xcms/xcms_neg_msnbase.mgf"
+reformat_mgf_custom <- function(infile, outfile, force_charge = NULL) {
+  lines <- readLines(infile)
+  new_lines <- vector("list",  length = sum(grepl("^BEGIN IONS", lines)))
+  begin_idx <- grep("^BEGIN IONS", lines)
+  end_idx   <- grep("^END IONS", lines)
+  
+  for (k in seq_along(begin_idx)) {
+    block <- lines[begin_idx[k]:end_idx[k]]
+    
+    # 提取信息
+    feature <- sub("^FEATURE_ID=", "", grep("^FEATURE_ID=", block, value = TRUE))
+    pepmass <- grep("^PEPMASS=", block, value = TRUE)
+    charge  <- grep("^CHARGE=", block, value = TRUE)
+    charge_val <- if (length(charge) > 0) sub("^CHARGE=", "", charge) else ""
+    rt <- grep("^RTINSECONDS", block, value = TRUE)
+    
+    # 根据 force_charge 参数处理
+    if (!is.null(force_charge)) {
+      if (force_charge == "positive") {
+        charge_fmt <- "1+"
+      } else if (force_charge == "negative") {
+        charge_fmt <- "1-"
+      } else {
+        stop("force_charge must be 'positive', 'negative', or NULL")
+      }
+    } else {
+      # 保留原始值
+      charge_fmt <- charge_val
+      if (charge_fmt == "" || charge_fmt == "0") charge_fmt <- "1+"
+    }
+    
+    # MSLEVEL 从 TITLE 提取
+    title_line <- grep("^TITLE=", block, value = TRUE)
+    mslevel <- if (length(title_line) > 0) sub(".*msLevel ([0-9]+).*", "\\1", title_line) else "NA"
+    
+    # 提取谱峰数据（非键值行）
+    peaks <- block[!grepl("=", block) & !grepl("^BEGIN|^END", block)]
+    scans <- grep("^SCANS", block, value = TRUE)
+    
+    # 拼接输出
+    new_lines[[k]] <- c(
+      "BEGIN IONS",
+      paste0("FEATURE_ID=", feature),
+      pepmass,
+      paste0("CHARGE=", charge_fmt),
+      rt,
+      paste0("MSLEVEL=", mslevel),
+      scans,
+      peaks,
+      "END IONS"
+    )
+  }
+  
+  writeLines(unlist(new_lines), outfile)
+}
+
+reformat_mgf_custom("data_xcms/xcms_neg_msnbase.mgf", "data_xcms/refmt_neg2.mgf", force_charge = "negative")
+```
+
+
+
+```{r}
+features_defination <- featureDefinitions(app_data, ppm = 20, msLevel = 1L)
+quant <- featureValues(app_data, value = "into")
+quant <- data.frame(quant)
+colnames(quant) <- metadata$sample
+quant$.features_id <- rownames(quant)
+quant <- dplyr::relocate(tibble::as_tibble(quant), .features_id)
+# mslevel2
+quant <- dplyr::filter(
+  quant, .features_id %in% combined_app_spectra_feature@elementMetadata@listData[["feature_id"]]
+)
+features_quantification <- quant
+
+data.table::fwrite(
+  features_quantification,
+  file.path("data_xcms", "msms_neg.csv")
+)
+```
+
