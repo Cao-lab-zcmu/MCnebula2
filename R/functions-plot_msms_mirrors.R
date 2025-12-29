@@ -113,10 +113,14 @@ plot_msms_mirrors <-
           function(lst){
             grob <- structures_grob(child_nebulae(x))[[ lst[[ "strip" ]] ]]
             if (!is.null(grob)) {
-              grid::downViewport(paste0(lst[[ "vp" ]]))
+              grid::upViewport(0)
+              grid::seekViewport(
+                grid::vpPath(lst[["vp"]])
+              )
+              #grid::downViewport(paste0(lst[[ "vp" ]]))
               grid::pushViewport(structure_vp)
               grid.draw(grob)
-              grid::upViewport(0)
+              grid::upViewport(2)
             }
           })
     .message_info_viewport()
@@ -128,7 +132,7 @@ plot_msms_mirrors <-
     df <- dplyr::mutate(df, mz = raw_mz, rel.int. = 0)
     new_command(geom_segment, data = df,
                 aes(x = mz, xend = raw_mz, y = rel.int., yend = raw_rel.int.),
-                color = color, size = size, alpha = alpha
+                color = color, linewidth = size, alpha = alpha
     )
   }
 
@@ -136,7 +140,7 @@ plot_msms_mirrors <-
   function(df, color = "#E6550DFF", size = 0.8, alpha = 1){
     new_command(geom_segment, data = df,
                 aes(x = sig_mz, xend = sig_mz, y = 0, yend = sig_rel.int.),
-                color = color, size = size, alpha = alpha
+                color = color, linewith = size, alpha = alpha
     )
   }
 
@@ -176,7 +180,7 @@ plot_msms_mirrors <-
                 strip.text = element_text(size = 12),
                 panel.grid = element_line(color = "grey85"),
                 plot.background = element_rect(
-                  fill = "white", color = "transparent", size = 0
+                  fill = "white", color = "transparent", linewidth = 0
                 )
     )
   }
@@ -235,6 +239,8 @@ get_facet.wrap.vp <-
     panel <- grid::grid.grep("panel", grep = T, global= T, viewports = T, grobs = F)
     ## vp name
     panel <- sapply(panel, paste)
+    ## remove parnet pannel
+    panel <- panel[!grepl("GRID", panel)]
     ## the specific seq number of vp
     panel.seq <- stringr::str_extract(panel, "(?<=panel-)[0-9]{1,}(?=-)")
     panel.seq <- max(as.integer(panel.seq))
