@@ -25,7 +25,37 @@ initialize_sirius_api <- function(sirius, port = 8080L, ..., version = "v6")
     sdk <- RSirius::SiriusSDK$new()
     .env_api$v6 <- sdk$connect(glue::glue("http://localhost:{port}"))
   }
+  .env_api$port <- port
   return(.env_api$v6)
+}
+
+list_files_top.sirius.v6 <- function(path, pattern){
+  if (!.is_sirius_running(.env_api$port)) {
+    stop('!is_sirius_running(.env_api$port), SIRIUS is not running or expired?')
+  }
+  message(glue::glue("Now open SIRIUS project ..."))
+  path <- normalizePath(path)
+  id <- .env_api$projectID[[ path ]] <- digest::digest(
+    path, "xxhash64", serialize = 3L
+  )
+  res <- try(.env_api$v6$projects_api$OpenProject(id, path), TRUE)
+  if (inherits(res, "try-error") && !usethis::ui_yeah("Re-open failed, is project already open?")) {
+    stop('Something error.')
+  }
+  features <- .env_api$v6$features_api$GetAlignedFeatures(id)
+  ids <- vapply(features, function(x) x$alignedFeatureId, character(1))
+  data.frame(files = ids)
+}
+
+list_files.sirius.v6 <- function(path, upper, pattern, ...){
+  # lst_file <- pbapply::pbmapply(path, upper, pattern, SIMPLIFY = F,
+  #   FUN = function(path, upper, pattern){
+  #     files <- list.files(paste0(path, "/", upper), pattern)
+  #     if ( length(files) == 0)
+  #       return( data.frame() )
+  #     data.frame(upper = upper, files = files)
+  #   })
+  # data.table::rbindlist(lst_file)
 }
 
 .validate_sirius.v6 <- function(path){
@@ -33,7 +63,6 @@ initialize_sirius_api <- function(sirius, port = 8080L, ..., version = "v6")
     stop('!file.exists(path).')
   }
 }
-
 
 .is_sirius_running <- function(port = 8080L)
 {
@@ -96,7 +125,7 @@ initialize_sirius_api <- function(sirius, port = 8080L, ..., version = "v6")
 {
   if (.is_sirius_running(port)) {
     message(glue::glue("Sirius is already running on port: {port}!"))
-    return(NULL)
+    return(TRUE)
   }
 
   if (.is_port_open(port) && !.is_sirius_running(port)) {
