@@ -78,7 +78,7 @@ setMethod("create_child_layouts",
                        mapply(apply(mtrx, 1, c, simplify = F), 1:nrow(mtrx),
                               SIMPLIFY = F,
                               FUN = function(names, row) {
-                                lapply(1:length(names),
+                                lapply(seq_along(names),
                                        function(n) {
                                          grid::viewport(layout = grid_layout,
                                                         layout.pos.row = row,

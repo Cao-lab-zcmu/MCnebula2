@@ -185,7 +185,7 @@ setMethod("get_metadata",
               stop( "`subscript` not descriped in `names(file_api(project_conformation))`" )
             api <- file_api[[ subscript ]]
             api <- strsplit(api, split = "/")[[1]]
-            for (i in 1:length(api)) {
+            for (i in seq_along(api)) {
               sub <- api[i]
               if ( any(sub == names(metadata(project_metadata))) )
                 next

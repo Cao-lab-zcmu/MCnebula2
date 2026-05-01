@@ -362,7 +362,7 @@ setMethod("cross_filter_identical",
                                  hierarchy %in% hierarchy_range)
             set <- split(set, f = ~ rel.index)
             ids <- lapply(set, `[[`, ".features_id")
-            groups <- combn(1:length(ids), 2, simplify = F)
+            groups <- combn(seq_along(ids), 2, simplify = F)
             discard <- lapply(groups,
                           function(group){
                             if (any( ids[group[1]] %in% ids[group[2]] )) {

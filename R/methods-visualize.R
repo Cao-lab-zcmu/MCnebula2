@@ -33,7 +33,7 @@ setMethod("visualize",
             class.name <- names(ggset(child_nebulae(x)))
             hierarchy <- vapply(class.name, function(c, h) h[[c]], 1,
                                 h = .get_hierarchy(x))
-            tibble::tibble(seq = 1:length(class.name),
+            tibble::tibble(seq = seq_along(class.name),
                            hierarchy = hierarchy,
                            class.name = class.name
             )

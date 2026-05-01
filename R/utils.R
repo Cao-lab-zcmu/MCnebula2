@@ -44,7 +44,7 @@ reCallMethod <-
     }
     expr <- paste0("method@.Data(",
                    paste0(paste0(arg.order, " = args[[",
-                                 1:length(arg.order), "]]"),
+                                 seq_along(arg.order), "]]"),
                           collapse = ", "),
                    ", ...)")
     eval(parse(text = expr))
@@ -65,7 +65,7 @@ match_methods <-
 vecter_unique_by_names <- 
   function(lst){
     unique <- data.frame(names = names(lst),
-                         order = 1:length(lst))
+                         order = seq_along(lst))
     unique <- unique[!duplicated(unique$names), ]
     lst[unique$order]
   }
@@ -73,7 +73,7 @@ vecter_unique_by_names <-
 vec_unique_by_value <- 
   function(vec){
     unique <- data.frame(value = vec,
-                         order = 1:length(vec))
+                         order = seq_along(vec))
     unique <- unique[!duplicated(unique$value), ]
     vec[unique$order]
   }
@@ -360,7 +360,7 @@ group_strings <-
   function(vec, names, default,
            fill = T, as.list = T, na.rm = F){
     if (is.null(names(vec)))
-      names(vec) <- names[1:length(vec)]
+      names(vec) <- names[seq_along(vec)]
     if (fill) {
       if (any(!names %in% names(vec))) {
         ex.names <- names[!names %in% names(vec)]

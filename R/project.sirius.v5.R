@@ -225,7 +225,7 @@ pblapply_read_tsv_fromZip <- function(path, fun = read_tsv) {
   zip_upper <- gsub("/[^/]*$", "", zips)
   zip_name <- stringr::str_extract(zips, "[^/]*$")
   exdir <- paste0(zip_upper, "/.temp_", zip_name)
-  lst <- pbapply::pblapply(1:length(lst_files),
+  lst <- pbapply::pblapply(seq_along(lst_files),
     function(n) {
       utils::unzip(zips[n], exdir = exdir[n])
       files <- paste0(exdir[n], "/", lst_files[[ n ]])

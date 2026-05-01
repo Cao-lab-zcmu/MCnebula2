@@ -145,11 +145,11 @@ setMethod("new_command",
             if (length(args) != 0) {
               args_name <- formalArgs(fun)
               if (is.null(names(args))) {
-                names(args) <- args_name[1:length(args)]
+                names(args) <- args_name[seq_along(args)]
               } else {
                 args_name <- args_name[!args_name %in% names(args)]
                 no_name_arg <- which(names(args) == "")
-                names(args)[no_name_arg] <- args_name[1:length(no_name_arg)]
+                names(args)[no_name_arg] <- args_name[seq_along(no_name_arg)]
               }
             }
             new("command", command_name = name, command_function = fun,

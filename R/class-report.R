@@ -176,7 +176,7 @@ setMethod("show_layers",
                             ending = "")
                    })
             cat(crayon::silver("layers of", length(layers(x)), "\n\n"))
-            lapply(1:length(layers(x)),
+            lapply(seq_along(layers(x)),
                    function(seq) {
                      cat(crayon::silver("+++ layer", seq, "+++\n"))
                      layer <- layers(x)[[ seq ]]
@@ -288,6 +288,6 @@ search_heading <-
                       grepl(pattern, s, perl = T)
                     } else F
                   })
-    (1:length(layers(x)))[ log ]
+    (seq_along(layers(x)))[ log ]
   }
 

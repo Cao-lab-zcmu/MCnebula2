@@ -139,7 +139,7 @@
 
 .grob_legend_hierarchy_plot <- 
   function(color, theme){
-    df <- data.frame(h = names(color), color = color, y = 1:length(color))
+    df <- data.frame(h = names(color), color = color, y = seq_along(color))
     p <- ggplot(df) +
       geom_tile(aes(x = 1, y = h, fill = h)) +
       labs(fill = "Class hierarchy") +

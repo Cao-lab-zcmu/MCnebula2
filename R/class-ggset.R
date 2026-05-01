@@ -53,7 +53,7 @@ setMethod("show_layers",
           function(x){
             layers <- layers(x)
             cat(crayon::silver("layers of", length(layers), "\n"))
-            mapply(layers, 1:length(layers),
+            mapply(layers, seq_along(layers),
                    FUN = function(com, seq){
                      cat(crayon::silver("  +++ layer", seq, "+++\n"))
                      cat("  ", crayon::yellow(command_name(com)), "\n",
@@ -190,7 +190,7 @@ setMethod("call_command",
           signature = c(x = "ggset"),
           function(x){
             layers <- layers(x)
-            for (i in 1:length(layers)) {
+            for (i in seq_along(layers)) {
               res <- try( call_command(layers[[i]]), silent = T )
               if (inherits(res, "try-error")) {
                 stop(paste0("the 'command' named '", command_name(layers[[i]]),
