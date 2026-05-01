@@ -2,6 +2,39 @@
 # load Sirius data using RSirius
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+.env_api <- new.env()
+
+initialize_sirius_api <- function(sirius, port = 8080L, ..., version = "v6")
+{
+  if (!requireNamespace("RSirius", quietly = TRUE)) {
+    expr <- substitute(
+      remotes::install_github(
+        repo = "sirius-ms/sirius-client-openAPI",
+        subdir = "client-api_r/generated", 
+        ref = "master", build = TRUE
+      )
+    )
+    string <- deparse(expr)
+    message(glue::glue("`RSirius` is no installed, to install it:\n\n{string}"))
+  }
+  if (version != "v6") {
+    stop('version != "v6".')
+  }
+  res <- .start_sirius_rest(sirius, port = port, ...)
+  if (!is.null(res)) {
+    sdk <- RSirius::SiriusSDK$new()
+    .env_api$v6 <- sdk$connect(glue::glue("http://localhost:{port}"))
+  }
+  return(.env_api$v6)
+}
+
+.validate_sirius.v6 <- function(path){
+  if (!file.exists(path)) {
+    stop('!file.exists(path).')
+  }
+}
+
+
 .is_sirius_running <- function(port = 8080L)
 {
   res <- try(
