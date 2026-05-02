@@ -105,7 +105,7 @@ fun_empty <- function(x) {
   set <- c(
     match.features_id = fun_empty,
     match.candidates_id = function(x) NULL,
-    generate_candidates_id = fun_empty
+    generate_candidates_id = function(x) x$.candidates_id
   )
 }
 
@@ -116,19 +116,8 @@ setMethod("read_data", signature = setMissing("read_data",
   function(subscript, path, .features_id, .candidates_id, fun_read, fun_format)
   {
     entity <- fun_read(path)
-    if (is.data.frame(entity)) {
-      ## a 'data.table' may cause error
-      entity <- list(data.frame(entity))
-      names(entity) <- subscript
-    }
-    entity <- mapply(entity, .features_id, SIMPLIFY = FALSE,
-      FUN = function(df, .features_id)
-      {
-        dplyr::mutate(df, .features_id = .features_id)
-      })
     entity <- dplyr::relocate(
-      data.table::rbindlist(entity, fill = TRUE), 
-      .features_id
+      entity, .features_id, .candidates_id
     )
     msframe <- new("msframe", subscript = subscript, entity = entity)
     fun_format(msframe)
@@ -150,7 +139,7 @@ setMethod("read_data", signature = setMissing("read_data",
     stop('!is.numeric(tryTimes), Invalid `mcn_try_touch_sirius_times` option.')
   }
   id <- .touch_project.sirius.v6(path)
-  lst <- pbapply::pblapply(features,
+  lst <- pbapply::pbsapply(features, simplify = FALSE,
     function(fea) {
       res <- FALSE
       n <- 0L
@@ -189,7 +178,7 @@ setMethod("read_data", signature = setMissing("read_data",
       data
     })
   message(glue::glue("Successfully perform `{name_fun}` on all features."))
-  data.table::rbindlist(lst, fill = TRUE)
+  data.table::rbindlist(lst, idcol = ".features_id", fill = TRUE)
 }
 
 .get_methods_read_sirius.v6 <- function(){
@@ -234,7 +223,7 @@ setMethod("read_data", signature = setMissing("read_data",
     ## .f2_formula
     ...sig = ".f2_formula",
     adduct = "adduct",
-    zodiac.score = "ZodiacScore",
+    zodiac.score = "zodiacScore",
     sirius.score = "siriusScore",
     tree.score = "treeScore",
     iso.score = "isotopeScore",
