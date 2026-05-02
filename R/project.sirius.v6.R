@@ -47,7 +47,7 @@
     .f3_canopus = "GetCanopusPrediction",
     .f3_fingerid = "GetStructureCandidates",
     .f3_scores = "",
-    .f3_spectra = "GetSpectralLibraryMatch"
+    .f3_spectra = "GetMsData"
   )
 }
 
@@ -196,7 +196,7 @@ setMethod("read_data", signature = setMissing("read_data",
   name_fun <- basename(path)
   path <- dirname(dirname(path))
   id <- .touch_project.sirius.v6(path)
-  data <- .env_api$v6$features_api[[ name_fun ]](id)
+  data <- .map_to_extId_run(name_fun, id)
   if (is(data, "list")) {
     lst <- lapply(data,
       function(x) {
@@ -243,12 +243,14 @@ setMethod("read_data", signature = setMissing("read_data",
         if (split_args || grepl(",", fea)) {
           split_args <<- TRUE
           args <- strsplit(fea, ",")[[1]]
-          args <- as.list(c(id, args))
-          fun <- .env_api$v6$features_api[[ name_fun ]]
-          res <- try(do.call(fun, args), TRUE)
+          args <- setNames(
+            as.list(args), c("features", rep("", length(args) - 1L))
+          )
+          args <- c(list(name_fun, id), args)
+          res <- try(do.call(.map_to_extId_run, args), TRUE)
         } else {
           res <- try(
-            .env_api$v6$features_api[[ name_fun ]](id, fea), TRUE
+            .map_to_extId_run(name_fun, id, features = fea), TRUE
           )
         }
       }
@@ -364,7 +366,7 @@ setMethod("read_data", signature = setMissing("read_data",
     ...sig = ".f2_info",
     rt.secound = "rtApexSeconds",
     mz = "ionMass",
-    .features_id = "alignedFeatureId",
+    .features_id = "externalFeatureId",
     ## .canopus
     ...sig = ".canopus",
     rel.index = "rel.index",
@@ -468,6 +470,36 @@ initialize_sirius_api <- function(sirius, port = 8080L,
   invisible(.env_api$v6)
 }
 
+.map_to_extId_run <- function(name, id, ..., features, .map = TRUE) {
+  if (missing(features)) {
+    .env_api$v6$features_api[[ name ]](id, ...)
+  } else {
+    # ID <- getOption("mcn_feature_id_type", "externalFeatureId")
+    if (.map) {
+      if (is.null(db <- .env_api$db_ids[[ id ]])) {
+        lst <- .env_api$v6$features_api$GetAlignedFeatures(id)
+        aliId <- vapply(lst, function(x) x$alignedFeatureId, character(1L))
+        extId <- vapply(lst, function(x) x$externalFeatureId, character(1L))
+        db <- .env_api$db_ids[[ id ]] <- list(aliId = aliId, extId = extId)
+      }
+      mapped <- db$aliId[ match(features, db$extId) ]
+      if (any(is.na(mapped))) {
+        stop('any(is.na(mapped)), mapping ID failed from "externalFeatureId" to "alignedFeatureId."')
+      }
+      features <- mapped
+    }
+    .env_api$v6$features_api[[ name ]](id, features, ...)
+  }
+}
+
+.map_back_feature_as_list <- function(x) {
+  if (is(x, "R6")) {
+    x$toList()
+  } else {
+    x
+  }
+}
+
 .touch_project.sirius.v6 <- function(path) {
   if (!.is_sirius_running(.env_api$port)) {
     message("is_sirius_running(.env_api$port) == FALSE.")
@@ -546,8 +578,8 @@ list_files_top.sirius.v6 <- function(path, pattern)
 {
   if (pattern == "GetAlignedFeatures") {
     id <- .touch_project.sirius.v6(path)
-    features <- .env_api$v6$features_api$GetAlignedFeatures(id)
-    ids <- vapply(features, function(x) x$alignedFeatureId, character(1))
+    features <- .map_to_extId_run("GetAlignedFeatures", id)
+    ids <- vapply(features, function(x) x$externalFeatureId, character(1))
     data.frame(files = ids)
   } else {
     data.frame(files = "")
