@@ -33,11 +33,11 @@
   set <- c(
     # `.id` is not used
     .id = "GetAlignedFeatures",
-    .canopus = "",
+    .canopus = "GetCanopusPrediction",
     .canopus_summary = "",
     .compound_identifications = "",
     .formula_identifications = "",
-    .canopus_neg = "",
+    .canopus_neg = "GetCanopusPrediction",
     .csi_fingerid = "",
     .csi_fingerid_neg = "",
     .f2_ms = "",
@@ -53,11 +53,11 @@
 
 .get_file_api_sirius.v6 <- function(){
   set <- c(.id = ".id",
-    .canopus = "",
+    .canopus = ".id/.canopus",
     .canopus_summary = "",
     .compound_identifications = "",
     .formula_identifications = "",
-    .canopus_neg = "",
+    .canopus_neg = ".id/.canopus_neg",
     .csi_fingerid = "",
     .csi_fingerid_neg = "",
     .f2_ms = "",
@@ -73,9 +73,8 @@
 
 .type_api_collection <- function() {
   list(
-    feature = c(
-      "GetFormulaCandidates", "GetStructureCandidates", "GetCanopusPrediction"
-    ),
+    feature = c("GetFormulaCandidates", "GetStructureCandidates"),
+    candidate = c("GetCanopusPrediction"),
     project = c("")
   )
 }
@@ -87,7 +86,17 @@ list_files.sirius.v6 <- function(path, upper, pattern, ...)
   }
   id <- .touch_project.sirius.v6(path)
   types <- .type_api_collection()
-  if (pattern %in% types$feature) {
+  if (pattern %in% types$candidate) {
+    path <- paste0(normalizePath(path), "/", upper, "/GetFormulaCandidates")
+    data <- suppressMessages(
+      .collate_candidates_via_sirius_api(path)
+    )
+    data <- dplyr::mutate(
+      data, upper = paste0(.features_id, ",", formulaId),
+      files = paste0(!!pattern, ",", formulaId)
+    )
+    dplyr::select(data, upper, files)
+  } else if (pattern %in% types$feature) {
     data.table::data.table(upper = upper, files = pattern)
   } else if (pattern %in% types$project) {
     # tibble::data.table(upper = upper, files = "")
@@ -103,8 +112,27 @@ fun_empty <- function(x) {
 
 .get_methods_match_sirius.v6 <- function(){
   set <- c(
-    match.features_id = fun_empty,
-    match.candidates_id = function(x) NULL,
+    match.features_id = function(x) {
+      if (any(grepl(",", head(x)))) {
+        .split_args(x, 1L)
+      } else {
+        x
+      }
+    },
+    match.candidates_id = function(x) {
+      if (all(!is.na(suppressWarnings(as.double(head(x)))))) {
+        x
+      } else if (any(grepl(",", head(x)))) {
+        x <- .split_args(x, 2L)
+        if (all(!is.na(suppressWarnings(as.double(head(x)))))) {
+          x
+        } else {
+          NULL
+        }
+      } else {
+        NULL
+      }
+    },
     generate_candidates_id = function(x) x$.candidates_id
   )
 }
@@ -123,8 +151,49 @@ setMethod("read_data", signature = setMissing("read_data",
     fun_format(msframe)
   })
 
-.collate_candidates_via_sirius_api <- function(path) {
-  name_fun <- unique(basename(path))
+setClassUnion("character_or_NULL", c("character", "NULL"))
+
+setMethod("read_data", signature = setMissing("read_data",
+    subscript = "character", path = "character",
+    .features_id = "character", .candidates_id = "character_or_NULL",
+    fun_read = "NULL", fun_format = "function"),
+  function(subscript, path, .features_id, .candidates_id, fun_read, fun_format)
+  {
+    if (identical(subscript, ".canopus") || identical(subscript, ".canopus_neg")) {
+      message("Try obtain one CANOPUS records as metadata for all features.")
+      message("Please ensure that CANOPUS has been executed and at least one feature has a corresponding result.")
+      groups <- split(path, ceiling(seq_along(path) / 10L))
+      for (pathTest in groups) {
+        dataTest <- .collate_candidates_via_sirius_api(
+          pathTest, bind = FALSE, get_index = TRUE
+        )
+        dataTest <- dataTest[ !vapply(dataTest, is.null, logical(1)) ]
+        if (length(dataTest)) {
+          break
+        }
+      }
+      entity <- dataTest[[ 1L ]]
+      entity <- dplyr::mutate(
+        entity, .features_id = NA_character_, .candidates_id = NA_character_
+      )
+      msframe <- new("msframe", subscript = subscript, entity = entity)
+      fun_format(msframe)
+    } else {
+      stop(glue::glue("Reading type of {subscript} no yet ready."))
+    }
+  })
+
+.split_args <- function(x, which, split = ",") {
+  vapply(strsplit(x, ","), function(x) x[[which]], character(1))
+}
+
+.collate_candidates_via_sirius_api <- function(path, bind = TRUE, get_index = FALSE)
+{
+  name_fun <- basename(path)
+  if (any(grepl(",", head(name_fun)))) {
+    name_fun <- .split_args(name_fun, 1L)
+  }
+  name_fun <- unique(name_fun)
   if (length(name_fun) != 1L) {
     stop('length(unique(name_fun)) != 1L, Does the input path contain Multiple API function?')
   }
@@ -134,11 +203,12 @@ setMethod("read_data", signature = setMissing("read_data",
     stop('length(unique(path)) != 1L, Does the input path contain Multiple SIRIUS project?')
   }
   path <- path[1L]
-  tryTimes <- getOption("mcn_try_touch_sirius_times", 10L)
+  tryTimes <- getOption("mcn_try_touch_sirius_times", 3L)
   if (!is.numeric(tryTimes)) {
     stop('!is.numeric(tryTimes), Invalid `mcn_try_touch_sirius_times` option.')
   }
   id <- .touch_project.sirius.v6(path)
+  split_args <- FALSE
   lst <- pbapply::pbsapply(features, simplify = FALSE,
     function(fea) {
       res <- FALSE
@@ -148,9 +218,17 @@ setMethod("read_data", signature = setMissing("read_data",
         if (inherits(res, "try-error")) {
           id <<- .touch_project.sirius.v6(path)
         }
-        res <- try(
-          .env_api$v6$features_api[[ name_fun ]](id, fea), TRUE
-        )
+        if (split_args || grepl(",", fea)) {
+          split_args <<- TRUE
+          args <- strsplit(fea, ",")[[1]]
+          args <- as.list(c(id, args))
+          fun <- .env_api$v6$features_api[[ name_fun ]]
+          res <- try(do.call(fun, args), TRUE)
+        } else {
+          res <- try(
+            .env_api$v6$features_api[[ name_fun ]](id, fea), TRUE
+          )
+        }
       }
       if (!length(res)) {
         message(
@@ -158,32 +236,56 @@ setMethod("read_data", signature = setMissing("read_data",
         )
         return(NULL)
       }
-      lst <- lapply(res,
-        function(x){
-          if (is(x, "R6")) {
-            x$toList()
-          } else {
-            message(
-              glue::glue(
-                "Unexpected class while try collating candidates data, \
-                the class is: {paste0(class(x), collapse = ', ')}"
-              )
-            )
-            message("Escape this candidate.")
-            NULL
+      if (is(res, "R6")) {
+        data <- dplyr::bind_rows(res$toList())
+        if (name_fun == "GetCanopusPrediction") {
+          if (!is.null(data) && nrow(data)) {
+            data <- dplyr::filter(data, type == "ClassyFire")
+            if (get_index) {
+              data <- dplyr::select(data, -probability)
+            } else {
+              data <- dplyr::select(data, probability)
+            }
+            data <- dplyr::mutate(data, rel.index = seq_len(nrow(data)))
           }
         }
-      )
-      data <- dplyr::bind_rows(lst)
-      data
+        return(data)
+      } else if (is(res, "list")) {
+        lst <- lapply(res,
+          function(x){
+            if (is(x, "R6")) {
+              x$toList()
+            } else {
+              message(
+                glue::glue(
+                  "Unexpected class while try collating candidates data, \
+                  the class is: {paste0(class(x), collapse = ', ')}"
+                )
+              )
+              message("Escape this candidate.")
+              NULL
+            }
+          }
+        )
+        return(dplyr::bind_rows(lst))
+      }
     })
   message(glue::glue("Successfully perform `{name_fun}` on all features."))
-  data.table::rbindlist(lst, idcol = ".features_id", fill = TRUE)
+  if (bind) {
+    data <- data.table::rbindlist(lst, idcol = ".features_id", fill = TRUE)
+    if (split_args) {
+      data <- dplyr::mutate(
+        data, .features_id = .split_args(.features_id, 1L)
+      )
+    }
+    return(data)
+  } else {
+    lst
+  }
 }
 
 .get_methods_read_sirius.v6 <- function(){
   set <- c(
-    # read.canopus = .collate_candidates_via_sirius_api,
     # read.canopus_neg = .collate_candidates_via_sirius_api,
     # read.canopus_summary = .collate_candidates_via_sirius_api,
     # read.compound_identifications = .collate_candidates_via_sirius_api,
@@ -195,7 +297,7 @@ setMethod("read_data", signature = setMissing("read_data",
     read.f3_fingerid = .collate_candidates_via_sirius_api,
     read.f3_scores = .collate_candidates_via_sirius_api,
     read.f3_spectra = .collate_candidates_via_sirius_api,
-    read.f3_canopus = .pbsapply_read_fpt
+    read.f3_canopus = .collate_candidates_via_sirius_api
   )
 }
 
@@ -235,8 +337,8 @@ setMethod("read_data", signature = setMissing("read_data",
     mz = "ionMass",
     ## .canopus
     ...sig = ".canopus",
-    rel.index = "relativeIndex",
-    abs.index = "absoluteIndex",
+    rel.index = "rel.index",
+    abs.index = "index",
     chem.ont.id = "id",
     class.name = "name",
     parent.chem.ont.id = "parentId",
@@ -260,7 +362,7 @@ setMethod("read_data", signature = setMissing("read_data",
     .id = "id",
     ## .f3_canopus
     ...sig = ".f3_canopus",
-    pp.value = "V1",
+    pp.value = "probability",
     ...sig = "END"
   )
 }
@@ -308,7 +410,8 @@ setMethod("read_data", signature = setMissing("read_data",
 # todo end
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-initialize_sirius_api <- function(sirius, port = 8080L, ..., version = "v6")
+initialize_sirius_api <- function(sirius, port = 8080L, 
+  ..., version = "v6", reset = FALSE)
 {
   if (!requireNamespace("RSirius", quietly = TRUE)) {
     expr <- substitute(
@@ -354,19 +457,17 @@ initialize_sirius_api <- function(sirius, port = 8080L, ..., version = "v6")
       stop('SIRIUS is not running or expired.')
     }
   }
-  message(glue::glue("Try open SIRIUS project, this take some seconds."))
-  message(
-    "If there is no response for a long time, please try killing the SIRIUS program and then reinitialize it with:"
-  )
-  message("\t`initialize_sirius_api`")
+  # message(glue::glue("Try open SIRIUS project, this take some seconds."))
+  # message(
+  #   "If there is no response for a long time, please try killing the SIRIUS program and then reinitialize it with:"
+  # )
+  # message("\t`initialize_sirius_api`")
   path <- normalizePath(path)
   id <- .env_api$projectID[[ path ]] <- digest::digest(
     path, "xxhash64", serialize = 3L
   )
   status <- try(.env_api$v6$projects_api$GetProject(id), TRUE)
-  if (is(status, "ProjectInfo")) {
-    message(glue::glue("Project has already opened."))
-  } else {
+  if (!is(status, "ProjectInfo")) {
     res <- try(.env_api$v6$projects_api$OpenProject(id, path), TRUE)
     if (inherits(res, "try-error")) {
       message(

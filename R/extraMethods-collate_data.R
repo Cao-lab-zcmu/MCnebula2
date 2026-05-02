@@ -127,7 +127,7 @@ setMethod("collate_data",
     project_metadata <- extract_metadata(x, subscript)
     if (!missing(reference)) {
       df <- metadata(project_metadata)[[ subscript ]]
-      df <- dplyr::mutate(df, .features_id = match.features_id(x)(upper),
+      Terror <<- df <- dplyr::mutate(df, .features_id = match.features_id(x)(upper),
                           .candidates_id = match.candidates_id(x)(files))
       df <- merge(reference, df, by = c(".features_id", ".candidates_id"))
       metadata(project_metadata)[[ subscript ]] <- df
