@@ -42,7 +42,7 @@
     .csi_fingerid_neg = "",
     .f2_ms = "",
     .f2_msms = "GetMsData",
-    .f2_info = "",
+    .f2_info = "GetAlignedFeatures",
     .f2_formula = "GetFormulaCandidates",
     .f3_canopus = "GetCanopusPrediction",
     .f3_fingerid = "GetStructureCandidates",
@@ -73,9 +73,9 @@
 
 .type_api_collection <- function() {
   list(
-    feature = c("GetFormulaCandidates", "GetStructureCandidates"),
+    feature = c("GetFormulaCandidates", "GetStructureCandidates", "GetMsData"),
     candidate = c("GetCanopusPrediction"),
-    project = c("")
+    project = c("GetAlignedFeatures")
   )
 }
 
@@ -89,7 +89,7 @@ list_files.sirius.v6 <- function(path, upper, pattern, ...)
   if (pattern %in% types$candidate) {
     path <- paste0(normalizePath(path), "/", upper, "/GetFormulaCandidates")
     data <- suppressMessages(
-      .collate_candidates_via_sirius_api(path)
+      .collate_candidates_via_sirius_api(path, bind = TRUE)
     )
     data <- dplyr::mutate(
       data, upper = paste0(.features_id, ",", formulaId),
@@ -100,7 +100,7 @@ list_files.sirius.v6 <- function(path, upper, pattern, ...)
     data.table::data.table(upper = upper, files = pattern)
   } else if (pattern %in% types$project) {
     # tibble::data.table(upper = upper, files = "")
-    stop('pattern %in% types$project, not yet ready.')
+    data.table::data.table(upper = "NULL", files = pattern)
   } else {
     stop('Not a valid API name')
   }
@@ -143,10 +143,15 @@ setMethod("read_data", signature = setMissing("read_data",
     fun_read = "function", fun_format = "function"),
   function(subscript, path, .features_id, .candidates_id, fun_read, fun_format)
   {
-    entity <- fun_read(path)
-    entity <- dplyr::relocate(
-      entity, .features_id, .candidates_id
-    )
+    # fun_read is: .collate_candidates_via_sirius_api
+    entity <- fun_read(path, bind = TRUE)
+    if (all(c(".features_id", ".candidates_id") %in% colnames(entity))) {
+      entity <- dplyr::relocate(
+        entity, .features_id, .candidates_id
+      )
+    } else if (".features_id" %in% colnames(entity)) {
+      entity <- dplyr::relocate(entity, .features_id)
+    }
     msframe <- new("msframe", subscript = subscript, entity = entity)
     fun_format(msframe)
   })
@@ -187,7 +192,24 @@ setMethod("read_data", signature = setMissing("read_data",
   vapply(strsplit(x, ","), function(x) x[[which]], character(1))
 }
 
-.collate_candidates_via_sirius_api <- function(path, bind = TRUE, get_index = FALSE)
+.collate_features_via_sirius_api <- function(path, ...) {
+  name_fun <- basename(path)
+  path <- dirname(dirname(path))
+  id <- .touch_project.sirius.v6(path)
+  data <- .env_api$v6$features_api[[ name_fun ]](id)
+  if (is(data, "list")) {
+    lst <- lapply(data,
+      function(x) {
+        x <- x$toList()
+        dplyr::bind_rows(x[ !vapply(x, is, logical(1L), "list") ])
+      })
+    data.table::rbindlist(lst, fill = TRUE)
+  } else {
+    dplyr::bind_rows(data$toList())
+  }
+}
+
+.collate_candidates_via_sirius_api <- function(path, bind = FALSE, get_index = FALSE)
 {
   name_fun <- basename(path)
   if (any(grepl(",", head(name_fun)))) {
@@ -280,7 +302,14 @@ setMethod("read_data", signature = setMissing("read_data",
     }
     return(data)
   } else {
-    lst
+    lapply(lst, 
+      function(data) {
+        if (is.null(data)) {
+          data.frame()
+        } else {
+          data
+        }
+      })
   }
 }
 
@@ -293,7 +322,7 @@ setMethod("read_data", signature = setMissing("read_data",
     read.f2_ms = .collate_candidates_via_sirius_api,
     # read.f2_msms = pbsapply_read_msms,
     read.f2_formula = .collate_candidates_via_sirius_api,
-    # read.f2_info = pbsapply_read_info,
+    read.f2_info = .collate_features_via_sirius_api,
     read.f3_fingerid = .collate_candidates_via_sirius_api,
     read.f3_scores = .collate_candidates_via_sirius_api,
     read.f3_spectra = .collate_candidates_via_sirius_api,
@@ -333,8 +362,9 @@ setMethod("read_data", signature = setMissing("read_data",
     .candidates_id = "formulaId",
     ## .f2_info
     ...sig = ".f2_info",
-    rt.secound = "rt",
+    rt.secound = "rtApexSeconds",
     mz = "ionMass",
+    .features_id = "alignedFeatureId",
     ## .canopus
     ...sig = ".canopus",
     rel.index = "rel.index",
