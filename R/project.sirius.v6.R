@@ -34,10 +34,10 @@
     # `.id` is not used
     .id = "GetAlignedFeatures",
     .canopus = "GetCanopusPrediction",
+    .canopus_neg = "GetCanopusPrediction",
     .canopus_summary = "",
     .compound_identifications = "",
     .formula_identifications = "",
-    .canopus_neg = "GetCanopusPrediction",
     .csi_fingerid = "",
     .csi_fingerid_neg = "",
     .f2_ms = "",
@@ -47,7 +47,7 @@
     .f3_canopus = "GetCanopusPrediction",
     .f3_fingerid = "GetStructureCandidates",
     .f3_scores = "",
-    .f3_spectra = "GetMsData"
+    .f3_spectra = "GetFormulaAnnotatedSpectrum"
   )
 }
 
@@ -71,10 +71,10 @@
   )
 }
 
-.type_api_collection <- function() {
+.arguments_type_sirius_api <- function() {
   list(
     feature = c("GetFormulaCandidates", "GetStructureCandidates", "GetMsData"),
-    candidate = c("GetCanopusPrediction"),
+    candidate = c("GetCanopusPrediction", "GetFormulaAnnotatedSpectrum"),
     project = c("GetAlignedFeatures")
   )
 }
@@ -85,7 +85,7 @@ list_files.sirius.v6 <- function(path, upper, pattern, ...)
     message(glue::glue("Invalid API function name (valid is such as: `GetAlignedFeatures`)."))
   }
   id <- .touch_project.sirius.v6(path)
-  types <- .type_api_collection()
+  types <- .arguments_type_sirius_api()
   if (pattern %in% types$candidate) {
     path <- paste0(normalizePath(path), "/", upper, "/GetFormulaCandidates")
     data <- suppressMessages(
@@ -104,10 +104,6 @@ list_files.sirius.v6 <- function(path, upper, pattern, ...)
   } else {
     stop('Not a valid API name')
   }
-}
-
-fun_empty <- function(x) {
-  x
 }
 
 .get_methods_match_sirius.v6 <- function(){
@@ -156,36 +152,35 @@ setMethod("read_data", signature = setMissing("read_data",
     fun_format(msframe)
   })
 
-setClassUnion("character_or_NULL", c("character", "NULL"))
+.fakeFun_canopus <- setClass("fakeFun_canopus", contains = c("NULL"))
 
 setMethod("read_data", signature = setMissing("read_data",
     subscript = "character", path = "character",
-    .features_id = "character", .candidates_id = "character_or_NULL",
-    fun_read = "NULL", fun_format = "function"),
+    .features_id = "character", .candidates_id = "character",
+    fun_read = "fakeFun_canopus", fun_format = "function"),
   function(subscript, path, .features_id, .candidates_id, fun_read, fun_format)
   {
-    if (identical(subscript, ".canopus") || identical(subscript, ".canopus_neg")) {
-      message("Try obtain one CANOPUS records as metadata for all features.")
-      message("Please ensure that CANOPUS has been executed and at least one feature has a corresponding result.")
-      groups <- split(path, ceiling(seq_along(path) / 10L))
-      for (pathTest in groups) {
-        dataTest <- .collate_candidates_via_sirius_api(
-          pathTest, bind = FALSE, get_index = TRUE
-        )
-        dataTest <- dataTest[ !vapply(dataTest, is.null, logical(1)) ]
-        if (length(dataTest)) {
-          break
-        }
-      }
-      entity <- dataTest[[ 1L ]]
-      entity <- dplyr::mutate(
-        entity, .features_id = NA_character_, .candidates_id = NA_character_
-      )
-      msframe <- new("msframe", subscript = subscript, entity = entity)
-      fun_format(msframe)
-    } else {
-      stop(glue::glue("Reading type of {subscript} no yet ready."))
+    if (!subscript %in% c(".canopus_neg", ".canopus")) {
+      stop('!subscript %in% c(".canopus_neg", ".canopus").')
     }
+    message("Try obtain one CANOPUS records as metadata for all features.")
+    message("Please ensure that CANOPUS has been executed and at least one feature has a corresponding result.")
+    groups <- split(path, ceiling(seq_along(path) / 10L))
+    for (pathTest in groups) {
+      dataTest <- .collate_canopus_via_sirius_api(
+        pathTest, bind = FALSE, get_index = TRUE
+      )
+      dataTest <- dataTest[ !vapply(dataTest, is.null, logical(1)) ]
+      if (length(dataTest)) {
+        break
+      }
+    }
+    entity <- dataTest[[ 1L ]]
+    entity <- dplyr::mutate(
+      entity, .features_id = NA_character_, .candidates_id = NA_character_
+    )
+    msframe <- new("msframe", subscript = subscript, entity = entity)
+    fun_format(msframe)
   })
 
 .split_args <- function(x, which, split = ",") {
@@ -209,7 +204,65 @@ setMethod("read_data", signature = setMissing("read_data",
   }
 }
 
-.collate_candidates_via_sirius_api <- function(path, bind = FALSE, get_index = FALSE)
+.collate_spectra_annotated_via_sirius_api <- function(path, ...) {
+  .collate_candidates_via_sirius_api(path, ...,
+    fun_as_data_R6 = function(x) {
+      x <- lapply(x$peaks,
+        function(x) {
+          int <- x$intensity
+          mz <- x$mz
+          x <- x$peakAnnotation
+          if (is.null(x) || !length(x)) {
+            NULL
+          } else {
+            x <- x$toList()
+            x <- x[ !vapply(x, is, logical(1L), "list") ]
+            if (length(x)) {
+              append(x, list(mz = mz, intensity = int, rel.intensity = int))
+            } else {
+              NULL
+            }
+          }
+        })
+      dplyr::bind_rows(x)
+    })
+}
+
+.collate_msms_via_sirius_api <- function(path, ...) {
+  .collate_candidates_via_sirius_api(path, ...,
+    fun_as_data_R6 = function(x) {
+      x <- x$mergedMs2$peaks
+      if (is(x, "list")) {
+        x <- lapply(x,
+          function(x) {
+            x$toList()
+          })
+        dplyr::bind_rows(x)
+      }
+    })
+}
+
+.collate_canopus_via_sirius_api <- function(path, ..., get_index = FALSE)
+{
+  .collate_candidates_via_sirius_api(path, ...,
+    fun_filter_data = function(data) {
+      if (!is.null(data) && nrow(data)) {
+        data <- dplyr::filter(data, type == "ClassyFire")
+        if (get_index) {
+          data <- dplyr::select(data, -probability)
+        } else {
+          data <- dplyr::select(data, probability)
+        }
+        data <- dplyr::mutate(data, rel.index = seq_len(nrow(data)))
+      }
+      data
+    })
+}
+
+.collate_candidates_via_sirius_api <- function(path, 
+  bind = FALSE, get_index = FALSE,
+  fun_as_data_R6 = NULL, fun_filter_data = NULL
+)
 {
   name_fun <- basename(path)
   if (any(grepl(",", head(name_fun)))) {
@@ -231,6 +284,18 @@ setMethod("read_data", signature = setMissing("read_data",
   }
   id <- .touch_project.sirius.v6(path)
   split_args <- FALSE
+  as_data_frame_R6 <- function(x) {
+    if (is.null(fun_as_data_R6)) {
+      data <- dplyr::bind_rows(x$toList())
+    } else {
+      data <- fun_as_data_R6(x)
+    }
+    if (is.null(fun_filter_data)) {
+      data
+    } else {
+      fun_filter_data(data)
+    }
+  }
   lst <- pbapply::pbsapply(features, simplify = FALSE,
     function(fea) {
       res <- FALSE
@@ -261,24 +326,13 @@ setMethod("read_data", signature = setMissing("read_data",
         return(NULL)
       }
       if (is(res, "R6")) {
-        data <- dplyr::bind_rows(res$toList())
-        if (name_fun == "GetCanopusPrediction") {
-          if (!is.null(data) && nrow(data)) {
-            data <- dplyr::filter(data, type == "ClassyFire")
-            if (get_index) {
-              data <- dplyr::select(data, -probability)
-            } else {
-              data <- dplyr::select(data, probability)
-            }
-            data <- dplyr::mutate(data, rel.index = seq_len(nrow(data)))
-          }
-        }
+        data <- as_data_frame_R6(res)
         return(data)
       } else if (is(res, "list")) {
         lst <- lapply(res,
           function(x){
             if (is(x, "R6")) {
-              x$toList()
+              as_data_frame_R6(x)
             } else {
               message(
                 glue::glue(
@@ -317,18 +371,14 @@ setMethod("read_data", signature = setMissing("read_data",
 
 .get_methods_read_sirius.v6 <- function(){
   set <- c(
-    # read.canopus_neg = .collate_candidates_via_sirius_api,
-    # read.canopus_summary = .collate_candidates_via_sirius_api,
-    # read.compound_identifications = .collate_candidates_via_sirius_api,
-    # read.formula_identifications = .collate_candidates_via_sirius_api,
-    read.f2_ms = .collate_candidates_via_sirius_api,
-    # read.f2_msms = pbsapply_read_msms,
+    read.f2_msms = .collate_msms_via_sirius_api,
     read.f2_formula = .collate_candidates_via_sirius_api,
     read.f2_info = .collate_features_via_sirius_api,
     read.f3_fingerid = .collate_candidates_via_sirius_api,
-    read.f3_scores = .collate_candidates_via_sirius_api,
-    read.f3_spectra = .collate_candidates_via_sirius_api,
-    read.f3_canopus = .collate_candidates_via_sirius_api
+    read.f3_spectra = .collate_spectra_annotated_via_sirius_api,
+    read.f3_canopus = .collate_canopus_via_sirius_api,
+    read.canopus = .fakeFun_canopus(),
+    read.canopus_neg = .fakeFun_canopus()
   )
 }
 
@@ -350,9 +400,8 @@ setMethod("read_data", signature = setMissing("read_data",
     mz = "mz",
     int. = "intensity",
     rel.int. = "rel.intensity",
-    exactmass = "exactmass",
-    formula = "formula",
-    ion. = "ionization",
+    exactmass = "exactMass",
+    formula = "molecularFormula",
     ## .f2_formula
     ...sig = ".f2_formula",
     adduct = "adduct",
@@ -492,13 +541,13 @@ initialize_sirius_api <- function(sirius, port = 8080L,
   }
 }
 
-.map_back_feature_as_list <- function(x) {
-  if (is(x, "R6")) {
-    x$toList()
-  } else {
-    x
-  }
-}
+# .map_back_feature_as_list <- function(x) {
+#   if (is(x, "R6")) {
+#     x$toList()
+#   } else {
+#     x
+#   }
+# }
 
 .touch_project.sirius.v6 <- function(path) {
   if (!.is_sirius_running(.env_api$port)) {
