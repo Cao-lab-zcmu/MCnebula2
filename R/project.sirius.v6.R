@@ -296,7 +296,8 @@ setMethod("read_data", signature = setMissing("read_data",
       fun_filter_data(data)
     }
   }
-  lst <- pbapply::pbsapply(features, simplify = FALSE,
+  lst <- pbapply::pbsapply(
+    features, simplify = FALSE,
     function(fea) {
       res <- FALSE
       n <- 0L
@@ -347,7 +348,8 @@ setMethod("read_data", signature = setMissing("read_data",
         )
         return(dplyr::bind_rows(lst))
       }
-    })
+    }
+  )
   message(glue::glue("Successfully perform `{name_fun}` on all features."))
   if (bind) {
     data <- data.table::rbindlist(lst, idcol = ".features_id", fill = TRUE)

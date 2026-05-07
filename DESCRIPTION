@@ -33,6 +33,7 @@ Imports:
     ggraph,
     ggsci,
     ggtext,
+    glue,
     grid,
     gridExtra,
     grImport2,
@@ -47,6 +48,7 @@ Imports:
     styler,
     svglite,
     tibble,
+    tidygraph,
     tidyr
 Suggests: 
     testthat (>= 3.0.0)
@@ -80,6 +82,7 @@ Collate:
     data.R functions-plot_msms_mirrors.R functions-clear.R
     functions-report.R
     tools-xcms-feature_detection.R
+    project.sirius.v6.R 
     zzz.R
 LazyData: true
 Author: LiChuang Huang <shaman.yellow@foxmail.com> [aut] (<https://orcid.org/0000-0002-5445-1988>)
