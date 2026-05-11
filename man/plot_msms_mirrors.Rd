@@ -24,10 +24,10 @@ to draw chemical structures in sub-panel. Can be \code{NULL}, this would return 
 object without chemical structure visualization.}
 }
 \description{
-Draw MS/MS spectra as mirror bar plots using 'ggplot2' with \code{\link[=facet_wrap]{facet_wrap()}}.
+Draw MS/MS spectra as mirror bar plots using 'ggplot2' with \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}.
 The sub-panel of each 'features' would be found by \code{\link[grid:grid.grep]{grid::grid.grep()}}...
 Then chemical structures would be drawn into sub-panel.
 }
 \seealso{
-\code{\link[=facet_wrap]{facet_wrap()}}, \link[grid:grid.force]{grid::grid.force}, \code{\link[grid:grid.grep]{grid::grid.grep()}}...
+\code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}, \link[grid:grid.force]{grid::grid.force}, \code{\link[grid:grid.grep]{grid::grid.grep()}}...
 }

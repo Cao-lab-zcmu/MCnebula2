@@ -493,6 +493,17 @@ setMethod("read_data", signature = setMissing("read_data",
 # todo end
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+
+#' Rsirius API tool
+#' 
+#' The `initialize_sirius_api` used for connection with "http://localhost:{port}",
+#' Then use `Rsirius` package to load data.
+#' 
+#' @param sirius character(1), the path to sirius.
+#' @param port integer(1), port
+#' @param version character(1), can ignore now
+#'
+#' @export initialize_sirius_api
 initialize_sirius_api <- function(sirius, port = 8080L, 
   ..., version = "v6", reset = FALSE)
 {

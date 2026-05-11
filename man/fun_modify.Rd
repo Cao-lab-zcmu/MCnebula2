@@ -59,7 +59,7 @@ In addition, if the 'use_tracer' is TRUE (see \code{\link[=set_nodes_color]{set_
 \code{modify_tracer_node} and \code{modify_color_edge} would be performed.
 
 \code{modify_stat_child}:
-Repalce \code{\link[=scale_fill_gradientn]{scale_fill_gradientn()}} with \code{\link[=scale_fill_gradient2]{scale_fill_gradient2()}} in 'layers';
+Repalce \code{\link[ggplot2:scale_gradient]{ggplot2::scale_fill_gradientn()}} with \code{\link[ggplot2:scale_gradient]{ggplot2::scale_fill_gradient2()}} in 'layers';
 unify the "aes" scale except for "fill";
 perfrom \code{\link[=modify_set_labs]{modify_set_labs()}};
 only keep the legend for 'fill', and adjust its width;
