@@ -207,7 +207,7 @@ setMethod("read_data", signature = setMissing("read_data",
     message("Will merge these rows by column 'externalFeatureId'")
     data <- dplyr::reframe(
       data,
-      dplyr::across(-externalFeatureId,
+      dplyr::across(dplyr::everything(),
           function(x) {
             x <- unique(x)
             if (length(x) == 1) {
