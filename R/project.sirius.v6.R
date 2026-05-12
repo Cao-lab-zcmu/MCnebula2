@@ -198,10 +198,28 @@ setMethod("read_data", signature = setMissing("read_data",
         x <- x$toList()
         dplyr::bind_rows(x[ !vapply(x, is, logical(1L), "list") ])
       })
-    data.table::rbindlist(lst, fill = TRUE)
+    data <- data.table::rbindlist(lst, fill = TRUE)
   } else {
-    dplyr::bind_rows(data$toList())
+    data <- dplyr::bind_rows(data$toList())
   }
+  if (any(duplicated(data$externalFeatureId))) {
+    message("Detected duplicated rows in feature information (.f2_info).")
+    message("Will merge these rows by column 'externalFeatureId'")
+    data <- dplyr::reframe(
+      data,
+      dplyr::across(-externalFeatureId,
+          function(x) {
+            x <- unique(x)
+            if (length(x) == 1) {
+              x
+            } else {
+              paste0(x, collapse = " ||| ")
+            }
+          }), 
+        .by = externalFeatureId
+    )
+  }
+  data
 }
 
 .collate_spectra_annotated_via_sirius_api <- function(path, ...) {
