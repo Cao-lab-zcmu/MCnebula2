@@ -79,7 +79,7 @@ plot_msms_mirrors <-
                     tani.score = round(tani.score, 2),
                     pre.mz = round(pre.mz, 4),
                     rt.min = round(rt.secound / 60, 2),
-                    x = 0, y = 65,
+                    x = 0, y = -90,
                     label = paste0(!!export_name[[ "pre.mz" ]],
                                    ": ", pre.mz, "\n",
                                    !!export_name[[ "rt.min" ]],
@@ -177,7 +177,12 @@ plot_msms_mirrors <-
   function(){
     new_command(theme, 
                 text = element_text(family = .font),
-                strip.text = element_text(size = 12),
+                axis.title = element_text(
+                  size = 20,
+                  face = "bold"
+                ),
+                axis.text = element_text(size = 18),
+                strip.text = element_text(size = 18),
                 panel.grid = element_line(color = "grey85"),
                 plot.background = element_rect(
                   fill = "white", color = "transparent", linewidth = 0
